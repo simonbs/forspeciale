@@ -1,0 +1,39 @@
+\newcommand{\mt}[1]{\textsc{#1}}
+
+\newcommand{\method}[2]{\sloppy\ensuremath{\texttt{{#1}(#2)}}}
+\newcommand{\var}[1]{\sloppy\ensuremath{\mathit{#1}}}
+\newcommand{\umlvar}[1]{\sloppy\ensuremath{\mathtt{#1}}}
+
+\newcommand{\mwh}{\si{\mega\watt\hour}}
+\newcommand{\kwh}{\si{\kW\hour}}
+\newcommand{\perc}[1]{\SI{#1}{\percent}}
+
+\newcommand{\charge}{\ensuremath{1}}
+\newcommand{\nocharge}{\ensuremath{0}}
+
+\newcommand{\productname}{REIDS}
+\newcommand{\hour}[1]{\formattime{#1}{0}{0}}
+\newcommand{\bigo}[1]{\ensuremath{\mathcal{O}\left(#1\right)}}
+
+\newcommand{\inkw}{(in \si{\kilo\watt})}
+\newcommand{\ineur}{(in \si{\euro})}
+\newcommand{\profit}{Profit \ineur{}}
+
+\newcommand{\ass}{\coloneqq} % :=, vertially centered. Requires mathtools
+
+\newenvironment{shadedi}{% For use with aligning the def environment
+  \def\FrameCommand{\fboxsep=\FrameSep \colorbox{green!40}}%
+  \MakeFramed {\advance\hsize-1\width\FrameRestore}}%
+ {\endMakeFramed}
+
+\newtheorem{tempDef}{Definition}[chapter]
+\newenvironment{definition}
+  {\begin{shadedi}\begin{tempDef}}
+  {\end{tempDef}\end{shadedi}}
+  
+\Crefname{lstlisting}{Listing}{Listings}
+
+\renewcommand*\contentsname{Table of Contents}
+
+\definecolor{skyblue}{rgb}{0.447,0.624,0.812}
+\definecolor{scarletred}{rgb}{0.937,0.161,0.161}

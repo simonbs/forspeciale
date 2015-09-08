@@ -1,0 +1,40 @@
+\section{Project Results}\label{sec:results}
+In the problem statement we wrote that we wish to solve the following:
+\begin{quote}
+  How well can we balance the production from renewable energy sources with the consumption from charging electric vehicles, using an intelligent home charging station that supports demand-response and the flexibilities in electric vehicles' power consumption?
+
+  And the following part questions:
+  \begin{itemize}
+    \item How can we minimize imbalances?
+    \item How can we maximize profit?
+  \end{itemize}
+\end{quote}
+
+
+By utilizing an electric vehicle data structure and a corresponding charge-offer data structure representing the vehicle's flexible consumption in a scenario where energy production is purely based on renewable energy sources, we are able to minimize imbalances and increase profits for a balance responsible party compared to not using our system.
+
+By balancing the charging of flexible-consumption electric vehicles, we can increase the overall profit for the balance responsible party by an average of $12-\perc{13}$ in the three cases we have described in this report; each consisting of different values of required driving distance, deadline flexibility, weather, and price forecast errors.
+
+% Hvordan minimirer vi imbalances
+% Hvordan maksimerer vi profit
+To minimize energy imbalances and maximize profits, we designed two scheduling methods which utilize the flexible consumption property of electric vehicles and their charge-offers. In \Cref{chap:design}, we introduced the optimization problem, which when solved would produce the optimal solution. This problem is however too complex to be solved optimally in reasonable time when scaling the size of the problem, as it is a NP-complete problem, shown in \Cref{sec:lpsched}. Thus we had to use approximations to solve the problem with LP scheduling procedure and design and implement a greedy scheduler as an alternative. We will in \Cref{sec:furtherwork} further abbreviate, how this problem can be mitigated.%Keep discussing about schedulers based on new results
+
+To further maximize profits we use price forecasting to improve the scheduling. We were able to forecast prices with a MAPE value of \perc{9.2}.
+
+In the following section we will further discuss these results and evaluate on the project as a whole.
+
+% -Ved at bruge charge-offers kan vi planlægge energiforbruget og således balancere energiforbruget
+% 	+Dette minimerer imbalances
+% Brug en kopi 4.2 til at vise hvor godt vi balancerer - dog ikke optimalt
+% Scheduling -> meget bedre end ikke scheduling
+% Vi forøger profit med ca. 20% ifølge cases 
+% Resultatet afhænger af forecasting
+% Vi bruger weather forecast, men har ikke haft mulighed for at teste MAPE for den
+% MAPE for price forecast 9,2 %
+% Ingen supply forecast, hvilket ville forøge profit endnu mere
+% Det er urealistisk at balancere energi optimalt inden for små time slots
+% Too computationally heavy
+% NP-Hard
+
+
+% asd

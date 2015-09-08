@@ -1,0 +1,27 @@
+\section{Simulator}\label{sec:simulator}
+Because our system deals with forecasting over time and charging EVs, our system is very time dependent. The simulator's overall goals are to:
+\begin{itemize}
+\item Simulate a real world environment 
+\item Simulate a faster flow of time
+\end{itemize}
+
+Time is represented by a DateTime\footnote{From the JodaTime Java API. See: \url{http://joda-time.sourceforge.net/apidocs/org/joda/time/DateTime.html}} object. Increasing the flow of time using such an object becomes quite trivial. The simulator executes a loop, where we in each iteration increase the time of the DateTime object by the desired time, rather than reading the operating system's time. 
+
+\subsection{Simulating a Real World Environment}
+To simulate a real world environment, we have to think about what happens during a day in our system. This will be the body of the aforementioned abstract loop in \Cref{fig:schedspiral} of \Cref{sec:idea} of our design. The following actions happen during every time slot during a day in our system:
+\begin{enumerate}
+\item EVs are plugged in
+\item The system gets weather forecasts 
+\item Wind turbines produce power based on these forecasts
+\item The system gets energy price forecasts
+\item Plugged-in EVs are scheduled every 20 minutes
+\item Scheduled EVs are charged
+\end{enumerate}
+
+These are the main actions that the simulator must simulate. \Cref{lst:simulator} shows the loop where each of these actions are executed. \texttt{curMin} and \texttt{finalMin} are the current time and the finish time for the simulator in minutes, respectively. The \method{produce}{dtNow, dtNow.plusHours(24), intervalMin} method on the \texttt{wmp} (windmill park), looks up weather forecasts and produces power, where \texttt{dtNow} is the current time (in the simulator) and \texttt{intervalMin} is the size of the time slots (20 minutes). The \method{collectFuturePrices}{production.size(), dtNow} method uses the forecaster to find future prices using the number of time slots (which are equal to the size of the list of production) and the current time. The \method{plugInRandomEVs}{numberOfEVs, dtNow, evs} method plugs in a random number of EVs in an interval. It includes a probability distribution of a day, allowing us to express higher probability of plugging in at different hours, hence the \texttt{dtNow} parameter. These EVs are from a generated database of EVs, and are saved in the \texttt{evs} list. The \texttt{brp}'s \method{schedule}{production, dtNow, prices} method tells the BRP to generate a schedule and start scheduling the currently plugged in EVs. The \method{chargeEVs}{dtNow} method charges the scheduled EVs and removes those that are past their deadline or are \var{maxCharged}, because they are irrelevant for the system. The \texttt{dtNow} parameter here is used to check if an EV past its deadline. Each iteration of the loop increases the simulator's time by one minute. The if-statement ensures that the scheduling is only done once every time slot (e.g.\ every 20 minutes).
+
+The generated EV objects we use are based on driving data from \cite[p.~52]{TRAFIKSTYRELSEN2010}. It should be noted that this data is for commercially used vans and trucks, but it was the only driving behavior we were able to find. 
+
+\lstinputlisting[caption={Simulator main loop}, label={lst:simulator}]{listings/simulatorLoop.java}
+
+This completes the simulator, acting as a platform to test and evaluate on, simulating the start of any day requested for as long as needed, allowing easy access to scheduling results and BRP profit. We now go into more details on how the individual components designed in \Cref{sec:components} are implemented.

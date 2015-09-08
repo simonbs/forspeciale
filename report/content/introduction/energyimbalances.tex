@@ -1,0 +1,28 @@
+\section{Energy Imbalances}\label{sec:energy_imbalances}
+With increased addition of renewable energy sources (RES), there also comes a price to be paid in terms of energy production unpredictability. Wind turbines and solar panels are for example very dependent on weather conditions. The problem when using RES, is that energy production and consumption is hard to balance. There can be neither underproduction nor overproduction in the electrical grid. This section introduces imbalances and why these appear.
+
+An imbalance in the electricity domain between production and consumption occurs, if e.g.\ consumers in an area actually consume \SI{40}{\MW\hour} of electrical energy when the production is only \SI{20}{\MW\hour}. In this case, the area would have to import energy, which is costly. The opposite could also occur, where production is greater than demand. This energy should instead be sold (exported), so that it is not wasted. Electricity is by its nature difficult to store and has to be available on demand. The overproduced energy will have to be sold cheaply; in some cases energy even sold at a negative price. The implication of this is that overproduced energy which cannot be consumed, has to go elsewhere and is thus an imbalance. An underproduction of energy means that another energy producer, will have to compensate for the imbalance. 
+
+We define an energy imbalance as:
+
+\begin{definition}[Imbalance]\label{def:imbalance}
+	Let $t$ be a time interval, $P_t$ be energy production for $t$ and $C_t$ be energy consumption for $t$, then
+  \[
+    \var{IMBALANCE}_{t} = P_t - C_t
+  \]
+\end{definition}
+
+We call a time interval of energy balancing a \emph{time slot}. We call an imbalance at time slot $t$, a \emph{positive imbalance} if there is overproduction ($P_t > C_t$), and a \emph{negative imbalance} if there is underproduction ($P_t < C_t$).
+
+\Cref{fig:imbalance} illustrates an example of imbalances over a period of five time slots of arbitrary length. We will almost always have the case where the production and consumption is imbalanced, though very marginal, but nonetheless existing. Note that we have to fill out the gaps of imbalanced energy, such that it is balanced which is an expensive process. Time slot \var{t1} has a positive imbalance, where this energy might be sold cheaply. Time slot \var{t4} has negative imbalance and balancing is required to meet the demand. Fast demand balancing is very costly~\cite{BALANCEMARKET}.
+
+Energinet.dk \cite{ENERGINET} is a large transmission system operator in Denmark, responsible for the transmission of energy through the grid, from power plants to local electricity distributors. Energinet.dk maintains a reserve pool of available electrical energy, which allows imbalances to be balanced by keeping controlled reserves such as diesel generators on standby. There are also fast balancing reserves which can be activated manually whenever a large disturbance occurs. 
+
+These reserves provide a balance area, a geographical area that needs balancing, with somewhat flexible production, helping out the balancing of electricity~\cite{MIRABELD1.2}. The party responsible for making sure imbalances do not occur, is the \emph{balance responsible party} (BRP). The BRP's main objective is to control the flow of energy, matching supply with demand. A BRP has a geographical balance area, which they are responsible of. Whenever an imbalance occurs in an area, the corresponding BRP has to pay for the expenditure of Energinet.dk balancing it out. 
+
+This is why careful planning of energy is needed to mitigate the occurrences of imbalances.
+
+\subsection{Problems With Renewable Energy Sources}
+With the addition of more RES, the energy production becomes harder to predict because most renewable energy sources depend on Earth's resources, such as wind and sun energy. Traditional energy sources such as fossil fuel and nuclear based power plants, are energy sources which are much more stable and controllable, and thus easier to manage in terms of energy load. For wind-generated electricity to participate in a short term energy market, lengthy and precise wind power production forecasts are important. This is a problem since it is impossible to guarantee \perc{100} accuracy on forecasting of weather. An erroneous weather forecast implies imbalances. Handling these RES imbalances is costly, therefore knowledge about demand is helpful, such that energy can be imported or exported according to production. 
+
+One way to handle imbalances is to adjust the demand. Having flexible demand opens up for the possibility of adjusting the consumption of energy based on the predicted production. Not many electric appliances allow this flexible consumption, e.g.\ the electricity consumption of an oven cannot be a adjusted, but an electric vehicle's (EV) charging overnight can be adjusted, because it does not need to be constantly charged right away as soon as it is plugged in. A way to accomplish flexibility balancing, is to create user specific comfort requirements, e.g.\ setting a deadline representing when the specific electric device must finish its electricity consuming task. If this deadline is larger than the time the task takes, it provides the consumers' energy supplier with flexible demand, which can be \emph{scheduled} according to  some deadline. This approach is taken by \textsc{mirabel}, introduced in \Cref{sec:MIRABEL}. 

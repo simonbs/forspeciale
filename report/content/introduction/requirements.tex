@@ -1,0 +1,18 @@
+\section{Requirements}\label{sec:requirements}
+Given the nature of the problem, which we are trying to answer as per the problem statement, we identify the requirements of a reasonable solution.
+
+Since the objective is to balance the production with the consumption, an optimization problem has been introduced: minimize imbalances caused by over- or underproduction of energy relative to the consumption and maximize profits for the BRP. Consumption and production are unknown factors until the very moment the imbalance has occurred. Future production is unknown, because we can not know exactly how much energy RES will produce in the future, as this is determined by weather conditions. Future consumption is also unknown, because we do not know when the EVs get plugged in and how much they need to be charged. Thus there are two unknown factors which should be planned together to achieve balance in the future. To balance these two variables, we need to schedule the charging of EVs. Before we can schedule, we have to forecast production. If we can predict the weather in advance, we can calculate how much energy we can produce. Forecasting will also be useful to predict consumption. If we can predict consumption, we can schedule accordingly and generate a schedule that optimizes potential import or export of energy. 
+
+Based on this, the following requirement arises:
+\begin{itemize}
+  \item Scheduling unknown production and consumption needs to be done with respect to energy prices, as to minimize any form of imbalance, positive or negative.
+\end{itemize}
+
+To learn the unknown factors, we will focus on determining these tasks:
+\begin{itemize}
+  \item Forecasting of production
+  \item Forecasting of consumption
+  \item Forecasting of prices
+\end{itemize}
+
+Based on these, we will analyze existing methods for solving these problems in \Cref{chap:design}. The following section will give an overview of the rest of the report, briefly describing the content of the report. 

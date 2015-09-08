@@ -1,0 +1,46 @@
+\section{Environment}\label{sec:scenario}
+To aid us in addressing the criteria in the problem statement (\Cref{sec:problem_statement}), we set up a pseudo-realistic scenario that we will refer to during the rest of this report.
+
+We imagine a user being offered a discount, as incentive when deciding how to charge their electric vehicle by their electricity supplier (BRP). In our case, we assume all consumers agree, merely to simplify the scenario. The EV owner gets an intelligent charging station installed in their home that can be controlled by our system. He then sets the minimum distance he wants to drive and a deadline for when he needs to be able to drive that far by for the coming week.
+
+\Cref{fig:scenario} below illustrates the scenario as we see it, to accompany the situation described in this section. As seen in the figure, wind turbines provide power to the grid and consumers, in the form of electric vehicles, consume power from the grid. The BRP manages the wind turbines' production and uses our system, which communicates with the charging stations. Here \emph{charge-offers} come into play (charge-offers are described in detail in \Cref{sec:components}). These \emph{charge-offers}, similar to \textsc{mirabel}'s flex-offers described in \Cref{sec:flexoffer}, are sent to the system from each EV's charging station every time the EV is plugged into the station. The BRP collects these offers and periodically sends a \emph{charge-assignment} to each EV. A \emph{charge-assignment} is simply a message to an EV telling it to charge if it is scheduled to charge. Since we schedule and assign charges in cycles, as we will explain in \Cref{sec:desScheduling}, the charge-assignment is essentially a message to the respective EV home charging station telling  the EV to charge in a set amount of time.
+
+\begin{figure}[htpb] 
+  \centering
+  \def\svgwidth{\textwidth}
+  \import{drawings/}{drawings/scenario.pdf_tex}
+  \caption{Visual representation of our scenario. The green buildings are BRPs, with the largest being the BRP utilizing the system. The BRP manages the export and import of energy from the grid, trading with other BRPs. It also keeps track of its own production and consumption, where its production consists of wind turbines and its consumption is from electric vehicles. The system collects \emph{charge-offers} for each plugged-in EV and periodically sends back charge assignments to each of these active vehicles.}
+  \label{fig:scenario}
+\end{figure}
+
+As an example, we now illustrate what a typical scenario using our system would look like from the EV owner's perspective. We obviously wish to minimize the consumer's need to go out of their way to do anything specific, but some action has to be taken. A typical follow of actions taken by a consumer could be:
+
+\begin{enumerate}
+  \item Every Sunday, Mary sets the distance she needs to drive each day the coming week and the time when she needs to be able to drive that distance by
+  \item She works a specific time each weekday and therefore sets the deadline to \hour{7} each morning, and \hour{10} on Saturday and Sunday, all with a distance of at least \SI{70}{\km}. She drives to see her parents on Wednesday after work, which means she sets the distance for Wednesday to \SI{50}{\km} more than the other days.
+\end{enumerate}
+
+The BRP uses our system, which acts upon the above, and does the following, taking actions in order:
+
+\begin{enumerate}
+  \item Each time the consumer plugs in her EV, the BRP receives a \emph{charge-offer}
+  \item The system generates a schedule of charging that minimizes imbalances
+  \item Since \emph{charge-offers} are received continuously and since EVs can be plugged in or unplugged any time, the system must plan periodically, e.g.\ every \SI{20}{\minute}
+  \item After this, the BRP generates a schedule using forecasting, the system then sends out a \emph{charge-assignment} to each scheduled EV telling them to charge or not to charge
+\end{enumerate}
+
+This, together with production forecasts and weather forecasts, allows the BRP to know if it needs to purchase any more power, or if it can sell some to the grid if there is low demand. If there is any need for this, the BRP can import or export energy from the grid, as shown in \Cref{fig:scenario}. This can even happen intra-day if the BRP is on the elbas market (see \Cref{sub:forecasting_energy_pricing}).
+
+Therefore, the BRP needs forecasts of energy supply, along with forecasts of energy prices to maximize profits. If forecasts predict that there will be less production than the minimum required consumption, the system will need to reschedule so that charging happens when energy is cheapest. If forecasts predict more production than the minimum required consumption, they can charge as many EVs as possible to full battery capacity and\slash or sell energy to the external balance areas at a reduced profit, compared to internal balance area. Increased profit margins not only benefit the BRP, but also minimizes the need for expensive, quick solutions to generate energy. The BRP will purchase energy, only when it cannot meet the demand with its own production, at the cheapest possible price.
+
+This results in two main actors who play critical roles: the BRP and the consumer. Obviously there are many other factors and variables in play here, hence many things can be focused on. To make the problem statement tangible, the following problems will be disregarded:
+\begin{itemize}
+  \item The costs of installing the charger, physically charging the vehicle, and any other electric vehicle costs
+  \item Any specific electric vehicle or manufacturer
+  \item The communication between the consumer and electric company
+  \item How the BRP sends his electricity to the charging station
+  \item Any other infrastructural or hardware information regarding smart grids
+\end{itemize}
+Also, we disregard all the concrete details of how the energy is handled in real life. Specifically, we assume that the BRP handles the electrical energy in every aspect. That means that it owns the produced energy, and sells this energy to consumers. In reality, many more parties are involved and BRPs don't always have any production, but the result is the same, as the system should work fine if no local production exists and just tell the BRP when to buy electricity.
+
+This concludes the design overview. The rest of this chapter will focus on the details of how we model and design the components in the system, which scheduling methods are best, and how we should forecast. The following section will design some of the components we know from the problem domain, such as EVs and wind turbines. 

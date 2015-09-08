@@ -1,0 +1,128 @@
+\documentclass[openright,twoside,11pt,american]{memoir}
+\synctex=1
+
+% Section spacing and numbering
+\setsecnumdepth{subsection}
+\setlength{\beforechapskip}{0pt}
+\setlength{\afterchapskip}{10pt} % vspace under chapters
+\setlength{\cftparskip}{-1pt}
+\setlength{\cftbeforechapterskip}{6pt}
+\setlength{\cftbeforepartskip}{14pt}
+
+\setlength{\belowcaptionskip}{-8pt} % vspace mellem caption og tekst
+
+\captiontitlefont{\itshape}
+
+%math
+%MathDesign indeholde de n�ste 2 pakker
+%\usepackage{amssymb}
+%\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage[locale=US]{siunitx}
+\sisetup{group-separator = {,},
+         per-mode = symbol,
+         inter-unit-product = \ensuremath{\cdot},
+         number-unit-product = \text{ },
+         binary-units = true}
+
+% LANGUAGE
+\usepackage[utf8x]{inputenc}
+
+%Images
+\usepackage{graphicx} %For figures
+\graphicspath{{./images/}}
+
+%Pseudocode
+\usepackage{algorithm}
+\usepackage{algorithmicx}
+\usepackage{algpseudocode}
+
+% OTHER
+\usepackage{hyperref}
+\usepackage{bookmark}
+\usepackage{epstopdf} % to include eps files
+\usepackage{multicol}
+\usepackage[numbers]{natbib} %bibliography package
+\usepackage[usenames,dvipsnames]{xcolor} %Colors
+\usepackage{tikz} %Tikz
+\usepackage{tikzscale}
+\usepackage{wrapfig}
+\usetikzlibrary{calc, arrows, decorations.markings,decorations.text}
+\usepackage{enumitem} % for noitemsep in lists
+\setlist{nolistsep}
+\usepackage{url} %Include URLs in bib
+\usepackage{framed} %For definitions
+\usepackage{import} %To import SVG in subfolder
+\usepackage[nodayofweek]{datetime} % For proper ISO 8601 date and time formatting
+\usepackage[section]{placeins}
+%\usepackage[colorinlistoftodos]{todonotes}
+%\presetkeys{todonotes}{inline}{}
+\usepackage{eurosym}
+\usepackage{booktabs}
+
+\usepackage{cleveref} %To cleverref: \Cref
+
+%Graphs
+\usepackage{pgfplots} %Graph plotting
+%\usepackage{pgfplotstable}
+\usepgfplotslibrary{dateplot}
+\usetikzlibrary{pgfplots.dateplot}
+\pgfplotsset{compat=newest,
+  grid=major, 
+  table/col sep = comma,
+	every axis legend/.append style={
+		no marks,
+		at={(0.5,1.25)},
+		legend columns=-1,
+		anchor=north,
+		enlarge y limits=0.1,
+		enlarge x limits=false,
+		filter discard warning=false,
+	}
+}
+\usepgflibrary{fpu}
+
+%Subfigures
+\newsubfloat{figure} % subfloat for figures
+\newsubfloat{table} % subfloat for tables
+
+%Definition color
+\colorlet{shadecolor}{LimeGreen!90}
+
+%Bibliography style
+\bibliographystyle{plainnat}
+
+% PARAGRAPH SPACING
+%\usepackage{parskip} & doesn't seem to work with memoir
+% They suggest:
+\setlength{\parindent}{0pt}
+\nonzeroparskip{}
+
+% Margins
+\usepackage[top=1in,bottom=1in,left=1.2in,right=1.2in]{geometry}
+
+% CHANGE BULLETS IN ITEMIZE
+\renewcommand{\labelitemi}{$\bullet$}
+\renewcommand{\labelitemii}{$\circ$}
+%\renewcommand{\labelitemiii}{$\cdot$}
+
+
+% Smaller spacing between lists
+\setlist[itemize]{noitemsep}
+\setlist[enumerate]{noitemsep}
+
+% FONTS
+\usepackage[bitstream-charter]{mathdesign}
+\usepackage[T1]{fontenc}
+\usepackage[activate={true,nocompatibility},final,tracking=true,kerning=true,spacing=true,factor=1100,stretch=10,shrink=10,verbose=silent]{microtype}
+
+%Listings
+\usepackage{listings} %For code listings
+\usepackage[font={small,it}]{caption}
+\input{settings/codelistingstyling}
+
+\input{settings/macros}
+
+% Set chapter style
+\chapterstyle{veelo} %madsen

@@ -1,0 +1,111 @@
+\subsection{Idea}\label{sec:idea}
+The idea is to generate a table representing a schedule for charging EVs as a result of scheduling (design of a ChargePlan is shown in \Cref{fig:UMLCP}). \Cref{tab:sched} shows such a table, highlighting which time slots an EV should charge in, represented by a boolean variable. It takes on the value ``\charge{}'' when the EV should charge, and ``\nocharge{}'' when it should not charge. Rows represent charge-offers, and columns represent time slots. In order to account for EVs that are plugged in after this schedule is generated, we iteratively generate a completely new schedule each time a new time slot is reached.
+
+We decide to make the input and output for each type of scheduler to be the same, allowing us to implement different types of schedulers. The input required by these schedulers is a charge-context, i.e.\ a list of the forecasted production, a list of charge-offers and the prices for importing/exporting for each time slot (see \Cref{fig:UMLCC}). This input can be illustrated as a table shown below in \Cref{tab:unsched}. Note that this table is \emph{not} a schedule, but an input to scheduling. Each cell represents the energy that a charge-offer's EV uses if it charges during that time slot. The number of non-zero values in a row represents how many times lots the EV may charge; an EV may not charge after its deadline, represented by \nocharge{}'s. E.g.\ the EV represented by charge-offer $\var{CO}_1$ may charge during the first three time slots and must not charge in the last three, due to $T_4$ being its deadline.
+
+\begin{table}[htpb]
+  \centering
+  \begin{tabular}{l S S S S S S} \toprule
+    \var{CO} & {$T_1$}   & {$T_2$}  & {$T_3$}  & {$T_4$}   & {$T_5$}   & {$T_6$} \\ \midrule
+    $\var{CO}_1$    &    10     &    10    &    10    &     0     &     0     &     0   \\
+    $\var{CO}_2$    &     8     &     8    &     8    &     8     &     0     &     0   \\
+    $\var{CO}_3$    &     7     &     7    &     7    &     7     &     7     &     7   \\
+    $\var{CO}_4$    &     4     &     4    &     0    &     0     &     0     &     0   \\
+    $\var{CO}_5$    &     5     &     5    &     5    &     5     &     5     &     0   \\
+    $\var{CO}_6$    &     6     &     6    &     6    &     6     &     0     &     0   \\ \midrule
+       \var{Prod}   &    40     &    50    &    30    &    20     &    40     &    35   \\ \bottomrule
+  \end{tabular}
+  \caption{An example of a charge-context, the input to a scheduler, based on \Cref{fig:UMLCC}}\label{tab:unsched}
+\end{table}
+
+\begin{table}[htpb]
+\centering
+  \begin{tabular}{l S S S S S S} \toprule
+    \var{CO} & {$T_1$} & {$T_2$} & {$T_3$} & {$T_4$} & {$T_5$} & {$T_6$} \\ \midrule
+    $\var{CO}_1$ & \charge{}    & \charge{}  & \charge{} & \nocharge{}  & \nocharge{}  & \nocharge{} \\
+    $\var{CO}_2$ & \charge{}   & \charge{}  & \nocharge{}  & \charge{} & \nocharge{}  & \nocharge{} \\
+    $\var{CO}_3$ & \charge{}    & \charge{}  & \charge{} & \charge{} & \charge{} & \charge{} \\
+    $\var{CO}_4$ & \charge{}    & \charge{}  & \nocharge{}  & \nocharge{}  & \nocharge{}  & \nocharge{} \\
+    $\var{CO}_5$ & \nocharge{}  & \nocharge{}   & \charge{} & \charge{} & \charge{} & \nocharge{} \\
+    $\var{CO}_6$ & \nocharge{}  & \charge{}  & \charge{} & \nocharge{}  & \nocharge{}  & \nocharge{} \\ \bottomrule
+	\end{tabular}
+	\caption{Example of a charge-plan, the complete charging schedule, based on \Cref{fig:UMLCP}}\label{tab:sched}
+\end{table}
+
+Time slots will have a duration of 20 minutes each in our system. But we design it so that this length is variable throughout the entire system, allowing the BRP to fit it to their needs. They may need to change this length due to varying factors, such as scheduling taking too long with one method in lieu of another on their computers or that a lower value is desired so that more detailed schedules are produced. The duration of \SI{20}{\minute} is chosen with regards to the following arguments:
+\begin{itemize}
+  \item An hour is dividable by 20 and it follows that an entire day is dividable by 20. Thus we can generate schedules for whole days without having any offsets.
+  \item The longer a time slot is, the more time exists to generate a schedule
+  \item The shorter a time slot is, the more often it is possible to check for newly plugged in EVs, which allows earlier charging of these EVs, possibly saving even more energy
+  \item The longer\slash shorter a time slot is, the more complex\slash simple the schedule becomes. Longer time slots will require fewer schedules during a day, but the schedules are also less accurate. Shorter time slots will increase the number of schedules during a day, but will also generate more accurate schedules.
+\end{itemize}
+
+20 minutes for each duration is chosen because it seems like a long enough duration to generate schedules, but without being too long to be good at scheduling newly plugged-in EVs. Our scheduling is thus iterative as seen by \Cref{fig:schedspiral}.
+
+\begin{figure}[!htb]
+  \centering
+  \input{drawings/iterativescheduling}
+  \caption{Iterative scheduling}\label{fig:schedspiral}
+\end{figure}
+
+An alternative to re-scheduling every time slot would be to reschedule every time an EV is plugged in. This will, however, require enormous computational power if the schedule is large. It would, however, allow charging of EVs exactly when they are plugged in, but is not possible due to the time it takes to reschedule. 
+
+\subsection{Optimization Problem} \label{sec:optimizationProblem}
+The BRP has its interest in making as much profit as possible, because the BRP's profit is increased by utilizing as much of the energy produced locally by the BRP as possible, and only import energy when needed to ensure all EVs are minimum charged. It is only natural to formulate their goals as an optimization problem, and think about how profit can be increased using our system. The description of this optimization problem follows. All variables used below are listed in the following list and should be used as a reference when reading the functions below. The acronyms $E$ stand for energy as the first letter and export as the second in the below acronyms, $I$ for import, $U$ for used, and $P$ for price.
+
+\begin{itemize}
+  \item $n : \text{number of time slots}$
+  \item $c : \text{number of charge-offers}$
+  \item $y_{ij} : \text{cell } (i, j) \text{ in resulting schedule (see \Cref{tab:sched})}$
+  \item $x_{ij} : \text{cell } (i, j) \text{ in charging table (see \Cref{tab:unsched})}, (x_{ij} \ass 0 \vee 1)$
+  \item $\var{EI}_t : \text{energy to be imported }(\var{EI}_t \geq 0) \text{ in time slot } t$
+  \item $\var{EIP}_t : \text{price for importing energy in time slot } t$
+  \item $\var{EEP}_t : \text{price for exporting energy in time slot } t$
+  \item $\var{EE}_t : \text{energy to be exported }(\var{EE}_t \geq 0) \text{ in time slot } t$
+  \item $\var{CO}_i : \text{charge-offer } i$
+  \item $\var{EU}_t : \sum_{i \ass 1}^{c} \left(x_{it} \cdot y_{it}\right)$, the total energy consumed (used) by all EVs in time slot $t$
+  \item $\var{EUP}_t : \text{ price for using energy in time slot } t$
+  \item $\var{EP}_t : \text{energy produced } (\var{EP}_t \geq 0) \text{ in time slot } t$ 
+\end{itemize}
+
+We define the optimization problem the schedulers need to solve as \Cref{eq:opprob}:
+\begin{equation}\label{eq:opprob}
+  \begin{aligned}
+    & \underset{\var{EU}_t, \var{EE_t}, \var{EI_t}}{\operatorname{maximize}} & & \sum_{t \ass 1}^n \left(\var{EU}_t \cdot \var{EUP}_t + \var{EE}_t \cdot \var{EEP}_t - \var{EI}_t \cdot \var{EIP}_t\right) \\
+    & \operatorname{subject\;to} & & t \ass 1, \dots, n : \var{EU}_t+\var{EE}_t = \var{EI}_t + \var{EP}_t \\
+    & & & t \ass 1, \dots, n : 0 < \var{EEP}_t < \var{EUP}_t < \var{EIP}_t \\
+    & & &   m \ass 1, \dots, c : \var{CO}_m\var{.minEnergy} \leq  \sum_{i \ass 1}^{n} \left( y_{mi} \cdot x_{mi} \right) \leq \var{CO}_m\var{.maxEnergy}
+  \end{aligned}
+\end{equation}
+
+Where $y_{ij}$, $\var{EI}_t$, and $\var{EE}_t$ are the unknown variables we wish to solve for. The subscript $i$ has a limit constrained to the amount of charge-offers $c$, and the subscript $j$ runs to the amount of time slots, $n$. This results in there being $n \cdot m$ variables for the two dimensional variable $y$. $\var{EI}_t$ is an unknown variable denoting how much energy should be imported in time slot $t$. There are a total of $n$ time slots, resulting in $n$ variables for \var{EI}. Lastly $\var{EE}_t$ represents the amount of energy to be exported for time slot $t$. As with the variable representing energy imported, there are $n$ variables for \var{EE}.
+
+To maximize profits, \var{EUP}, \var{EIP}, and \var{EEP} need to be set to appropriate prices, because they define the money the BRP receives from selling energy to consumers and exporting to the market, respectfully.
+
+The core of the optimization problem is the objective function. We are interested in maximizing the energy used per time slot, taking the electricity import and export prices into account. It is therefore essential to express to only import in time slots where the import price (defined below by \var{EIP} -- energy import price) is at its lowest. The BRP should therefore only export in a time slot if it is not economically viable to send it to their consumers, or if there are simply not enough consumers at that given time slot, as we define \var{EEP} to be less than \var{EUP}, i.e.\ it is always more profitable to charge EVs than to export energy to the grid. The objective function is formally defined as:
+
+\[
+  \underset{\var{EU}_t, \var{EE}_t, \var{EI}_t}{\operatorname{maximize}} \sum_{t \ass 1}^n \left(\var{EU}_t \cdot \var{EUP}_t + \var{EE}_t \cdot \var{EEP}_t - \var{EI}_t \cdot \var{EIP}_t\right)
+\]
+
+Energy needs to be balanced in all time slots, as described in \Cref{sec:marketmodel}. I.e.\ if you need to consume more than you produce, importing energy is required. If you somehow cannot consume every bit of energy you produce to charge EVs, you have to export. This constraint is formally defined as:
+
+\[
+  t \ass 1, \dots, n : \var{EU}_t + \var{EE}_t = \var{EI}_t + \var{EP}_t
+\]
+
+For the optimization to only import energy when needed to ensure that all EVs are minimum charged, and only export if all EVs cannot be charged more, another constraint is needed. The price of consuming energy locally needs to be more than what you can get for exporting it, but less expensive than the price of importing electricity. This constraint is formally defined as:
+
+\[
+   t \ass 1, \dots, n : 0 < \var{EEP}_t < \var{EUP}_t < \var{EIP}_t
+\]
+
+Finally we need to ensure all EVs are charged in a range between their minimum energy needed to drive the range specified by the user and the maximum energy the battery can hold. This last constraint is formally defined as:
+
+\[
+   m \ass 1, \dots, c : \var{CO}_m\var{.minEnergy} \leq \sum_{i \ass 1}^{n} \left( y_{mi} \cdot x_{mi} \right) \leq \var{CO}_m\var{.maxEnergy}
+\]
+
+Besides ensuring that all EVs are charged within their range of minimum and maximum energy, this constraint also ensures that no EV can charge after its deadline. Recall \Cref{tab:sched}, where ``\charge{}'' indicates when an EV can charge and ``\nocharge{}'' indicates when an EV cannot charge. When we reach a time slot where an EV cannot charge, i.e.\ when we read a ``\nocharge{}'', $y_{mi} \cdot x_{mi}$ will result in $0$ because $x_{mi}$ will be $0$. Thus $\var{EU}_t$ for that time slot will also equal $0$, which results in the desired outcome of no EV being charged after its deadline.
+
+This sums up the optimization problem we wish to solve. Below we will introduce different approaches to solving the same problem. This is done because we wish to compare methods in \Cref{chap:evaluation}.

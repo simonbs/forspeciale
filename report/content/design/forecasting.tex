@@ -1,0 +1,109 @@
+\section{Time Series Forecasting}\label{sec:timeseriesforecasting}
+The problem statement in \Cref{sec:problem_statement} gives way to the issue of looking ahead in time. Predicting what will happen in the future is essential when balancing production and consumption of energy, even when consumption is flexible. This is due to production coming solely from RES. This section will describe how we design a forecaster for our system.
+
+To forecast is to predict or estimate some future factors based on a fixed, independent factor or factors. Given the problem statement, we have identified three separate instances that need to be forecasted or predicted, all based on the same time series. They are as follows:
+
+\begin{itemize}
+  \item Energy supply
+  \item Energy demand 
+  \item Energy prices 
+\end{itemize}
+
+If known or accurately predicted within a low error margin, they will make the energy balancing better, hence increasing profit. In our case, we would need a forecasting model for each bullet in the list. Each share the same fixed, independent factors: date and time. Note that both of these independent factors can be represented as a single, independent variable with no loss of information. Also note that all three are numerical values and we wish to predict their values based upon the axis of date and time. Unfortunately, the prediction of these factors is difficult due to various factors. 
+
+Forecasting of energy supply, demand, and prices are helpful, as they improve the solution, for the following reasons:
+
+\begin{description}
+  \item[Energy supply] Knowledge of supply is helpful if minimizing future imbalances is important. Energy supply is based upon various sources, where as per the problem statement, we are merely focusing on energy supply from renewable energy sources such as wind turbines.
+  \item[Energy demand] Knowledge of demand is based purely on the charging of EVs in our scenario. It would therefore be beneficial to predict the times and amounts of demand in the form of \emph{charge-offers} during each part of a day in the future. This would ease deciding when each EV should and should not charge.
+  \item[Energy prices] Knowledge of prices provides the system with the ability to optimize profits. This is because given flexible demand and knowledge of energy prices in the future, if importing energy is needed, then it is obvious that the BRP wishes to import energy during the hours where they can buy the cheapest energy.
+\end{description}
+
+We can therefore conclude that we should invest time in finding a suitable model or method for forecasting supply and prices. We do not take demand into consideration because we have not been able to find any data on driving habits. Consumption in our system is based on charge-offers, which technically is a \perc{100} accurate consumption forecast for the individual EV, which can be moved according to the energy supply, and energy can be imported/exported every hour.
+
+\subsection{Energy Supply}\label{sub:Forecasting: Energy supply}
+Many different models allow forecasting of energy supply based upon the energy source. Since we have chosen to work exclusively with wind energy, this significantly narrows down the domain of models to merely needing wind speed at a given location.
+
+Future wind speeds can be retrieved via weather forecasts based on very complex mathematical and geographical models that are out of the scope of this project. We thus choose to rely on weather forecasts from a external source instead of attempting to forecast ourselves.
+
+What's left is to compute the power output of a wind turbine. This is given by the following equation~\cite{RAENGWIND}:
+\[
+  P = \frac{1}{2} \cdot \varphi \cdot A \cdot v^3 \cdot C_{p}
+\]
+
+where $\varphi$ is the density of air, and the sweep area is defined by $A = \pi \cdot r^{2}$, $r$ is the radius of the wind turbine's blade, $v$ is the wind speed, and lastly the power coefficient $C_p$ is defined by the rate at which the wind turbine converts kinetic energy into mechanical energy. The power coefficient is unique for each wind turbine. Consequently, given a weather forecast we can calculate the energy supply for each wind turbine.
+
+The formula for calculating power output allows us to easily design the wind turbine structure in \Cref{sec:components}, that produces some form of energy based on its efficiency, wingspan, and wind speed over a period of time by constantly probing wind turbines for this data.
+
+\subsection{Electricity Prices}\label{sub:forecasting_energy_pricing}
+As with weather forecasts, advanced methods to forecast energy prices also exist. Nord Pool Spot is the day-ahead electrical energy market for Scandinavia and Eastern Europe. It operates much like a stock market, with electricity supply and demand dominating the prices. Nord Pool Spot allows BRPs to trade energy for each hour-interval in the day ahead.
+
+For intraday trading, another energy exchanged offered by Nord Pool Spot exists. Elbas is the Nordic exchange for trade in hourly energies i.e.\ up to one hour before the delivery hour~\cite{ELBAS}.
+
+When it comes to predicting prices in the future, models similar to predicting stock prices could be an option. The ``random walk theory'' is a highly debated phenomenon that arises when talking about prediction in the stock market domain. It states that an occurrence of an event is determined by a series of random movements. Future events are practically impossible to predict, which is relevant because stock prices reflect available information, and when this new information arises is seemingly random.
+
+We do not believe energy prices are as random as stock prices, due to the fact that they mostly match the demand for each hour in a given day, forming a pattern~\cite{eiaElDemand}. Surges of sudden extremes can also not occur in electricity demand as proven otherwise by the stock market. It follows that we can attempt analytical techniques to predict future electricity prices based on historical electricity prices.
+
+\subsubsection{Regression Analysis}
+Regression attempts to build a mathematical function as a model to represent the relationship of a dependent variable. The goal of regression is to select parameters of a model so it minimizes the sum of squared residuals, where the residual is the difference between the observed value and the estimated function value. Residual can be seen as a fitting error and can be computed by using some of the data set as a training set, and the rest as the test set.
+
+% How we should use linear regression
+Linear regression attempts to build a linear function over a series of data points, indirectly allowing prediction of future values based off of the function. In our case, it would not be appropriate to use linear regression for the prices of an entire day, due to the fact that they vary greatly depending on what time of day it is. Prices of electricity in early morning hours between \hour{7} and \hour{9} can easily be \EUR{10} or more than the other hours of the day, because a lot of energy is used during that time. The sum of square residuals would be very high, if attempting to fit a linear function over prices for an entire day.
+
+Instead of looking at an entire day, refining the data to look at each hour-interval per day gives a more linear relationship. By splitting the dataset up into plotting prices for individual hour-intervals, linear regression suddenly becomes much more relevant. As an example, historical electricity prices between \hour{7} and \hour{8} from Nord Pool Spot over the past three years is shown in \Cref{fig:energyprices}~\cite{nordPoolSpot}.
+
+\begin{figure}[htpb]
+  \centering
+  \includegraphics[width=\textwidth]{drawings/linear-regression/plot.tikz}
+  \caption{Graph over energy prices on the Nord Pool Spot market between \hour{7} and \hour{8} across all months of 2011 and 2013. Includes a possible linear regression function over the data.}
+  \label{fig:energyprices}
+\end{figure}
+
+Here we have added a possible linear regression function that attempts to minimize the sum of squared residuals, by minimizing the distance (price) between the line and samples. Prediction of data in the future would then be based off of that linear function. It is obviously not realistic to only compute this function once, as described next.
+
+One could argue that the above plot looks irregular and unpredictable, almost like the prices of stocks on the stock market. It is possible to further refine the data by filtering out points not in the month targeted for forecasting. This could make prices more linear, as electricity demand during winter is higher than other seasons, therefore resulting in higher prices. The issue with only looking at a single month over the past few years is that general price fluctuations are not taken into account.
+
+Regardless of how filtered and refined the data is, by daily gathering data and drawing the function for each hour interval, it's possible continuously improve the accuracy of electricity price prediction for that hour-interval the next day.
+
+\subsubsection{Multilayer Neural Network}
+Another method often used for time series forecasting, is a feedforward neural network model called \emph{multilayer perceptron}. This model uses backward propagation of errors, or backpropagation, to train a neural network on a dataset. Feedforward means that all the neurons of each hidden layer feed into every neuron of the next layer with weighted edges, none of which go backwards, resulting in a hierarchy of layers. A perceptron is a type of machine learning algorithm, defined by classifying an input by mapping it to one-to-many non-binary outputs.
+
+% What is a neural network
+A neural network is a computational model capable of machine learning. They are structured as directed, weighted graphs with neurons as nodes. An example of this graphical structure is shown below in \Cref{fig:neuralNetworkModel}. There are three types of neurons in a perceptron model: input neurons, hidden neurons, and output neurons. Input neurons capture observed features and output neurons describe the result of the model. In a multilayer perceptron, multiple layers of hidden neurons connect the input neuron or neurons to the output neuron or neurons with edges. Hidden nodes have values based on the activation function, and the input and output neurons have a different heuristic for determining their values.
+
+\begin{figure}[!htb]
+\centering
+\includegraphics{drawings/neuralnetwork.tikz}
+\label{fig:neuralNetworkModel}
+\caption{Example of a neural network with multiple input neurons and hidden layers with a single output neuron}
+\end{figure}
+
+% About the neruons' activation functions
+Benefits of using this model include using data that are not linearly separable, due to the fact that the model's neural network model uses neurons with nonlinear activation functions. Activation functions are merely functions that take in multiple inputs and provide a single output. In the case of a neuron, the activation function takes input from all the edges entering the neuron and outputs a single value, which the neuron takes on. Activation functions of multilayer perceptrons are usually sigmoid functions\footnote{A mathematical function with an \textbf{S} shape.} formally defined by the formula:
+
+\[
+  \operatorname{S}(t) = \frac{1}{1+e^{-t}}
+\]
+
+% Backpropagation
+This activation function lives inside each neuron of each hidden layer. The goal of backpropagating errors is to set the weights of the edges between these neurons until the desired error margin is minimized enough. This is done by propagating the weight changes back up through the neural network. The activation function of a neuron is given an input of the sum parent neuron values multiplied by their weight. With backpropagation, the gradient descent method is used to find the local minimum and thus minimize the sum of squared errors.
+
+% Multiple layers
+By having multiple layers, it's possible to recognize more and more complex features in the input, as each layer uses the features of the parent layer to learn a more abstract feature. The amount of layers to have in the model is dependent on the errors.
+
+% Input and output neurons
+Again in our case, the database would merely consist of a date and time entry that map to a corresponding price. The two input units of the neural network would therefore consist of a date and time, and the single non-binary output unit would be a price\footnote{Note that discrete features can be represented as binary features. Example for prices: \texttt{price\_is30.3eur?}, \texttt{price\_is31.2eur?}, and so on.}.
+
+Using such a neural network, is a different approach than regression and it would be interesting, to compare this method and regression analysis when it comes to forecasting of prices, as they are vastly different models. Implementing one is out of the scope of this project, which is why a tool would be sufficient.
+
+\subsubsection{Other Methods}
+Many other methods exist to predict future values of the dependent variable of electricity prices based on a time axis. There are many software resources, which have time series forecasting models built in and ready to use, such as R, S, MATLAB, among others. Apart from regression, some use stochastic processes due to the seemingly randomness of prices, others use a more classical statistical model of representing stochastic processes, namely autoregressive integrated moving average (ARIMA).
+
+\subsection{Discussion}
+We choose to use the wind turbine power output equation described in \Cref{sub:Forecasting: Energy supply} to predict future production of wind turbines using weather forecasts. It requires constructing a realistic wind turbine model to be able to compute their power output over a period of time based off of wind speeds, whether in the future or in the past. This makes designing forecast production simple in our situation, considering the fact that we only take wind turbines into consideration. Wind turbines are located in some physical position and their production is based purely on the wind speed at that location. This makes designing a wind turbine model trivial, because all we need is wind speed forecast at that given location and at some time.
+
+Linear regression seems simple enough for our purposes, because the data sets of previous prices appears linear. We choose to create 24 linear functions for each hour-interval and compute these for each day, taking electricity prices for that hour-interval from 2011 until the day before into account. We chose to use a software package that allows different models will increase flexibility when testing, instead of implementing something from scratch. 
+
+A multilayer perceptron would also be interesting to implement in helping forecast electricity prices. Software packages that offer a generic version of this model also exist and will be preferable. This covers all bases in terms of whether the data is linearly separable or not. An effective implementation will allow using different forms of time series prediction and forecasting. Most software packages will allow hot swapping different types according to demand.
+
+The next section will describe the design of our scheduler, which we will use to schedule our flexible energy consumption and is the other main component of our system. 

@@ -1,0 +1,42 @@
+\section{Market Model}\label{sec:marketmodel}
+The goal for every BRP is to balance energy within time slots of 1 hour, for 24 hours ahead \cite[p~9]{NORDIC08}. Energy is balanced when the imbalance (see \Cref{def:imbalance}) of the balance area is equal to 0. When the BRP predicts a difference between the energy produced and consumed, the BRP can decide import or export the difference. This section explains the market models for the BRPs and describes how BRPs earn money. This information is useful to fully understand how imbalances affect BRPs' profits. 
+
+If the energy within the current hour is not balanced, the BRP loses potential income by having to purchase expensive energy from Energinet.dk, as illustrated by \Cref{fig:income}, since the BRP needs to urgently buy expensive energy from other other BRPs, or sell it cheap via the market. 
+
+\begin{figure}[!htb]
+\centering
+\includegraphics{drawings/lostincome.tikz}
+\caption{Example of income being lost due to an imbalance in a BRP's balance area.}\label{fig:income}
+\end{figure}
+
+We are interested in two types of imbalances, as presented in \Cref{sec:energy_imbalances}:
+
+\begin{enumerate}
+  \item Negative imbalance: Happens if energy consumed in the balance area is higher than the amount the BRP predicted (\Cref{fig:negimba}).
+  \item Positive imbalance: Happens if energy consumed in the balance area is lower than the amount the BRP predicted (\Cref{fig:posimba}).
+\end{enumerate}
+
+If there is a negative imbalance, the BRP has to import expensive energy, and if there is positive imbalance, the BRP has to sell it cheaply or simply waste it, if possible. Regardless of which kind of imbalance appears, it's a loss of potential income for the BRP. It is less profitable to import/export, compared to the profit can be earned when utilizing the entire energy locally, or selling the energy ahead of time on the market. Imbalances are thus something that should be avoided at all times. But since that is almost impossible to do due to erroneous production predictions, it is something everyone is interested in minimizing as much as possible. 
+
+\begin{figure}[htbp]
+  \centering
+  \subbottom[\emph{Negative imbalance}\label{fig:negimba}]{\includegraphics[width=0.48\textwidth]{drawings/negativeImbalance.tikz}}
+  \subbottom[\emph{Positive imbalance}\label{fig:posimba}]{\includegraphics[width=0.48\textwidth]{drawings/positiveImbalance.tikz}}
+  \caption{The two kinds of imbalances. The left bar on each figure is total energy production, and the right is total energy consumption.}\label{fig:negposImbalance}
+\end{figure}
+
+Assuming that the BRP controls every aspect in the flow of energy, we can calculate the profit. To find the total profit of a BRP, knowledge of the total income and the total expenses is required. The income sources for a BRP are based on the export of energy and the energy sold to customers via contracts. The expenses are related to the import of energy and the production cost. Granted, this is only true if we focus purely on the profit made from dealing with energy. We do not take any other factors into account. The total profit of a BRP is then:
+
+\[
+  \var{Profit} = (\var{Export}_{\var{profit}} + \var{Contracts}_{\var{profit}}) - (\var{Production}_{\var{cost}} +  \var{Import}_{\var{cost}})
+\]
+
+We will abstract away from the production costs and assume it is free if the BRP owns electricity production sources, as this property is not very relevant and is a constant. Thus, we remove these details and arrive at \Cref{eq:profit}:
+
+\begin{equation}\label{eq:profit}
+  \var{Profit} = (\var{Export}_{\var{profit}} + \var{Contracts}_{\var{profit}}) - \var{Import}_{\var{cost}}
+\end{equation}
+
+Modeling profit this way allows measuring profit at a single point in time or over a period of time slots. This equation will be used when we will determine the feasibility of our solution by plotting the profit of charging EVs in \Cref{chap:evaluation}.
+
+A new technology called \emph{smart grids} makes it possible to implement a system such as \textsc{mirabel} and allows us to do a lot more with the electric grid.

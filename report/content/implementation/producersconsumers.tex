@@ -1,0 +1,16 @@
+\section{Producers and Consumers}\label{sec:prosumer}
+As the implementation of this system builds upon smart grid technology, the system benefits from having a virtual representation of producers and consumers. 
+
+\subsection{Producers}
+Since we focus on RES, we feel wind turbines make the best candidate as a RES for our system, considering the fact that they are quite simple and regular. As previously mentioned in \Cref{sub:Forecasting: Energy supply}, we have a simple formula for estimating energy output based on wind speeds. Implementing these wind turbines is therefore quite trivial and exactly like the component design of wind turbines. Wind turbines are aggregated into parks consisting of 1-to-many wind turbines, each generating energy depending on the wind speed at the wind turbine's location. We have looked up some simple standard wind turbine specifications, and used those for simulation. 
+
+\subsubsection{Energy Production Calculation}
+To calculate the production rate of wind turbines, we need wind speeds for the equation. We retrieve wind speed via the \href{openweathermap.org}{openweathermap.org} API, which is a free-to-use API for weather data. We simply send a request with a city name, a time, and receive weather information about that city as a JSON\footnote{JavaScript Object Notation (JSON) is a lightweight language-independent data format based on key-value pairs.} object. 
+
+% Wind turbines and wind turbine parks
+In an attempt to make production forecasting as flexible as possible, we have made it possible to look a time up for any wind turbine and meter its production, at any given time. Using the weather API described above, allows us to make three different types calls: one for historical data, another for current data, and the last for forecast data. Unfortunately, the JSON returned from each of these calls is formatted differently, requiring three different deserializing methods.
+
+To make this possible, we use \href{https://code.google.com/p/google-gson/}{google-gson}, a library to convert JSON to Java objects to build Java classes from the returned JSON. This results in three different classes with almost identical information, located in different attributes and child classes. To make the interface for accessing this weather data uniform, regardless of what time is requested, we use the facade software design pattern to abstract the different types of Gson-generated classes away from other parts of the system.
+
+\subsection{Consumers}
+As we focus on flexible consumers, we focus on electric vehicles, because of the fact that they are mostly plugged-in at night, and they do not have to charge constantly nor instantly. The consumers in the system are the EVs implemented using \Cref{fig:UMLEV}. A few more methods are however added, like \method{drive}{distance}, which is implemented for simulation purposes. On the BRP side of the system, EV are represented as charge-offers. Charge-offers are implemented using \Cref{fig:UMLCO}, where \texttt{deadline} and \texttt{chargingSpeed} are read directly from the EV, and \texttt{minEnergy} and \texttt{maxEnergy} is calculated as shown by \Cref{eq:minmaxEnergy}.

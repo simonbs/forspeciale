@@ -1,0 +1,73 @@
+%% 
+%% AMPL definition (c) 2007 Mirko Maischberger 
+%% 
+%% Source: http://puszcza.gnu.org.ua/support/?135
+\lstdefinelanguage{AMPL}{ 
+alsoletter={.},% 
+morekeywords={Current,IN,INOUT,Infinity,Initial,LOCAL,OUT,all,binary,% 
+by,check,complements,contains,default,dimen,div,else,environ,exists,% 
+forall,if,in,integer,less,logical,max,min,option,setof,shell_exitcode,% 
+slve_exitcode,solve_message,solve_result,solve_result_num,suffix,sum,% 
+symbolic,table,then,union,until,while,within,from,to,obj,% 
+cross,diff,symdiff,inter,% 
+and,not,or,prod,product},%keywords 
+morekeywords=[2]{abs,acos,acosh,alias,asin,asinh,atan,atan2,atanh,ceil,% 
+ctime,cos,exp,floor,log,log10,max,min,precision,round,sin,sinh,sqrt,tan,% 
+tanh,time,trunc,% 
+Beta,Cauchy,Exponential,Gamma,Irand224,Normal,Normal101,Poisson,% 
+Uniform,Uniform01,% 
+num,num0,ichar,char,length,substr,sprintf,match,sub,gsub,% 
+card,next,nextw,prev,prevw,first,last,member,ord,ord0,arity,indexarity,% 
+interval,integer,ordered,circular,coeff,cover},%functions 
+morekeywords=[3]{set,param,var,arc,minimize,maximize,subject to,% 
+node,subjto,s.t.},%declarations 
+morekeywords=[4]{call,cd,check,close,commands,data,delete,display,drop,end,% 
+environ,exit,expand,fix,include,let,load,model,objective,option,print,% 
+printf,problem,purge,quit,read,read table,redeclare,reload,remove,reset,% 
+restore,shell,show,solexpand,solution,solve,update,unfix,unload,write,% 
+write table,xref},%commands 
+sensitive=true,% 
+morecomment=[s][\color{gray}]{/}{/},% 
+morecomment=[l][\color{gray}]\#,% 
+morestring=[d]",% 
+morestring=[d]'% 
+}[keywords,comments,strings]% 
+\definecolor{lightgray}{rgb}{0.95, 0.95, 0.95}
+
+% Smaller font for listings with microtype package
+% taken from: http://tex.stackexchange.com/questions/33020/shrinking-monospace-style-for-listings-package
+\newcommand\Small{\fontsize{9}{9.2}\selectfont}
+\newcommand*\LSTfont{\Small\ttfamily\SetTracking{encoding=*}{-60}\lsstyle}
+
+% Taken from: http://stackoverflow.com/questions/741985/latex-source-code-listing-like-in-professional-books
+\lstset{
+  language=Java,
+  %basicstyle=\footnotesize\ttfamily, 
+  basicstyle=\LSTfont,
+  numbers=left,              
+  numbersep=5pt,
+  tabsize=2,
+  extendedchars=true,
+  breaklines=true,
+  keywordstyle=\color{red},
+  captionpos=b,
+  frame=t,         
+  stringstyle=\color{cyan}\ttfamily,
+  commentstyle=\color{gray},
+  showspaces=false,
+  showtabs=false,
+  xleftmargin=17pt,
+  framexleftmargin=17pt,
+  framexrightmargin=5pt,
+  framexbottommargin=4pt,
+  backgroundcolor=\color{lightgray},
+  showstringspaces=false
+}
+\DeclareCaptionFont{white}{\color{white}}
+\DeclareCaptionFormat{listing}{\noindent\colorbox[cmyk]{0.43, 0.35, 0.35,0.01}{\parbox{\dimexpr\textwidth-0.9\fboxsep\relax}{\centering #1#2\em#3}}}
+\captionsetup[lstlisting]{format=listing,labelfont=white,textfont=white, singlelinecheck=false, margin=0pt, font={bf,footnotesize}}
+%----
+\lstloadlanguages{
+  Java
+}
+

@@ -1,0 +1,20 @@
+\section{Further Work}\label{sec:furtherwork}
+In this section, we synthesize different ideas related to the system that could be interesting to research or include in the system in the future. These ideas consist of expanding the system to reach more types of flexible consumption devices and alternative solutions to scheduling.
+
+\subsection{Expanding to Broader Consumer Types}
+Technically, there's nothing stopping the system from being expanded to other flexible-demand consumer types, such as the examples the \textsc{mirabel} system works on: dishwashers, heat pumps, washing machines, freezers, etc. It could even be researched how to combine \textsc{mirabel}'s flex-offers and \productname's charge-offers.
+
+\subsection{Adaptive Scheduling}
+The system could learn from its previous scheduling experiences. It could keep track of the predicted profit and all it entails for each day, and then the next, look back and see the actual profit. Time slots with lost profits could then be analyzed after having collected data over predictions and actual outcomes to see what went wrong and if anything can be done to minimize it. It could then react accordingly if it predicts a similar situation that gave the non-optimal profit.
+
+\subsection{Consumption Forecasting}
+To increase the accuracy of scheduling the charging of cars, forecasting/prediction of consumption could be implemented in the system. This would result in schedulers not being overwhelmed when a large amount of cars are suddenly plugged in, e.g.\ between \hour{17} and \hour{18} in the afternoon.
+
+If the system could predict this surge of demand, it could schedule cars plugged in before this surge to finish charging as fast and cheap as possible, to minimize the amount of active charge-offers. To implement this, we could do the same as we do with energy price forecasting. Data collecting could be done by researching when people usually leave for work and come home. Then prediction models using linear regression or another method could be used. Here the independent variables would again be date and time, and the dependent variable would be amount of EVs plugged in at that date and time in the future.
+
+Scheduling more than a day combined with demand\slash consumption forecasting would allow better regulation of the charging, when charging more than \var{minCharge}. E.g. the knowledge that a specific car will plug in again in two days, might persuade us to charge the car to maximum capacity , based on the price of importing.
+
+%mikkel: addede lige det mens jeg kunne huske :)
+%martin: det er her allerede, se slutning af systemevaluation 5.2.2
+%As previously mentioned, we've had to use floating point rounding because we are not able to charge parts of a time slot. To solve the problem with the LP scheduler being approximative, one could allow flexible charging, e.g. charging at \perc{50} of max charging speed. With this capability, consumption could be fit on production very precisely.
+%Flexible charging!

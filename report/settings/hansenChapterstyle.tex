@@ -1,0 +1,53 @@
+% From: ftp://ftp.tex.ac.uk/tex-archive/info/MemoirChapStyles/MemoirChapStyles.pdf
+\usepackage{calc}
+\definecolor{ChapNumColor}{gray}{0.90}
+\definecolor{ChapTitleColor}{gray}{0.65}
+% helper macros
+\newcommand\numlifter[1]{\raisebox{-18mm}[0pt][0pt]{\smash{#1}}}
+\newcommand\numindent{\kern08mm}
+\newlength\chaptertitleboxheight
+\makechapterstyle{hansen}{
+  \renewcommand\printchaptername{%
+    \color{ChapTitleColor}%
+  %\raggedleft
+  }
+  \renewcommand\printchapternum{%
+    \begingroup%
+    \leavevmode%
+    \chapnumfont%
+    \strut%
+    \numindent%
+    \numlifter{\thechapter}%
+    \endgroup%
+  }
+  \renewcommand*{\printchapternonum}{%
+    \vphantom{\begingroup%
+      \leavevmode%
+      \chapnumfont%
+    \numlifter{\vphantom{9}}%
+    \numindent%
+    \endgroup}
+  \afterchapternum}
+  \setlength\midchapskip{0pt}
+  \setlength\beforechapskip{0.5\baselineskip}
+  \setlength{\afterchapskip}{3\baselineskip}
+  \renewcommand\chapnumfont{%
+    \fontsize{40mm}{0mm}%
+    \bfseries%
+    \fontfamily{\sfdefault}\selectfont%
+    \color{ChapNumColor}%
+  }
+  \renewcommand\chaptitlefont{%
+    \huge%
+    \sffamily%
+    %\color{ChapTitleColor}%
+    %\raggedleft%
+  }%
+  \settototalheight\chaptertitleboxheight{%
+  \parbox{\textwidth}{\chaptitlefont \strut bg\\bg\strut}}
+  \renewcommand\printchaptertitle[1]{%
+    \parbox[t][\chaptertitleboxheight][t]{\textwidth}{%
+    \microtypesetup{protrusion=false}% add this if you use microtype
+    \chaptitlefont\strut ##1\strut}%
+  }
+}

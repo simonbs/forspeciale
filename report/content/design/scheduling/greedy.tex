@@ -1,0 +1,84 @@
+\subsection{Greedy Scheduling}\label{sec:greedyschedanal}
+Greedy algorithms are often a quick way to solve problems, so greedy scheduling would be an interesting approach to schedule generation. However, because it is greedy, it does not guarantee that the result is optimal. We can implement a greedy scheduler in several ways, such as shortest charge first, longest charge first, latest deadline first or earliest deadline first. To get the best result, we should schedule with regard to earliest deadline first. This approach will give the best result, as the EVs with the earliest deadlines must finish before the others, and if we did not prioritize these first, we would end up with less flexibility than what we started with, because the time between the current time and the deadline will decrease by each schedule. The first thing the greedy scheduler should do is thus to sort the list of charge-offers with regards with deadlines. 
+
+% Thalley - Ikke nødvendigt IMO
+%A greedy scheduling algorithm can be implemented in several ways, but some of these way does not work properly. If we have a number of EVs to charge, we have start, end and execution time of those charges. A greedy approach to schedule EVs with regards to deadlines and charging is much like scheduling to minimize lateness~\cite[p.~8]{GREEDY}. We can thus schedule regarding to the end, start and execution time variables. However, we will show that some of these are not feasible.
+
+%\begin{description}
+%  \item [Smallest duration first:] This approach sorts by charging duration (in our case, how much time it takes to charge the EVs). This approach fails because it cannot take deadlines into account and will not generate a feasible schedule respecting the constraints.
+%  \item [Smallest value first:] This approach does not give an optimal solution either. If for example an EV has to be charged for a long time, it should be schedule first, but with smallest value first, it will be scheduled late and it might not be able to charge before its deadline.
+%  \todo{Hvad menes der med value? Kan ikke forstå det ud fra teksten\ldots -- Martin}
+%  \item [Largest value first:] For the same reason as above, this approach is not feasible either. Here short charges with short deadlines might not be scheduled in time.
+%  \item [Shortest deadline first:] Contrary to the previously mentioned approaches, this approach \emph{is} feasible. If we schedule regarding to the deadline, we get an optimal schedule. To schedule based on deadlines, we first sort the list of activities to be scheduled by their deadline. Then we simply just insert the activities into the schedule from start to end, if they fit regarding to the constraints. The proof that we get an optimal schedule can be seen in \cite[p.~8]{GREEDY}.
+%\end{description}
+
+
+\subsubsection{Design of a Greedy Scheduler}
+To see how a greedy scheduler could possibly solve the optimization problem effectively, we now design a greedy scheduler that does not guarantee an optimal solution, but could possibly be faster than a linear programming approach. This model will be described as \Cref{alg:greedy} first and then the algorithm will be illustrated in \Cref{fig:greedy}. This algorithm works in three phases:
+
+\begin{enumerate}
+    \item Schedule all charge-offers greedily without using more energy than what is produced (\Cref{fig:greedyp1})
+    \item If any charge-offer is not \var{minCharged} after first phase, use energy from the grid to schedule these. These charge-offers must be scheduled when the energy is cheapest to import (\Cref{fig:greedyp2}).
+    \item If we have more power left, schedule charge-offers that are not \var{maxCharged} with the remaining energy (\Cref{fig:greedyp3})
+\end{enumerate}
+
+\Cref{alg:greedy} below follows the above steps and ensures that all EVs, represented by charge-offers, will be charged with the minimum energy amount needed, but it does not optimize such that we do not use energy from the grid. 
+
+\begin{algorithm}[!htb]
+\small
+\caption{Greedy scheduler}\label{alg:greedy}
+	\begin{algorithmic}[1]
+		\State Input: \var{COs} = List of charge-offers, \var{Prod} = List of production values for each time slot, \var{Prices} = List of prices for each time slot
+		\State Sort(COs).byDeadline
+		\ForAll {\var{values} in \var{Prod}}
+		  \While{\var{powerUsed} $<$ \var{production}} \Comment{Phase 1}
+			\State Schedule charge-offers that are not charging from start to end
+		  \EndWhile
+		  \While{All charge-offers are not \var{minCharged}}  \Comment{Phase 2}
+			\State Find the cheapest time slot
+			\State Schedule charge-offers that are not charging and have deadline after current time slot
+		    \State Set cheapest time slot price to \num{9999} (so it will not be used again)
+		  \EndWhile
+		  \While{\var{powerUsed} $<$ \var{production}} \Comment {Phase 3}
+			\State Schedule charge-offers that are not \var{maxCharged} and are not charging
+		  \EndWhile 
+		\EndFor
+		\State \Return List of charge-offers to be charged in next time slot
+	\end{algorithmic}
+\end{algorithm}
+
+\begin{figure}[!htb]
+  \centering
+  \subbottom[\emph{Phase 1}\label{fig:greedyp1}] {%
+    \includegraphics[width=0.8\textwidth]{drawings/greedyPhase1.tikz}
+  }
+  \subbottom[\emph{Phase 2}\label{fig:greedyp2}] {%
+    \includegraphics[width=0.8\textwidth]{drawings/greedyPhase2.tikz}
+  }
+  \subbottom[\emph{Phase 3}\label{fig:greedyp3}] {%
+    \includegraphics[width=0.8\textwidth]{drawings/greedyPhase3.tikz}
+  }
+  \caption{Plots over the different phases in the greedy scheduler algorithm defined in~\Cref{alg:greedy}. Time is on the $x$-axis and power is on $y$-axis. Phase 1 schedules all charge-offers without using more energy than what is produced from RES. Phase 2 schedules charge-offers not \var{minCharged} when energy is cheapest. Phase 3 schedules charge-offers to use remaining energy.}\label{fig:greedy}
+\end{figure}
+
+\subsubsection{Algorithm Analysis}
+The time complexity of \Cref{alg:greedy} is described in \Cref{tab:greedyanal}. Lines 4 to 14 are repeated for each time slot. Lines 7-11 require $p \cdot n^2$ steps because finding the cheapest time slot takes $p$ steps, and going through each charge-offer to check if it charging takes $n \cdot n$ time, and is also the reason why lines 12-14 require $n \cdot n$ steps, assuming that we keep a list of which charge-offers that are charging in each time slot. \Cref{tab:greedyanal} shows the time complexity of the greedy scheduler. 
+
+\begin{table}[!htb]
+	\centering
+	\begin{tabular}{l l}\toprule
+		Line(s) & Complexity \\ \midrule
+		2       & \bigo{n \log n} \\
+		3       & \bigo{p} \\
+    4--6    & \bigo{n} \\
+		7--11   & \bigo{p \cdot n^2} \\
+		12--14  & \bigo{n^2} \\ \midrule
+    Total   & \bigo{p \cdot (p \cdot n^2)} \\ \bottomrule
+	\end{tabular}
+	\caption{Time complexity of \Cref{alg:greedy}, where $n = |\var{COs}|$, the number of charge-offers, $p = |\var{Prod}|$, the amount of time slots.}\label{tab:greedyanal}
+\end{table}
+
+\FloatBarrier
+
+\subsubsection{Randomized Greedy Search}\label{sec:randomsearch}
+An alternative approach is to use randomized greedy search as a scheduling method. \textsc{mirabel} used two algorithms to solve the scheduling problem: \emph{randomized greedy search} and \emph{evolutionary algorithm}. The randomized greedy search is simply a randomized greedy algorithm which randomly chooses flex-offers, constructs schedules and analyzes which schedule is best. The evolutionary algorithm takes the schedules from the randomized greedy search, selects some of the solutions, then uses crossover and mutation to change and optimize the schedules. Both of these algorithms are time limited, e.g.\ ``run for 20 seconds and return result''. This is scales badly and will therefore not be considered.
