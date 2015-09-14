@@ -1,11 +1,20 @@
+\makeatletter
+\DeclareRobustCommand\onedot{\futurelet\@let@token\@onedot}
+\def\@onedot{\ifx\@let@token.\else.\null\fi\xspace}
+% Commands for ie, eg, etc... 
+\def\eg{\emph{e.g}\onedot} \def\Eg{\emph{E.g}\onedot}
+\def\ie{\emph{i.e}\onedot} \def\Ie{\emph{I.e}\onedot}
+\def\cf{\emph{c.f}\onedot} \def\Cf{\emph{C.f}\onedot}
+\def\etc{\emph{etc}\onedot} \def\vs{\emph{vs}\onedot}
+\def\wrt{w.r.t\onedot} \def\dof{d.o.f\onedot}
+\def\etal{\emph{et al}\onedot}
+\makeatother
+
 \newcommand{\mt}[1]{\textsc{#1}}
 
 \newcommand{\method}[2]{\sloppy\ensuremath{\texttt{{#1}(#2)}}}
 \newcommand{\var}[1]{\sloppy\ensuremath{\mathit{#1}}}
-\newcommand{\umlvar}[1]{\sloppy\ensuremath{\mathtt{#1}}}
 
-\newcommand{\mwh}{\si{\mega\watt\hour}}
-\newcommand{\kwh}{\si{\kW\hour}}
 \newcommand{\perc}[1]{\SI{#1}{\percent}}
 
 \newcommand{\charge}{\ensuremath{1}}
@@ -14,10 +23,6 @@
 \newcommand{\productname}{Untitled}
 \newcommand{\hour}[1]{\formattime{#1}{0}{0}}
 \newcommand{\bigo}[1]{\ensuremath{\mathcal{O}\left(#1\right)}}
-
-\newcommand{\inkw}{(in \si{\kilo\watt})}
-\newcommand{\ineur}{(in \si{\euro})}
-\newcommand{\profit}{Profit \ineur{}}
 
 \newcommand{\ass}{\coloneqq} % :=, vertially centered. Requires mathtools
 
