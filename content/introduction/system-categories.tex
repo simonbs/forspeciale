@@ -1,0 +1,45 @@
+\section{Categories of Systems}\label{sec:categories-of-systems}
+
+The scenarios in which home automation is facilitated can in general be divided into the following three categories.
+
+\begin{itemize}
+\item Rule driven systems
+\item Gesture driven systems
+\item Autonomous systems
+\end{itemize}
+
+The categories varies in the way users configure and interact with the systems. ``Manual systems'' could constitute a fourth category, consisting of regular systems with manual switches. The category was left out as it such systems do not contribute to home automation.
+Each of the four categories and their use cases are briefly described below.
+
+\textbf{Rule Driven Systems}
+
+A system is considered to be rule driven if an action is considered when a set of rules are  fulfilled. The systems use conditional statements to express input and output. Below are a few examples of rules.
+
+\begin{itemize}
+\item (The temperature is above 23 degrees Celsius) $\rightarrow$ (Lower the temperature on my thermostat)
+\item (The CO2 index is critically high) $\rightarrow$ (Open my windows)
+\end{itemize}
+
+The above rules consist of a condition on the left-hand side of the arrow and an action on the right-hand side of the arrow.
+
+The automation of the home is based on the set of rules. To achieve the desired behaviour, the user must add, remove or tweak existing rules.
+
+\textbf{Gesture Driven Systems}
+
+Systems are gesture driven if the system is configured with a set of gestures that can be performed by the user in oder to trigger some action. Each device in the system responds to a set of gestures. For example, a lamp may respond to the user waving in order to turn on and the user clapping in order to turn off.
+
+A gesture driven system is partly rule driven as each gesture registered in the system is associated with one or more actions. The association means that each time the gesture is registered in the system, the action should be triggered. Such rules can be formulated as ``if I wave then lower the temperature on my thermostat''
+
+\textbf{Autonomous Systems}
+
+An autonomous system monitors the system and proactively responds to changes in the system. Observable changes include but are not limited to changes in the temperature, CO2 index, the number of people in the room or even who are in the room.
+Autonomous systems should intelligently react to the users needs based upon the observable state of the environment.
+
+Autonomous systems rely on the concept of ambient intelligence in order to determine the necessary actions. Such systems include autonomous enhancement services that replaces manual care with an automated system \cite{nehmer2006living}. These systems gather environment and the data about the individuals body functions, e.g. temperature, pulse and blood pressure in order to determine if the individuals health is critical.
+
+Autonomous systems are rule driven systems that intelligently determines the rules to be created and the necessary action to take when a set of rules are fulfilled. Typical for such systems may be the complexity of the rules. It is not given that users themselves are capable of determing a suitable set of rules in order to judge if their health is critical. The system should itself be able to determine such set of rules and adjust it to the individual.
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "../../master"
+%%% End:
