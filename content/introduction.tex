@@ -13,7 +13,14 @@ Each of the four categories and their use cases are briefly described below.
 
 \textbf{Rule Driven Systems}
 
-A system is considered to be rule driven if an action is considered when a set of rules are fulfilled. The systems use conditional statements to express input and output. For example, ``if the temperature is above 23 degrees Celsius then lower the temperature on my thermostat''. In this case ``the temperature is above 23 degrees Celsius'' is a condition and ``lower the temperature of my thermostat'' is an action triggered when the rule is fulfilled.
+A system is considered to be rule driven if an action is considered when a set of rules are  fulfilled. The systems use conditional statements to express input and output. Below are a few examples of rules.
+
+\begin{itemize}
+\item (The temperature is above 23 degrees Celsius) $\rightarrow$ (Lower the temperature on my thermostat)
+\item (The CO2 index is critically high) $\rightarrow$ (Open my windows)
+\end{itemize}
+
+The above rules consist of a condition on the left-hand side of the arrow and an action on the right-hand side of the arrow.
 
 The automation of the home is based on the set of rules. To achieve the desired behaviour, the user must add, remove or tweak existing rules.
 
@@ -27,6 +34,10 @@ A gesture driven system is partly rule driven as each gesture registered in the 
 
 An autonomous system monitors the system and proactively responds to changes in the system. Observable changes include but are not limited to changes in the temperature, CO2 index, the number of people in the room or even who are in the room.
 Autonomous systems should intelligently react to the users needs based upon the observable state of the environment.
+
+Autonomous systems rely on the concept of ambient intelligence in order to determine the necessary actions. Such systems include autonomous enhancement services that replaces manual care with an automated system \cite{nehmer2006living}. These systems gather environment and the data about the individuals body functions, e.g. temperature, pulse and blood pressure in order to determine if the individuals health is critical.
+
+Autonomous systems are rule driven systems that intelligently determines the rules to be created and the necessary action to take when a set of rules are fulfilled. Typical for such systems may be the complexity of the rules. It is not given that users themselves are capable of determing a suitable set of rules in order to judge if their health is critical. The system should itself be able to determine such set of rules and adjust it to the individual.
 
 %%% Local Variables:
 %%% mode: latex
