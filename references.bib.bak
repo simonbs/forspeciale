@@ -1,0 +1,46 @@
+% This file was created with JabRef 2.10.
+% Encoding: Cp1252
+
+
+@Misc{HIRIS,
+  Title                    = {Hiris, the first wearable computer},
+
+  Author                   = {Hiris},
+  Note                     = {\url{http://gethiris.com/}},
+  Year                     = {2015},
+
+  Owner                    = {Thalley},
+  Timestamp                = {2015.09.16}
+}
+
+@Misc{JAWBONE,
+  Title                    = {Jawbone UP3},
+
+  Author                   = {Jawbone},
+  Note                     = {\url{https://jawbone.com}},
+  Year                     = {2015},
+
+  Owner                    = {Thalley},
+  Timestamp                = {2015.09.16}
+}
+
+@InProceedings{nehmer2006living,
+  Title                    = {Living assistance systems: an ambient intelligence approach},
+  Author                   = {Nehmer, J{\"u}rgen and Becker, Martin and Karshmer, Arthur and Lamm, Rosemarie},
+  Booktitle                = {Proceedings of the 28th international conference on Software engineering},
+  Year                     = {2006},
+  Organization             = {ACM},
+  Pages                    = {43--50}
+}
+
+@Misc{PEBBLE,
+  Title                    = {Pebble Smartwatch},
+
+  Author                   = {Pebble},
+  Note                     = {\url{https://getpebble.com}},
+  Year                     = {2015},
+
+  Owner                    = {Thalley},
+  Timestamp                = {2015.09.16}
+}
+
