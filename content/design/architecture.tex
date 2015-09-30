@@ -34,12 +34,17 @@ If a gesture is recognized and an action must be triggered, the server communica
     \draw[thick,<->] (5,-2.15) -- (5,-2.85);
     \draw[thick] (0.2,-3.8) rectangle (2.7,-4.8) node[pos=.5] (bulb) {Bulb};
     \draw[thick] (2.9,-3.8) rectangle (5.4,-4.8) node[pos=.5] (lock) {Lock};
-    \draw[thick] (7.3,-3.8) rectangle (9.8,-4.8) node[pos=.5] (door) {Door};
+    \draw[thick] (7.3,-3.8) rectangle (9.8,-4.8) node[pos=.5] (door) {Thermostat};
     \node at ($(lock)!.5!(door)$) {\ldots};
   \end{tikzpicture}
   \caption{Architecture of the system.}
   \label{fig:architecture}
 \end{figure}
+
+When utilizing SmartThings, users must install a hub in their home. The hub communicates with the users devices, e.g. bulbs, locks and thermostats. For privacy reasons, it may be interesting to move the logic from the server to such hubs in the users home. However, Samsung does not allow developers to run applications on the Hub, nor do they provide a database or any other means of storing larger amount of data in an application running in the SmartThings environment.
+An alternative is to develop our own hub and system for automating and communicating with the devices, however, that would a yet another solution for solving that problem. Many big companies provide such solutions including Google, Microsoft, Apple and Samsung.
+
+On the other hand, storing the logic on the server allows rather than a hub eliminates the need for distributing updates to multiple hubs everytime a new feature is introduced or a minor bug is fixed. Such changes only need to be deployed to a single server.
 
 %%% Local Variables:
 %%% mode: latex
