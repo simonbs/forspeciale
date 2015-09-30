@@ -1,0 +1,47 @@
+\section{Architecture}
+
+The system consists of three layers as illustrated in figure \ref{fig:architecture}. Each layer can communicate with the layer below and above it if they exist.
+
+The first layer consist of the wearable device and the mobile device. The two may be tightly coupled as some wearable watches, for example the Apple Watch, relies heavily on the phone. The two devices are responsible for listening to new movement data from the wearable, e.g. new data from the accelerometer and the magnetometer. The topmost is also responsible for communicating with the beacons in order to retrieve the position of the user and possibly the position of the devices the user can control. This external dependency must communicate directly with the phone due to limitations of the Estimote beacons.
+
+The topmost layer communicates with a central server developed specifically for this project. The server is responsible for storing positions reported by the mobile device as well as receiving and interpret gestures received from the wearable device.
+When new positions are available from the phone, they are pushed to the server and whenever the wearable device recognizes a gesture, it is pushed to the server along with the direction of the user.
+The server then determines if the user points at a known device and if the gesture is understood by that device. If it is, the appropriate action is triggered. If no device is found or the gesture is not understood by the device, the data is discarded.
+
+\todo[author=Simon]{Is this true? Is the communication between mobile device, server and watch necessary?}
+
+If a gesture is recognized and an action must be triggered, the server communicates with the third layer. SmartThings is responsible for managing the devices that can be controlled using gestures. Therefore the server sends a request to SmartThings in order to trigger the appropriate action.
+
+\begin{figure}[h]
+  \centering
+  \begin{tikzpicture}
+    \node[anchor=center] at (-0.8,0.5) {(1)};
+    \node[anchor=center] at (-0.8,-1.5) {(2)};
+    \node[anchor=center] at (-0.8,-4) {(3)};
+
+    \node[anchor=center] at (2.5,0.5) {Wearable Device};
+    \node[anchor=center] at (7.5,0.5) {Mobile Device};
+    \draw[thick] (0,0) rectangle (10,1);
+    \draw[thick, dashed] (5,0) -- (5,1);
+    \draw[thick,->] (10.85,0.5) -- (10.15,0.5);
+    \draw[thick] (11,0) rectangle (13,1) node[pos=.5] {Beacons};
+
+    \draw[thick] (0,-1) rectangle (10,-2) node[pos=.5] {Server};
+    \draw[thick,<->] (5,-0.15) -- (5,-0.85);
+
+    \node[anchor=center] at (1.2,-3.4) {SmartThings};
+    \draw[thick] (0,-3) rectangle (10,-5);
+    \draw[thick,<->] (5,-2.15) -- (5,-2.85);
+    \draw[thick] (0.2,-3.8) rectangle (2.7,-4.8) node[pos=.5] (bulb) {Bulb};
+    \draw[thick] (2.9,-3.8) rectangle (5.4,-4.8) node[pos=.5] (lock) {Lock};
+    \draw[thick] (7.3,-3.8) rectangle (9.8,-4.8) node[pos=.5] (door) {Door};
+    \node at ($(lock)!.5!(door)$) {\ldots};
+  \end{tikzpicture}
+  \caption{Architecture of the system.}
+  \label{fig:architecture}
+\end{figure}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "../../master"
+%%% End:
