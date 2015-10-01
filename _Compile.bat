@@ -35,22 +35,22 @@ EXIT
 
 :3
 TITLE pdflatex: %r%/%c%
-pdflatex main
+pdflatex master
 SET /A r=%r%+1
 CLS
 TITLE bibtex
-bibtex main
+bibtex master
 CLS
 
 :2
 TITLE pdflatex: %r%/%c%
-pdflatex main
+pdflatex master
 SET /A r=%r%+1
 CLS
 
 :1
 TITLE pdflatex: %r%/%c%
-pdflatex main
+pdflatex master
 CLS
 
 :d
