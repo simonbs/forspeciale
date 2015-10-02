@@ -59,6 +59,34 @@ Pozyx \cite{pozyx}
 \end{tabularx}
 \end{table}
 
+\subsection{Methods of indoor positioning}
+To locate devices and users inside buildings, various approaches were considered.
+
+\begin{itemize}
+\item Trilateration using signal strength (Eg. Wi-Fi or Bluetooth)
+\item Fingerprinting of signal strength
+\item Line of sight (Eg. Light)
+\item Directional signals (Eg. Bluetooth)
+\end{itemize}
+
+\subsection*{Trilateration}
+One way of getting the position of a user is to use the signal strength of a set of transmitters, eg. Wi-Fi access points. This requires that the position of each transmitter used is known so the position of the user relative to the transmitters can be determined.
+
+If only one transmitter is used, then it is impossible to determine where the user is based on the distance alone. The only thing known is that the user is somewhere on the circumference of a circle centered around the transmitter with a radius equal to the distance between the user and the transmitter.
+If two transmitters are used then there are two possible locations where the user may be, and that is where two circles centered on each transmitter respectively intersect.
+When a third transmitter is introduced then there is only one point where the user can be.
+
+However there are some uncertainties associated with this method because signal strength may vary in if the receiver remains stationary. This means that the distance between a user and a set of transmitters cannot be determined accurately based on signal strength alone.
+
+\subsection*{Fingerprinting of Signal Strength}
+Another method is to collect a dataset of signal strength values with an associated position submitted by person who noted the location where the signal strength was measured. When a sufficient\todo{Determine what constitutes sufficient in this case or reword.} amount of data has been acquired a user can get an estimated position by measuring signal strength and comparing it to the ones in the dataset.
+
+\subsection*{Line of Sight}
+Instead of trying to determine where users and devices are located, the user can send a light towards a receiver near a device. If the receiver is hit by the light then the device is selected. This approach requires an unobstructed path between the user and the devices as anything standing in between may block the light.
+
+\subsection*{Directional Signals}
+To combat things blocking a light, the user can send a directional signal that can penetrate some materials. By default Bluetooth signals are omnidirectional, meaning they are sent out in every direction around a transmitter. One way to solve this would be to build a casing around the transmitter blocking the signal in most directions leaving only a small spot open. Another would be to create a custom transmitter.
+
 %%% Local Variables:
 %%% mode: latex
 %%% TeX-master: "../../master"
