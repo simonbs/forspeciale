@@ -2,6 +2,7 @@
 This section will describe the setup of the prototypes developed during this project.
 
 \subsection{Prototype \#1}
+\label{sec:implementation:prototypes:prototype1}
 The first prototype was an Android phone application that showed the location of the user, the direction the phone was pointing, and the devices that were being pointed at.
 The application used a 10x10 grid to simulate a square room in which the user and the devices to be controlled were located.
 A set of imaginary devices was hardcoded into the application with fixed positions and the grid would look like the one shown in table \ref{table/prototype-grid}.
@@ -38,4 +39,42 @@ Lamp 1 &  &  &  &  & TV &  &  &  &  \\ \hline
     }
     \caption{Screenshots of the first prototype.}
     \label{fig:prototype1-app-screenshots}
+\end{figure}
+
+
+\subsection{Prototype \#2}
+\label{sec:implementation:prototypes:prototype2}
+
+The second prototype consisted of an iOS application similar to Android application described in section \ref{sec:implementation:prototypes:prototype1} and a server that represented two controllable lamps.
+The platform was changed from Android to iOS because the application would later use Estimote beacons and there was no Android SDK available for this. 
+
+\subsubsection*{Major Changes}
+\begin{itemize}
+\item Introduction of a server for the application to interact with.
+\item Switched platform from Android to iOS.
+\end{itemize}
+
+In this prototype the room is still represented as a grid and the user is placed in the center of the grid, however the user is unable to change position.
+This is because the first prototype showcased the idea of pointing at devices from different locations sufficiently and the next step would be to use the actual location of a user using Estimote beacons.
+As shown in figure \ref{fig:prototype2-app-screenshots} the user can see his direction as an angle between himself and north.
+Devices are represented as orange dots and if the user points towards one of them two buttons will appear that allow the user to interact with the device by either turning it \texttt{on} or \texttt{off}.
+When the user turns a device on or off it will be reflected on the server where a corresponding box will have the color \texttt{green} when turned on and \texttt{red} when turned off as shown in figure \ref{fig:prototype2-server-screenshot}.
+
+\begin{figure}%
+    \centering
+    \subfloat{
+        \includegraphics[scale=0.15]{images/Prototype2_iOS_1.png}
+    }
+    \subfloat{
+        \includegraphics[scale=0.15]{images/Prototype2_iOS_2.png}
+    }
+    \caption{Screenshots of the second prototype application.}
+    \label{fig:prototype2-app-screenshots}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[scale=0.2]{images/Prototype2_Server.png}
+    \caption[caption]{Screenshot of the server representing two lamps in the second prototype.\\\texttt{Green}: On, \texttt{Red}: Off}
+    \label{fig:prototype2-server-screenshot}
 \end{figure}
