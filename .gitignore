@@ -22,4 +22,5 @@
 *.out
 *.lol
 *.synctex.gz
+*.fdb_latexmk
 master.pdf
