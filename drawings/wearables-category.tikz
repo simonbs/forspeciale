@@ -13,6 +13,7 @@
     ybar,
     ymax=250,
     ymin=0,
+    bar width=20pt,
     ]
     \addplot coordinates {(Entertainment,45) (Fitness,153) (Gaming,24) (Industrial,33) (Lifestyle,212) (Medical,56) (Pets,5)};
 \end{axis}
