@@ -1,16 +1,27 @@
 \section{Architecture}
 
-The system consists of three layers as illustrated in figure \ref{fig:architecture}. Each layer can communicate with the layer below and above it if they exist.
+The system consists of three layers as illustrated in figure \ref{fig:architecture}. 
+Each layer can communicate with the layer below and above it if they exist.
 
-The first layer consist of the wearable device and the mobile device. The two may be tightly coupled as some wearable watches, for example the Apple Watch, relies heavily on the phone. The two devices are responsible for listening to new movement data from the wearable, e.g. new data from the accelerometer and the magnetometer. The topmost is also responsible for communicating with the beacons in order to retrieve the position of the user and possibly the position of the devices the user can control. This external dependency must communicate directly with the phone due to limitations of the Estimote beacons.
+The first layer consist of the wearable device and the mobile device. 
+The two may be tightly coupled as some wearable watches, for example the Apple Watch, relies heavily on the phone. 
+The two devices are responsible for listening to new movement data from the wearable, e.g. new data from the accelerometer and the magnetometer. 
+The topmost is also responsible for communicating with the beacons in order to retrieve the position of the user and possibly the position of the devices the user can control. 
+This external dependency must communicate directly with the phone due to limitations of the Estimote beacons.
 
-The topmost layer communicates with a central server developed specifically for this project. The server is responsible for storing positions reported by the mobile device as well as receiving and interpret gestures received from the wearable device.
-When new positions are available from the phone, they are pushed to the server and whenever the wearable device recognizes a gesture, it is pushed to the server along with the direction of the user.
-The server then determines if the user points at a known device and if the gesture is understood by that device. If it is, the appropriate action is triggered. If no device is found or the gesture is not understood by the device, the data is discarded.
+The topmost layer communicates with a central server developed specifically for this project. 
+The server is responsible for storing positions reported by the mobile device as well as receiving and interpret gestures received from the wearable device.
+When new positions are available from the phone, they are pushed to the server and whenever the wearable device recognizes a gesture, 
+it is pushed to the server along with the direction of the user.
+The server then determines if the user points at a known device and if the gesture is understood by that device. 
+If it is, the appropriate action is triggered. 
+If no device is found or the gesture is not understood by the device, the data is discarded.
 
 \todo[author=Simon]{Is this true? Is the communication between mobile device, server and watch necessary?}
 
-If a gesture is recognized and an action must be triggered, the server communicates with the third layer. SmartThings is responsible for managing the devices that can be controlled using gestures. Therefore the server sends a request to SmartThings in order to trigger the appropriate action.
+If a gesture is recognized and an action must be triggered, the server communicates with the third layer. 
+SmartThings is responsible for managing the devices that can be controlled using gestures. 
+Therefore the server sends a request to SmartThings in order to trigger the appropriate action.
 
 \begin{figure}[h]
   \centering
@@ -41,10 +52,18 @@ If a gesture is recognized and an action must be triggered, the server communica
   \label{fig:architecture}
 \end{figure}
 
-When utilizing SmartThings, users must install a hub in their home. The hub communicates with the users devices, e.g. bulbs, locks and thermostats. For privacy reasons, it may be interesting to move the logic from the server to such hubs in the users home. However, Samsung does not allow developers to run applications on the Hub, nor do they provide a database or any other means of storing larger amount of data in an application running in the SmartThings environment.
-An alternative is to develop our own hub and system for automating and communicating with the devices, however, that would a yet another solution for solving that problem. Many big companies provide such solutions including Google, Microsoft, Apple and Samsung.
+When utilizing SmartThings, users must install a hub in their home. 
+The hub communicates with the users devices, e.g. bulbs, locks and thermostats. 
+For privacy reasons, it may be interesting to move the logic from the server to such hubs in the users home. 
+However, Samsung does not allow developers to run applications on the Hub, 
+nor do they provide a database or any other means of storing larger amount of data in an application running in the SmartThings environment.
+An alternative is to develop our own hub and system for automating and communicating with the devices, 
+however, that would a yet another solution for solving that problem. 
+Many big companies provide such solutions including Google, Microsoft, Apple and Samsung.
 
-On the other hand, storing the logic on the server allows rather than a hub eliminates the need for distributing updates to multiple hubs everytime a new feature is introduced or a minor bug is fixed. Such changes only need to be deployed to a single server.
+On the other hand, storing the logic on the server allows, 
+rather than a hub eliminates the need for distributing updates to multiple hubs every time a new feature is introduced or a minor bug is fixed. 
+Such changes only need to be deployed to a single server.
 
 %%% Local Variables:
 %%% mode: latex
