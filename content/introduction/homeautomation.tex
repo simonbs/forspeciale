@@ -1,9 +1,11 @@
 \section{Smart Homes}
-Another trend that utilizes the concept of IoT is smart homes which are homes that are, to some degree, automated by utilization IoT devices. 
+Another trend that utilizes the concept of IoT is smart homes which are homes that are, 
+to some degree, automated by utilization IoT devices. 
 The devices used for smart homes differ greatly from wearables as they are usually stationary. 
 The concept of smart homes have been around for a while and numerous homes have already integrated some of these smart devices. 
 A good example of a high-end smart home is Bill Gate's mansion in Medina, Washington \cite{billgatehouse}.
-This \$100 million house have sensors to adjust each room's temperature and lighting and have speakers behind the wallpaper that follows you from room to room. 
+This \$100 million house have sensors to adjust each room's temperature and lighting, 
+and have speakers behind the wallpaper that follows you from room to room. 
 The artwork in the house is mostly digital and can be changed by pressing a button. 
 One can only imagine what other technology is being used in that house. 
 
@@ -17,9 +19,45 @@ This thermostat senses when you are around and when you are not to control the c
 Unlike a lot of smart devices that are made to make your life a little easier, such as an automated coffee machine, 
 the Nest thermostat helps you save money which is likely the reason for it popularity. 
 Furthermore, the newest version (as of October 2015) allows you to connect other IoT devices to the thermostat. 
-The Nest thermostat is thus starting to solve what is probable the greatest problem with smart homes (and IoT in general) and why they have not become popular yet: Lack of interconnectivity between IoT devices. 
+The Nest thermostat is thus starting to solve what is probable the greatest problem with smart homes (and IoT in general), 
+and why they have not become popular yet: Lack of interconnectivity between IoT devices. 
+This problem leads us to what is known as smart hubs. 
 
 \subsection{Smart Hubs}
+A smart hub is a device, or service, that implements several communication protocols used by IoT devices, 
+and gives the user a single protocol or interface. 
+The goal of a smart hub is to make the connected devices able to communicate. 
+
+\subsubsection{Common Protocols for IoT}
+There is a range of different protocols that are being used for various smart devices. 
+We will not get into much detail with these protocols, 
+but we demonstrate how many different there are and why communication is a problem.
+\begin{table}
+   \begin{description}
+       \item[Protocol:] ZigBee
+       \item[Used by:] Samsung, Jasco, Smartenit, FortrezZ and others
+       \item[In products:] SmartThings Hub, thermostats, door sensors, light bulbs, etc.\\
+       
+       \item[Protocol:] Z-Wave
+       \item[Used by:] FortrezZ, GE, Intermatic, Leviton, Aeon Labs, Evolve and others
+       \item[In products:] Thermostats, wall outlets, door locks, door and window sensors, etc.  \\
+       
+       \item[Protocol:] WiFi (IEEE 802.11)
+       \item[Used by:] Nest, Philips, Samsung, Bose, D-link and others
+       \item[In products:] Thermostats, speakers, light bulbs, motion sensors, fitness trackers, camera, etc. 
+    \end{description}
+    \caption{Protocols used by various IoT devices}\label{table:iotprotocols}
+\end{table}
+
+Aside from the protocols in \Cref{table:iotprotocols}, 
+there are several others messaging protocols such as MQTT, CoAP and XMPP used by various devices. 
+
+A smart hub should thus not only be able to communicate with the devices, 
+but also be able to transform the data to a single format and give easy access to it. 
+
+\subsubsection{Smart Hubs on the Market}
+The requirements for smart hubs have gained the attention of several large companies and even more smaller companies, 
+all competing to be center of future smart homes. 
 %Something about SmartThings
 %How does wearables fit in
 
