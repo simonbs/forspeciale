@@ -29,6 +29,7 @@ and gives the user a single protocol or interface.
 The goal of a smart hub is to make the connected devices able to communicate. 
 
 \subsubsection{Common Protocols for IoT}
+\todo[author=Thalley]{Insert figure illustrating this}
 There is a range of different protocols that are being used for various smart devices. 
 We will not get into much detail with these protocols, 
 but we demonstrate how many different there are and why communication is a problem.
@@ -58,10 +59,43 @@ but also be able to transform the data to a single format and give easy access t
 \subsubsection{Smart Hubs on the Market}
 The requirements for smart hubs have gained the attention of several large companies and even more smaller companies, 
 all competing to be center of future smart homes. 
-%Something about SmartThings
-%How does wearables fit in
+One of the mature commercial available smart hubs is the Samsung SmartThings Hub\cite{SMARTTHINGS}. 
+The SmartThings Hub is a standalone device that supports the Z-Wave, ZigBee and WiFi protocols, 
+and provides a smartphone application or a Representational State Transfer (REST) interface. 
+The SmartThings Hub has been tested and is compatible with more than 150 devices as of October 2015,
+but with support for the aforementioned protocols and a REST interface, this number is in practice higher.  
+The price for such a hub is \$99, which is, compared to the prices for some of the compatible devices, very affordable. 
+A more detailed description of the Samsung SmartThings Hub can be found in \Cref{sec:smartthings}. 
+
+Samsung is, however, not the only company selling smart hubs. 
+Microsoft has been working on their HomeOS\cite{HOMEOS}, Apple has their HomeKit\cite{HOMEKIT} and Google recently announced Brillo\cite{BRILLO}. 
+While these products differ in terms of architecture, descriptions (operating system contra hub) and availability,
+they all share the same goal of giving a centralized control of smart devices. 
+
+There are also other open source alternatives such as openHAB\cite{OPENHAB}, 
+where you simply setup your own server running the open sourced code and control the devices through that. 
+The advantage here is of course the price (free) and the possibility of adding new unsupported products. 
+
+
+\Cref{table:smarthubs} gives a short overview of some of the available or coming smart hubs. 
+\begin{table}
+    \centering
+    \begin{tabular}{l l}
+        Company                           & Product                              \\\hline
+        openHAB\cite{OPENHAB}             & Employ open source code on own server \\
+        Open Source Automation\cite{OSA}  & Employ open source code on own server \\
+        OpenRemote\cite{OPENREMOTE}       & Employ open source code on own server \\
+        Apple\cite{HOMEKIT}               & HomeKit Framework \\
+        Samsung\cite{SMARTTHINGS}         & SmartThings Hub: A standalone device that cost \$99 \\
+        Microsoft\cite{HOMEOS}            & HomeOS: An Operating system that runs on a server \\
+        Google\cite{BRILLO}               & Project Brillo: An Operating system that runs on a server
+    \end{tabular}
+    \caption{An overview of home automation hubs from different companies}
+    \label{table:smarthubs}
+\end{table}
 
 \subsection{Indoor Positioning}\label{sec:indoor-positioning}
+\todo[author=Thalley]{Make indoor positioning section fit in better}
 %Something about Estimote
 In order to determine which device the user points at and thereby intends to control, 
 it is necessary to determine the locations of the devices in the system relative to the user.
