@@ -17,7 +17,7 @@ where \var{user.x} and \var{user.y} are the $x$ and $y$ coordinates of the user 
 A screenshot of this application is shown in \Cref{fig:prototype1-app-screenshots}.
 
 
-\begin{table} % Thalley: Måske lave om et et Tikz coordinatsystem i stedet for? Fylder unødvendigt meget imo. 
+\begin{table}[!htb] % Thalley: Måske lave om et et Tikz coordinatsystem i stedet for? Fylder unødvendigt meget imo. 
     \centering
     \tiny
     \begin{TAB}(e){|c:c:c:c:c:c:c:c:c:c|}{|c:c:c:c:c:c:c:c:c:c|}
@@ -36,7 +36,7 @@ A screenshot of this application is shown in \Cref{fig:prototype1-app-screenshot
     \label{table/prototype-grid}
 \end{table}
 
-\begin{figure}%
+\begin{figure}[!htb]%
     \centering
     \subfloat{
         \includegraphics[width=0.3\textwidth]{images/Prototype1_Android_1.png}
@@ -55,10 +55,10 @@ A screenshot of this application is shown in \Cref{fig:prototype1-app-screenshot
 The second prototype consisted of an iOS application similar to the Android application described in section \ref{sec:implementation:prototypes:prototype1} and a server that represented two controllable lamps.
 The platform was changed from Android to iOS because the application would later use Estimote beacons and there was no Android Indoor Location SDK available for this. 
 
-\subsubsection*{Major Changes}
+\subsubsection{Major Changes}
 \begin{itemize}
-\item Introduction of a server for the application to interact with.
-\item Switched platform from Android to iOS.
+    \item Introduction of a server for the application to interact with.
+    \item Switched platform from Android to iOS.
 \end{itemize}
 
 In this prototype the room is still represented as a grid and the user is placed in the center of the grid, however the user is unable to change position.
@@ -68,7 +68,7 @@ Devices are represented as orange dots and if the user points towards one of the
 When the user turns a device on or off, it will be reflected on the server, 
 where a corresponding box will have the color \texttt{green} when turned on and \texttt{red} when turned off as shown in \Cref{fig:prototype2-server-screenshot}.
 
-\begin{figure}%
+\begin{figure}[!htb]%
     \centering
     \subfloat{
         \includegraphics[width=0.3\textwidth]{images/Prototype2_iOS_1.png}
@@ -80,7 +80,7 @@ where a corresponding box will have the color \texttt{green} when turned on and 
     \label{fig:prototype2-app-screenshots}
 \end{figure}
 
-\begin{figure}
+\begin{figure}[!htb]
     \centering
     \includegraphics[scale=0.2]{images/Prototype2_Server.png}
     \caption[caption]{Screenshot of the server representing two lamps in the second prototype.\\\texttt{Green}: On, \texttt{Red}: Off}

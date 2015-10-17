@@ -76,7 +76,6 @@ There are also other open source alternatives such as openHAB\cite{OPENHAB},
 where you simply setup your own server running the open sourced code and control the devices through that. 
 The advantage here is of course the price (free) and the possibility of adding new unsupported products. 
 
-
 \Cref{table:smarthubs} gives a short overview of some of the available or coming smart hubs. 
 \begin{table}
     \centering
@@ -93,6 +92,79 @@ The advantage here is of course the price (free) and the possibility of adding n
     \caption{An overview of home automation hubs from different companies}
     \label{table:smarthubs}
 \end{table}
+
+\subsection{Control of Smart Homes}
+While smart hubs let different smart devices communicate, 
+they are not meant to be a control panel for smart homes (although some, such as HomeOS, is designed as such).
+To control the devices connected to a smart home, or standalone smart devices, 
+most vendors offer some sort of smartphone application that gives the consumer a basic interface to control the device, set rules for it and so on.
+This is for example the case with the Samsung SmartThings hubs. 
+
+An alternative to such an application could be the Logitech Harmony Remote\cite{HARMONYREMOTE}, 
+which is a universal remote that can connect to over \num{270000} devices (smart and dumb). 
+It comes either as a standalone remote control or connected with a hub. 
+
+Gesture control is a newer and more advanced way of controlling a smart home. 
+A company known as Reemo\cite{Reemo}, formerly Playtabase, has created a way of controlling smart devices by gestures. 
+They have developed a wearable devices, located on the wrist, that allows user to point at a device, 
+and then perform a pre-programmed gesture that corresponds to a certain action for that device. 
+A small received has to be placed near the devices that you want to control, 
+and it is this received that you have to point to as depicted by \Cref{fig:reemo}. 
+The pointing will, however, only work if the device is within line of sight. 
+
+\begin{figure}[!htb]
+    \centering
+    \includegraphics[width=0.8\textwidth]{images/Reemo}
+    \caption{How Reemo gesture control works. Source: \url{http://www.getreemo.com/projects/}}
+    \label{fig:reemo}
+\end{figure}
+
+Unfortunately they have not disclosed any details regarding the technology, 
+how the receivers know which receiver you are pointing at or how the devices are controlled. 
+The company and the product is also still in a development phase, 
+so the product is not commercialized yet but have been in development since mid-2014.
+
+These are the most common and/or most intuitive ways of controlling smart devices. 
+The question is which is ``the best'', or rather, which method is the wanted way of controlling the devices.
+\Cref{tbl:smartcontrol} summaries the aforementioned 3 ways. 
+
+\begin{table}[!htb]
+    \centering
+    \parbox[t][][t]{0.3\textwidth}{
+        \textbf{Smartphone application}\\
+        \textbf{Pros:} Easy control of smart devices if the smartphone is usually carried or always near. 
+                       Applications are usually available from vendors. 
+                       Easy to get updates to the software. \\
+        \textbf{Cons:} Requires a smartphone nearby to control. 
+                       An overhead of unlocking phone, opening application and selecting device and action.
+    }\quad
+    \parbox[t][][t]{0.3\textwidth}{
+        \textbf{Remote Control}\\
+        \textbf{Pros:} Easy control of smart devices if the remote is usually carried or always near. \\
+        \textbf{Cons:} Requires a remote control nearby to control (usually not very expensive). 
+                       An overhead of selecting device and action.
+    }\quad
+    \parbox[t][][t]{0.3\textwidth}{
+        \textbf{Gesture Control}\\
+        \textbf{Pros:} Wearables are usually worn and grants easy control of applications by gesture.
+                       Intuitive way of controlling devices (gestures imitates regular actions).
+                       Easy to get updates to the software. 
+                       No overhead of opening an application\\
+        \textbf{Cons:} Requires a wearable to control. 
+                       Have to remember gestures.
+                       Must be in line of sight. 
+    }
+    \caption{Ways of controlling smart devices}
+    \label{tbl:smartcontrol}
+\end{table}
+
+Each way has its pros and cons. Although \cite{MISSING REFERENCE} shows that users would rather have gesture for control, 
+rather than the bother of always using their smartphone or remote for control.  
+A product such as Reemo is a good way of controlling smart devices. 
+However, as mentioned, it has a downside that the objects have to be in line of sight. 
+If this restriction could be removed, it would improve this method. 
+
+\todo[author=Thalley]{Insert reference and more about users wanting a more intuitive way of controlling their devices and how indoor positioning can be used for automation and gesture control}
 
 \subsection{Indoor Positioning}\label{sec:indoor-positioning}
 \todo[author=Thalley]{Make indoor positioning section fit in better}
