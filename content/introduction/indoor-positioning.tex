@@ -21,17 +21,24 @@ It will be chosen based on availability, price, easy of use, accuracy and develo
     \begin{description}[style=multiline,leftmargin=2.5cm]
         \item[Product:] Estimote Beacons and Stickers \cite{estimote}
         \item[Availability:] Beacons and Stickers are shipping. SDKs available.
-        \item[Technology:] iBeacon protocol
+        \item[Technology:] iBeacon protocol.
         \item[Price:] \$99 for beacons. \$99 for 10 stickers, one per device to be positioned.
         \item[Ease of use:] Initial installation of beacons. Attach each sticker to device.
         \item[Accuracy:] Unknown. Desired to be less than five meters. \\ \todo[author=Simon]{Update after conducting tests.} 
         
         \item[Product:] Pozyx \cite{pozyx}
         \item[Availability:] Available for preorder.
-        \item[Technology:] Ultra-wideband (UWB)
+        \item[Technology:] Ultra-wideband (UWB).
         \item[Price:] \$368 for anchors. \$123 for each device to be positioned, plus supported Arduino.
         \item[Ease of use:] Initial installation of anchors. One tag for each device, plus supported Arduino. Not meant for mounting.
-        \item[Accuracy:] Claimed to be 10 cm. Untested.
+        \item[Accuracy:] Claimed to be 10 cm. Untested. \\
+        
+        \item[Product:] SmartActionSLAM \cite{SASLAM}
+        \item[Availability:] Android Application (research). Not commercialized.
+        \item[Technology:] Smartphone sensors.
+        \item[Price:] N/A.
+        \item[Ease of use:] Requires modification of source code (available) to get real-time position. 
+        \item[Accuracy:] Reported to have a mean error of 0.34m (only using smartphone and no external sensors).
     \end{description}
     \todo[author=Thalley]{Can we find more?}
     \caption{Assessment of potential solutions for indoor positioning. Please note that all prices are converted to U.S. dollars from their respective currency. Prices include the minimum available hardware for positioning a device.}
@@ -45,3 +52,9 @@ and then by using the round trip time of the signals to each beacon, it can esti
 Pozyx is uses a wireless radio technology known as ultra-wideband, which works much like BLE but at a different frequency. 
 Like Estimote, it also requires setting up ``anchors'' and then using the round trip time to find the location. 
 It is currently only for Arduinos. 
+
+SmartActionSLAM is an Android application from research done by Hardegger \etal \cite{SASLAM}. 
+This solution is a lot different from most other indoor location solutions. 
+It \emph{calculates} an estimated location by counting steps and estimating step length and direction. 
+In theory it can be adapted to almost any smartphone, 
+but requires a lot of work to adapt the released code from the research project. 
