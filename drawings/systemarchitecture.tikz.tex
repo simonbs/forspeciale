@@ -1,0 +1,23 @@
+\begin{tikzpicture}
+    \node[anchor=center] at (-0.8,0.5) {(1)};
+    \node[anchor=center] at (-0.8,-1.5) {(2)};
+    \node[anchor=center] at (-0.8,-4) {(3)};
+    
+    \node[anchor=center] at (2.5,0.5) {Wearable Device};
+    \node[anchor=center] at (7.5,0.5) {Mobile Device};
+    \draw[thick] (0,0) rectangle (10,1);
+    \draw[thick, dashed] (5,0) -- (5,1);
+    \draw[thick,->] (10.85,0.5) -- (10.15,0.5);
+    \draw[thick] (11,0) rectangle (13,1) node[pos=.5] {Beacons};
+    
+    \draw[thick] (0,-1) rectangle (10,-2) node[pos=.5] {Server};
+    \draw[thick,<->] (5,-0.15) -- (5,-0.85);
+    
+    \node[anchor=center] at (1.2,-3.4) {SmartThings};
+    \draw[thick] (0,-3) rectangle (10,-5);
+    \draw[thick,<->] (5,-2.15) -- (5,-2.85);
+    \draw[thick] (0.2,-3.8) rectangle (2.7,-4.8) node[pos=.5] (bulb) {Bulb};
+    \draw[thick] (2.9,-3.8) rectangle (5.4,-4.8) node[pos=.5] (lock) {Lock};
+    \draw[thick] (7.3,-3.8) rectangle (9.8,-4.8) node[pos=.5] (door) {Thermostat};
+    \node at ($(lock)!.5!(door)$) {\ldots};
+\end{tikzpicture}

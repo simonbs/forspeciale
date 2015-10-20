@@ -28,6 +28,13 @@ A smart hub is a device, or service, that implements several communication proto
 and gives the user a single protocol or interface. 
 The goal of a smart hub is to make the connected devices able to communicate. 
 
+\begin{figure}[!htb]
+    \centering
+    \input{drawings/IoTArchitecture.tikz}
+    \caption{Architecture of IoT network}
+    \label{fig:IoTProtocols}
+\end{figure}
+
 \subsubsection{Common Protocols for IoT}
 \todo[author=Thalley]{Insert figure illustrating this}
 There is a range of different protocols that are being used for various smart devices. 
@@ -80,14 +87,14 @@ The advantage here is of course the price (free) and the possibility of adding n
 \begin{table}
     \centering
     \begin{tabular}{l l}
-        Company                           & Product                              \\\hline
+        Company                           & Product Type \\ \hline
         openHAB\cite{OPENHAB}             & Employ open source code on own server \\
         Open Source Automation\cite{OSA}  & Employ open source code on own server \\
         OpenRemote\cite{OPENREMOTE}       & Employ open source code on own server \\
         Apple\cite{HOMEKIT}               & HomeKit Framework \\
-        Samsung\cite{SMARTTHINGS}         & SmartThings Hub: A standalone device that cost \$99 \\
-        Microsoft\cite{HOMEOS}            & HomeOS: An Operating system that runs on a server \\
-        Google\cite{BRILLO}               & Project Brillo: An Operating system that runs on a server
+        Samsung\cite{SMARTTHINGS}         & SmartThings Hub: A standalone device that costs \$99 \\
+        Microsoft\cite{HOMEOS}            & HomeOS: An operating system that runs on a server \\
+        Google\cite{BRILLO}               & Project Brillo: An operating system that runs on a server
     \end{tabular}
     \caption{An overview of home automation hubs from different companies}
     \label{table:smarthubs}
@@ -112,6 +119,7 @@ A small received has to be placed near the devices that you want to control,
 and it is this received that you have to point to as depicted by \Cref{fig:reemo}. 
 The pointing will, however, only work if the device is within line of sight. 
 
+%Thalley: Skal vi bare skrive ``Reemo'' i stedet for en url som source?
 \begin{figure}[!htb]
     \centering
     \includegraphics[width=0.8\textwidth]{images/Reemo}

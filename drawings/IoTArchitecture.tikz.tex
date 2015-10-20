@@ -1,0 +1,16 @@
+\tikzstyle{block} = [draw, rectangle, minimum width=3cm, minimum height=1cm]
+\tikzstyle{myarrows}=[line width=0.5mm,triangle 60-triangle 60]
+\begin{tikzpicture}
+\node [block] (internet) at (0,0) {Internet};
+\node [block] (zigbee) at (-5, 0) {Zigbee Network};
+\node [block] (zwave) at (-2.5, 2.5) {Z-Wave Network};
+\node [block] (services) at (2.5, 2.5) {Application Services};
+\node [block] (wifi) at (5, 0) {WiFi};
+\node [block] (bluetooth) at (0, -2.5) {Bluetooth};
+
+\draw [myarrows] (internet) -- (zigbee);
+\draw [myarrows] (internet) -- (zwave);
+\draw [myarrows] (internet) -- (services);
+\draw [myarrows] (internet) -- (wifi);
+\draw [myarrows] (internet) -- (bluetooth);
+\end{tikzpicture}
