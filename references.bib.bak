@@ -2,15 +2,107 @@
 % Encoding: Cp1252
 
 
-@Misc{HIRIS,
+@Misc{NEST,
+  Title                    = {Nest Thermostat},
+
+  Author                   = {Nest labs},
+  Note                     = {\url{https://nest.com/thermostat/meet-nest-thermostat/}},
+  Year                     = {2015}
+}
+
+@Misc{OSA,
+  Title                    = {Open Source Automation},
+
+  Author                   = {Open Source Automation},
+  Note                     = {\url{http://www.opensourceautomation.com/}},
+  Year                     = {2015}
+}
+
+@Misc{HOMEOS,
+  Title                    = {HomeOS: Enabling smarter homes for everyone},
+
+  Author                   = {Microsoft Corporation},
+  Note                     = {\url{http://research.microsoft.com/en-us/projects/homeos/}},
+  Year                     = {2015}
+}
+
+@Misc{estimote,
+  Title                    = {Estimote {B}eacons - real world context for your apps},
+
+  Author                   = {Estimote},
+  Note                     = {\url{http://estimote.com}},
+  Year                     = {2015},
+
+  Owner                    = {Simon},
+  Timestamp                = {2015.09.22}
+}
+
+@InProceedings{SASLAM,
+  Title                    = {ActionSLAM on a Smartphone: At-Home Tracking with a Fully Wearable System},
+  Author                   = {Hardegger, Michael and Mazilu, Sinziana and Caraci, Dario and Hess, Frederik and Roggen, Daniel and Tr{\"{o}}ster, Gerhard},
+  Booktitle                = {Proceedings of the 4th International Conference on Indoor Positioning and Indoor Navigation (IPIN) [Best Paper Award]},
+  Year                     = {2013},
+
+  Key                      = {CUPID},
+  Keywords                 = {CUPID},
+  Location                 = {Montb{\'{e}}liard}
+}
+
+@Misc{hirisweb,
   Title                    = {Hiris, the first wearable computer},
 
   Author                   = {Hiris},
-  Note                     = {\url{http://gethiris.com/}},
-  Year                     = {2015},
+  Note                     = {\url{http://gethiris.com}},
+  Year                     = {2015}
+}
 
-  Owner                    = {Thalley},
-  Timestamp                = {2015.09.16}
+@Misc{applehomekitref,
+  Title                    = {Home{K}it {F}ramework {R}eference},
+
+  Author                   = {Apple Inc},
+  Note                     = {\url{https://developer.apple.com/library/ios/documentation/HomeKit/Reference/HomeKit_Framework/}},
+  Year                     = {2015}
+}
+
+@Misc{LISTOFWEARABLES,
+  Title                    = {List of wearables},
+
+  Author                   = {Vandrico Solutions Inc},
+  Month                    = {September},
+  Note                     = {\url{http://vandrico.com/wearables/list}},
+  Year                     = {2015}
+}
+
+@Misc{HOMEKIT,
+  Title                    = {HomeKit},
+
+  Author                   = {Apple Inc.},
+  Note                     = {\url{https://developer.apple.com/homekit/}},
+  Year                     = {2015}
+}
+
+@Misc{BRILLO,
+  Title                    = {Project Brillo},
+
+  Author                   = {Google Inc.},
+  Note                     = {\url{https://developers.google.com/brillo/}},
+  Year                     = {2015}
+}
+
+@Misc{OPENREMOTE,
+  Title                    = {OpenRemote},
+
+  Author                   = {OpenRemote Inc.},
+  Note                     = {\url{http://www.openremote.org/}},
+  Year                     = {2015}
+}
+
+@Misc{SMARTTHINGS,
+  Title                    = {Smart Home. Intelligent Living.},
+
+  Author                   = {SmartThings Inc.},
+  Note                     = {\url{http://www.smartthings.com/}},
+  Year                     = {2015}
 }
 
 @Misc{JAWBONE,
@@ -18,10 +110,37 @@
 
   Author                   = {Jawbone},
   Note                     = {\url{https://jawbone.com}},
-  Year                     = {2015},
+  Year                     = {2015}
+}
 
-  Owner                    = {Thalley},
-  Timestamp                = {2015.09.16}
+@Article{Kela2006,
+  Title                    = {Accelerometer-based Gesture Control for a Design Environment},
+  Author                   = {Kela, Juha and Korpip\&\#x00e4;\&\#x00e4;, Panu and M\&\#x00e4;ntyj\&\#x00e4;rvi, Jani and Kallio, Sanna and Savino, Giuseppe and Jozzo, Luca and Marca, Di},
+  Journal                  = {Personal Ubiquitous Comput.},
+  Year                     = {2006},
+
+  Month                    = jul,
+  Number                   = {5},
+  Pages                    = {285--299},
+  Volume                   = {10},
+
+  Acmid                    = {1149819},
+  Address                  = {London, UK, UK},
+  Doi                      = {10.1007/s00779-005-0033-8},
+  ISSN                     = {1617-4909},
+  Issue_date               = {August 2006},
+  Keywords                 = {Accelerometer, Gesture control, Gesture recognition, Mobile device, Multimodal interaction},
+  Numpages                 = {15},
+  Publisher                = {Springer-Verlag},
+  Url                      = {http://dx.doi.org.zorac.aub.aau.dk/10.1007/s00779-005-0033-8}
+}
+
+@Misc{HARMONYREMOTE,
+  Title                    = {Logitech Harmony - Universal Remote Control for Home Entertainment Systems},
+
+  Author                   = {Logitech},
+  Note                     = {\url{http://www.logitech.com/en-us/universal-remotes}},
+  Year                     = {2015}
 }
 
 @InProceedings{nehmer2006living,
@@ -33,14 +152,67 @@
   Pages                    = {43--50}
 }
 
+@Misc{OPENMOTICS,
+  Title                    = {OpenMotics: Open Source Home Automation \& Power Measurement},
+
+  Author                   = {OpenMotics},
+  Note                     = {\url{https://www.openmotics.com/}},
+  Year                     = {2015}
+}
+
 @Misc{PEBBLE,
   Title                    = {Pebble Smartwatch},
 
   Author                   = {Pebble},
   Note                     = {\url{https://getpebble.com}},
+  Year                     = {2015}
+}
+
+@Misc{pozyx,
+  Title                    = {Pozyx - centimeter positioning for arduino},
+
+  Author                   = {Pozyx},
+  Note                     = {\url{https://www.pozyx.io}},
   Year                     = {2015},
 
+  Owner                    = {Simon},
+  Timestamp                = {2015.09.22}
+}
+
+@Misc{Reemo,
+  Title                    = {Reemo},
+
+  Author                   = {Reemo},
+  Note                     = {\url{http://www.getreemo.com/}},
+  Year                     = {2015}
+}
+
+@Misc{billgatehouse,
+  Title                    = {19 Crazy Facts About Bill Gates' \$123 Million Washington Mansion},
+
+  Author                   = {Madeline Stone},
+  Note                     = {\url{http://uk.businessinsider.com/19-crazy-facts-about-bill-gates-house-2014-11}},
+  Year                     = {2014}
+}
+
+@Misc{OPENHAB,
+  Title                    = {openHAB},
+
+  Author                   = {openHAB UG},
+  Note                     = {\url{http://www.openhab.org/}},
+  Year                     = {2015}
+}
+
+@Misc{WEARABLESTREND,
+  Title                    = {THE WEARABLES REPORT: Growth trends, consumer attitudes, and why smartwatches will dominate},
+
+  Author                   = {Business Insider UK},
+  Note                     = {\url{http://uk.businessinsider.com/the-wearable-computing-market-report-2014-10}},
+  Year                     = {2015}
+}
+
+@Misc{coke-iot,
   Owner                    = {Thalley},
-  Timestamp                = {2015.09.16}
+  Timestamp                = {2015.10.21}
 }
 
