@@ -116,9 +116,15 @@
 \usepackage{microtype}
 
 %Listings
-\usepackage{listings} %For code listings
-\usepackage[font={small,it}]{caption}
-\input{settings/codelistingstyling}
+% \usepackage{listings} %For code listings
+% \usepackage[font={small,it}]{caption}
+% \input{settings/codelistingstyling}
+\usepackage{minted}
+\newminted{swift}{
+  linenos,
+  autogobble,
+  breaklines
+}
 
 \input{settings/macros}
 
