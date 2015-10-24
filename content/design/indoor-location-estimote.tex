@@ -50,7 +50,16 @@ The \texttt{ESTLocationBuilder} lets developers configure a room programmaticall
 \label{lst:estlocationbuilder}
 \end{listing}
 
-Listing \ref{lst:estlocationbuilder} shows how we used the \texttt{ESTLocationBuilder} to create a model of a real world living room. The builder is configured with six points that gives information about the shape of the room. Next, the beacons are added to the walls of the room. Beacons are added with the identifier of the beacon. Lastly the orientation of the room relative to north and the name of the room is set. When the room has been configured it can be stored on the users Estimote account using the Estimote SDK.
+Listing \ref{lst:estlocationbuilder} shows how we used the \texttt{ESTLocationBuilder} to create a model of a real world living room. The resulting model is illustrated in figure \ref{fig:estlocationbuilder-livingroom}.
+
+The builder is configured with six points that gives information about the shape of the room. Next, the beacons are added to the walls of the room. Beacons are added with the identifier of the beacon. Lastly the orientation of the room relative to north and the name of the room is set. When the room has been configured it can be stored on the users Estimote account using the Estimote SDK.
+
+\begin{figure}
+\centering
+\includegraphics[width=0.33\textwidth]{images/living-room}
+\caption{Model created using the \texttt{ESTLocationBuilder} as shown in listing \ref{lst:estlocationbuilder}.}
+\label{fig:estlocationbuilder-livingroom}
+\end{figure}
 
 %%% Local Variables:
 %%% mode: latex
