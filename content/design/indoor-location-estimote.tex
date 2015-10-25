@@ -62,6 +62,20 @@ Using the \texttt{ESTLocationBuilder} to model a room reduces any uncertainties 
 \caption{Model created using the \texttt{ESTLocationBuilder} as shown in listing \ref{lst:estlocationbuilder}. Note that the model is rotated accordingly to the orientation of the room and the position of north relative to the user.}
 \label{fig:estlocationbuilder-livingroom}
 \end{figure}
+
+\subsubsection{Ranging in the Background}
+
+There are two distinct ways of locating a user when using iBeacon \cite{estimote:monitoring-ranging}.
+
+\begin{itemize}
+\item Region monitoring is performed to check if a user enters or leaves a specific region. A region is a geofence, a virtual perimeter around some location. Such region could be used to check if a user arrives or leaves his house, his workplace or if he is nearby a shop encapsulated in a geofence. Regions are useful for performing simple home automation, e.g. turn the lights on when the user arrives at home and turn them off when they leave.
+\item Ranging is more granular than region monitoring and is used to continuously retrieve the set of beacons in range along with an estimated distance to them based on the signal strengths. Ranging is used to get a granular user position.
+\end{itemize}
+
+According to both Apple and Estimote it is preferred that ranging is only performed while the application is in the foreground, that is, the application is on the screen and the user is likely to interact with the application. The reason for this is that ranging for beacons can have a negativ impact on the battery life where as the region monitoring do not use as much battery power.
+
+While Apple and Estimote advise agains performing beacon ranging in the background, it is possible \cite{apple:monitoring-ibeacon} \cite{estimote:monitoring-ranging}.
+
 %%% Local Variables:
 %%% mode: latex
 %%% TeX-master: "../../master"
