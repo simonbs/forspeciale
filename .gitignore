@@ -25,3 +25,4 @@
 *.fdb_latexmk
 master.pdf
 _minted-master
+master.pyg
