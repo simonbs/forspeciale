@@ -1,6 +1,6 @@
 \section{Smart Homes}\label{sec:smarthomes}
-Another trend that utilizes the concept of IoT is smart homes which are homes that are, 
-to some degree, automated by utilization IoT devices. 
+Another trend that utilizes the concept of IoT is smart homes, 
+which are homes that are to some degree automated by utilization IoT devices. 
 The devices used for smart homes differ greatly from wearables as they are usually stationary. 
 The concept of smart homes have been around for a while and numerous homes have already integrated some of these smart devices. 
 A good example of a high-end smart home is Bill Gate's mansion in Medina, Washington \cite{billgatehouse}.
@@ -14,8 +14,9 @@ Ordinarily, the devices found in smart homes are common items that has been conn
 Common devices that are found in smart homes include, but are not limited to, 
 coffee machines, washers and dryers, thermostats, sound systems and locks. 
 However, only few devices have really gained ground for the common user and few homes are automated.
-One of the most commonly found IoT in homes are the Nest thermostat \cite{NEST}. 
-This thermostat senses when you are around and when you are not to control the climate inside to save energy and thus money.
+One of the most commonly found IoT in homes is the Nest thermostat \cite{NEST}. 
+This thermostat senses when you are around, and when you are not, 
+to control the climate inside to save energy and thus money.
 Unlike a lot of smart devices that are made to make your life a little easier, such as an automated coffee machine, 
 the Nest thermostat helps you save money which is likely the reason for it popularity. 
 Furthermore, the newest version (as of October 2015) allows you to connect other IoT devices to the thermostat. 
@@ -26,7 +27,14 @@ This problem leads us to what is known as smart hubs.
 \subsection{Smart Hubs}
 A smart hub is a device, or service, that implements several communication protocols used by IoT devices, 
 and gives the user a single protocol or interface. 
-The goal of a smart hub is to make the connected devices able to communicate. 
+The goal of a smart hub is to make the connected devices able to communicate.
+The communication problem arises from the number of different communication protocols used by the smart devices. 
+
+
+\subsubsection{Common Protocols for IoT}
+There is a range of different protocols that are being used for various smart devices. 
+\Cref{fig:IoTProtocols} illustrates the current architecture of the IoT network,
+where \num{5} communication protocols are shown. 
 
 \begin{figure}[!htb]
     \centering
@@ -35,9 +43,6 @@ The goal of a smart hub is to make the connected devices able to communicate.
     \label{fig:IoTProtocols}
 \end{figure}
 
-\subsubsection{Common Protocols for IoT}
-\todo[author=Thalley]{Insert figure illustrating this}
-There is a range of different protocols that are being used for various smart devices. 
 We will not get into much detail with these protocols, 
 but we demonstrate how many different there are and why communication is a problem.
 \begin{table}
@@ -72,7 +77,6 @@ and provides a smartphone application or a Representational State Transfer (REST
 The SmartThings Hub has been tested and is compatible with more than 150 devices as of October 2015,
 but with support for the aforementioned protocols and a REST interface, this number is in practice higher.  
 The price for such a hub is \$99, which is, compared to the prices for some of the compatible devices, very affordable. 
-A more detailed description of the Samsung SmartThings Hub can be found in \Cref{sec:smartthings}. 
 
 Samsung is, however, not the only company selling smart hubs. 
 Microsoft has been working on their HomeOS \cite{HOMEOS}, Apple has their HomeKit \cite{HOMEKIT} and Google recently announced Brillo \cite{BRILLO}. 
@@ -110,6 +114,8 @@ This is for example the case with the Samsung SmartThings hubs.
 An alternative to such an application could be the Logitech Harmony Remote \cite{HARMONYREMOTE}, 
 which is a universal remote that can connect to over \num{270000} devices (smart and dumb). 
 It comes either as a standalone remote control or connected with a hub. 
+Depending on the model, the remote either uses infrared (does not require a hub), 
+or connects to a hub via WiFi. 
 
 Gesture control is a newer and more advanced way of controlling a smart home. 
 A company known as Reemo \cite{Reemo}, formerly Playtabase, has created a way of controlling smart devices by gestures. 
