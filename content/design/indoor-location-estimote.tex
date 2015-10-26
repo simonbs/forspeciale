@@ -1,29 +1,37 @@
 \subsection{Estimote}
 \todo[author=Thalley]{Skal vi have noget med omkring iBeacon protokollen?}
-We have decided to use Bluetooth Low Energy (BLE) beacons for indoor location in this project. 
+We have decided to use Bluetooth Low Energy (BLE) beacons from Estimote, 
+for indoor location in this project. 
 This is due to the access to the technology, ease of use and price. 
-The beacons that we have chosen to use are the beacons sold by Estimote. 
-Estimote, as described in \Cref{sec:indoor-positioning}, is one of the vendors of BLE beacons using the iBeacon. 
-We have chosen to use their beacons because they provide a software development kit (SDK) for indoor location. 
 
 Estimote not only focus on typical use cases for beacons like entering a specific region, 
 but have also specialized in indoor location of users using the iBeacon protocol. 
-The company developed the Estimote Indoor Location SDK and a demo application for iOS\footnote{https://itunes.apple.com/us/app/estimote-indoor-location/id963704810}, 
+The company developed the Estimote Indoor Location SDK\footnote{https://github.com/Estimote/iOS-Indoor-SDK}, 
+and a demo application for iOS\footnote{https://itunes.apple.com/us/app/estimote-indoor-location/id963704810}, 
 which is meant to ease configuration needed for indoor location. 
-A user will install the beacons in a room by placing minimum \num{4} beacons on the walls, preferably in the middle of each wall in a rectangular room.   
+A user will install the beacons in a room by placing a minimum of \num{4} beacons on the walls, 
+preferably in the middle of each wall in a rectangular room.   
 Next the user walks along the perimeter of the room, 
-and thereby registering the location of the beacons by collecting signal strengths from the beacons (a feature of the iBeacon protocol), 
+and thereby registering the location of the beacons, 
+by collecting signal strengths from the beacons (a feature of the iBeacon protocol), 
 and data from the phones accelerometer and/or gyroscope.
-After the configuration, the application will have estimated the length of and placement of the walls along with the signal strengths of each beacon.
+After the configuration, the application will have estimated the length of and placement of the walls, 
+along with the signal strengths of each beacon.
 
-To analyze the precision to see whether we could actually use these beacons and Estimote's SDK we performed a few tests. 
-During our tests we found that the approach for configuring the indoor locationing, as described above, works terribly or not at all. 
-After configuring the room, the application would show an illustration of the registered room and we found the measurements to to be very inaccurate.
+To analyze the precision, 
+to see whether we could actually use these beacons and Estimote's SDK, 
+we performed a few tests. 
+During our tests we found that the approach for configuring the indoor locationing, 
+as described above, works terribly or not at all. 
+After configuring the room, 
+the application would show an illustration of the registered room, 
+and we found the measurements to to be very inaccurate.
 We have decided not to use the built-in room configuration. 
-\todo[author=Thalley]{Indsæt nogle beskrivende tal til at forklare hvor ringe det faktisk var}
+\todo[author=Thalley]{Indsæt nogle beskrivende tal eller illustrationer til at forklare hvor ringe det faktisk var}
 
 \subsubsection{Configuring Rooms Programmatically}
-As mentioned, Estimote provides the Estimote Indoor Location SDK\footnote{https://github.com/Estimote/iOS-Indoor-SDK} for performing indoor locationing using beacons on iOS. 
+As mentioned, Estimote provides the Estimote Indoor Location SDK, 
+for performing indoor locationing using beacons on iOS. 
 The SDK provides two mechanisms for configuring a room for indoor positioning.
 
 \begin{enumerate}
@@ -33,9 +41,11 @@ The SDK provides two mechanisms for configuring a room for indoor positioning.
 
 The built-in controller was abandoned as it resulted in poor accuracy.
 
-The \texttt{ESTLocationBuilder} lets developers configure a room programmatically by passing coordinates (\texttt{ESTPoint}s) and an orientation to the builder. 
+The \texttt{ESTLocationBuilder} lets developers configure a room programmatically, 
+by passing coordinates (\texttt{ESTPoint}s) and an orientation to the builder. 
 The $X$ and $Y$ value of each coordinate is measured in meters. 
-Therefore a coordinate $(0, 0$) to $(0, 5)$ represents a horizontal line of $5$ meters and the set of coordinates $\{(0,0),(0,5),(5,5),(5,0)\}$ represents $5$ by $5$ meter room.
+Therefore a coordinate $(0, 0$) to $(0, 5)$ represents a horizontal line of $5$ meters, 
+and the set of coordinates $\{(0,0),(0,5),(5,5),(5,0)\}$ represents $5$ by $5$ meter room.
 
 \begin{listing}
 \begin{swiftcode}
@@ -73,16 +83,19 @@ The resulting model is illustrated in \Cref{fig:estlocationbuilder-livingroom}.
 \begin{figure}[!htb]
   \centering
   \includegraphics[width=0.33\textwidth]{images/living-room}
-  \caption{Model created using the \texttt{ESTLocationBuilder} as shown in listing \ref{lst:estlocationbuilder}. Note that the model is rotated accordingly to the orientation of the room and the position of north relative to the user.}
+  \caption{Model created using the \texttt{ESTLocationBuilder} as shown in C\ref{lst:estlocationbuilder}. Note that the model is rotated accordingly to the orientation of the room and the position of north relative to the user.}
   \label{fig:estlocationbuilder-livingroom}
 \end{figure}
 
 The builder is configured with $6$ coordinates that gives information about the shape of the room. 
 Next, the beacons are added to the walls of the room. 
-Beacons are added with the identifier of the beacon, such as \texttt{dec18deac0c5} for the \texttt{ice3} beacon. 
+Beacons are added with the identifier of the beacon, 
+such as \texttt{dec18deac0c5} for the \texttt{ice3} beacon. 
 Lastly the orientation of the room relative to north and the name of the room is set. 
-When the room has been configured it can be stored on the users Estimote account using the Estimote SDK.
-Using the \texttt{ESTLocationBuilder} to model a room reduces any uncertainties in estimating the users location caused by an imprecise model of the room.
+When the room has been configured, 
+it can be stored on the users Estimote account using the Estimote SDK.
+Using the \texttt{ESTLocationBuilder} to model a room reduces any uncertainties in estimating the users location, 
+caused by an imprecise model of the room.
 
 \subsubsection{Ranging in the Background}
 

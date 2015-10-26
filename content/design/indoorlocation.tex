@@ -2,10 +2,29 @@
 %Thalley: This has been copied from the section that used to be in chap. 1.
 %Probably needs some modifying
 
-In this project, a solution for pointing at a controllable device, e.g. a lamp, is proposed. In order to determine which device the user points at and thereby intends to control, it is necessary to determine the locations of the devices in the system relative to the user. That is, we must know the location of the user and his controllable devices along with the orientation of the user.
+In this project, a solution for pointing at a controllable device, \eg a lamp, is proposed. 
+In order to determine which device the user points at, 
+and thereby intends to control, 
+it is necessary to determine the locations of the devices in the system, 
+relative to the user. 
+We must thus know the location of the user, 
+and his controllable devices along with the orientation of the user.
 
-The orientation of the user can be retrieved from any device possessing a magnetometer. We found that 49 devices in Vandrico's database contain the magnetometer component. Given the orientation of the user, his location and the location of a controllable device we can calculate if the user is looking at, or in the direction of, the controllable device. We also need to define a visibility range, \ie a range (in degrees) such that if the user's direction is \var{directions}, then the visibility range \var{range} is $\var{range} = \var{directions} \pm \var{degrees}$ where \var{degrees} is a variable defining the size of the visibility range. 
-\Cref{fig:visibilityangle} illustrates this. In this figure, the user's orientation is \var{o1}, and there is two device with orientations \var{o2} and \var{o3}. An orientation in degrees is between \num{0} and \num{360}. To find if a device with orientation \var{o2} is within the visibility range, it is a simple matter of calculating whether $\var{o1} \pm \var{degree}$ is smaller or larger than \var{o2}.
+The orientation of the user can be retrieved from any device possessing a magnetometer. 
+We found that 49 devices in Vandrico's database contain the magnetometer component. 
+Given the orientation of the user, his location and the location of a controllable device, 
+we can calculate if the user is looking at, 
+or in the direction of, the controllable device. 
+We also need to define a visibility range, 
+\ie a range (in degrees) such that if the user's direction is \var{directions}, 
+then the visibility range \var{range} is $\var{range} = \var{directions} \pm \var{degrees}$, 
+where \var{degrees} is a variable defining the size of the visibility range. 
+\Cref{fig:visibilityangle} illustrates this. 
+In this figure, the user's orientation is \var{o1}, 
+and there is two device with orientations \var{o2} and \var{o3}. 
+An orientation in degrees is between \num{0} and \num{360}. 
+To find if a device with orientation \var{o2} is within the visibility range, 
+it is a simple matter of calculating whether $\var{o1} \pm \var{degree}$ is smaller or larger than \var{o2}.
 
 \begin{figure}[!htb]
     \centering
@@ -15,20 +34,36 @@ The orientation of the user can be retrieved from any device possessing a magnet
     \label{fig:visibilityangle}
 \end{figure}
 
-The focus of this project is not to position devices and as such it was not the intention to spend time developing an entire solution for positioning devices indoors. 
-Instead it was desired to find an existing product that could be used to facilitate indoor positioning.
-The solution should be available in the early phases of the project in order to start building the system based on the solution for positioning.
+The focus of this project is not to position devices, 
+and as such it was not the intention to spend time developing an entire solution for positioning devices indoors. 
+Instead it was desired to find an existing product, 
+that could be used to facilitate indoor positioning.
+The solution should be available in the early phases of the project, 
+in order to start building the system based on the solution for positioning.
 
-As the target group of the project is consumers and not businesses with big budgets, it is desired that the price of the technology used for indoor positioning is kept at a minimum. This includes the price for any device that may have to be installed on each controllable device in order to position it.
+As the target group of the project is consumers, 
+and not businesses with big budgets, 
+it is desired that the price of the technology used for indoor positioning is kept at a minimum. 
+This includes the price for any device, 
+that may have to be installed on each controllable device in order to position it.
 
-It is assumed that users already own one or more devices that fit within the concept of Internet of Things and are early adapters of such technology. However, it easy to imagine that this project can be used in an office environment where employees of varying technological expertise work or in health care. Therefore users may have a varying degree of technological expertise and it should be easy to extend the solution with new controllable devices.
+It is assumed that users already own one or more devices that fit within the concept of Internet of Things, 
+and are early adapters of such technology. 
+However, it easy to imagine that this project can be used in an office environment, 
+where employees of varying technological expertise work or in health care. 
+Therefore users may have a varying degree of technological expertise, 
+and it should be easy to extend the solution with new controllable devices.
 
 Naturally the accuracy of the solution used for indoor positioning plays an important part. 
 \Cref{fig:indoor-positioning:incorrect} shows the consequence of an incorrect location. 
 If a lamp is estimated to be at another location that it is actually located, 
 the user must point to an incorrect location in order to control the lamp.
-Furthermore if the estimate is too wide, that is, the given area in which the lamp is located is very big, there is a greater risk that locations overlap. 
-Overlapping locations causes a complexity as it is necessary to determine which device the user desires to control if he points at the overlap as visualized in \Cref{fig:indoor-positioning:overlap}.
+Furthermore if the estimate is too wide, 
+\ie the given area in which the lamp is located is very big, 
+there is a greater risk that locations overlap. 
+Overlapping locations causes a complexity, 
+as it is necessary to determine which device the user desires to control, 
+if he points at the overlap as visualized in \Cref{fig:indoor-positioning:overlap}.
 
 \begin{figure}[!htb]
     \centering
@@ -46,10 +81,13 @@ Overlapping locations causes a complexity as it is necessary to determine which 
     \end{minipage}
 \end{figure}
 
-The solution provided by Estimote was chosen for indoor positioning. The choice of Estimote was made due to it being available already, having a low price whcih may fit consumers and its advertised ease of use. However, as described below the ease of use come at a cost of the accuracy.
-Furthermore Estimote has put effort into optimizing their software for indoor positioning and has released libraries developers can use to perform indoor positioning making it easier adopt the technology.
-
-\todo[author=Simon]{Need to be rewritten to fit with 1.4. Criterias should not be listed here.}
+We choose to use the solution provided by Estimote for this project.
+The choice of Estimote was made due to it being available already, 
+having a low price whcih may fit consumers, 
+and its advertised ease of use. 
+However, as described below the ease of use come at a cost of the accuracy.
+Furthermore Estimote has put effort into optimizing their software for indoor positioning, 
+and has released libraries developers can use to perform indoor positioning making it easier adopt the technology.
 
 \input{content/design/indoor-location-estimote.tex}
 %%% Local Variables:
