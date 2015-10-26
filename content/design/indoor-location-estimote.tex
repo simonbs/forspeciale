@@ -38,33 +38,33 @@ The $X$ and $Y$ value of each coordinate is measured in meters.
 Therefore a coordinate $(0, 0$) to $(0, 5)$ represents a horizontal line of $5$ meters and the set of coordinates $\{(0,0),(0,5),(5,5),(5,0)\}$ represents $5$ by $5$ meter room.
 
 \begin{listing}
-  \begin{swiftcode}
-          let locationBuilder = ESTLocationBuilder()
-          locationBuilder.setLocationBoundaryPoints([
-              ESTPoint(x: 0.cmToMeter(), y: 0.cmToMeter()),
-              ESTPoint(x: 537.cmToMeter(), y: 0.cmToMeter()),
-              ESTPoint(x: 537.cmToMeter(), y: 60.cmToMeter()),
-              ESTPoint(x: 690.cmToMeter(), y: 60.cmToMeter()),
-              ESTPoint(x: 690.cmToMeter(), y: 385.cmToMeter()),
-              ESTPoint(x: 0.cmToMeter(), y: 385.cmToMeter()),
-          ])
-          
-          let ice3 = "dec18deac0c5"
-          let blueberry3 = "f13173ad3185"
-          let ice2 = "d470d26d33f3"
-          let mint3 = "e6d39dee79c9"
-          
-          locationBuilder.addBeaconIdentifiedByMac(blueberry3, atBoundarySegmentIndex: 0, inDistance: 422.cmToMeter(), fromSide: .RightSide)
-          locationBuilder.addBeaconIdentifiedByMac(ice3, atBoundarySegmentIndex: 3, inDistance: 222.cmToMeter(), fromSide: .RightSide)
-          locationBuilder.addBeaconIdentifiedByMac(mint3, atBoundarySegmentIndex: 4, inDistance: 335.cmToMeter(), fromSide: .LeftSide)
-          locationBuilder.addBeaconIdentifiedByMac(ice2, atBoundarySegmentIndex: 5, inDistance: 165.cmToMeter(), fromSide: .LeftSide)
-          locationBuilder.setLocationOrientation(130)
-          locationBuilder.setLocationName("Gros Stue")
-          
-          let location = locationBuilder.build()
-  \end{swiftcode}
-  \caption{Example usage of the \texttt{ESTLocationBuilder} class.}
-  \label{lst:estlocationbuilder}
+\begin{swiftcode}
+        let locationBuilder = ESTLocationBuilder()
+        locationBuilder.setLocationBoundaryPoints([
+            ESTPoint(x: 0.cmToMeter(), y: 0.cmToMeter()),
+            ESTPoint(x: 537.cmToMeter(), y: 0.cmToMeter()),
+            ESTPoint(x: 537.cmToMeter(), y: 60.cmToMeter()),
+            ESTPoint(x: 690.cmToMeter(), y: 60.cmToMeter()),
+            ESTPoint(x: 690.cmToMeter(), y: 385.cmToMeter()),
+            ESTPoint(x: 0.cmToMeter(), y: 385.cmToMeter()),
+        ])
+        
+        let ice3 = "dec18deac0c5"
+        let blueberry3 = "f13173ad3185"
+        let ice2 = "d470d26d33f3"
+        let mint3 = "e6d39dee79c9"
+        
+        locationBuilder.addBeaconIdentifiedByMac(blueberry3, atBoundarySegmentIndex: 0, inDistance: 422.cmToMeter(), fromSide: .RightSide)
+        locationBuilder.addBeaconIdentifiedByMac(ice3, atBoundarySegmentIndex: 3, inDistance: 222.cmToMeter(), fromSide: .RightSide)
+        locationBuilder.addBeaconIdentifiedByMac(mint3, atBoundarySegmentIndex: 4, inDistance: 335.cmToMeter(), fromSide: .LeftSide)
+        locationBuilder.addBeaconIdentifiedByMac(ice2, atBoundarySegmentIndex: 5, inDistance: 165.cmToMeter(), fromSide: .LeftSide)
+        locationBuilder.setLocationOrientation(130)
+        locationBuilder.setLocationName("Living Room")
+        
+        let location = locationBuilder.build()
+\end{swiftcode}
+\caption{Example usage of the \texttt{ESTLocationBuilder} class.}
+\label{lst:estlocationbuilder}
 \end{listing}
 
 \Cref{lst:estlocationbuilder} shows how we used the \texttt{ESTLocationBuilder} to create a model of a real world living room. 
