@@ -1,24 +1,41 @@
 \subsection{Estimote}
+\todo[author=Thalley]{Skal vi have noget med omkring iBeacon protokollen?}
+We have decided to use Bluetooth Low Energy (BLE) beacons for indoor location in this project. 
+This is due to the access to the technology, ease of use and price. 
+The beacons that we have chosen to use are the beacons sold by Estimote. 
+Estimote, as described in \Cref{sec:indoor-positioning}, is one of the vendors of BLE beacons using the iBeacon. 
+We have chosen to use their beacons because they provide a software development kit (SDK) for indoor location. 
 
-Beacons are used for indoor location in this project. Estimote is one of many vendors of iBeacons. Common use cases for beacons include monitoring if the user enters a specific region of an area. This can be used to push location specific information or advertisement when a user is near a shop or even a certain product in that shop.
+Estimote not only focus on typical use cases for beacons like entering a specific region, 
+but have also specialized in indoor location of users using the iBeacon protocol. 
+The company developed the Estimote Indoor Location SDK and a demo application for iOS\footnote{https://itunes.apple.com/us/app/estimote-indoor-location/id963704810}, 
+which is meant to ease configuration needed for indoor location. 
+A user will install the beacons in a room by placing minimum \num{4} beacons on the walls, preferably in the middle of each wall in a rectangular room.   
+Next the user walks along the perimeter of the room, 
+and thereby registering the location of the beacons by collecting signal strengths from the beacons (a feature of the iBeacon protocol), 
+and data from the phones accelerometer and/or gyroscope.
+After the configuration, the application will have estimated the length of and placement of the walls along with the signal strengths of each beacon.
 
-Estimote not only focus on typical use cases for beacons like entering a specific region, but have also specialized in indoor location of users using the beacon technology. The company developed the Estimote Indoor Location application for iOS\footnote{https://itunes.apple.com/us/app/estimote-indoor-location/id963704810} which is meant to ease configuration needed for indoor location. A user will install the beacons in a room by placing one beacon on each wall. Next the user walks along the perimeter of the room and thereby registering the location of the beacons by collecting signal strengths from the beacons and data from the phones accelerometer and/or gyroscope.
-After the configuration, the application has estimated the length of and placement of walls allong with the signal strengths of each beacon.
-
-During our tests we found that the approach for configuring the indoor locationing describe above works terribly or not at all. After configurin the room, the application would show an illustration of the registered room and we found the measurements to to be very inaccurate. The Estimote Indoor Location application was therefore abandoned for configuring a room.
+To analyze the precision to see whether we could actually use these beacons and Estimote's SDK we performed a few tests. 
+During our tests we found that the approach for configuring the indoor locationing, as described above, works terribly or not at all. 
+After configuring the room, the application would show an illustration of the registered room and we found the measurements to to be very inaccurate.
+We have decided not to use the built-in room configuration. 
+\todo[author=Thalley]{Indsæt nogle beskrivende tal til at forklare hvor ringe det faktisk var}
 
 \subsubsection{Configuring Rooms Programmatically}
-
-Estimote provides Estimote Indoor Location SDK\footnote{https://github.com/Estimote/iOS-Indoor-SDK} to perform indoor locationing using beacons on iOS. The SDK provides two mechanisms for configuring a room for indoor positioning.
+As mentioned, Estimote provides the Estimote Indoor Location SDK\footnote{https://github.com/Estimote/iOS-Indoor-SDK} for performing indoor locationing using beacons on iOS. 
+The SDK provides two mechanisms for configuring a room for indoor positioning.
 
 \begin{enumerate}
 \item Using the built-in controller. The component presents the user with a guided configuration similar to the one used in the Estimote Indoor Location application.
 \item Programmatically using the \texttt{ESTLocationBuilder} class.
 \end{enumerate}
 
-The built-in controller was abandoned as it uses the exact same technology as the Estimote Indoor Location application and therefore results in poor accuracy.
+The built-in controller was abandoned as it resulted in poor accuracy.
 
-The \texttt{ESTLocationBuilder} lets developers configure a room programmatically by passing XY-points and an orientation to the builder. The X and Y value of each point is measured in meters. Therefore a point $(0, 0$) to $(0, 5)$ represents a horisontal line of five meters and the set of points $\{(0,0),(0,5),(5,5),(5,0)\}$ represents a room of size 5 meters by 5 meters.
+The \texttt{ESTLocationBuilder} lets developers configure a room programmatically by passing coordinates (\texttt{ESTPoint}s) and an orientation to the builder. 
+The $X$ and $Y$ value of each coordinate is measured in meters. 
+Therefore a coordinate $(0, 0$) to $(0, 5)$ represents a horizontal line of $5$ meters and the set of coordinates $\{(0,0),(0,5),(5,5),(5,0)\}$ represents $5$ by $5$ meter room.
 
 \begin{listing}
 \begin{swiftcode}
@@ -50,31 +67,38 @@ The \texttt{ESTLocationBuilder} lets developers configure a room programmaticall
 \label{lst:estlocationbuilder}
 \end{listing}
 
-Listing \ref{lst:estlocationbuilder} shows how we used the \texttt{ESTLocationBuilder} to create a model of a real world living room. The resulting model is illustrated in figure \ref{fig:estlocationbuilder-livingroom}.
+\Cref{lst:estlocationbuilder} shows how we used the \texttt{ESTLocationBuilder} to create a model of a real world living room. 
+The resulting model is illustrated in \Cref{fig:estlocationbuilder-livingroom}.
 
-The builder is configured with six points that gives information about the shape of the room. Next, the beacons are added to the walls of the room. Beacons are added with the identifier of the beacon. Lastly the orientation of the room relative to north and the name of the room is set. When the room has been configured it can be stored on the users Estimote account using the Estimote SDK.
-
-Using the \texttt{ESTLocationBuilder} to model a room reduces any uncertainties in estimating the users location caused by an imprecise model of the room.
-
-\begin{figure}
-\centering
-\includegraphics[width=0.33\textwidth]{images/living-room}
-\caption{Model created using the \texttt{ESTLocationBuilder} as shown in listing \ref{lst:estlocationbuilder}. Note that the model is rotated accordingly to the orientation of the room and the position of north relative to the user.}
-\label{fig:estlocationbuilder-livingroom}
+\begin{figure}[!htb]
+  \centering
+  \includegraphics[width=0.33\textwidth]{images/living-room}
+  \caption{Model created using the \texttt{ESTLocationBuilder} as shown in listing \ref{lst:estlocationbuilder}. Note that the model is rotated accordingly to the orientation of the room and the position of north relative to the user.}
+  \label{fig:estlocationbuilder-livingroom}
 \end{figure}
+
+The builder is configured with $6$ coordinates that gives information about the shape of the room. 
+Next, the beacons are added to the walls of the room. 
+Beacons are added with the identifier of the beacon, such as \texttt{dec18deac0c5} for the \texttt{ice3} beacon. 
+Lastly the orientation of the room relative to north and the name of the room is set. 
+When the room has been configured it can be stored on the users Estimote account using the Estimote SDK.
+Using the \texttt{ESTLocationBuilder} to model a room reduces any uncertainties in estimating the users location caused by an imprecise model of the room.
 
 \subsubsection{Ranging in the Background}
 
-There are two distinct ways of locating a user when using iBeacon \cite{estimote:monitoring-ranging}.
+There are two distinct ways of locating a user when using the iBeacon protocol \cite{estimote:monitoring-ranging}.
 
 \begin{itemize}
-\item Region monitoring is performed to check if a user enters or leaves a specific region. A region is a geofence, a virtual perimeter around some location. Such region could be used to check if a user arrives or leaves his house, his workplace or if he is nearby a shop encapsulated in a geofence. Regions are useful for performing simple home automation, e.g. turn the lights on when the user arrives at home and turn them off when they leave.
-\item Ranging is more granular than region monitoring and is used to continuously retrieve the set of beacons in range along with an estimated distance to them based on the signal strengths. Ranging is used to get a granular user position.
+\item Region monitoring is performed to check if a user enters or leaves a specific region. A region is a geofence, \ie a virtual perimeter around some location. A region can be used to check if a user arrives or leaves his house, his workplace or if he is nearby a shop encapsulated in a geofence. Regions are useful for performing simple home automation, \eg turn the lights on when the user arrives at home and turn them off when they leave.
+\item Ranging is more granular than region monitoring and is used to continuously retrieve the set of beacons in range, along with an estimated distance to them based on the signal strengths. Ranging is used to get a granular user position.
 \end{itemize}
 
-According to both Apple and Estimote it is preferred that ranging is only performed while the application is in the foreground, that is, the application is on the screen and the user is likely to interact with the application. The reason for this is that ranging for beacons can have a negativ impact on the battery life where as the region monitoring do not use as much battery power.
+According to both Apple and Estimote it is preferred that ranging is only performed while the application is in the foreground, 
+\ie the application is on the screen and the user is likely to interact with the application. 
+The reason for this is that ranging for beacons can have a negative impact on the battery life, 
+whereas the region monitoring do not use as much battery power.
 
-While Apple and Estimote advise agains performing beacon ranging in the background, it is possible \cite{apple:monitoring-ibeacon} \cite{estimote:monitoring-ranging}.
+While Apple and Estimote advise against performing beacon ranging in the background, it is possible \cite{apple:monitoring-ibeacon} \cite{estimote:monitoring-ranging}.
 
 %%% Local Variables:
 %%% mode: latex
