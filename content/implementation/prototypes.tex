@@ -6,11 +6,11 @@ This section will describe the setup of the prototypes developed during this pro
 The first prototype was an Android phone application that showed the location of the user, the direction the phone was pointing, and the devices that were being pointed at.
 The application used a $10 \times 10$ grid to simulate a square room in which the user and the devices to be controlled were located.
 A set of imaginary devices was hardcoded into the application with fixed positions and the grid would look like the one shown in \Cref{table/prototype-grid}.
-The user is positioned in the center at (5,5) by default. This position can be changed by using the \texttt{Up}, \texttt{Down}, \texttt{Left} and \texttt{Right} buttons.
+The user is positioned in the center at $(5,5)$ by default. This position can be changed by using the \texttt{Up}, \texttt{Down}, \texttt{Left} and \texttt{Right} buttons.
 When the user's direction changes a list of devices being pointed at is acquired by calculating the angle between the user's position and the position of each device.
 The direction is found using magnetic fields such that $0$ is north, $-90$ is west, $90$ is east, etc. 
 The angle between each smart device and the user is calculated finding the inverse tangent (arctangent) and then converting from radians to degrees such that we get:
-\begin{equation}
+\begin{equation}\label{eq:angle}
 \var{angle} = 180 / \pi * \arctan(\var{user.y} - \var{device.y} / \var{user.x} - \var{device.x})
 \end{equation}
 where \var{user.x} and \var{user.y} are the $x$ and $y$ coordinates of the user and likewise for the device.
@@ -48,12 +48,13 @@ A screenshot of this application is shown in \Cref{fig:prototype1-app-screenshot
     \label{fig:prototype1-app-screenshots}
 \end{figure}
 
-
+\FloatBarrier
 \subsection{Prototype \#2}
 \label{sec:implementation:prototypes:prototype2}
 
-The second prototype consisted of an iOS application similar to the Android application described in section \ref{sec:implementation:prototypes:prototype1} and a server that represented two controllable lamps.
-The platform was changed from Android to iOS because the application would later use Estimote beacons and there was no Android Indoor Location SDK available for this. 
+The second prototype consisted of an iOS application similar to the Android application described in section \ref{sec:implementation:prototypes:prototype1}, 
+and a server that represented two controllable lamps.
+The platform was changed from Android to iOS because Estimote does not have a SDK for Android.
 
 \subsubsection{Major Changes}
 \begin{itemize}
@@ -62,11 +63,20 @@ The platform was changed from Android to iOS because the application would later
 \end{itemize}
 
 In this prototype the room is still represented as a grid and the user is placed in the center of the grid, however the user is unable to change position.
-This is because the first prototype showcased the idea of pointing at devices from different locations sufficiently and the next step would be to use the actual location of a user using Estimote beacons.
+This is because the first prototype showcased the idea of pointing at devices from different locations sufficiently, 
+and the next step would be to use the actual location of a user using Estimote beacons.
 As shown in \Cref{fig:prototype2-app-screenshots} the user can see his direction as an angle between himself and north.
-Devices are represented as orange dots and if the user points towards one of them two buttons will appear that allow the user to interact with the device by either turning it \texttt{on} or \texttt{off}.
+The angle is computed the same way as in Prototype 1 with \Cref{eq:angle}.
+
+Devices are represented as orange dots and if the user points towards one of them, 
+two buttons will appear that allow the user to interact with the device by either turning it \texttt{on} or \texttt{off}.
 When the user turns a device on or off, it will be reflected on the server, 
 where a corresponding box will have the color \texttt{green} when turned on and \texttt{red} when turned off as shown in \Cref{fig:prototype2-server-screenshot}.
+The server is running as a Heruko\footnote{\url{https://heroku.com/}} application as a simple RESTful webservice written in Python. 
+The server contains the information of the devices such as ID, name, status and position.
+The application gets this information by sending a GET request to get a list of all the devices and their information. 
+To change the status of a device (turn off or on), the application sends a POST request with the device's ID and the action. 
+In this prototype, the only actions are \texttt{turnOn} and \texttt{turnOff}.
 
 \begin{figure}[!htb]%
     \centering
@@ -83,10 +93,11 @@ where a corresponding box will have the color \texttt{green} when turned on and 
 \begin{figure}[!htb]
     \centering
     \includegraphics[scale=0.2]{images/Prototype2_Server.png}
-    \caption[caption]{Screenshot of the server representing two lamps in the second prototype.\\\texttt{Green}: On, \texttt{Red}: Off}
+    \caption{Screenshot of the server representing two lamps in the second prototype. Colors indicate their status. \texttt{Red} (top): Off and \texttt{Green} (bottom): On}
     \label{fig:prototype2-server-screenshot}
 \end{figure}
 
+\FloatBarrier
 \subsection{Prototype \#3}
 \label{sec:implementation:prototypes:prototype3}
 
@@ -108,13 +119,13 @@ The third prototype does not support associating a gesture with an action, that 
 \begin{figure}[!htb]%
     \centering
     \subfloat{
-        \includegraphics[width=0.3\textwidth]{images/prototype-3-all-gestures}
+        \frame{\includegraphics[width=0.3\textwidth]{images/prototype-3-all-gestures}}
     }
     \subfloat{
-        \includegraphics[width=0.3\textwidth]{images/prototype-3-new-gesture}
+        \frame{\includegraphics[width=0.3\textwidth]{images/prototype-3-new-gesture}}
     }
     \subfloat{
-        \includegraphics[width=0.3\textwidth]{images/prototype-3-train-gesture}
+        \frame{\includegraphics[width=0.3\textwidth]{images/prototype-3-train-gesture}}
     }
     \caption{Screenshots showing the flow and interface for adding and training a new gesture in the third prototype.}
     \label{fig:prototype3-gesture-screenshots}
@@ -122,7 +133,7 @@ The third prototype does not support associating a gesture with an action, that 
 
 \begin{figure}[!htb]%
     \centering
-    \framebox{\includegraphics[width=0.3\textwidth]{images/prototype-3-gesture-triggered}}
+    \frame{\includegraphics[width=0.3\textwidth]{images/prototype-3-gesture-triggered}}
     \caption{Screenshot showing new representation of the room and controllable devices. In this screenshot the gesture named ``Half Circle'' was recently recognized and therefore the gesture name is shown in the top of the screen.}
     \label{fig:prototype3-room-screenshot}
 \end{figure}
