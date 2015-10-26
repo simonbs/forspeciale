@@ -1,0 +1,64 @@
+%% Creator: Inkscape 0.91_64bit, www.inkscape.org
+%% PDF/EPS/PS + LaTeX output extension by Johan Engelen, 2010
+%% Accompanies image file 'visibilityangle.pdf' (pdf, eps, ps)
+%%
+%% To include the image in your LaTeX document, write
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics{<filename>.pdf}
+%% To scale the image, write
+%%   \def\svgwidth{<desired width>}
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics[width=<desired width>]{<filename>.pdf}
+%%
+%% Images with a different path to the parent latex file can
+%% be accessed with the `import' package (which may need to be
+%% installed) using
+%%   \usepackage{import}
+%% in the preamble, and then including the image with
+%%   \import{<path to file>}{<filename>.pdf_tex}
+%% Alternatively, one can specify
+%%   \graphicspath{{<path to file>/}}
+%% 
+%% For more information, please see info/svg-inkscape on CTAN:
+%%   http://tug.ctan.org/tex-archive/info/svg-inkscape
+%%
+\begingroup%
+  \makeatletter%
+  \providecommand\color[2][]{%
+    \errmessage{(Inkscape) Color is used for the text in Inkscape, but the package 'color.sty' is not loaded}%
+    \renewcommand\color[2][]{}%
+  }%
+  \providecommand\transparent[1]{%
+    \errmessage{(Inkscape) Transparency is used (non-zero) for the text in Inkscape, but the package 'transparent.sty' is not loaded}%
+    \renewcommand\transparent[1]{}%
+  }%
+  \providecommand\rotatebox[2]{#2}%
+  \ifx\svgwidth\undefined%
+    \setlength{\unitlength}{305.93106384bp}%
+    \ifx\svgscale\undefined%
+      \relax%
+    \else%
+      \setlength{\unitlength}{\unitlength * \real{\svgscale}}%
+    \fi%
+  \else%
+    \setlength{\unitlength}{\svgwidth}%
+  \fi%
+  \global\let\svgwidth\undefined%
+  \global\let\svgscale\undefined%
+  \makeatother%
+  \begin{picture}(1,0.76183758)%
+    \put(0,0){\includegraphics[width=\unitlength,page=1]{visibilityangle.pdf}}%
+    \put(0.45264145,0.37967544){\color[rgb]{0,0,0}\rotatebox{-37.99999908}{\makebox(0,0)[b]{\smash{User Orientation = o1}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=2]{visibilityangle.pdf}}%
+    \put(0.63052734,0.48082979){\color[rgb]{0,0,0}\rotatebox{-63.49999884}{\makebox(0,0)[b]{\smash{Visibility Range}}}}%
+    \put(0.46956024,0.2294506){\color[rgb]{0,0,0}\rotatebox{-19.49999698}{\makebox(0,0)[b]{\smash{Device Orientation = o2}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=3]{visibilityangle.pdf}}%
+    \put(0.48548562,0.06715392){\color[rgb]{0,0,0}\rotatebox{6.50000324}{\makebox(0,0)[b]{\smash{Device Orientation = o3}}}}%
+    \put(-0.00464555,0.4053298){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.24095063\unitlength}\centering Device 1 (x2,y2)\end{minipage}}}%
+    \put(0.82896434,0.13227203){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.22040444\unitlength}\centering User (x1,y1)\end{minipage}}}%
+    \put(-0.0190325,0.10051885){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.24095063\unitlength}\centering Device 2 (x3,y3)\end{minipage}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=4]{visibilityangle.pdf}}%
+  \end{picture}%
+\endgroup%
