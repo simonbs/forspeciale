@@ -1,0 +1,24 @@
+\section{Precision of Indoor Location}
+Another core part of our system is indoor location. 
+For the ``point-to-select'' part of our system to work as intended, we need high indoor precision. 
+In \Cref{sec:indoor-positioning} we mentioned that Estimote claims the accuracy to be less than \num{5} meters.
+In this section we test if that is actually the case, or even if we can achieve better results than that. 
+We test this by comparing the position we get from the application to the actual position we have in the room. 
+
+We setup a [SIZE OF ROOM] room, with [NUMBER OF BEACONS]. 
+The room is illustrated by \Cref{fig:precisiontest}. 
+In \Cref{fig:precisiontest} you can also see small spots. 
+These spots is the known locations where we are going to perform the precision tests. 
+We randomly walk between these spots [NUMBER OF TIMES] and find the mean error rate.
+\begin{figure}[!htb]
+    \centering
+    \todo[author=Thalley]{Insert figure}
+    \caption{Illustration of room used for indoor location precision test}
+    \label{fig:precisiontest}
+\end{figure}
+
+The mean error rate that we found is [RESULT]. 
+
+\subsection{Precision of Indoor Location Conclusion}
+From the results, we can conclude that... \todo[author=Thalley]{Write conclusion of precision test based on results}
+

@@ -1,0 +1,32 @@
+\section{Performance of Gesture Recognition}
+Gesture recognition is a core part of our solution and it is being performed often. 
+Since the gesture recognition is being performed by device with somewhat low performance,
+it is important that we have high performance of our gesture recognition. 
+In this section we test the performance of recognizing gestures. 
+We test the performance by executing a number of gestures and see how fast we can recognize these.  
+We expect the number of unique gestures in the database to increase the recognition time. 
+Furthermore, the number of times each gesture has been trained also increase the complexity of recognizing gestures. %Thalley: Remove this line if that is no longer the case
+
+For this setup, we have [NUMBER OF GESTURES], each trained [NUMBER OF TRAININGS] times. 
+We start by evaluating with \num{1} gesture, and then increase the number of unique gestures to estimate the computational complexity.
+
+\begin{figure}[!htb]
+    \centering
+    \todo[author=Thalley]{Insert figure}
+    \caption{Graph showing the time of recognizing gestures, with increasing number of unique gestures}
+    \label{fig:performancegraph}
+\end{figure}
+\todo[author=Thalley]{Perform performance of gesture recognition tests}
+
+The result from \Cref{fig:performancegraph} show that the complexity of gesture recognition is [RESULT]. 
+
+To find the time it takes to recognize a single gesture, 
+we perform the recognition of a random sample of known gestures \num{1000} times, 
+and calculate the mean time spend on recognizing each gesture. 
+Since the number of unique gestures has an impact on the complexity, 
+we choose a fixed number of common gestures each trained [NUMBER OF TRAININGS] times. 
+We expect at common number of unique gestures to be [NUMBER OF COMMON GESTURES], 
+and for that number of gestures we find that the average time to recognize a single gesture is [RESULT]. 
+
+\subsection{Performance of Gesture Recognition Conclusion}
+From the results, we can conclude that... \todo[author=Thalley]{Write conclusion of performance test based on results}
