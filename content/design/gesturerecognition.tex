@@ -1,1 +1,11 @@
+%!TeX root=../../master.tex
 \section{Gesture Recognition}\label{sec:gesturerecognition}
+The system lets users control smart devices in their home by performing certain gestures.
+
+Gesture recognition can generally be split into two categories: Camera-based and motion-based \cite{Kela2006}. Examples of camera-based gesture recognition systems are the ``Gesture Pendant'' \cite{starner2000gesture} and the Kinect \cite{kinect} and an example of a motion-based system is the Reemo \cite{Reemo}.
+
+The camera-based solution require that the limbs used to perform gestures are visible to the camera and as such static cameras placed in a room may be rendered useless if the user turns his back against them. In addition, furniture and other people may stand in between them and obstruct the line of sight between the camera and the user.
+This would likely not happen with the ``Gesture Pendant'', but the user would have to make sure that the pendant was always outside of any clothes worn as putting on a sweater or wrapping yourself in a blanket might block the view of the camera.
+
+Motion-based solutions can employ various different sensors on the person, eg. accelerometers and gyroscopes and depending on the type of sensor different methods can be used to recognize gestures.
+As mentioned in \Cref{sec:wearables} accelerometers are present in about half of the devices examined and therefore the motion-based solutions utilizing these will be the ones explored further.
