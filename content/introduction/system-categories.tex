@@ -2,8 +2,7 @@
 Smart home automation is one of the big sell-points of smart homes.
 Home automation can happen at various degrees. 
 In this section we will analyze and categorize the different types of smart home automation. 
-
-The scenarios in which home automation is facilitated can in general be divided into the following three categories.
+The scenarios in which home automation is facilitated can in general be divided into the following three categories:
 
 \begin{enumerate}
     \item Rule driven systems
@@ -20,64 +19,82 @@ Each of the three categories and their use cases are briefly described below.
 
 A system is considered to be rule driven if an action is executed when a set of rules are fulfilled. 
 The rule driven systems use conditional statements to express input and output. 
-Below are a few examples of rules in the form of (if this) \textrightarrow (then that):
+Below are a few examples of rules in the form of (if this) \textrightarrow~(then that):
 
 \begin{itemize}
     \item (The temperature is above 23 degrees Celsius) \textrightarrow~(Lower the temperature on my thermostat)
-    \item (The CO\textsubscript{2} index is critically high) \textrightarrow (Open my windows)
+    \item (The CO\textsubscript{2} index is critically high) \textrightarrow~(Open my windows)
 \end{itemize}
 
-The above rules consist of a condition on the left-hand side of the arrow and an action on the right-hand side of the arrow.
+The above rules consist of a condition on the left-hand side of the arrow, 
+and an action on the right-hand side of the arrow.
 The automation of the smart home is based on the set of rules. 
 To achieve the desired behavior, the user must add, remove or tweak existing rules.
 
 Examples of rule drive systems include the aforementioned Apple HomeKit. 
-As outlined in the framework reference for HomeKit \cite{applehomekitref}, the system is based on actions and events. 
+As outlined in the framework reference for HomeKit \cite{applehomekitref}, 
+the system is based on actions and events. 
 Triggers constitutes rules by encapsulating actions and events. 
 Each event represents a condition. 
-An event may be fulfilled by a change in time, the state of devices in the system of the location of the user.
+An event may be fulfilled by a change in time, 
+the state of devices in the system of the location of the user.
 
 \subsection{Gesture Driven Systems}
 
-Systems are gesture driven if the system is configured with a set of gestures that can be performed by the user in oder to trigger some action. 
+Systems are gesture driven if the system is configured with a set of gestures, 
+that can be performed by the user in oder to trigger some action. 
 Each device in the system responds to a set of gestures. 
-For example, a lamp may respond to the user waving in order to turn on and the user clapping in order to turn off.
+For example, a lamp may respond to the user waving in order to turn on, 
+and the user clapping in order to turn off.
 
-A gesture driven system is partly rule driven as each gesture registered in the system is associated with one or more actions. 
+A gesture driven system is partly rule driven, 
+as each gesture registered in the system is associated with one or more actions. 
 The association means that each time the gesture is registered in the system, the action should be triggered. 
 Such rules can be formulated as ``if I wave, then lower the temperature on my thermostat''
 
-Examples of gesture driven systems includes Hiris, a wearable computer with focus on gestures that allow the users to interact with other devices \cite{hirisweb}.
+Examples of gesture driven systems include the aforementioned Hiris and Reemo.
 
 \subsection{Autonomous Systems}
 
-An autonomous system monitors the system and proactively responds to changes in the system. 
-Observable changes include but are not limited to changes in the temperature, CO\textsubscript{2} index, the number of people in the room or even who are in the room.
-Autonomous systems should intelligently react to the users needs based upon the observable state of the environment.
+An autonomous system monitors the system, 
+and proactively responds to changes in the system. 
+Observable changes include but are not limited to changes in the temperature, 
+CO\textsubscript{2} index, the number of people in the room or even who are in the room.
+Autonomous systems should intelligently react to the users needs, 
+based upon the observable state of the environment.
 
-Autonomous systems rely on the concept of ambient intelligence in order to determine the necessary actions.
+Autonomous systems rely on the concept of ambient intelligence, 
+in order to determine the necessary actions.
 \todo[author=Thalley]{Maybe add something about ambient intelligence here?}
-Such systems include autonomous enhancement services that replaces manual care with an automated system \cite{nehmer2006living}. 
-These systems gather environment and the data about the individuals body functions, 
-\eg temperature, pulse and blood pressure in order to determine if the individuals health is critical.
+Such systems include autonomous enhancement services, 
+that replaces manual care with an automated system \cite{nehmer2006living}. 
+These systems gather environment data, 
+and the data about the individuals body functions, 
+\eg temperature, pulse and blood pressure, 
+in order to determine if the individuals health is critical.
 
-Autonomous systems are rule driven systems that intelligently determines the rules to be created and the necessary action to take when a set of rules are fulfilled. 
+Autonomous systems are rule driven systems, 
+that intelligently determines the rules to be created, 
+and the necessary action to take when a set of rules are fulfilled. 
 Typical for such systems may be the complexity of the rules. 
 It is not given that users themselves are capable of determining a suitable set of rules in order to judge if their health is critical. 
-The system should itself be able to determine such set of rules and adjust it to the individual.
+The system itself should be able to determine such set of rules and adjust it to the individual.
 
-Examples of autonomous systems include the one described Nehmer \etal \cite{nehmer2006living}. 
+Examples of autonomous systems include the one described by Nehmer \etal \cite{nehmer2006living}. 
 The authors envision a living assistance system which monitors elderly people. 
-A model is outlined and by continuously feeding the model with data about the individuals body functions and his behavior, 
+A model is outlined, 
+and by continuously feeding the model with data about the individuals body functions and his behavior, 
 they can determine if a \emph{critical situation} occurs. 
-A critical situation could be that the person has fallen and are not responding to contact, for example calls.
+A critical situation could be that the person has fallen and is not responding to contact, \eg calls.
 Such system may reduce the cost of providing care to the elderly people.
 
 \subsection{Conclusion}
 
-The rule driven, gesture driven and autonomous systems are all rule driven to some extend but the origin and the types of rules differ between the systems. 
+The rule driven, gesture driven and autonomous systems are all rule driven to some extend, 
+but the origin and the types of rules differ between the systems. 
 In a rule driven system the rules are configured by the user.
-In an autonomous system the rules are programmed by some expert or in collaboration with experts in a certain field, \eg the medical field. 
+In an autonomous system the rules are programmed by some expert, 
+or in collaboration with experts in a certain field, \eg the medical field. 
 The system may adapt its set of rules based on the environment and that behavior of the individual.
 Gesture driven systems use rules configured by the user. 
 In such systems gestures make up the condition of a rule.
@@ -94,7 +111,7 @@ The degree of automation as well as the reasoning behind each of the classificat
     \textit{Lowest degree of automation}  & \textit{Medium degree of automation}                     & \textit{Highest degree of automation}\\
     Configured by the user.               & Configured by the user.                                  & Configured by an expert.\\
     Conditions are triggered by the user. & Automatically and constantly observes the environment.   & Automatically and constantly observes the environment.\\
-    ~                                     & The configuration may be reusable for other individuals. & Automatically adjusts to the users needs.\\
+    ~                                     & The configuration may be reusable for other individuals. & Automatically adjusts to the user's needs.\\
     \end{tabularx}
     \caption{Classification of systems based on their degree of automation}
     \label{tbl:system-categories}
