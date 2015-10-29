@@ -1,4 +1,5 @@
-\section{System Categories}\label{sec:system-categories}
+\section{Levels of Smart Home Automation}\label{sec:system-categories}
+\todo[author=Thalley]{Bør vi ændre det med categories til noget med levels i stedet?}
 Smart home automation is one of the big sell-points of smart homes.
 Home automation can happen at various degrees. 
 In this section we will analyze and categorize the different types of smart home automation. 
@@ -13,7 +14,8 @@ The scenarios in which home automation is facilitated can in general be divided 
 The categories varies in the way users configure and interact with the systems. 
 ``Manual systems'' could constitute a fourth category, consisting of regular systems with manual switches,
 but is left out as it such systems do not contribute to home automation.
-Each of the three categories and their use cases are briefly described below.
+Each of the three categories and their use cases are briefly described below,
+as well as how they can be integrated with wearables.
 
 \subsection{Rule Driven Systems}
 
@@ -39,6 +41,9 @@ Each event represents a condition.
 An event may be fulfilled by a change in time, 
 the state of devices in the system of the location of the user.
 
+A wearable here could be integrated as a form of sensor (to \eg measure room temperature or CO\textsubscript{2} index), 
+and use this information to perform the actions based on the rules.  
+
 \subsection{Gesture Driven Systems}
 
 Systems are gesture driven if the system is configured with a set of gestures, 
@@ -52,7 +57,8 @@ as each gesture registered in the system is associated with one or more actions.
 The association means that each time the gesture is registered in the system, the action should be triggered. 
 Such rules can be formulated as ``if I wave, then lower the temperature on my thermostat''
 
-Examples of gesture driven systems include the aforementioned Hiris and Reemo.
+Examples of gesture driven systems include the aforementioned Hiris and Reemo, 
+where wearables are used as active control units by performing gestures. 
 
 \subsection{Autonomous Systems}
 
@@ -88,10 +94,15 @@ they can determine if a \emph{critical situation} occurs.
 A critical situation could be that the person has fallen and is not responding to contact, \eg calls.
 Such system may reduce the cost of providing care to the elderly people.
 
+Wearables here would be integrated in the same form as with rule driven systems, 
+but where the autonomous systems would likely gather and use more information, 
+to fully automate the home. 
+
 \subsection{Conclusion}
 
 The rule driven, gesture driven and autonomous systems are all rule driven to some extend, 
 but the origin and the types of rules differ between the systems. 
+
 In a rule driven system the rules are configured by the user.
 In an autonomous system the rules are programmed by some expert, 
 or in collaboration with experts in a certain field, \eg the medical field. 
@@ -99,8 +110,13 @@ The system may adapt its set of rules based on the environment and that behavior
 Gesture driven systems use rules configured by the user. 
 In such systems gestures make up the condition of a rule.
 
-When concerned with the field of home automation it is relevant to classify each system in order to determine how automatic a system is. 
-The more automatic a system is, the less the user should be involved with the system.
+When concerned with the field of home automation, 
+it is relevant to classify each system in order to determine how automatic a system is. 
+The more autonomous a system is, 
+the less the user should be involved with the system.
+Each of the system can integrate wearables to different degrees, 
+where the more autonomous systems would use the wearable more implicitly, 
+and the gesture driven systems would use the wearable explicitly.  
 
 The degree of automation as well as the reasoning behind each of the classifications are shown in \Cref{tbl:system-categories}.
 
