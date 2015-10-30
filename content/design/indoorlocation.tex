@@ -1,7 +1,4 @@
 \section{Indoor Location}\label{sec:designindoorlocation}
-%Thalley: This has been copied from the section that used to be in chap. 1.
-%Probably needs some modifying
-
 In this project, a solution for pointing at a controllable device, \eg a lamp, is proposed. 
 In order to determine which device the user points at, 
 and thereby intends to control, 
@@ -81,13 +78,65 @@ if he points at the overlap as visualized in \Cref{fig:indoor-positioning:overla
     \end{minipage}
 \end{figure}
 
-We choose to use the solution provided by Estimote for this project.
-The choice of Estimote was made due to it being available already, 
-having a low price whcih may fit consumers, 
-and its advertised ease of use. 
-However, as described below the ease of use come at a cost of the accuracy.
-Furthermore Estimote has put effort into optimizing their software for indoor positioning, 
-and has released libraries developers can use to perform indoor positioning making it easier adopt the technology.
+
+\subsection{Analysis of Potential Existing Solution}
+This section will be an analysis of commercialized products that offer indoor location.
+Only solutions intended for indoor positioning are considered.
+GPS is not considered a potential solution as GPS is meant for outdoor positioning, 
+and the location offered by GPS tend to have poor accuracy indoors.
+We have chosen not to include solutions designed for larger buildings such as airports, malls or warehouses, 
+as these does not provide solutions or setups for smaller areas such as rooms or houses. 
+
+\Cref{tbl:indoor-positioning} shows the results of the analysis. 
+\begin{table}[!htb]
+    \begin{description}[style=multiline,leftmargin=2.5cm]
+        \item[Product:] Estimote Beacons and Stickers \cite{estimote}
+        \item[Availability:] Beacons and Stickers are shipping. SDKs available.
+        \item[Technology:] iBeacon protocol.
+        \item[Price:] \SI{99}[\$]{} for beacons. \SI{99}[\$]{} for 10 stickers, one per device to be positioned.
+        \item[Ease of use:] Initial installation of beacons. Attach each sticker to device.
+        \item[Accuracy:] Unknown. Desired to be less than five meters. \\ \todo[author=Simon]{Update after conducting tests.} 
+        
+        \item[Product:] Pozyx \cite{pozyx}
+        \item[Availability:] Available for preorder.
+        \item[Technology:] Ultra-wideband (UWB).
+        \item[Price:] \$368 for anchors. \SI{123}[\$]{} for each device to be positioned, plus supported Arduino.
+        \item[Ease of use:] Initial installation of anchors. One tag for each device, plus supported Arduino. Not meant for mounting.
+        \item[Accuracy:] Claimed to be 10 cm. Untested. \\
+        
+        \item[Product:] SmartActionSLAM \cite{SASLAM}
+        \item[Availability:] Android Application (research). Not commercialized.
+        \item[Technology:] Smartphone sensors.
+        \item[Price:] N/A.
+        \item[Ease of use:] Requires modification of source code (available) to get real-time position. 
+        \item[Accuracy:] Reported to have a mean error of 0.34m (only using smartphone and no external sensors).\\
+        
+        \item[Product:] DecaWave's DW1000 \cite{decawave}
+        \item[Availability:] Available in stores. 
+        \item[Technology:] Ultra-wideband (UWB)
+        \item[Price:] Chips are \SI{12.50}[\$]{}, transceiver module is \SI{25}[\$]{}. Evaluation kits are available for \SI{589}[\$]{} and \SI{990}[\$]{} 
+        \item[Ease of use:] No SDK and requires implementing the chips on a board yourself. 
+        \item[Accuracy:] Claimed to be 10cm. 
+        \end{description}
+    \caption{Assessment of potential solutions for indoor positioning. Please note that all prices are converted to U.S. dollars from their respective currency. Prices include the minimum available hardware for positioning a device.}
+    \label{tbl:indoor-positioning}
+\end{table}
+
+Estimote gives a solution using Bluetooth Low Energy (BLE) beacons using the iBeacon protocol. 
+The beacons can be mounted on walls in a room or building, 
+and then by using the signal strength of each beacon (an iBeacon feature), 
+it can estimate how far away the user is. 
+Estimote's solution is available as a consumer product.
+
+Pozyx and DecaWave use a wireless radio technology known as ultra-wideband, which works much like BLE but at a different frequency. 
+Like Estimote, it also requires setting up ``anchors'' and then using the signal strength to find the location. 
+No easy to use consumer product is availably for either of these.
+
+SmartActionSLAM is an Android application from research done by Hardegger \etal \cite{SASLAM}. 
+This solution is a lot different from most other indoor location solutions. 
+It \emph{calculates} an estimated location by counting steps and estimating step length and direction. 
+In theory it can be adapted to almost any smartphone, 
+but requires a lot of work to adapt the released code from the research project. 
 
 \input{content/design/indoor-location-estimote.tex}
 %%% Local Variables:

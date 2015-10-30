@@ -1,14 +1,21 @@
 \subsection{Estimote}
 \todo[author=Thalley]{Skal vi have noget med omkring iBeacon protokollen?}
-We have decided to use Bluetooth Low Energy (BLE) beacons from Estimote, 
-for indoor location in this project. 
-This is due to the access to the technology, ease of use and price. 
+We choose to use the solution provided by Estimote for this project.
+The choice of Estimote was made due to it being available already, 
+having a low price which may fit consumers, 
+and its advertised ease of use. 
+However, as described below the ease of use come at a cost of the accuracy.
+Furthermore Estimote has put effort into optimizing their software for indoor positioning, 
+and has released a software development kit (SDK),
+that developers can use to perform indoor positioning, 
+making it easier adopt the technology.
 
-Estimote not only focus on typical use cases for beacons like entering a specific region, 
-but have also specialized in indoor location of users using the iBeacon protocol. 
-The company developed the Estimote Indoor Location SDK\footnote{https://github.com/Estimote/iOS-Indoor-SDK}, 
-and a demo application for iOS\footnote{https://itunes.apple.com/us/app/estimote-indoor-location/id963704810}, 
+Estimote, aside from offering the typical use case for beacons like entering a specific region, 
+has also specialized in indoor location of users using the iBeacon protocol. 
+The company has developed and released the Estimote Indoor Location SDK\footnote{https://github.com/Estimote/iOS-Indoor-SDK}.
+They have also released a demo application for iOS\footnote{https://itunes.apple.com/us/app/estimote-indoor-location/id963704810}, 
 which is meant to ease configuration needed for indoor location. 
+
 A user will install the beacons in a room by placing a minimum of \num{4} beacons on the walls, 
 preferably in the middle of each wall in a rectangular room.   
 Next the user walks along the perimeter of the room, 
