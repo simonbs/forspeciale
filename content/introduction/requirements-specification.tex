@@ -29,7 +29,8 @@ These requirements are functional requirements that our system should implement.
 \subsection{Performance Requirements}
 These requirements will be used to measure how well the system performs. 
 \begin{description}
-    \item[Realtime gesture recognition] The system should recognize gestures effectively to give the user a feeling of realtime control of devices.
+    \item[Realtime gesture recognition] The system should recognize gestures effectively to give the user a feeling of realtime control of devices. %Thalley: Should we define a maximum computational time? 
+    \item[Scalability] The system should scale well with the number of smart devices and locations. The system should be able to handle a smart home with plenty of smart devices. It is likely that the number of gestures will contribute most to the computational complexity. %Thalley: Should we define a minimum number of gestures and devices it should be able to handle in realtime? 
     \item[Correct gesture recognition] The system should recognize gestures correctly at least \perc{80} of the time. If the system continuously turns the volume of your stereo up instead of down, it is rendered useless.  
     \item[Correct device selection] The system should send the action to the correct device at least \perc{80} of the time. The system needs to figure out which device is the most likely to perform the action send. The system should not turn on the coffee machine instead of turning on a lamp. 
     \item[Overall system correctness] The system should recognize the correct gesture and send the corrosponding action to the correct device at least \perc{80} of the time. This is required to give the user actual control of the devices. 
