@@ -24,8 +24,10 @@ The communication problem arises from the number of different communication prot
 
 \subsubsection{Common Protocols for IoT}
 There is a range of different protocols that are being used for various smart devices. 
-\Cref{fig:IoTProtocols} illustrates the current architecture of the IoT network,
-where \num{5} communication protocols are shown. 
+
+%Thalley: Figure is removed for now
+%\Cref{fig:IoTProtocols} illustrates the current architecture of the IoT network,
+%where \num{5} communication protocols are shown. 
 
 %\begin{figure}[!htb]
 %    \centering
@@ -57,7 +59,67 @@ Aside from the protocols in \Cref{table:iotprotocols},
 there are several others messaging protocols such as MQTT, CoAP and XMPP used by various devices. 
 
 A smart hub should thus not only be able to communicate with the devices, 
-but also be able to transform the data to a single format and give easy access to it. 
+but also be able to transform the data to a single format and give easy access to it.
+
+\subsubsection{Analysis of a Smart Hub}
+In this section we will analyze a smart hub called \emph{HomePort} \cite{HOMEPORT10}.
+HomePort is not a commercial smart hub, 
+but is a research project at Aalborg University. 
+The reason why we are analyzing this smart hub, 
+is that is it described in a way that commercial smart are not (either due to secrecy or simply lack of information) \cite{HOMEPORT09, HOMEPORT10, HOMEPORT13}.  
+
+HomePort is technically a system, or rather an architecture, rather than a hub. 
+The architecture is described in \cite{HOMEPORT10}. 
+However, an implementation of this, \ie an actual smart hub, can be found in \cite{HOMEPORT13}. 
+The architecture consists of \num{4} layers as illustrated by \Cref{fig:homeport}.
+
+\begin{figure}[!htb]
+    \centering
+    \input{drawings/homeport.tikz}
+    \caption{The HomePort architecture proposed in \protect\cite{HOMEPORT10}}
+    \label{fig:homeport}
+\end{figure}
+
+The layers have the following functionality:
+\begin{description}
+    \item[(1) Device Layer] This layer consists of the smart devices connected to easy subsystem (\eg ZigBee or Z-wave). Devices in different subsystems can usually not communicate with each other.
+    \item[(2) Bridging Layer] This layer relays commands from one subsystem to another using minimum translation or adaption of the subsystem protocols. Commands are sent to a \emph{bridge device}, which then replies on behalf of the other devices. The layer consists of two parts: a generic bridging part and a subsystem dependent part. 
+    \item[(3) Service Layer] This layer provides the composition layer with device functionality using a common language. A Gateway device is introduced to give access to the Bridge devices. This Gateway device communicates using a RESTful interface. 
+    \item[(4) Composition Layer] The composition layer lets applications use multiple home devices to create a smart home, by communicating with the different Bridge devices through the common language from the service layer. 
+\end{description}
+
+The implementation of HomePort modified a few things about this architecture, 
+and added additional components such as a logging system. 
+An illustration of the implemented system can be seen in \Cref{fig:homeport2}.
+The implementation runs on a Linux server and uses ZeroConf to discover services on the network. 
+Clients (\eg applications) communicate with the smart devices through HomePort. 
+The clients can get a list of devices in the system by sending a \texttt{GET} request, 
+which also returns the services they provide. 
+
+\begin{figure}[!htb]
+    \centering
+    \input{drawings/homeport2.tikz}
+    \caption{The HomePort architecture implemented in \protect\cite{HOMEPORT13}}
+    \label{fig:homeport2}
+\end{figure}
+
+Following is a short description of the HomePort system showed in \Cref{fig:homeport2}:
+\begin{description}
+    \item[Webserver] Provides a RESTful interface to access and control the services.
+    \item[ZeroConf] A service discovery module that discovers devices inside a Local Area Network (LAN).
+    \item[Log] The log module keeps trace of requests and events. 
+    \item[HomePort Services] Keeps information about the services. 
+    \item[HomePort Secure Services] Adds security through TLS to the HTTP requests (HTTPS).
+    \item[HomePort Access Control Service] This module contains a table of information about what each client is allowed to do. 
+    \item[Events Module] Sends notifications to devices and handles requests from clients
+    \item[Configuration] Stores configuration of HomePort. HomePort can be configured to use only HTTP, a mix of HTTP and HTTPS or only HTTPS.
+    \item[Adapter] The adapters handles the translation between devices. 
+\end{description}
+
+From what we have seen so far with HomePort, 
+it shows that only a part of the smart hub's responsibility is the translation between the different protocols. 
+The smart hub should also handle requests from clients (\eg using a RESTful interface), 
+and preferably also provide secure communication. 
 
 \subsubsection{Smart Hubs on the Market}
 The requirements for smart hubs have gained the attention of several large companies and even more smaller companies, 

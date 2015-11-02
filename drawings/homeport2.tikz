@@ -1,0 +1,38 @@
+\tikzstyle{block} = [rectangle,draw,minimum width=3cm, minimum height = 1cm, text width=2.7cm]
+\tikzstyle{longblock} = [rectangle,draw,minimum width=9cm, text width=8.7cm]
+\begin{tikzpicture}[every text node part/.style={align=center}]
+\small
+\node[rectangle,draw] at (-3, 0) {Client 1};
+\node[rectangle,draw] at (0, 0) {Client 2};
+\node[rectangle,draw] at (3, 0) {Client n};
+
+\node at (-4.2, -2) {HomePort};
+
+\node[block] at (-3, -3) {Webserver};
+\node[block] at (0, -3) {ZeroConf};
+\node[block] at (3, -3) {Log};
+
+\node[block] at (-3, -4) {HomePort Services};
+\node[block] at (0, -4) {HomePort Secure Services};
+\node[block] at (3, -4) {HomePort Access Control Service};
+
+\node[longblock, minimum height=0.5cm] at (0, -4.750) {Events Module};
+\node[longblock, minimum height=0.5cm] at (0, -5.275) {Configuration};
+\node[longblock, minimum height = 1cm] at (0, -6.05) {Adapter $1, 2, \ldots, n$};
+
+\node[rectangle,draw,minimum width=0.68\textwidth, minimum height=1cm] at (0, -7.05) {OS (Linux)};
+
+\node[rectangle,draw] at (-3, -9) {Device 1};
+\node[rectangle,draw] at (-1, -9) {Device 2};
+\node[] at (1, -9) {$\ldots$};
+\node[rectangle,draw] at (3, -9) {Device n};
+
+\node[rectangle,draw, minimum width=0.7\textwidth, minimum height=6cm] at (0, -4.7) {};
+
+\node[cloud, cloud puffs=20.7, cloud ignores aspect, minimum width=8cm, minimum height=2.5cm, align=center, draw] (cloud) at (0, 0) {};
+\draw[triangle 90-triangle 90,line width=0.5mm] (0,-1) -- (0, -1.75);
+
+\draw[triangle 90-triangle 90,line width=0.5mm] (-3,-8.8) -- (-3, -7.7);
+\draw[triangle 90-triangle 90,line width=0.5mm] (-1,-8.8) -- (-1, -7.7);
+\draw[triangle 90-triangle 90,line width=0.5mm] (3,-8.8) -- (3, -7.7);
+\end{tikzpicture}
