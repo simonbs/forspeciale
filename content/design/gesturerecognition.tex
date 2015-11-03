@@ -39,3 +39,26 @@ differences and resulting numbers of points''\footnotemark}
 \label{fig:onedollar-gesturetrace}
 \end{figure}
 \footnotetext{Image and text is from Figure 3 in \cite{wobbrock2007gestures}}
+
+\subsection{Detecting Points Before and After Gestures}
+
+Before a user performs a gesture in order to control an actuator, he must point at the actuator he desires to control. A point is defined as the user holding his phone still for a period of time. An accelerometer can be used to detect if the user holds the device still. If there is a low amount of activity on all three axis, it is assumed that the user is holding the device in his hand without moving it.
+
+Figure \ref{fig:gesture-recognition:point-to-gesture-state-diagram} shows the relationship of a point and a gesture in a state diagram. All gestures begin and end with a point. When the first point is detected, a very short delay is introduced in order for the user to prepare to do the gesture, e.g. move the position of his hand. When the delay has passed, the gesture recognition begins. Gestures are recognized using the previously described \$3 Gesture Recognizer. After the gesture has been performed, the device must be hold still again and the second point is detected. The collected gesture data is then analyzed by \$3 Gesture Recognizier in order to determine which known gesture was performed, if any at all. Lastly, the system returns to the initial state and another gesture can be performed.
+
+While performing the gesture, the recognition may tiemout. The \$3 Gesture Recognizer has can recognize gestures for a maximum of four seconds before the recognition is cancelled. In such case, the system returns to the initial state.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\textwidth]{images/point-to-gesture-state-diagram}
+\label{fig:gesture-recognition:point-to-gesture-state-diagram}
+\caption{State diagram showing the relationship between a point and a gesture. A gesture always starts and ends with a point.}
+\end{figure}
+
+% Screenshots fra pointer app: på bord og i hånd
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "../../master"
+%%% TeX-command-extra-options: "-shell-escape"
+%%% End:
