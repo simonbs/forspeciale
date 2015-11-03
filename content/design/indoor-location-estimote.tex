@@ -8,7 +8,7 @@ However, as described below the ease of use come at a cost of the accuracy.
 Furthermore Estimote has put effort into optimizing their software for indoor positioning, 
 and has released a software development kit (SDK),
 that developers can use to perform indoor positioning, 
-making it easier adopt the technology.
+making it easier to adopt the technology.
 
 Estimote, aside from offering the typical use case for beacons like entering a specific region, 
 has also specialized in indoor location of users using the iBeacon protocol. 
@@ -28,7 +28,7 @@ along with the signal strengths of each beacon.
 To analyze the precision, 
 to see whether we could actually use these beacons and Estimote's SDK, 
 we performed a few tests. 
-During our tests we found that the approach for configuring the indoor locationing, 
+During our tests we found that the approach for configuring the indoor positioning, 
 as described above, works terribly or not at all. 
 After configuring the room, 
 the application would show an illustration of the registered room, 
@@ -51,7 +51,7 @@ The built-in controller was abandoned as it resulted in poor accuracy.
 The \texttt{ESTLocationBuilder} lets developers configure a room programmatically, 
 by passing coordinates (\texttt{ESTPoint}s) and an orientation to the builder. 
 The $X$ and $Y$ value of each coordinate is measured in meters. 
-Therefore a coordinate $(0, 0$) to $(0, 5)$ represents a horizontal line of $5$ meters, 
+Therefore a set of coordinates $\{(0, 0$), $(0, 5)\}$ represents a horizontal line of $5$ meters, 
 and the set of coordinates $\{(0,0),(0,5),(5,5),(5,0)\}$ represents $5$ by $5$ meter room.
 
 \begin{listing}
@@ -116,7 +116,7 @@ There are two distinct ways of locating a user when using the iBeacon protocol \
 According to both Apple and Estimote it is preferred that ranging is only performed while the application is in the foreground, 
 \ie the application is on the screen and the user is likely to interact with the application. 
 The reason for this is that ranging for beacons can have a negative impact on the battery life, 
-whereas the region monitoring do not use as much battery power.
+whereas the region monitoring does not use as much battery power.
 
 While Apple and Estimote advise against performing beacon ranging in the background, it is possible \cite{apple:monitoring-ibeacon} \cite{estimote:monitoring-ranging}.
 
