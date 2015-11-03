@@ -46,7 +46,7 @@ Before a user performs a gesture in order to control an actuator, he must point 
 
 Figure \ref{fig:gesture-recognition:point-to-gesture-state-diagram} shows the relationship of a point and a gesture in a state diagram. All gestures begin and end with a point. When the first point is detected, a very short delay is introduced in order for the user to prepare to do the gesture, e.g. move the position of his hand. When the delay has passed, the gesture recognition begins. Gestures are recognized using the previously described \$3 Gesture Recognizer. After the gesture has been performed, the device must be hold still again and the second point is detected. The collected gesture data is then analyzed by \$3 Gesture Recognizier in order to determine which known gesture was performed, if any at all. Lastly, the system returns to the initial state and another gesture can be performed.
 
-While performing the gesture, the recognition may tiemout. The \$3 Gesture Recognizer has can recognize gestures for a maximum of four seconds before the recognition is cancelled. In such case, the system returns to the initial state.
+While performing the gesture, the recognition may timeout. The \$3 Gesture Recognizer has can recognize gestures for a maximum of four seconds before the recognition is cancelled. In such case, the system returns to the initial state.
 
 \begin{figure}[h]
 \centering
@@ -55,7 +55,24 @@ While performing the gesture, the recognition may tiemout. The \$3 Gesture Recog
 \caption{State diagram showing the relationship between a point and a gesture. A gesture always starts and ends with a point.}
 \end{figure}
 
-% Screenshots fra pointer app: på bord og i hånd
+Figure \ref{fig:gesture-recognition:pointer} shows screenshots of an application created to experiment with data from the accelerometer. The figure shows graphs of measurements made while the device was lying on a table, the user was pointing with the device in his hand and while the user was walking with the device in his hand. $x$-, $y$- and $z$-values are measued in radians per second. The $y$-axis of the graph spans from -5 to 5. The graphs shows that there are small but measureable differences between the measurements made while a device is lying on the table and the user is pointing with the device. This allows us to distinct between the two scenarios and disregard measurements made while the device is lying on the table.
+
+Furthermore the graphs clearly shows that there is a measurable difference between the values read when a user is pointing with a device and walking with the device in his hand. Based on the small experiment we can conclude that the accelerometer data can be used to determine if a user is pointing with a device.
+
+\begin{figure}[!htb]%
+    \centering
+    \subfloat{
+        \frame{\includegraphics[width=0.3\textwidth]{images/pointer-table}}
+    }
+    \subfloat{
+        \frame{\includegraphics[width=0.3\textwidth]{images/pointer-hand}}
+    }
+    \subfloat{
+        \frame{\includegraphics[width=0.3\textwidth]{images/pointer-walk}}
+    }
+    \caption{Screenshots application created to experiment with data from the accelerometer. Leftmost screenshot shows graph of measurements made when the device lies on a table. The middle image shows graph of measurements made while pointing with the device. Rightmost screenshot shows graph of measurements made while the user was walking with the device in his hand.}
+    \label{fig:gesture-recognition:pointer}
+\end{figure}
 
 %%% Local Variables:
 %%% mode: latex
