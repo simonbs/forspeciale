@@ -55,6 +55,8 @@ While performing the gesture, the recognition may timeout. The \$3 Gesture Recog
 \caption{State diagram showing the relationship between a point and a gesture. A gesture always starts and ends with a point.}
 \end{figure}
 
+\subsubsection{Using Accelerometer Data to Detect a Point}
+
 Figure \ref{fig:gesture-recognition:pointer} shows screenshots of an application created to experiment with data from the accelerometer. The figure shows graphs of measurements made while the device was lying on a table, the user was pointing with the device in his hand and while the user was walking with the device in his hand. $x$-, $y$- and $z$-values are measued in radians per second. The $y$-axis of the graph spans from -5 to 5. The graphs shows that there are small but measureable differences between the measurements made while a device is lying on the table and the user is pointing with the device. This allows us to distinct between the two scenarios and disregard measurements made while the device is lying on the table.
 
 Furthermore the graphs clearly shows that there is a measurable difference between the values read when a user is pointing with a device and walking with the device in his hand. Based on the small experiment we can conclude that the accelerometer data can be used to determine if a user is pointing with a device.
@@ -70,8 +72,44 @@ Furthermore the graphs clearly shows that there is a measurable difference betwe
     \subfloat{
         \frame{\includegraphics[width=0.3\textwidth]{images/pointer-walk}}
     }
-    \caption{Screenshots application created to experiment with data from the accelerometer. Leftmost screenshot shows graph of measurements made when the device lies on a table. The middle image shows graph of measurements made while pointing with the device. Rightmost screenshot shows graph of measurements made while the user was walking with the device in his hand.}
+    \caption{Screenshots of application created to experiment with data from the accelerometer. Leftmost screenshot shows graph of measurements made when the device lies on a table. The middle image shows graph of measurements made while pointing with the device. Rightmost screenshot shows graph of measurements made while the user was walking with the device in his hand.}
     \label{fig:gesture-recognition:pointer}
+\end{figure}
+
+\subsubsection{Detecting Points using PointDetector}
+
+\begin{figure}
+\centering
+\includegraphics[width=\textwidth]{images/point-detector-state-diagram}
+\label{fig:gesture-recognition:pointdetector-state-diagram}
+\caption{State diagram showing the states the \texttt{PointDetector} class can be in.}
+\end{figure}
+
+\begin{figure}
+\centering
+\begin{tikzpicture} 
+\umlclass[x=0,y=0]{PointDetector}{
++/- isDetecting: Bool\\
+- isSampling: Bool\\
+- pointingDuration: Float\\
+- pointingSampleFrequency: Float\\
+- pointingThreshold: Float\\
+- tableThreshold: Float\\
+- samplingTimer: Timer\\
+- pointingSampleCount: Int\\
+- totalSampleCount: Int\\
+- pointDetectedCallback: Closure?
+}{
++ beginDetecting()\\
++ endDetecting()\\
+- didUpdateMotionData(data: AccelerometerData)\\
+- isMotionDataAPointingGesture(data: AccelerometerData): Bool\\
+- dataFitsWithinThreshold(data: AccelerometerData, threshold: Double): Bool\\
+- samplingTimerTriggered()
+} 
+\end{tikzpicture}
+\label{fig:gesture-recognition:pointdetector-uml}
+\caption{Class diagram of the \texttt{PointDetector} class.}
 \end{figure}
 
 %%% Local Variables:
