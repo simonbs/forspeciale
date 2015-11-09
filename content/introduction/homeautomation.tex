@@ -1,4 +1,4 @@
-\section{Smart Homes}\label{sec:smarthomes}
+\section{Smart Homes \& Smart Hubs}\label{sec:smarthomes}
 %Thalley: Indfør noget statistik over smart homes?
 However, that is a rather extreme example of a smart home. 
 The devices found in smart homes are common items that has been connected to the Internet for wireless control.
@@ -15,14 +15,13 @@ The Nest thermostat is thus starting to solve what is likely the greatest proble
 and why they have not become popular yet: lack of interoperability between IoT devices. 
 This problem leads us to what is known as smart hubs. 
 
-\subsection{Smart Hubs}
 A smart hub is a device, or service, that implements several communication protocols used by IoT devices, 
 and gives the user a single protocol or interface. 
 The goal of a smart hub is to make the connected devices able to communicate.
 The communication problem arises from the number of different communication protocols used by the smart devices. 
 
 
-\subsubsection{Common Protocols for Home Automation}
+\subsection{Common Protocols for Home Automation}
 There is a range of different protocols that are being used for various smart devices. 
 
 %Thalley: Figure is removed for now
@@ -61,7 +60,7 @@ there are several others messaging protocols such as MQTT, CoAP and XMPP used by
 A smart hub should thus not only be able to communicate with the devices, 
 but also be able to transform the data to a single format and give easy access to it.
 
-\subsubsection{Analysis of a Smart Hub: HomePort}
+\subsection{Analysis of a Smart Hub: HomePort}\label{sec:homeport}
 In this section we will analyze a smart hub called \emph{HomePort} \cite{HOMEPORT10}.
 HomePort is not a commercial smart hub, 
 but is a research project at Aalborg University. 
@@ -152,7 +151,7 @@ it shows that only a part of the smart hub's responsibility is the translation b
 The smart hub should also handle requests from clients (\eg using a RESTful interface), 
 and preferably also provide secure communication. 
 
-\subsubsection{Smart Hubs on the Market}
+\subsection{Smart Hubs on the Market}\label{sec:smarthubsmarket}
 The requirements for smart hubs have gained the attention of several large companies and even more smaller companies, 
 all competing to be center of future smart homes. 
 One of the mature commercial available smart hubs is the Samsung SmartThings Hub \cite{SMARTTHINGS}. 
