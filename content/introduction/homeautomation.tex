@@ -61,7 +61,7 @@ there are several others messaging protocols such as MQTT, CoAP and XMPP used by
 A smart hub should thus not only be able to communicate with the devices, 
 but also be able to transform the data to a single format and give easy access to it.
 
-\subsubsection{Analysis of a Smart Hub}
+\subsubsection{Analysis of a Smart Hub: HomePort}
 In this section we will analyze a smart hub called \emph{HomePort} \cite{HOMEPORT10}.
 HomePort is not a commercial smart hub, 
 but is a research project at Aalborg University. 
@@ -115,6 +115,37 @@ Following is a short description of the HomePort system showed in \Cref{fig:home
     \item[Configuration] Stores configuration of HomePort. HomePort can be configured to use only HTTP, a mix of HTTP and HTTPS or only HTTPS.
     \item[Adapter] The adapters handles the translation between devices. 
 \end{description}
+
+HomePort uses, as mentioned, a RESTful interface for communication. 
+In order to get the devices in the HomePort network, 
+we can do a \texttt{GET} request on \texttt{/devices}.
+The output is an XML file containing information about the devices,
+such as ID and what actions can be performed,
+or rather what values the devices can have (\eg 0 = off, and 1 = on).
+Each device also has a URL. 
+This URL is used to control the devices. 
+
+Following is an example of how to turn on a lamp in HomePort.
+In this example, the lamp is connected to a Phidgets\footnote{\url{http://www.phidgets.com/}} network, 
+where HomePort is connected to a Phidgets interface kit with ID 173111, 
+using a Phidgets adapter. 
+We want to change the \emph{output} of the lamp with ID 0, 
+to the value 1. 
+To change the value of the lamp, 
+we have to send the following data to it:
+
+\begin{listing}
+  \begin{minted}{xml}
+    <?xml version='1.0' encoding='UTF-8'?><value>1</value>
+  \end{minted}
+  \caption{Data to send to a HomePort devices, to set the value of the device to 1}
+  \label{lst:homeportchange}
+\end{listing}
+
+The data is sent as a \texttt{PUT} request with the URL of the lamp, 
+which in this example is \texttt{/phidget/173111/output/0}. 
+The URL describes that we want to change the output of device with ID 0, 
+of the interface with ID 173111 of the Phidgets network, to the value 1.
 
 From what we have seen so far with HomePort, 
 it shows that only a part of the smart hub's responsibility is the translation between the different protocols. 
