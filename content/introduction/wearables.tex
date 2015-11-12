@@ -1,9 +1,9 @@
-\section{Wearables}\label{sec:wearables} %Working title
+\section{Wearables}\label{sec:wearables}
 If we take a look at some of the current state of the art or the most popular wearable devices right now, 
 we can create an image of what we can actually monitor, track, control or in other ways do with devices that we can wear. 
 One of the latest and most advanced wearable is the HIRIS \cite{hirisweb}. 
 The HIRIS is a wearable computer able to track 3D movements in real-time. 
-By using several HIRIS, a full-body tracking system can be created.
+By using several HIRIS, you can create a full-body tracking system.
 Aside from 3D tracking, HIRIS also tracks heart rate and temperature and can connect to other devices and control these. 
 Another advanced wearable tracker is the Jawbone UP3 \cite{JAWBONE}. 
 This wearable is also able to track your heart rate, activity, sleep and temperature, but unlike the Hiris cannot control any other devices. 
@@ -21,34 +21,57 @@ Some devices may fit more than one category.
 \begin{figure}[!htb]
     \centering
     \input{drawings/wearables-category.tikz}
-    \caption{Number of devices in each category}
+    \caption{Number of devices in each category. Data from \protect\cite{LISTOFWEARABLES}.}
     \label{fig:wearables-category}
 \end{figure}
 
-\Cref{fig:wearables-placement} shows where on the body the wearable should or can be worn. 
-The most common placement is the wrist where smartwatches or wristband are worn, 
-which are the most popular wearables. 
-The devices that are worn on the head are usually augmented/virtual reality headsets, 
-but also includes smart bike-helmets or ear/headphones.
-
-\begin{figure}[!htb]
-    \centering
-    \input{drawings/wearables-placement.tikz}
-    \caption{Placements of wearables}
-    \label{fig:wearables-placement}
-\end{figure}
-
-We have visualized the most common sensors and components in figure \ref{fig:wearables-sensors}. Data is from Vandrico.
+We have visualized the most common sensors and components in \Cref{fig:wearables-sensors}.
 Due to its high usability, the accelerometer is a very important sensor which is found in approximately half the wearables. 
 The remaining sensors in \Cref{fig:wearables-sensors} are, unsurprisingly, sensors that we also find in smartphones as they give a lot of options when it comes to developing applications. 
+
 \begin{figure}[!htb]
     \centering
     \input{drawings/wearables-sensors.tikz}
-    \caption{Top 10 mostly used sensors and components}
+    \caption{Top 10 mostly used sensors and components. Data from \protect\cite{LISTOFWEARABLES}.}
     \label{fig:wearables-sensors}
 \end{figure}
 
-This section gave a short overview of the current state of wearables, what they are and which sensors are widely available. 
+\subsection{The Future of Wearables}
+We have already mentioned that wearables is trending. 
+From a report from Business Insider UK \cite{WEARABLESTREND}, 
+Statista \cite{WEARABLESTRENDNUMBERS}have illustrated the trend as a bar plot, 
+reproduced here as \Cref{fig:wearables-trend}.
+
+\begin{figure}[!htb]
+  \centering
+  \input{drawings/wearables-trend.tikz}
+  \caption{Wearables trend based on sales and statistics. Data from \protect\cite{WEARABLESTRENDNUMBERS}.}.
+  \label{fig:wearables-trend}
+\end{figure}
+
+The figure shows the market value of wearables in the past years, 
+but also utilizes statistics to determine the market value in the coming years. 
+Based on this graph (and report), 
+we see a very clear rise in the market value. 
+This could lead to wearables becoming much more common,
+attracting investors and developers, 
+giving wearables a bright future. 
+
+A report from PSFK \cite{PFSK} forecasts that by 2016, 
+clothing wearables will become more advanced and more widely used. 
+A few examples from the report include: 
+``hug-jacket'' letting parents send ``hugs'' to their children via a mobile device, 
+GPS tracking of football players on the field for statistics, 
+and a sweater that monitors the user's mood and displays them (much like mood rings).
+
+The report from PSFK also forecasts that by 2018, 
+will start to be embedded, \ie inserted into the human body. 
+Examples of these types or wearables from the report are: 
+prosthetic limbs, implanted headphones allowing users to echolocate, 
+and a contact lens that lets the user zoom.
+
+This section gave a short overview of the current and future state of wearables, 
+what they are and which sensors are widely available. 
 This information should be remembered if developing any system that utilizes wearables. 
 
 %Skab et overblik over de nyeste devices
