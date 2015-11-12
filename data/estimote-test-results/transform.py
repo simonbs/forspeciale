@@ -4,7 +4,7 @@ Transform data from Estimote tests.
 Usage:
   transform.py --output=DIR --max-duration=SECONDS  [--skip-header] (--input=DIR | <file>)
   transform.py --output=DIR --max-duration=SECONDS --resolution=RESOLUTION [--group] [--skip-header] (--input=DIR | <file>)
-  transform.py --output=DIR --max-duration=SECONDS --resolution=RESOLUTION --group [--skip-header] --xmax=X --ymax=Y  (--input=DIR | <file>)
+  transform.py --output=DIR --max-duration=SECONDS --resolution=RESOLUTION --group [--skip-header] --xmax=X --ymax=Y (--input=DIR | <file>)
   transform.py (-h | --help)
   transform.py --version
 
@@ -66,6 +66,13 @@ class Coordinate:
   def __ne__(self, other):
     return not self.__eq__(other)
 
+  def __lt__(self, other):
+    if self.x > other.x:
+      return False
+    elif self.x < other.x:
+      return True    
+    return self.y < other.y
+
   def __hash__(self):
     return hash(self.x) ^ hash(self.y)
 
@@ -80,10 +87,13 @@ def open_and_transform(in_path, output_dir, max_duration, resolution = None, gro
   
 def transform(infile, output_dir, max_duration, resolution = None, group = False, max_coord = None, skip_header = False):
   log_entries = parse_log_entries(infile, resolution, skip_header)
-  filtered = filter_log_entries(log_entries, max_duration)
-  if group:
+  filtered = filter_log_entries(log_entries, max_duration)  
+  if group and resolution:
+    chunk_size = int(float(max_coord.x) / float(resolution)) + 1 # Take zero into account
     groups = group_log_entries(filtered, resolution, max_coord)
-    rows = [ csv_row_from_groups(i, c, groups[c]) for i, c in enumerate(groups) ]
+    keys = sorted(groups.keys())
+    rows = [ csv_row_from_groups(i, c, groups[c]) for i, c in enumerate(keys) ]
+    rows = spaced_rows_from_groups(rows, chunk_size)
   else:
     rows = [ csv_row_from_log_entry(i, e) for i, e in enumerate(filtered) ]
   write_csv(rows, os.path.join(output_dir, os.path.basename(infile.name)))
@@ -92,6 +102,14 @@ def write_csv(rows, out_path):
   with open(out_path, 'w') as csvfile:
     writer = csv.writer(csvfile)
     writer.writerows(rows)
+
+def spaced_rows_from_groups(groups, chunk_size):
+  rows_chunks = chunks(groups, chunk_size)
+  rows = []
+  for chunk in rows_chunks:
+    rows += chunk
+    rows.append([])
+  return rows
 
 def group_log_entries(log_entries, resolution = 1, max_coord = None):
   res = defaultdict(list)
@@ -128,6 +146,10 @@ def frange(start, end, step):
   while n <= end:
     yield n
     n += step
+
+def chunks(l, n):
+  for i in xrange(0, len(l), n):
+    yield l[i:i+n]
 
 if __name__ == '__main__':
   args = docopt(__doc__, version='Transform 1.0')
