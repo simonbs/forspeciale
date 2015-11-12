@@ -133,13 +133,9 @@ to the value 1.
 To change the value of the lamp, 
 we have to send the following data to it:
 
-\begin{listing}
-  \begin{minted}{xml}
-    <?xml version='1.0' encoding='UTF-8'?><value>1</value>
-  \end{minted}
-  \caption{Data to send to a HomePort devices, to set the value of the device to 1}
-  \label{lst:homeportchange}
-\end{listing}
+\begin{minted}[autogobble]{xml}
+  <?xml version='1.0' encoding='UTF-8'?><value>1</value>
+\end{minted}
 
 The data is sent as a \texttt{PUT} request with the URL of the lamp, 
 which in this example is \texttt{/phidget/173111/output/0}. 
@@ -171,7 +167,6 @@ where you simply setup your own server running the open sourced code and control
 The advantage here is of course the price (free) and the possibility of adding new unsupported products. 
 
 \Cref{table:smarthubs} gives a short overview of some of the available or coming smart hubs. 
-\todo[author=Thalley]{Add HomePort to this section}
 \begin{table}
     \centering
     \begin{tabular}{l l}

@@ -1,4 +1,4 @@
-\section{Server}
+\section{Server}\label{sec:serverdesign}
 The server of our system manages the communication between the user and the devices. 
 The user issues a request containing the actions to be executed and on which device. 
 The server must also contain information about the smart devices available,
@@ -22,6 +22,7 @@ A class diagram of the \texttt{Device} class can be seen in \Cref{fig:deviceclas
       +/- id : Int \\
       +/- actions : Set[String] \\
       +/- state : String \\
+      +/- url : String \\
       + name : String \\
       + coordinates : Tuple(Float, Float)
     }{
@@ -38,6 +39,7 @@ The state describes the state of the devices,
 but could also for a lamp, be a number between \num{0} and \num{100} describing the brightness of the light. 
 The state should come from the smart hub and/or the device itself. 
 The tuple of \texttt{coordinates} describes the location of the smart device. 
+The \texttt{url} attribute contains the URL of the device, if any. 
 The \texttt{canPerformAction(action)} method is used to make sure that we do not try to perform an action on a device that cannot perform that action. 
 
 \subsection{Communication with Smart Hub}
