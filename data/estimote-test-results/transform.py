@@ -89,7 +89,7 @@ def transform(infile, output_dir, max_duration, resolution = None, group = False
   log_entries = parse_log_entries(infile, resolution, skip_header)
   filtered = filter_log_entries(log_entries, max_duration)  
   if group and resolution:
-    chunk_size = int(float(max_coord.x) / float(resolution)) + 1 # Take zero into account
+    chunk_size = int(float(max(max_coord.x, max_coord.y)) / float(resolution)) + 1 # Take zero into account
     groups = group_log_entries(filtered, resolution, max_coord)
     keys = sorted(groups.keys())
     rows = [ csv_row_from_groups(i, c, groups[c]) for i, c in enumerate(keys) ]
