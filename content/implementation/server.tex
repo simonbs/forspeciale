@@ -55,7 +55,7 @@ and look up either the numeric or string value in our list of tuples of actions.
 
 If the list of tuples is
 \begin{center}
-  \texttt{MAPPINGS = [('0', 'turnOff'), ('1', 'turnOn')]},
+  \texttt{ACTIONS = [('0', 'turnOff'), ('1', 'turnOn')]},
 \end{center}
 then if we send \texttt{0}, we get \texttt{'turnOff'}. 
 
@@ -98,6 +98,15 @@ and \texttt{unit} to figure out what actions are available.
 The \texttt{unit} attribute is however not compatible with our actions, 
 so we transform the string \texttt{''0/1''} to a list \texttt{['0', '1']}, 
 and then use our mapper to convert these to our actions. 
+
+We also need to get the state of the device. 
+In HomePort, the state is either 0 (off) or 1 (on). 
+To get the state of the device, 
+we can do a \texttt{GET} request to the URL of the device, \eg 
+\begin{center}
+  \texttt{GET /phidget/173111/output/0},
+\end{center}
+and then map the state of HomePort (0 or 1) to our states (off or on). 
 
 The names and coordinates of the \texttt{Device} objects will have to be inserted by the user. 
 \todo[author=Thalley]{Either implement this in system or say that it is hardcoded as of now}
