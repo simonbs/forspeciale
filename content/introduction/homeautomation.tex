@@ -1,18 +1,37 @@
 \section{Smart Homes \& Smart Hubs}\label{sec:smarthomes}
 %Thalley: Indfør noget statistik over smart homes?
-The devices found in smart homes are common items that has been connected to the Internet for wireless control.
+Smart homes are, as mentioned, also a trending concept. 
+Berg Insight have compiled a report \cite{SMARTHOMETREND}, 
+showing that the number of smart homes in North America and in Europe is rising steadily. 
+They have illustrated this as a bar chart, reproduced in \Cref{fig:smarthomestrend}.
+They define a smart home as having a \emph{smart home system}, 
+but do not further define what such as system it, 
+but we can say that the homes have at least one smart device each. 
+
+\begin{figure}[!htb]
+  \centering
+  \input{drawings/smarthome-trend.tikz}
+  \caption{Smart homes trend based on sales and statistics. Data from \protect\cite{SMARTHOMETREND}.}
+  \label{fig:smarthomestrend}
+\end{figure}
+
+
+The devices found in smart homes are common items, 
+that have been connected to the Internet for wireless control.
 Common devices that are found in smart homes include, but are not limited to, 
 windows, HVAC (heating, ventilating, and air conditioning) units, thermostats, sound systems and locks. 
+
 However, only few devices have really gained ground for the common user and few homes are automated.
-A smart device that is currently becoming more popular is the Nest thermostat \cite{NEST}. 
+A smart device that is currently becoming more popular is the Nest thermostat \footnote{\url{https://nest.com/}}. 
+
 This thermostat senses when you are around, and when you are not, 
 to control the climate inside to save energy and thus money.
 Unlike a lot of smart devices that are made to make your life a little easier, such as smart bulbs or HVAC units,
 the Nest thermostat helps you save money which is likely the reason for it popularity. 
-Furthermore, the newest version (as of October 2015) allows you to connect other IoT devices to the thermostat, 
+Furthermore, the newest version (as of October 2015) allows you to connect other smart devices to the thermostat, 
 using the Weave protocol. 
 The Nest thermostat is thus starting to solve what is likely the greatest problem with smart homes (and IoT in general), 
-and why they have not become popular yet: lack of interoperability between IoT devices. 
+and why they have not become popular yet: lack of interoperability between smart devices. 
 This problem leads us to what is known as smart hubs. 
 
 A smart hub is a device, or service, that implements several communication protocols used by IoT devices, 
@@ -23,17 +42,6 @@ The communication problem arises from the number of different communication prot
 
 \subsection{Common Protocols for Home Automation}
 There is a range of different protocols that are being used for various smart devices. 
-
-%Thalley: Figure is removed for now
-%\Cref{fig:IoTProtocols} illustrates the current architecture of the IoT network,
-%where \num{5} communication protocols are shown. 
-
-%\begin{figure}[!htb]
-%    \centering
-%    \input{drawings/IoTArchitecture.tikz}
-%    \caption{Architecture of IoT network}
-%    \label{fig:IoTProtocols}
-%\end{figure}
 
 We will not get into much detail with these protocols, 
 but we demonstrate how many different there are and why communication is a problem.
@@ -51,6 +59,10 @@ but we demonstrate how many different there are and why communication is a probl
        \item[Protocol:] WiFi (IEEE 802.11)
        \item[Used by:] Nest, Philips, Samsung, Bose, D-link and others
        \item[In products:] Thermostats, speakers, light bulbs, motion sensors, fitness trackers, camera, etc. 
+       
+       \item[Protocol:] Weave
+       \item[Used by:] Nest, Philips, pebble, Logitech, Jawbone and others
+       \item[In products:] Thermostats, fitness trackers, camera, lights, locks, etc. 
     \end{description}
     \caption{Protocols used by various IoT devices}\label{table:iotprotocols}
 \end{table}
@@ -64,7 +76,7 @@ but also be able to transform the data to a single format and give easy access t
 \subsection{Analysis of a Smart Hub: HomePort}\label{sec:homeport}
 In this section we will analyze a smart hub called \emph{HomePort} \cite{HOMEPORT10}.
 HomePort is not a commercial smart hub, 
-but is a research project at Aalborg University. 
+but is a research project at Institute of Computer Science, Aalborg University in Denmark. 
 The reason why we are analyzing this smart hub, 
 is that is it described in a way that commercial smart are not (either due to secrecy or simply lack of information) \cite{HOMEPORT09, HOMEPORT10, HOMEPORT13}.  
 
@@ -82,18 +94,19 @@ The architecture consists of \num{4} layers as illustrated by \Cref{fig:homeport
 
 The layers have the following functionality:
 \begin{description}
-    \item[(1) Device Layer] This layer consists of the smart devices connected to easy subsystem (\eg ZigBee or Z-wave). Devices in different subsystems can usually not communicate with each other.
+    \item[(1) Device Layer] This layer consists of the smart devices connected to each subsystem (\eg ZigBee or Z-wave). Devices in different subsystems can usually not communicate with each other, due to lack of common protocols.
     \item[(2) Bridging Layer] This layer relays commands from one subsystem to another using minimum translation or adaption of the subsystem protocols. Commands are sent to a \emph{bridge device}, which then replies on behalf of the other devices. The layer consists of two parts: a generic bridging part and a subsystem dependent part. 
     \item[(3) Service Layer] This layer provides the composition layer with device functionality using a common language. A Gateway device is introduced to give access to the Bridge devices. This Gateway device communicates using a RESTful interface. 
     \item[(4) Composition Layer] The composition layer lets applications use multiple home devices to create a smart home, by communicating with the different Bridge devices through the common language from the service layer. 
 \end{description}
 
-The implementation of HomePort modified a few things about this architecture, 
+The implementation of HomePort \cite{HOMEPORT13}, 
+modified a few things about this architecture, 
 and added additional components such as a logging system. 
 An illustration of the implemented system can be seen in \Cref{fig:homeport2}.
 The implementation runs on a Linux server and uses ZeroConf to discover services on the network. 
 Clients (\eg applications) communicate with the smart devices through HomePort. 
-The clients can get a list of devices in the system by sending a \texttt{GET} request, 
+The clients can get a list of devices in the system by sending a GET request, 
 which also returns the services they provide. 
 
 \begin{figure}[!htb]
@@ -111,26 +124,26 @@ Following is a short description of the HomePort system showed in \Cref{fig:home
     \item[HomePort Services] Keeps information about the services. 
     \item[HomePort Secure Services] Adds security through TLS to the HTTP requests (HTTPS).
     \item[HomePort Access Control Service] This module contains a table of information about what each client is allowed to do. 
-    \item[Events Module] Sends notifications to devices and handles requests from clients
+    \item[Events Module] Sends notifications to devices and handles requests from clients.
     \item[Configuration] Stores configuration of HomePort. HomePort can be configured to use only HTTP, a mix of HTTP and HTTPS or only HTTPS.
     \item[Adapter] The adapters handles the translation between devices. 
 \end{description}
 
 HomePort uses, as mentioned, a RESTful interface for communication. 
 In order to get the devices in the HomePort network, 
-we can do a \texttt{GET} request on \texttt{/devices}.
+we can do a GET request on \texttt{/devices}.
 The output is an XML file containing information about the devices,
 such as ID and what actions can be performed,
 or rather what values the devices can have (\eg 0 = off, and 1 = on).
-Each device also has a URL. 
+Each device also has an URL. 
 This URL is used to control the devices. 
 
 Following is an example of how to turn on a lamp in HomePort.
-In this example, the lamp is connected to a Phidgets\footnote{\url{http://www.phidgets.com/}} network, 
-where HomePort is connected to a Phidgets interface kit with ID 173111, 
+In this example, the lamp is connected to a Phidget\footnote{\url{http://www.phidgets.com/}} network, 
+where HomePort is connected to a Phidget interface kit with ID \texttt{173111}, 
 using a Phidgets adapter. 
-We want to change the \emph{output} of the lamp with ID 0, 
-to the value 1. 
+We want to change the \emph{output} of the lamp with ID \texttt{0}, 
+to the value \texttt{1}. 
 To change the value of the lamp, 
 we must send the following data to it:
 
@@ -138,10 +151,10 @@ we must send the following data to it:
   <?xml version='1.0' encoding='UTF-8'?><value>1</value>
 \end{minted}
 
-The data is sent as a \texttt{PUT} request with the URL of the lamp, 
+The data is sent as a PUT request with the URL of the lamp, 
 which in this example is \texttt{/phidget/173111/output/0}. 
-The URL describes that we want to change the output of device with ID 0, 
-of the interface with ID 173111 of the Phidgets network, to the value 1.
+The URL describes that we want to change the output of device with ID \texttt{0}, 
+of the interface with ID \texttt{173111} of the Phidgets network, to the value \texttt{1}.
 
 From what we have seen so far with HomePort, 
 it shows that only a part of the smart hub's responsibility is the translation between the different protocols. 
@@ -153,7 +166,7 @@ The requirements for smart hubs have gained the attention of several large compa
 all competing to be center of future smart homes. 
 One of the mature commercial available smart hubs is the Samsung SmartThings Hub \cite{SMARTTHINGS}. 
 The SmartThings Hub is a standalone device that supports the Z-Wave, ZigBee and WiFi protocols, 
-and provides a smartphone application or a Representational State Transfer (REST) interface. 
+and provides a smartphone application and a RESTful interface. 
 The SmartThings Hub has been tested and is compatible with more than 150 devices as of October 2015,
 but with support for the aforementioned protocols and a REST interface, this number is in practice higher.  
 The price for such a hub is \$99, which is, compared to the prices for some of the compatible devices, very affordable. 
@@ -164,7 +177,7 @@ While these products differ in terms of architecture, descriptions (operating sy
 they all share the same goal of giving a centralized control of smart devices. 
 
 There are also other open source alternatives such as openHAB \cite{OPENHAB}, 
-where you simply setup your own server running the open sourced code and control the devices through that. 
+where you setup your own server running the open sourced code and control the devices through that. 
 The advantage here is of course the price (free) and the possibility of adding new unsupported products. 
 
 \Cref{table:smarthubs} gives a short overview of some of the available or coming smart hubs. 
@@ -187,21 +200,24 @@ The advantage here is of course the price (free) and the possibility of adding n
 While smart hubs let different smart devices communicate, 
 they are not meant to be a control panel for smart homes (although some, such as HomeOS, is designed as such).
 To control the devices connected to a smart home, or standalone smart devices, 
-most vendors offer some sort of smartphone application that gives the consumer a basic interface to control the device, set rules for it and so on.
-This is for example the case with the Samsung SmartThings hubs. 
+most vendors offer a smartphone application that gives the consumer a basic interface to control the device, 
+set rules for it and so on.
+This is for example the case with the Samsung SmartThings Hub. 
 
-An alternative to such an application could be the Logitech Harmony Remote \cite{HARMONYREMOTE}, 
+An alternative to such a smartphone application could be the Logitech Harmony Remote \cite{HARMONYREMOTE}, 
 which is a universal remote that can connect to over \num{270000} devices (smart and dumb). 
 It comes either as a standalone remote control or connected with a hub. 
 Depending on the model, the remote either uses infrared (does not require a hub), 
 or connects to a hub via WiFi. 
 
 Gesture control is a newer and more advanced way of controlling a smart home. 
-We have already mentioned the Hiris computer that are able to track 3D movements, and thus 3D gestures, 
+We have already mentioned the HIRIS computer that are able to track 3D movements, and thus 3D gestures, 
 but in this section we want to explore another solution that are designed for smart homes. 
 
-A company known as Reemo \cite{Reemo}, formerly Playtabase, has created a way of controlling smart devices in homes using gestures. 
-They have developed a wearable device which is located on the wrist. The wearable allows user to point at a device, 
+A company known as Reemo \cite{Reemo}, formerly Playtabase, 
+has created a way of controlling smart devices in homes using gestures. 
+They have developed a wearable device which is located on the wrist. 
+The wearable allows user to point at a device, 
 and then perform a pre-programmed gesture that corresponds to a certain action for that device. 
 A small receiver must be placed near the devices that you want to control. 
 The receiver must be pointed at as depicted by \Cref{fig:reemo}.
@@ -219,7 +235,6 @@ Unfortunately they have not disclosed any details regarding the technology,
 how the receivers know which receiver you are pointing at or how the devices are controlled. 
 The company and the product is also still in a development phase, 
 so the product is not commercialized yet but have been in development since mid-2014.
-
 
 These are the most common and/or most intuitive ways of controlling smart devices. 
 The question is which is ``the best'', or rather, which method is the wanted way of controlling the devices.
