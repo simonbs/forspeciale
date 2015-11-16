@@ -1,0 +1,23 @@
+\begin{tikzpicture}
+    \begin{axis}[
+        height=8cm,
+        width=0.95\textwidth,
+        xlabel={Year},
+        ylabel={Market value in million U.S. dollars},
+        yticklabel style={align=right,inner sep=0pt,xshift=-0.3em},
+        scaled y ticks = false,
+        nodes near coords align={vertical},
+        nodes near coords,
+        xtick=data,
+        symbolic x coords={2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018},
+%        ybar,
+        ymax=15000,
+        ymin=0,
+%        bar width=20pt,
+ybar, bar width=20pt
+        ]
+        \addplot coordinates {(2010, 6.3) (2011, 630) (2012, 1260) (2013, 2520) (2014, 5166) (2015, 7140) (2016, 8862) (2017, 10920) (2018, 12642)};
+        \addplot [ultra thick,orange,line join=round,smooth, nodes near coords = ] coordinates {(2010, 6.3) (2011, 630) (2012, 1260) (2013, 2520) (2014, 5166) (2015, 7140) (2016, 8862) (2017, 10920) (2018, 12642)};
+%        
+    \end{axis}
+\end{tikzpicture}

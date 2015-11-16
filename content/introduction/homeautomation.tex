@@ -1,16 +1,16 @@
 \section{Smart Homes \& Smart Hubs}\label{sec:smarthomes}
 %Thalley: Indfør noget statistik over smart homes?
-However, that is a rather extreme example of a smart home. 
 The devices found in smart homes are common items that has been connected to the Internet for wireless control.
 Common devices that are found in smart homes include, but are not limited to, 
-windows, HVAC, thermostats, sound systems and locks. 
+windows, HVAC (heating, ventilating, and air conditioning) units, thermostats, sound systems and locks. 
 However, only few devices have really gained ground for the common user and few homes are automated.
-One of the most commonly found IoT in homes is the Nest thermostat \cite{NEST}. 
+A smart device that is currently becoming more popular is the Nest thermostat \cite{NEST}. 
 This thermostat senses when you are around, and when you are not, 
 to control the climate inside to save energy and thus money.
-Unlike a lot of smart devices that are made to make your life a little easier, such as smart bulbs,
+Unlike a lot of smart devices that are made to make your life a little easier, such as smart bulbs or HVAC units,
 the Nest thermostat helps you save money which is likely the reason for it popularity. 
-Furthermore, the newest version (as of October 2015) allows you to connect other IoT devices to the thermostat. 
+Furthermore, the newest version (as of October 2015) allows you to connect other IoT devices to the thermostat, 
+using the Weave protocol. 
 The Nest thermostat is thus starting to solve what is likely the greatest problem with smart homes (and IoT in general), 
 and why they have not become popular yet: lack of interoperability between IoT devices. 
 This problem leads us to what is known as smart hubs. 
@@ -37,6 +37,7 @@ There is a range of different protocols that are being used for various smart de
 
 We will not get into much detail with these protocols, 
 but we demonstrate how many different there are and why communication is a problem.
+\todo[author=Thalley]{Insert Weave in this table}
 \begin{table}
    \begin{description}
        \item[Protocol:] ZigBee
@@ -131,7 +132,7 @@ using a Phidgets adapter.
 We want to change the \emph{output} of the lamp with ID 0, 
 to the value 1. 
 To change the value of the lamp, 
-we have to send the following data to it:
+we must send the following data to it:
 
 \begin{minted}[autogobble]{xml}
   <?xml version='1.0' encoding='UTF-8'?><value>1</value>
@@ -196,11 +197,15 @@ Depending on the model, the remote either uses infrared (does not require a hub)
 or connects to a hub via WiFi. 
 
 Gesture control is a newer and more advanced way of controlling a smart home. 
-A company known as Reemo \cite{Reemo}, formerly Playtabase, has created a way of controlling smart devices by gestures. 
+We have already mentioned the Hiris computer that are able to track 3D movements, and thus 3D gestures, 
+but in this section we want to explore another solution that are designed for smart homes. 
+
+A company known as Reemo \cite{Reemo}, formerly Playtabase, has created a way of controlling smart devices in homes using gestures. 
 They have developed a wearable device which is located on the wrist. The wearable allows user to point at a device, 
 and then perform a pre-programmed gesture that corresponds to a certain action for that device. 
-A small receiver has to be placed near the devices that you want to control. The receiver must be pointed at as depected in figure \ref{fig:reemo}.
-The pointing will, however, only work if the device is within line of sight. 
+A small receiver must be placed near the devices that you want to control. 
+The receiver must be pointed at as depicted by \Cref{fig:reemo}.
+The pointing will, however, only work if the device is line of sight of the wearable. 
 
 %Thalley: Skal vi bare skrive ``Reemo'' i stedet for en url som source?
 \begin{figure}[!htb]
@@ -214,6 +219,7 @@ Unfortunately they have not disclosed any details regarding the technology,
 how the receivers know which receiver you are pointing at or how the devices are controlled. 
 The company and the product is also still in a development phase, 
 so the product is not commercialized yet but have been in development since mid-2014.
+
 
 These are the most common and/or most intuitive ways of controlling smart devices. 
 The question is which is ``the best'', or rather, which method is the wanted way of controlling the devices.
@@ -242,20 +248,22 @@ The question is which is ``the best'', or rather, which method is the wanted way
                        Easy to get updates to the software. 
                        No overhead of opening an application\\
         \textbf{Cons:} Requires a wearable to control. 
-                       Have to remember gestures.
-                       Must be in line of sight of the user.
+                       Must remember gestures.
+                       Must be in line of sight of the wearable.
     }
     \caption{Ways of controlling smart devices}
     \label{tbl:smartcontrol}
 \end{table}
 
 Each way has its pros and cons. 
-A survey of 37 people showed that \perc{76} found gestures to be a natural way of controlling devices, 
-while \perc{8} found it unnatural and the remaining left the question unanswered \cite{Kela2006}. 
+A survey \cite{Kela2006} of 37 people showed that \perc{76} found gestures to be a natural way of controlling devices, 
+while \perc{8} found it unnatural and the remaining left the question unanswered. 
 This survey shows that users would rather have gesture for control, 
 rather than the bother of always using their smartphone or remote for control.  
-A product such as Reemo is a one way of controlling smart devices but it has a downside that the objects have to be in line of sight. 
-If this restriction could be removed, the system would be improved.
+A product such as Reemo is a one way of controlling smart devices, 
+but it has a downside that the objects must be in line of sight. 
+If this restriction could be removed, 
+we think that the system would be improved.
 
 %%% Local Variables:
 %%% mode: latex
