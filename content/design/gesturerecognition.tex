@@ -2,43 +2,95 @@
 \section{Gesture Recognition}\label{sec:gesturerecognition}
 The system lets users control smart devices in their home by performing certain gestures.
 
-Gesture recognition can generally be split into two categories: Camera-based and motion-based \cite{Kela2006}. Examples of camera-based gesture recognition systems are the ``Gesture Pendant'' \cite{starner2000gesture} and the Kinect \cite{kinect} and an example of a motion-based system is the Reemo \cite{Reemo}.
+Gesture recognition can generally be split into two categories: 
+Camera-based and motion-based \cite{Kela2006}. 
+Examples of camera-based gesture recognition systems are the ``Gesture Pendant'' \cite{starner2000gesture} and the Kinect \cite{kinect}, 
+and an example of a motion-based system is the Reemo \cite{Reemo}.
 
-The camera-based solution require that the limbs used to perform gestures are visible to the camera and as such static cameras placed in a room may be rendered useless if the user turns his back against them. In addition, furniture and other people may stand in between them and obstruct the line of sight between the camera and the user.
-This would likely not happen with the ``Gesture Pendant'', but the user would have to make sure that the pendant was always outside of any clothes worn as putting on a sweater or wrapping yourself in a blanket might block the view of the camera.
+The camera-based solution require that the limbs, 
+used to perform gestures, 
+are visible to the camera, 
+and as such \emph{static} cameras placed in a room, 
+may be rendered useless if the user turns his back against them. 
+In addition, furniture and other people may stand in between them, 
+and obstruct the line of sight between the camera and the user.
+This would likely not happen with the ``Gesture Pendant'', 
+but the user would have to make sure that the pendant was always outside of any clothes worn, 
+as putting on a sweater or wrapping yourself in a blanket, 
+might block the view of the camera.
 
-Motion-based solutions can employ various different sensors on the person, eg. accelerometers and gyroscopes and depending on the type of sensor different methods can be used to recognize gestures.
-As mentioned in \Cref{sec:wearables} accelerometers are present in about half of the devices examined and therefore the motion-based solutions utilizing these will be the ones explored further.
+Motion-based solutions can employ various different sensors on the person,
+such as accelerometers and gyroscopes, 
+and depending on the type of sensor, 
+different methods can be used to recognize gestures.
+As mentioned in \Cref{sec:wearables}, accelerometers are present in about half of the wearables. 
+Because of this, we will focus on finding a solution using accelerometer, 
+so that we do not have to use additional hardware, such as cameras. 
+
+In the following section, we will describe a gesture recognition system called the \$3 Gesture Recognizer. 
+
 
 \subsection{\$3 Gesture Recognizer}\label{sec:threedollar}
-The \$3 Gesture Recognizer is a gesture recognition system created by Sven Kratz and Michael Rohs and is presented in the paper ``A \$3 Gesture Recognizer – Simple Gesture Recognition for Devices Equipped with 3D Acceleration Sensors'' \cite{threedollar}.
+The \$3 Gesture Recognizer is a gesture recognition system, 
+created by Sven Kratz and Michael Rohs, 
+and is presented in the paper ``A \$3 Gesture Recognizer – Simple Gesture Recognition for Devices Equipped with 3D Acceleration Sensors'' \cite{threedollar}.
 
-The system is based on the work of Wobrock et al. \cite{wobbrock2007gestures} and adds the ability to detect three dimensional gestures rather than being limited to two dimensional gestures.
+The system is based on the \$1 Recognizer by Wobrock \etal \cite{wobbrock2007gestures}, 
+and adds the ability to detect three dimensional gestures, 
+rather than being limited to two dimensional gestures.
 
-Both of these systems are designed to be easy to use by anyone for fast prototyping of user interfaces which makes them appropriate for use in this project.
-The \$3 Gesture Recognizer however would be better suited as it is capable of recognizing more gestures because it uses three-dimensional sensors.
-This means that users have even more options for personalizing the gestures that they use to control their home with.
+Both of these systems are designed to be easy to use by anyone for fast prototyping of user interfaces, 
+which makes them appropriate for use in this project.
+The \$3 Gesture Recognizer, however, is better suited, 
+as it is capable of recognizing more gestures because it utilizes three dimensional data.
+This means that users have even more options for personalizing the gestures, 
+that they will use to control their home with.
 
-In addition, the \$3 Gesture Recognizer only requires the user to train a gesture about five times before it can deliver adequate recognition rates. This provides a better experience for the user as he does not need to spend much time training the system before he is able to use it.
+In addition, the \$3 Gesture Recognizer only requires the user to train a gesture about five times, 
+before it can deliver adequate recognition rates. 
+This provides a better experience for the user, 
+as he does not need to spend much time training the system before he is able to use it.
+Whenever a user trains a gesture, 
+a new gesture trace is stored and associated with a gesture class. 
+A gesture class that has been trained five times, 
+has five gesture traces stored.
 
-The way the \$3 Gesture Recognizer works is by collecting data from a three-axis accelerometer and from this it creates a gesture trace $T$ which consists of a set of candidate points, this is illustrated in \Cref{fig:onedollar-gesturetrace}.
-Also shown in this figure is that the gesture traces can contain a different number of points when performing the same gesture at different speeds.
-Because of this, the \$3 Gesture Recognizer resamples $T$ so that it contains a fixed number of points, in \cite{threedollar} it's $N = 150$, with equal distance between the points.
-If $N$ is set to a lower value, then precision is lost, but if $N$ is set to a higher value, then computational cost increases.
-After resampling the points, $T$ is rotated in an attempt to correct for any rotational error and finally it is scaled to fit inside of a cube of $100^3$ units to compensate for the fact that may perform inconsistently sized gestures.
+The way the \$3 Gesture Recognizer works, 
+is by collecting data from a three-axis accelerometer, 
+and from this it creates a gesture trace $T$, 
+which consists of a set of candidate points. 
+This is illustrated in \Cref{fig:onedollar-gesturetrace}.
 
-Once all of these modifications have been performed, the gesture trace is matched against all the training gestures\footnote{Whenever a user trains a gesture, a new gesture trace is stored and associated with a gesture class. A gesture class that has been trained five times hence has five gesture traces stored.}.
-From these comparisons a scoring table is created where each training gesture is scored based on the distance between it and the input gesture trace. To reduce the amount of false positives a scoring heuristic is used, which simply determines whether a score is above a threshold $\epsilon$.
+The figure also shows that the gesture traces can contain a different number of points, 
+when performing the same gesture at different speeds.
+Because of this, the \$3 Gesture Recognizer \emph{resamples} $T$, 
+so that it contains a fixed number of points. 
+In \cite{threedollar}, the number of points $N$ is \num{150}, 
+with equal distance between the points.
+If $N$ is set to a lower value, then precision is lost. 
+If $N$ is set to a higher value, then computational cost increases.
+After resampling the points, 
+$T$ is rotated in an attempt to correct for any rotational error, 
+and finally it is scaled to fit inside of a cube of $100^3$ units, 
+to compensate for the fact that may perform inconsistently sized gestures.
+
+Once all of these transformations have been performed, 
+the gesture trace is matched against all the training gestures. 
+From these comparisons a scoring table is created, 
+where each trained gesture is given a score, 
+based on the distance between it and the input gesture trace. 
+To reduce the amount of false positives, 
+a scoring heuristic is utilized, 
+which simply determines whether a score is above a threshold $\epsilon$.
+
+\todo[author=Thalley]{We should include a description of how gestures are compared. What's the math behind it?}
 
 \begin{figure}[!htb]
   \centering
   \includegraphics[width=0.8\textwidth]{images/1-dollar-gesturetrace.png}
-  \caption[Some Caption]{``A slow and fast question mark and triangle made by
-subjects using a stylus on a Pocket PC. Note the considerable time
-differences and resulting numbers of points''\footnotemark}
-\label{fig:onedollar-gesturetrace}
+  \caption{A slow and fast question mark, and triangle made by subjects using a stylus on a Pocket PC. Note the considerable time differences and resulting numbers of points. Image and text is from Figure 3 in \cite{wobbrock2007gestures}}
+  \label{fig:onedollar-gesturetrace}
 \end{figure}
-\footnotetext{Image and text is from Figure 3 in \cite{wobbrock2007gestures}}
 
 \subsection{Detecting Points Before and After Gestures}
 
