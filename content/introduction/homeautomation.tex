@@ -15,6 +15,17 @@ but we can say that the homes have at least one smart device each.
   \label{fig:smarthomestrend}
 \end{figure}
 
+The elements in smart homes can be categorized into:
+\begin{enumerate}
+  \item Sensors - Capable of observing the environment
+  \item Actuators - Control pars of the environment (\eg lights or air condition units)
+  \item Software Clients - Controls the actuators based on input from the sensors
+\end{enumerate}
+
+We will not discuss the sensors of smart homes much in this report, 
+but will rather talk about the actuators, 
+\ie the controllable smart devices,
+and the software clients (how to control the actuators in a smart home).
 
 The devices found in smart homes are common items, 
 that have been connected to the Internet for wireless control.
@@ -45,7 +56,6 @@ There is a range of different protocols that are being used for various smart de
 
 We will not get into much detail with these protocols, 
 but we demonstrate how many different there are and why communication is a problem.
-\todo[author=Thalley]{Insert Weave in this table}
 \begin{table}
    \begin{description}
        \item[Protocol:] ZigBee
@@ -94,7 +104,7 @@ The architecture consists of \num{4} layers as illustrated by \Cref{fig:homeport
 
 The layers have the following functionality:
 \begin{description}
-    \item[(1) Device Layer] This layer consists of the smart devices connected to each subsystem (\eg ZigBee or Z-wave). Devices in different subsystems can usually not communicate with each other, due to lack of common protocols.
+    \item[(1) Device Layer] This layer consists of the smart devices connected to each subsystem (\eg ZigBee or Z-wave). Devices in different subsystems can usually not communicate with each other, due to lack of common protocols. 
     \item[(2) Bridging Layer] This layer relays commands from one subsystem to another using minimum translation or adaption of the subsystem protocols. Commands are sent to a \emph{bridge device}, which then replies on behalf of the other devices. The layer consists of two parts: a generic bridging part and a subsystem dependent part. 
     \item[(3) Service Layer] This layer provides the composition layer with device functionality using a common language. A Gateway device is introduced to give access to the Bridge devices. This Gateway device communicates using a RESTful interface. 
     \item[(4) Composition Layer] The composition layer lets applications use multiple home devices to create a smart home, by communicating with the different Bridge devices through the common language from the service layer. 
