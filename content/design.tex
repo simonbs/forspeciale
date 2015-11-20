@@ -11,6 +11,7 @@ and its sensors, to perform gestures and thereby control a smart home.
 
 The goal of our project is to create a system, 
 that allows gesture-based communication between the user and smart devices.
+We describe the context and the target group of this system in \Cref{sec:environment}.
 We want to design the system so that a user, wearing a \emph{wrist wearable}, 
 can simply point at a smart device and perform a gesture to control this device. 
 This is much like the solution that Reemo (see \Cref{sec:smarthomecontrol}) uses. 
@@ -23,6 +24,7 @@ We want to remove this limitation in our solution.
 
 For this to work, we need a way to determine when a gesture is being performed, 
 and which device should perform the action. 
+The architecture of the system is presented in \Cref{sec:architecture}.
 Gesture recognition is a large subject and will be described in \Cref{sec:gesturerecognition}. 
 Furthermore, to determine which device should perform the action, 
 without a line of sight requirement, 
@@ -32,16 +34,13 @@ We will discuss how we get the location of the devices and the user in \Cref{sec
 At last, as described in \Cref{sec:smarthomes}, 
 we need a smart hub to allow communication between the different devices, 
 including the wearable, to be able to perform actions on the devices. 
+We design a server to hold information about the locations of devices,
+and to communicate with a smart hub in \Cref{sec:serverdesign}. 
 
 Our approach to a solution thus requires accurate indoor location, 
 a wrist-worn wearable that can recognize gestures, 
 and a hub for interoperability between the wearable and the smart devices. 
 
-\todo[author=Thalley]{Finish introduction}
-
-
-
-%\input{content/design/approch}
 \input{content/design/environment}
 \input{content/design/architecture.tex}
 \input{content/design/gesturerecognition}
