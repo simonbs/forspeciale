@@ -15,6 +15,17 @@ but we can say that the homes have at least one smart device each.
   \label{fig:smarthomestrend}
 \end{figure}
 
+The elements in smart homes can be categorized into:
+\begin{enumerate}
+  \item Sensors - Capable of observing the environment
+  \item Actuators - Control pars of the environment (\eg lights or air condition units)
+  \item Software Clients - Controls the actuators based on input from the sensors
+\end{enumerate}
+
+We will not discuss the sensors of smart homes much in this report, 
+but will rather talk about the actuators, 
+\ie the controllable smart devices,
+and the software clients (how to control the actuators in a smart home).
 
 The devices found in smart homes are common items, 
 that have been connected to the Internet for wireless control.
@@ -32,46 +43,41 @@ Furthermore, the newest version (as of October 2015) allows you to connect other
 using the Weave protocol. 
 The Nest thermostat is thus starting to solve what is likely the greatest problem with smart homes (and IoT in general), 
 and why they have not become popular yet: lack of interoperability between smart devices. 
-This problem leads us to what is known as smart hubs. 
+The Nest thermostat is, however, limited in this, 
+as it only supports the Weave protocol. 
 
+\Cref{table:iotprotocols} shows \emph{some} of the many different protocols, 
+that are being used by smart devices. 
+The Nest thermostat is able to communicate with the other devices that uses the Weave protocol, 
+but it cannot communicate with other devices that uses \eg the ZigBee or Z-Wave protocol. 
+
+\begin{table}[!htb]
+  \begin{description}
+    \item[Protocol:] ZigBee
+    \item[Used by:] Samsung, Jasco, Smartenit, FortrezZ and others
+    \item[In products:] SmartThings Hub, thermostats, door sensors, light bulbs, etc.\\
+    
+    \item[Protocol:] Z-Wave
+    \item[Used by:] FortrezZ, GE, Intermatic, Leviton, Aeon Labs, Evolve and others
+    \item[In products:] Thermostats, wall outlets, door locks, door and window sensors, etc.  \\
+    
+    \item[Protocol:] WiFi (IEEE 802.11)
+    \item[Used by:] Nest, Philips, Samsung, Bose, D-link and others
+    \item[In products:] Thermostats, speakers, light bulbs, motion sensors, fitness trackers, camera, etc. \\
+    
+    \item[Protocol:] Weave
+    \item[Used by:] Nest, Philips, pebble, Logitech, Jawbone and others
+    \item[In products:] Thermostats, fitness trackers, camera, lights, locks, etc. 
+  \end{description}
+  \caption{Wireless protocols used by smart devices}\label{table:iotprotocols}
+\end{table}
+
+Researchers and companies are working on developing what we call \emph{smart hubs}. 
 A smart hub is a device, or service, that implements several communication protocols used by IoT devices, 
 and gives the user a single protocol or interface. 
 The goal of a smart hub is to make the connected devices able to communicate.
 The communication problem arises from the number of different communication protocols used by the smart devices. 
-
-
-\subsection{Common Protocols for Home Automation}
-There is a range of different protocols that are being used for various smart devices. 
-
-We will not get into much detail with these protocols, 
-but we demonstrate how many different there are and why communication is a problem.
-\todo[author=Thalley]{Insert Weave in this table}
-\begin{table}
-   \begin{description}
-       \item[Protocol:] ZigBee
-       \item[Used by:] Samsung, Jasco, Smartenit, FortrezZ and others
-       \item[In products:] SmartThings Hub, thermostats, door sensors, light bulbs, etc.\\
-       
-       \item[Protocol:] Z-Wave
-       \item[Used by:] FortrezZ, GE, Intermatic, Leviton, Aeon Labs, Evolve and others
-       \item[In products:] Thermostats, wall outlets, door locks, door and window sensors, etc.  \\
-       
-       \item[Protocol:] WiFi (IEEE 802.11)
-       \item[Used by:] Nest, Philips, Samsung, Bose, D-link and others
-       \item[In products:] Thermostats, speakers, light bulbs, motion sensors, fitness trackers, camera, etc. 
-       
-       \item[Protocol:] Weave
-       \item[Used by:] Nest, Philips, pebble, Logitech, Jawbone and others
-       \item[In products:] Thermostats, fitness trackers, camera, lights, locks, etc. 
-    \end{description}
-    \caption{Protocols used by various IoT devices}\label{table:iotprotocols}
-\end{table}
-
-Aside from the protocols in \Cref{table:iotprotocols}, 
-there are several others messaging protocols such as MQTT, CoAP and XMPP used by various devices. 
-
-A smart hub should thus not only be able to communicate with the devices, 
-but also be able to transform the data to a single format and give easy access to it.
+In the following section we will analyze a smart hub called HomePort. 
 
 \subsection{Analysis of a Smart Hub: HomePort}\label{sec:homeport}
 In this section we will analyze a smart hub called \emph{HomePort} \cite{HOMEPORT10}.
@@ -94,7 +100,7 @@ The architecture consists of \num{4} layers as illustrated by \Cref{fig:homeport
 
 The layers have the following functionality:
 \begin{description}
-    \item[(1) Device Layer] This layer consists of the smart devices connected to each subsystem (\eg ZigBee or Z-wave). Devices in different subsystems can usually not communicate with each other, due to lack of common protocols.
+    \item[(1) Device Layer] This layer consists of the smart devices connected to each subsystem (\eg ZigBee or Z-wave). Devices in different subsystems can usually not communicate with each other, due to lack of common protocols. 
     \item[(2) Bridging Layer] This layer relays commands from one subsystem to another using minimum translation or adaption of the subsystem protocols. Commands are sent to a \emph{bridge device}, which then replies on behalf of the other devices. The layer consists of two parts: a generic bridging part and a subsystem dependent part. 
     \item[(3) Service Layer] This layer provides the composition layer with device functionality using a common language. A Gateway device is introduced to give access to the Bridge devices. This Gateway device communicates using a RESTful interface. 
     \item[(4) Composition Layer] The composition layer lets applications use multiple home devices to create a smart home, by communicating with the different Bridge devices through the common language from the service layer. 
@@ -145,7 +151,7 @@ using a Phidgets adapter.
 We want to change the \emph{output} of the lamp with ID \texttt{0}, 
 to the value \texttt{1}. 
 To change the value of the lamp, 
-we must send the following data to it:
+we must send the following XML data to it:
 
 \begin{minted}[autogobble]{xml}
   <?xml version='1.0' encoding='UTF-8'?><value>1</value>
@@ -185,12 +191,12 @@ The advantage here is of course the price (free) and the possibility of adding n
     \centering
     \begin{tabular}{l l}
         Company                           & Product Type \\ \hline
-        openHAB \cite{OPENHAB}             & Employ open source code on own server \\
-        Open Source Automation \cite{OSA}  & Employ open source code on own server \\
-        OpenRemote \cite{OPENREMOTE}       & Employ open source code on own server \\
-        Apple \cite{HOMEKIT}               & HomeKit Framework \\
-        Samsung \cite{SMARTTHINGS}         & SmartThings Hub: A standalone device that costs \$99 \\
-        Microsoft \cite{HOMEOS}            & HomeOS: An operating system that runs on a server
+        openHAB \cite{OPENHAB}            & Employ open source code on own server \\
+        Open Source Automation \cite{OSA} & Employ open source code on own server \\
+        OpenRemote \cite{OPENREMOTE}      & Employ open source code on own server \\
+        Apple \cite{HOMEKIT}              & HomeKit Framework \\
+        Samsung \cite{SMARTTHINGS}        & SmartThings Hub: A standalone device that costs \$99 \\
+        Microsoft \cite{HOMEOS}           & HomeOS: An operating system that runs on a server
     \end{tabular}
     \caption{An overview of home automation hubs from different companies}
     \label{table:smarthubs}
