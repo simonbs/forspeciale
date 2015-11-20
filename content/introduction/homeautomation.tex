@@ -43,45 +43,41 @@ Furthermore, the newest version (as of October 2015) allows you to connect other
 using the Weave protocol. 
 The Nest thermostat is thus starting to solve what is likely the greatest problem with smart homes (and IoT in general), 
 and why they have not become popular yet: lack of interoperability between smart devices. 
-This problem leads us to what is known as smart hubs. 
+The Nest thermostat is, however, limited in this, 
+as it only supports the Weave protocol. 
 
+\Cref{table:iotprotocols} shows \emph{some} of the many different protocols, 
+that are being used by smart devices. 
+The Nest thermostat is able to communicate with the other devices that uses the Weave protocol, 
+but it cannot communicate with other devices that uses \eg the ZigBee or Z-Wave protocol. 
+
+\begin{table}[!htb]
+  \begin{description}
+    \item[Protocol:] ZigBee
+    \item[Used by:] Samsung, Jasco, Smartenit, FortrezZ and others
+    \item[In products:] SmartThings Hub, thermostats, door sensors, light bulbs, etc.\\
+    
+    \item[Protocol:] Z-Wave
+    \item[Used by:] FortrezZ, GE, Intermatic, Leviton, Aeon Labs, Evolve and others
+    \item[In products:] Thermostats, wall outlets, door locks, door and window sensors, etc.  \\
+    
+    \item[Protocol:] WiFi (IEEE 802.11)
+    \item[Used by:] Nest, Philips, Samsung, Bose, D-link and others
+    \item[In products:] Thermostats, speakers, light bulbs, motion sensors, fitness trackers, camera, etc. \\
+    
+    \item[Protocol:] Weave
+    \item[Used by:] Nest, Philips, pebble, Logitech, Jawbone and others
+    \item[In products:] Thermostats, fitness trackers, camera, lights, locks, etc. 
+  \end{description}
+  \caption{Wireless protocols used by smart devices}\label{table:iotprotocols}
+\end{table}
+
+Researchers and companies are working on developing what we call \emph{smart hubs}. 
 A smart hub is a device, or service, that implements several communication protocols used by IoT devices, 
 and gives the user a single protocol or interface. 
 The goal of a smart hub is to make the connected devices able to communicate.
 The communication problem arises from the number of different communication protocols used by the smart devices. 
-
-
-\subsection{Common Protocols for Home Automation}
-There is a range of different protocols that are being used for various smart devices. 
-
-We will not get into much detail with these protocols, 
-but we demonstrate how many different there are and why communication is a problem.
-\begin{table}
-   \begin{description}
-       \item[Protocol:] ZigBee
-       \item[Used by:] Samsung, Jasco, Smartenit, FortrezZ and others
-       \item[In products:] SmartThings Hub, thermostats, door sensors, light bulbs, etc.\\
-       
-       \item[Protocol:] Z-Wave
-       \item[Used by:] FortrezZ, GE, Intermatic, Leviton, Aeon Labs, Evolve and others
-       \item[In products:] Thermostats, wall outlets, door locks, door and window sensors, etc.  \\
-       
-       \item[Protocol:] WiFi (IEEE 802.11)
-       \item[Used by:] Nest, Philips, Samsung, Bose, D-link and others
-       \item[In products:] Thermostats, speakers, light bulbs, motion sensors, fitness trackers, camera, etc. 
-       
-       \item[Protocol:] Weave
-       \item[Used by:] Nest, Philips, pebble, Logitech, Jawbone and others
-       \item[In products:] Thermostats, fitness trackers, camera, lights, locks, etc. 
-    \end{description}
-    \caption{Protocols used by various IoT devices}\label{table:iotprotocols}
-\end{table}
-
-Aside from the protocols in \Cref{table:iotprotocols}, 
-there are several others messaging protocols such as MQTT, CoAP and XMPP used by various devices. 
-
-A smart hub should thus not only be able to communicate with the devices, 
-but also be able to transform the data to a single format and give easy access to it.
+In the following section we will analyze a smart hub called HomePort. 
 
 \subsection{Analysis of a Smart Hub: HomePort}\label{sec:homeport}
 In this section we will analyze a smart hub called \emph{HomePort} \cite{HOMEPORT10}.
@@ -155,7 +151,7 @@ using a Phidgets adapter.
 We want to change the \emph{output} of the lamp with ID \texttt{0}, 
 to the value \texttt{1}. 
 To change the value of the lamp, 
-we must send the following data to it:
+we must send the following XML data to it:
 
 \begin{minted}[autogobble]{xml}
   <?xml version='1.0' encoding='UTF-8'?><value>1</value>
@@ -195,12 +191,12 @@ The advantage here is of course the price (free) and the possibility of adding n
     \centering
     \begin{tabular}{l l}
         Company                           & Product Type \\ \hline
-        openHAB \cite{OPENHAB}             & Employ open source code on own server \\
-        Open Source Automation \cite{OSA}  & Employ open source code on own server \\
-        OpenRemote \cite{OPENREMOTE}       & Employ open source code on own server \\
-        Apple \cite{HOMEKIT}               & HomeKit Framework \\
-        Samsung \cite{SMARTTHINGS}         & SmartThings Hub: A standalone device that costs \$99 \\
-        Microsoft \cite{HOMEOS}            & HomeOS: An operating system that runs on a server
+        openHAB \cite{OPENHAB}            & Employ open source code on own server \\
+        Open Source Automation \cite{OSA} & Employ open source code on own server \\
+        OpenRemote \cite{OPENREMOTE}      & Employ open source code on own server \\
+        Apple \cite{HOMEKIT}              & HomeKit Framework \\
+        Samsung \cite{SMARTTHINGS}        & SmartThings Hub: A standalone device that costs \$99 \\
+        Microsoft \cite{HOMEOS}           & HomeOS: An operating system that runs on a server
     \end{tabular}
     \caption{An overview of home automation hubs from different companies}
     \label{table:smarthubs}
