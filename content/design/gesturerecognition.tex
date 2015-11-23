@@ -249,9 +249,7 @@ and checks if the data fits within the threshold $g$,
 indicating that the data comes from a device lying on the table. 
 If the data fits within $g$, 
 the function returns false. 
-%Thalley: Jeg kan overhovedet ikke læse og forstå den næste sætning :s
-If not, the functions returns whether or not the data fits within the threshold $h$, 
-some small number specifying a approximate of the acceleration given to the device when pointed with.
+If the data does not fit within the threshold $g$, the function checks if the data fits within the threshold $h$ and returns the result of the check as a boolean value. $h$ is some small number that represents an approximate of the acceleration of the device when the user points with it.
 
 \begin{algorithm}
   \begin{algorithmic}
