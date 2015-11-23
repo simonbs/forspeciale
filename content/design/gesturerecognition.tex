@@ -93,9 +93,10 @@ which simply determines whether a score is above a threshold $\epsilon$.
 \end{figure}
 
 \subsection{Detecting Points Before and After Gestures}
-Before a user performs a gesture in order to control an actuator, 
-he must point at the actuator he desires to control. 
-%Thalley: Describe the reason for this
+Before a user performs a gesture in order to control a smart device, 
+he must point at the smart device he desires to control. 
+
+Pointing at a smart device informs the system which device actions should be sent to. This allows multiple devices to share actions and only the device being pointed at, will be receive the action. Configuring multiple devices with the same gesture means that the users can configure fewer gestures as they can be used.
 
 A point is defined as the user holding his phone still for a small period of time. 
 An accelerometer can be used to detect if the user holds the device still. 
