@@ -108,7 +108,7 @@ All gestures begin and end with a point.
 When the first point is detected, 
 a very short delay is introduced in order for the user to prepare to do the gesture, 
 \eg move the position of his hand. 
-%Thalley: Jeg kan ikke se hvorfor der skal være et delay. Kunne man ikke bare sige at man starter recognition så snart den ikke peger mere, efter at et peg at detected? 
+The delay was added because from testing on our own we found that if there was no delay, the recognition would suddenly begin without the user being prepared, resulting in the first data being invalid and not part of any gesture and ultimately the gesture would not be recognized.
 The gesture recognition begins when the delay has passed. 
 Gestures are recognized using the previously described \$3 Gesture Recognizer. 
 After the gesture has been performed, 
