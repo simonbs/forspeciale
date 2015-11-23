@@ -127,6 +127,62 @@ To construct a room outdoors we mounted the beacons on street lamps in a parking
 The tests were conducted by placing the phone on the ground in the center of the room and logging position data for a duration of one minute.
 This was done three times.
 
+\subsection{Second Round of Tests}
+
+\begin{figure}[!tbp]
+  \centering
+  \begin{minipage}[b]{0.4\textwidth}
+    \begin{tikzpicture}
+
+    \draw (0,0) rectangle (5,10); % Outline of room
+    
+    \draw[red,thick,dashed] (2.5,5) circle (0.2); % Phone location
+    
+    \fill[blue!100!] (2.5, 0) circle (0.25); % Beacon location - Bottom
+    \fill[blue!100!] (5, 5) circle (0.25); % Beacon location - Right
+    \fill[blue!100!] (2.5, 10) circle (0.25); % Beacon location - Top
+    \fill[blue!100!] (0, 5) circle (0.25); % Beacon location - Left
+    
+    % Walking path
+    \draw[dashed] (0.5,0.5) -- (4.5,0.5) -- (0.5, 9.5) -- (4.5, 9.5) -- cycle;
+    
+    % Start / stop point of walking path
+    \draw (0.3,0.7) -- (0.7,0.3);
+    \draw (0.3,0.3) -- (0.7,0.7);
+    
+    \end{tikzpicture}
+    \caption{Room setup using four beacons in second round of tests.}
+  \end{minipage}
+  \hfill
+  \begin{minipage}[b]{0.4\textwidth}
+    \begin{tikzpicture}
+
+    \draw (0,0) rectangle (5,10); % Outline of room
+    
+    \draw[red,thick,dashed] (2.5,5) circle (0.2); % Phone location
+    
+    \fill[blue!100!] (1.6667, 0) circle (0.25); % Beacon location - Bottom Left
+    \fill[blue!100!] (3.3334, 0) circle (0.25); % Beacon location - Bottom Right
+    \fill[blue!100!] (5, 6.6666) circle (0.25); % Beacon location - Right Top
+    \fill[blue!100!] (5, 3.3333) circle (0.25); % Beacon location - Right Bottom
+    \fill[blue!100!] (1.6667, 10) circle (0.25); % Beacon location - Top Left
+    \fill[blue!100!] (3.3334, 10) circle (0.25); % Beacon location - Top Right
+    \fill[blue!100!] (0, 6.6666) circle (0.25); % Beacon location - Left Top
+    \fill[blue!100!] (0, 3.3333) circle (0.25); % Beacon location - Left Bottom
+    
+    
+    % Walking path
+    \draw[dashed] (0.5,0.5) -- (4.5,0.5) -- (0.5, 9.5) -- (4.5, 9.5) -- cycle;
+    
+    % Start / stop point of walking path
+    \draw (0.3,0.7) -- (0.7,0.3);
+    \draw (0.3,0.3) -- (0.7,0.7);
+    
+    \end{tikzpicture}
+    \caption{Room setup using eight beacons in second round of tests.}
+  \end{minipage}
+\end{figure}
+
 \subsection{Precision of Indoor Location Conclusion}
 From the results, we can conclude that... \todo[author=Thalley]{Write conclusion of precision test based on results}
 
