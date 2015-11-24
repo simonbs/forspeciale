@@ -9,12 +9,12 @@ echo Q - Exit
 read -p "Your choice: [1, 2, 3, D, Q] " choice
 case $choice in
   3 )
-	pdflatex master.tex
+	pdflatex --shell-escape master.tex
 	bibtex master.tex;&
   2 )
-	pdflatex master.tex;&
+	pdflatex --shell-escape master.tex;&
   1 ) 
-	pdflatex master.tex;&
+	pdflatex --shell-escape master.tex;&
   D )
 	rm *.log;
 	rm *.aux;

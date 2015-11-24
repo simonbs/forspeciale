@@ -1,0 +1,113 @@
+\section{Server}
+The server was described in \Cref{sec:serverdesign}. 
+In this section, we briefly document the implementation of the server.
+
+The server is implemented in Python,
+using a microframework called \texttt{Flask},
+which provides a built-in server and a RESTful request handler, among other things. 
+As described in \Cref{sec:serverdesign}, 
+the server only provides two REST methods for controlling a devices and getting the devices. 
+Using \texttt{Flask}, the server has been programmed as simple as \Cref{lst:server}, 
+where the code for communicating with HomePort has been omitted. 
+%Thalley: Er det for dumt at skrive dette? Skal koden fjernes, eller skal man indsætte mere kode?
+
+\begin{listing}
+  \begin{minted}[linenos, breaklines, autogobble]{python}
+    from flask import Flask
+    app = Flask(__name__)
+    
+    @app.route('/', methods=['POST'])
+    def do_action():
+      action = request.form['action']
+      id = request.form['id']
+      # Code to send request to HomePort
+      
+    @app.route('/devices', methods=['GET'])
+    def get_devices():
+      # Code to return devices from HomePort
+    
+    if __name__ == '__main__':
+    app.run(host="localhost", port=5000)
+  \end{minted}
+  \caption{Simple server implemented in Python using Flask}
+  \label{lst:server}
+\end{listing}
+
+\subsection{Communication with HomePort}
+In order to communicate with HomePort, 
+we need to do
+\begin{enumerate}
+  \item Map actions as strings, to actions as numeric values
+  \item Send HTTP requests (\texttt{GET} and \texttt{PUT})
+  \item Transform XML data from HomePort to JSON
+\end{enumerate}
+
+\subsubsection{Mapping Actions}
+In the current implementation of HomePort, 
+there is only two actions: $\{0, 1\}$.
+We implement two actions: $\{\var{turnoff}, \var{turnOn}\}$. 
+The two sets of actions are implemented as a list of tuples, 
+where the first value is the HomePort value, 
+and the second value is our string value. 
+
+To map the actions, we either send a numeric value (map to string) or a string value (map to numeric), 
+and look up either the numeric or string value in our list of tuples of actions. 
+
+If the list of tuples is
+\begin{center}
+  \texttt{ACTIONS = [('0', 'turnOff'), ('1', 'turnOn')]},
+\end{center}
+then if we send \texttt{0}, we get \texttt{'turnOff'}. 
+
+\subsubsection{Sending HTTP Requests}
+We use another python module called httplib to send the requests. 
+The request we send are either a \texttt{GET} or a \texttt{PUT}. 
+The \texttt{GET} is simply a \texttt{GET /devices HTTP/1.1}. 
+
+To perform an action, we use the aforementioned mapper to get the numeric value of our action and send a \texttt{PUT} request with 
+  \begin{minted}[breaklines, autogobble]{python}
+  "<?xml version='1.0' encoding='UTF-8'?><value>" + mapper.map_action_to_id(action) + "</value>"
+  \end{minted}
+as data. 
+
+\subsubsection{Transforming XML Data}
+When we request devices from HomePort, 
+we receive an XML response. 
+An example response of HomePort could be:
+\begin{minted}[linenos, breaklines, autogobble]{xml}
+<?xml version="1.0"?>
+<devicelist name="services.xml" id="12345">
+  <device desc="phidget" id="173111" vendorid="0x01" productid="0x01" version="V1" location="ExampleRoom" type="phidget">
+    ...
+    <service desc="input" id="0" value_url="/phidget/173111/output/0" type="input" unit="0/1">
+      <parameter id="0"/>
+    </service>
+    ...
+  </device>
+</devicelist>
+\end{minted}
+
+The values that we are interested in here is the attributes of the \texttt{service} element, 
+mainly the attributes \texttt{id}, \texttt{value\_url} and \texttt{unit}. 
+The \texttt{desc} attribute have the potential to contain the name of the smart device, 
+but is not so in the version of HomePort that we are using. 
+We will use the \texttt{id} to identify the HomePort, 
+the \texttt{value\_url} to easily send actions to the device, 
+and \texttt{unit} to figure out what actions are available. 
+
+The \texttt{unit} attribute is however not compatible with our actions, 
+so we transform the string \texttt{''0/1''} to a list \texttt{['0', '1']}, 
+and then use our mapper to convert these to our actions. 
+
+We also need to get the state of the device. 
+In HomePort, the state is either 0 (off) or 1 (on). 
+To get the state of the device, 
+we can do a \texttt{GET} request to the URL of the device, \eg 
+\begin{center}
+  \texttt{GET /phidget/173111/output/0},
+\end{center}
+and then map the state of HomePort (0 or 1) to our states (off or on). 
+
+The names and coordinates of the \texttt{Device} objects will have to be inserted by the user. 
+\todo[author=Thalley]{Either implement this in system or say that it is hardcoded as of now}
+

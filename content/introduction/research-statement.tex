@@ -1,46 +1,52 @@
 \section{Problem Statement}\label{sec:researchstatement}
-% In the previous sections we analyzed different areas of Internet of Things (IoT), 
-% including how wearables and home automation are maturing. 
-% We have seen some of the possibilities of wearables, 
-% and we can see that this can integrated with home automation and indoor location.
-% We think that exploring the concept of home automation with wearables, 
-% can result in a usable system that better utilizes the devices for smart homes, 
-% by giving a better interface. 
-% More accurately, we want to explore the possibilities of interconnecting smart devices using existing technologies.
-% In the remainder of this report, we will answer the following question:
+This chapter has explored different wearables, 
+the components commonly found in wearables and different levels of home automation. 
+It is our hypothesis that wearables can be integrated into home automation environments, 
+in order to provide an attractive interface for controlling devices connected to the Internet, 
+such as light bulbs, thermostats, and music centers.
 
-The previous chapter has explored different wearables, the components commonly found in wearables and different levels of home automation. We believe that wearables can be integrated into home automation environments in order to provide an attractive interface for controlling devices connected to the internet, e.g. light bulbs, thermostats, and music centers.
-
-While introducing a wearable in a system provides interesting possibilities for autonomous systems that adjust the environment based on the users properties, e.g. his body temperature or the amount of light he is exposed to, the remainder of this report will focus on the possibilities of gesture driven systems using a wearable.
+While introducing a wearable in a system provides interesting possibilities for autonomous systems, 
+that adjust the environment based on the users properties, 
+\eg his body temperature or the amount of light he is exposed to. 
+The remainder of this report will focus on the possibilities of gesture driven systems using a wearable.
 
 The report will answer the following question.
 
 \begin{framed}
-    \begin{quote}
-        % What can we do with wearables and smart devices in a smart home setting, where different smart devices may use different communication protocols?
-        
-        % In answering this question, we will also answer the following questions:
-        % \begin{itemize}
-        %     \item What problems arise when working with different platforms using different operating systems?
-        %     \item Which limitations does current technology have in the area of IoT? Can we overcome it and how? 
-        %    \end{itemize} 
+%    \begin{quote}
       How can wearables be utilized for home automation in a gesture driven solution?
-    \end{quote}
+%    \end{quote}
 \end{framed}
-%Thalley: For meget med frame? Evt. bruge noget andet for at fremhæve problemformuleringen, eller bare droppe det helt? 
 
+\subsection{Scenario}
+We imagine a scenario of a user that owns a wearable and a home with a number of smart devices. 
+All of these smart devices are connected to a smart hub, 
+giving him centralized control of all his devices using \eg a smartphone application.
+To perform a certain action on a certain devices, the user needs to:
+\begin{enumerate}
+  \item Take up his smartphone
+  \item Open up his smart hub application
+  \item Find and select the device
+  \item Find and select the action
+\end{enumerate}
 
-%Thalley: Gammel formulering:
-%\begin{quote}
-%    \begin{itemize}
-%        \item Explore the possibilities of interconnecting smart devices using existing technologies  
-%        \item Give users a better interface of controlling smart devices with gestures using a wearable in a smart home 
-%    \end{itemize}    
-%\end{quote}
-%
-%The goal of our research is to create a system that allows gesture-based communication between the user and smart devices.
-%We feel that allowing users to point and control devices will give the best interface. 
-%This approach requires accurate indoor location, a wearable that can recognize gestures and a hub for interoperability between the wearable and the smart devices. 
+We envision an alternative solution, 
+where the user can use his wearable to control his smart devices. 
+More specifically, we want to create a smart system, 
+where the user can use his wearable to \emph{point} and \emph{select} a smart device, 
+and then by performing a certain \emph{gesture}, he can send a certain action to the smart device
+This way there is no overhead of finding the device on an application, 
+nor having to find the action. 
+Thus to perform a certain action on a certain devices, the user needs to:
+\begin{enumerate}
+  \item Point at the device
+  \item Perform a gesture
+\end{enumerate}
+
+To recognize the gesture, the arm wearing the wearable must perform the action. 
+The wearable itself will have to be able to track 3D movements (using \eg an accelerometer), 
+and know which device the user is pointing at. 
+
 %%% Local Variables:
 %%% mode: latex
 %%% TeX-master: "../../master"

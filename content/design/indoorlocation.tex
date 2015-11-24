@@ -11,24 +11,21 @@ The orientation of the user can be retrieved from any device possessing a magnet
 We found that 49 devices in Vandrico's database contain the magnetometer component. 
 Given the orientation of the user, his location and the location of a controllable device, 
 we can calculate if the user is looking at, 
-or in the direction of, the controllable device. 
-We also need to define a visibility range, 
-\ie a range (in degrees) such that if the user's direction is \var{directions}, 
-then the visibility range \var{range} is $\var{range} = \var{directions} \pm \var{degrees}$, 
-where \var{degrees} is a variable defining the size of the visibility range. 
+or in the direction of, the controllable device.
+We also need to define a visibility range, \ie a range that constitutes the area in which items are visible to the system. This range can be specified (in degrees) as $r = o \pm e$, where $r$ is the visibility range, $o$ is the orientation of the user and $e$ is the distance between $o$ and the edges of $r$.
 \Cref{fig:visibilityangle} illustrates this. 
 In this figure, the user's orientation is \var{o1}, 
-and there is two device with orientations \var{o2} and \var{o3}. 
+and there are two devices with orientations \var{o2} and \var{o3}. 
 An orientation in degrees is between \num{0} and \num{360}. 
-To find if a device with orientation \var{o2} is within the visibility range, 
-it is a simple matter of calculating whether $\var{o1} \pm \var{degree}$ is smaller or larger than \var{o2}.
+To determine whether a device with orientation \var{o2} is within the visibility range, 
+it is a simple matter of calculating whether \var{o2} is greather than $\var{o1}-\var{e}$ and smaller than $\var{o1}+\var{e}$, with some exceptions when the visibility range spans the gap between 359\degree and 0\degree.
 
 \begin{figure}[!htb]
     \centering
     \def\svgwidth{0.6\textwidth}
     \import{drawings/}{drawings/visibilityangle.pdf_tex}
     \caption{Finding objects in the visibility range. Device 1 is within the range, but Device 2 is not.}
-    \label{fig:visibilityangle}
+\label{fig:visibilityangle}
 \end{figure}
 
 The focus of this project is not to position devices, 
@@ -95,8 +92,8 @@ as these does not provide solutions or setups for smaller areas such as rooms or
         \item[Technology:] iBeacon protocol.
         \item[Price:] \SI{99}[\$]{} for beacons. \SI{99}[\$]{} for 10 stickers, one per device to be positioned.
         \item[Ease of use:] Initial installation of beacons. Attach each sticker to device.
-        \item[Accuracy:] Unknown. Desired to be less than five meters. \\ \todo[author=Simon]{Update after conducting tests.} 
-        
+        \item[Accuracy:] 0.5 - 1 meter \cite{estimote:accuracy}. However the accuracy is reported to be 3-4 meters on average for locations bigger than 100 square mters in an e-mail correspondence with Wojtek Borowicz from Estimote. See appendix \ref{appendix:estimote-accuracy}.
+
         \item[Product:] Pozyx \cite{pozyx}
         \item[Availability:] Available for preorder.
         \item[Technology:] Ultra-wideband (UWB).
@@ -130,7 +127,7 @@ Estimote's solution is available as a consumer product.
 
 Pozyx and DecaWave use a wireless radio technology known as ultra-wideband, which works much like BLE but at a different frequency. 
 Like Estimote, it also requires setting up ``anchors'' and then using the signal strength to find the location. 
-No easy to use consumer product is availably for either of these.
+No easy to use consumer product is available for either of these.
 
 SmartActionSLAM is an Android application from research done by Hardegger \etal \cite{SASLAM}. 
 This solution is a lot different from most other indoor location solutions. 
@@ -139,6 +136,8 @@ In theory it can be adapted to almost any smartphone,
 but requires a lot of work to adapt the released code from the research project. 
 
 \input{content/design/indoor-location-estimote.tex}
+\input{content/design/configuration-of-locations}
+
 %%% Local Variables:
 %%% mode: latex
 %%% TeX-master: "../../master"

@@ -1,0 +1,29 @@
+\begin{tikzpicture}
+    \begin{axis}[
+        height=8cm,
+        width=0.95\textwidth,
+        xlabel={Year},
+        ylabel={Million smart homes},
+        yticklabel style={align=right,inner sep=0pt,xshift=-0.3em},
+        scaled y ticks = false,
+        nodes near coords align={vertical},
+        nodes near coords,
+        xtick=data,
+        symbolic x coords={2013, 2014, 2015, 2016, 2017, 2018, 2019},
+        ybar,
+        ymax=45,
+        ymin=0,
+        bar width=20pt,
+        legend pos = north west,
+        ]
+        \addplot coordinates {(2013, 1.51) (2014, 2.72) (2015, 4.61) (2016, 7.81) (2017, 12.46) (2018, 19.87) (2019, 29.70)};        
+        \addplot coordinates {(2013, 4.65) (2014, 7.92) (2015, 12.28) (2016, 17.48) (2017, 24.06) (2018, 31.10) (2019, 38.23)};
+        \legend{Europe, North America}
+        
+        %Trend lines:
+%        \addplot [ultra thick,orange,line join=round,smooth, nodes near coords = ] coordinates {(2013, 1.51) (2014, 2.72) (2015, 4.61) (2016, 7.81) (2017, 12.46) (2018, 19.87) (2019, 29.70)};
+%        \addplot [ultra thick,orange,line join=round,smooth, nodes near coords = ] coordinates {(2013, 4.65) (2014, 7.92) (2015, 12.28) (2016, 17.48) (2017, 24.06) (2018, 31.10) (2019, 38.23)};
+%        
+
+    \end{axis}
+\end{tikzpicture}

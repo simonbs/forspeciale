@@ -1,30 +1,41 @@
 \section{Precision of Indoor Location}\label{sec:estimoteprecision}
 Another core part of our system is indoor location. 
-For the ``point-to-select'' part of our system to work as intended, we need high indoor precision. 
-In \Cref{sec:indoor-positioning} we mentioned that Estimote claims the accuracy to be less than \num{5} meters.
-In this section we test if that is actually the case, or even if we can achieve better results than that. 
-We test this by comparing the position we get from the application to the actual position we have in the room. 
-We test in with the following four settings:
-\begin{enumerate}
-    \item Room 1: $5 \times 5$ meter room with no walls
-    \item Room 2: $8 \times 8$ meter room with no walls
-    \item Room 3: Outside in a $17.9 \times 17.9$ meter square with no walls
-    \item Room 4: $4.9 \times 9.95$ meter room
-\end{enumerate}
+For the ``point-to-select'' part of our system to work as intended, 
+we need high indoor precision. 
+In \Cref{sec:designindoorlocation} we mentioned that Estimote claims the accuracy to be \num{0.5}-\num{1} meters.
+In this section we test if that is actually the case, 
+or even if we can achieve better results than that. 
+
+We test this by comparing the position we get from the application, 
+to the actual position we have in the room. 
+We test in with the \num{4} settings from \Cref{table:rooms}.
+
+\begin{table}
+    \centering
+    \begin{tabular}{l| l c c}
+        Name & Size in meters & \# of Beacons & \# of Tests\\ \hline
+        Room 1 & $5 \times 5$ & 4 & 8 \\
+        Room 2 & $8 \times 8$ & 4 & 7 \\
+        Room 3 & $17.9 \times 17.9$ & 4 & 3 \\
+        Room 4 & $4.9 \times 9.95$ & 4/8 &  33
+    \end{tabular}
+    \caption{Room settings}
+    \label{table:rooms}
+\end{table}
 
 We test in different settings to measure if, and how much, 
 the size of the room matters in terms of accuracy. 
 We decided to test outside in an area where there were none or few WiFi signals,
 as WiFi shares the same same radio frequency as BLE (\SI{2.4}{\GHz}). 
 We have performed tests both with and without movement. 
+The same person have used to perform all the movement tests. 
 
-\subsection{Room 1}
-Room 1 and Room 2 have been setup in an auditorium. 
+\subsection{Setup}
+Room 1 and Room 2 were setup in an auditorium. 
 We used tables to simulate walls, 
 and we placed the beacons on chairs on top of the tables. 
-The setup can be seen in \Cref{fig:audtest} and illustrated in \Cref{fig:audtestsetup}. 
+The setup can be seen in \Cref{fig:audtest} and illustrated in \Cref{fig:precisiontest:illustration}. 
 \todo[author=Thalley]{Insert number of 2.4 GHz access points}
-
 \begin{figure}[!htb]
     \centering
     \includegraphics[width=\textwidth]{drawings/audtest}
@@ -34,35 +45,129 @@ The setup can be seen in \Cref{fig:audtest} and illustrated in \Cref{fig:audtest
 
 \begin{figure}[!htb]
     \centering
-    \includegraphics[width=0.6\textwidth]{drawings/audtestsetup}
-    \caption{The setup for Room 1 and Room 2 (illustration of \Cref{fig:audtest}). Room 1 is marked as the inner (blue) square and is $5 \times 5$ meters. Room 2 is marked as the outer (red) square and is $8 \times 8$ meters. The rings shows the position of the beacons. The filled circles shows where the the phone is placed to obtain the position (only for the non-moving tests).}
-    \label{fig:audtestsetup}
+    \input{drawings/audtestillustration.tikz}
+    \caption{Illustration of room used for indoor location precision test. The full (blue) circles represent beacons, the dotted line is the walking path (movement test) and the dotted center circle is the location of the phone (stationary test). This setup is used for the $5 \times 5$ and $8 \times 8$ meter rooms.}
+    \label{fig:precisiontest:illustration}
 \end{figure}
 
-\FloatBarrier
-\subsection{Room 2}
+The setup consisted of four beacons, one on each wall, 
+each using the recommended settings from Estimote \cite{estimote:settings}:
+\begin{description}
+    \item[Broadcasting Power]{4 dBm}
+    \item[Advertising Interval]{200 ms}
+    \item[Smart Power Mode]{Enabled}
+    \item[Basic Power Mode]{Disabled}
+\end{description}
 
-\subsection{Room 3}
+For Room 3, the outdoor ``room'',
+we attached the beacons to lampposts. 
+We tested outside to see if the number of access points would have, and how much of, 
+an impact on the accuracy. 
+The ``room'' is illustrated in \Cref{fig:outdoortest}. 
+The beacons in this room are slightly off-center (\SI{0.45}{\meter}), 
+as we had to use the lampposts' locations. 
 
-\subsection{Room 4}
-
-\subsection{Conclusion}
-
-
-We setup a [SIZE OF ROOM] room, with [NUMBER OF BEACONS]. 
-The room is illustrated by \Cref{fig:precisiontest}. 
-In \Cref{fig:precisiontest} you can also see small spots. 
-These spots is the known locations where we are going to perform the precision tests. 
-We randomly walk between these spots [NUMBER OF TIMES] and find the mean error rate.
 \begin{figure}[!htb]
     \centering
-    \todo[author=Thalley]{Insert figure}
-    \caption{Illustration of room used for indoor location precision test}
-    \label{fig:precisiontest}
+    \input{drawings/outdoortestillustration.tikz}
+    \caption{Illustration of room used for Estimote accuracy outdoors, with little to no interference from WiFi access points. The full (blue) circles represent beacons, and the dotted center circle is the location of the phone (stationary test).}
+    \label{fig:outdoortest}
 \end{figure}
 
-The mean error rate that we found is [RESULT]. 
+Room 4 is a seminar room. 
+The setup for Room 4 for the stationary tests,
+were exactly the same as the Room 1 and 2. 
+We also did movement tests in this room, 
+where the user walked around near the walls as with Room 1 and 2. 
+We did, however, also test movement where the user walked in a bowtie,
+illustrated by \Cref{fig:bowtie4beacons}. 
+We did this to see if we it would have any effect if we did not walk near the beacons all the time. 
+We also tried to perform tests with \num{8} beacons in this room, 
+illustrated by \Cref{fig:bowtie8beacons}. 
+
+\begin{figure}[!htb]
+    \centering
+    \begin{minipage}[b]{0.4\textwidth}
+        \input{drawings/seminar4beacons.tikz}
+        \caption{Room 4 setup using four beacons.}
+        \label{fig:bowtie4beacons}
+    \end{minipage}
+    \quad
+    \begin{minipage}[b]{0.4\textwidth}
+        \input{drawings/seminar8beacons.tikz}
+        \caption{Room 4 setup using eight beacons.}
+        \label{fig:bowtie8beacons}
+    \end{minipage}
+\end{figure}
+
+\Cref{table:precisiontest:roomsize} shows the test setups from these rooms,
+using the recommended settings.
+In \Cref{sec:settings}, we change some of the settings to determine if they have any effect.
+
+\begin{table}[!htb]
+    \centering
+    \begin{tabular}{l| l l c c}
+        \hline
+        Room   & Phone Position & Duration 	       & Count & \# of Beacons \\ \hline
+        Room 1 & Center         & \SI{1}{\minute}  & 4  & 4 \\ 
+        Room 1 & Center         & \SI{2}{\minute}  & 1     & 4 \\ 
+        Room 1 & Moving         & NA               & 3     & 4 \\
+        Room 2 & Center         & \SI{1}{\minute}  & 3     & 4 \\ 
+        Room 2 & Center         & \SI{2}{\minute}  & 1     & 4 \\
+        Room 2 & Moving         & NA               & 3     & 4 \\ 
+        Room 3 & Center         & \SI{1}{\minute}  & 3     & 4 \\ 
+        Room 4 & Center         & \SI{1}{\minute}  & 3     & 4 \\ 
+        Room 4 & Center         & \SI{1}{\minute}  & 3     & 8 \\ 
+        Room 4 & Moving         & NA       & 3     & 4 \\
+        Room 4 & Moving         & NA       & 3     & 8 \\
+        Room 4 & Moving-Bowtie  & NA       & 3     & 4 \\
+        Room 4 & Moving-Bowtie  & NA       & 3     & 8 \\
+    \end{tabular}
+    \caption{Tests conducted with varying room size and recommended beacon configuration.}
+    \label{table:precisiontest:roomsize}
+\end{table}
+
+
+\subsection{Stationary Accuracy}
+This section contains the results from measuring the accuracy of the tests, 
+where we have placed a phone and logged the locations. 
+Since we know the location of the phone, 
+we can measure the distance error of each coordinate we get from Estimote. 
+\todo[author=Thalley]{Insert results}
+
+\begin{figure}[!htb]
+    \includegraphics[width=\textwidth]{\heatmap{01}}
+\end{figure}
+
+\subsection{Moving Accuracy}
+\todo[author=Thalley]{Insert results}
+\subsection{Changing Settings}\label{sec:settings}
+For this test the objective was to test the accuracy of the location system,
+using different settings. 
+We use Room 4 with 4 beacons for these tests. 
+The tests conducted in this room, 
+had the phone placed on a table in the center of the room, 
+and logging position data for a duration of one minute.
+This was done three times, 
+and then the settings of the beacons were changed.
+
+The difference settings we tested are shown in \cref{table:precisiontest:settings}.
+
+\begin{table}[!htb]
+\centering
+\begin{tabular}{l|l}
+Advertising Interval & Broadcasting Power \\ \hline
+200 ms               & 4 dBm              \\ 
+200 ms               & -20 dBm            \\ 
+200 ms               & -12 dBm            \\ 
+200 ms               & -4 dBm             \\ 
+100 ms               & 4 dBm              \\ 
+\end{tabular}
+\caption{Tests conducted with varying settings on the beacons.}
+\label{table:precisiontest:settings}
+\end{table}
+
+\todo[author=Thalley]{Insert results}
 
 \subsection{Precision of Indoor Location Conclusion}
 From the results, we can conclude that... \todo[author=Thalley]{Write conclusion of precision test based on results}
-

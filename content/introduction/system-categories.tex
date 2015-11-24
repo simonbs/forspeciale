@@ -1,30 +1,35 @@
 \section{Levels of Smart Home Automation}\label{sec:system-categories}
 \todo[author=Thalley]{Bør vi ændre det med categories til noget med levels i stedet?}
-Smart home automation is one of the big sell-points of smart homes.
+Smart home \emph{automation} is one of the big sell-points of smart homes.
 Home automation can happen at various degrees. 
 In this section we will analyze and categorize the different types of smart home automation. 
-The scenarios in which home automation is facilitated can in general be divided into the following three categories:
+We divide the scenarios in which home automation is facilitated, 
+into the following three categories. Each category constitute a level, or a degree, of home automation.
 
 \begin{enumerate}
-    \item Rule driven systems
-    \item Gesture driven systems
+    \item User defined rule systems
+    \item Interactive systems
     \item Autonomous systems
 \end{enumerate}
 
-The categories varies in the way users configure and interact with the systems. 
-``Manual systems'' could constitute a fourth category, consisting of regular systems with manual switches,
+``Manual systems'' could constitute a fourth category, 
+consisting of regular systems with manual switches,
 but is left out as it such systems do not contribute to home automation.
+The categories varies in the way users configure and interact with the systems. 
+All the systems are, however, all driven by a set of \emph{rules}. 
+The main difference is how the rules are defined or how they are used.
 Each of the three categories and their use cases are briefly described below,
 as well as how they can be integrated with wearables.
 
-\subsection{Rule Driven Systems}
+\subsection{User Defined Rule Systems}
 
-A system is considered to be rule driven if an action is executed when a set of rules are fulfilled. 
-The rule driven systems use conditional statements to express input and output. 
+These types of systems have a set of \emph{used defined} rules, 
+that controls what the system does when certain events happen. 
+The user defined rule systems use conditional statements to express input and output. 
 Below are a few examples of rules in the form of (if this) \textrightarrow~(then that):
 
 \begin{itemize}
-    \item (The temperature is above 23 degrees Celsius) \textrightarrow~(Lower the temperature on my thermostat)
+    \item (The temperature is above 23 degrees Celsius) \textrightarrow~(Turn on the air conditioner)
     \item (The CO\textsubscript{2} index is critically high) \textrightarrow~(Open my windows)
 \end{itemize}
 
@@ -33,7 +38,7 @@ and an action on the right-hand side of the arrow.
 The automation of the smart home is based on the set of rules. 
 To achieve the desired behavior, the user must add, remove or tweak existing rules.
 
-Examples of rule drive systems include the aforementioned Apple HomeKit. 
+Examples of user defined rule systems include the aforementioned Apple HomeKit. 
 As outlined in the framework reference for HomeKit \cite{applehomekitref}, 
 the system is based on actions and events. 
 Triggers constitutes rules by encapsulating actions and events. 
@@ -41,24 +46,51 @@ Each event represents a condition.
 An event may be fulfilled by a change in time, 
 the state of devices in the system of the location of the user.
 
-A wearable here could be integrated as a form of sensor (to \eg measure room temperature or CO\textsubscript{2} index), 
-and use this information to perform the actions based on the rules.  
+A wearable here could be integrated as a form of sensor, for example to measure body temperature or CO\textsubscript{2} index.
+The information can be included in rules that involves data about the user. 
+For example, turn up the heat if the skin temperature of the user is low, o
+r open the windows if the CO\textsubscript{2} index near the user is too high.
+Wearables could also be used to create a ``Follow Me'' system, 
+that could track if the user is near \eg a door, 
+and automatically open the door for the user, 
+or have the lighting follow the user around the house (turning off the lights in unoccupied rooms). 
+Such a system could be implemented using a smartphone. 
+However, it is fair to assume that users are more likely to leave their phone on a desk or table than a wearable. 
+If they are using a wearable such as a smartwatch, 
+they are most likely wearing it in the daytime.
 
-\subsection{Gesture Driven Systems}
 
-Systems are gesture driven if the system is configured with a set of gestures, 
-that can be performed by the user in oder to trigger some action. 
+\subsection{Interactive Systems}
+
+Interactive systems are explicitly controlled by the users, but in a smart way. 
+Two main examples of interactive systems are gesture controlled and remote controlled. 
+
+The gesture controlled systems are controlled by tracking the user's movements, 
+and perform certain actions based on the movements.
 Each device in the system responds to a set of gestures. 
 For example, a lamp may respond to the user waving in order to turn on, 
 and the user clapping in order to turn off.
 
-A gesture driven system is partly rule driven, 
-as each gesture registered in the system is associated with one or more actions. 
+A gesture driven system is partly a user defined rule system, 
+as each gesture registered in the system is associated with one or more actions.
 The association means that each time the gesture is registered in the system, the action should be triggered. 
 Such rules can be formulated as ``if I wave, then lower the temperature on my thermostat''
+The difference between these types of systems and the user defined rule systems, 
+is that the actions are performed explicitly by the user, 
+and not by measurements or other observations.
+Gesture driven systems can implemented using motion sensors such as accelerometers, 
+but it is also possible to do it via a video stream (recognizing gestures using a camera). 
 
-Examples of gesture driven systems include the aforementioned Hiris and Reemo, 
+Examples of gesture driven systems include the aforementioned HIRIS and Reemo, 
 where wearables are used as active control units by performing gestures. 
+
+The other type of interactive systems are the remote controlled systems. 
+In these types of systems, the user controls the devices in the smart home using a remote control. 
+The remote control could be the aforementioned Logitech Harmony Remote, 
+but could also simply be a smartphone application. 
+These types of systems are not combined with wearables data from wearables, 
+as they typically require a screen to control which device to perform an action on.
+A wearable could be used as a remote control but this is only slightly more convenient than a smartphone or a regular remote.
 
 \subsection{Autonomous Systems}
 
@@ -66,7 +98,7 @@ An autonomous system monitors the system,
 and proactively responds to changes in the system. 
 Observable changes include but are not limited to changes in the temperature, 
 CO\textsubscript{2} index, the number of people in the room or even who are in the room.
-Autonomous systems should intelligently react to the users needs, 
+Autonomous systems should intelligently react to the users' needs, 
 based upon the observable state of the environment.
 
 Autonomous systems rely on the concept of ambient intelligence, 
@@ -74,18 +106,26 @@ in order to determine the necessary actions.
 \todo[author=Thalley]{Maybe add something about ambient intelligence here?}
 Such systems include autonomous enhancement services, 
 that replaces manual care with an automated system \cite{nehmer2006living}. 
-These systems gather environment data, 
-and the data about the individuals body functions, 
-\eg temperature, pulse and blood pressure, 
-in order to determine if the individuals health is critical.
+These systems gather environment and user data, 
+to determine the user's future actions or intentions. 
+The autonomous systems are designed to what the users' want, 
+without the users input or interaction. 
+These systems applies methods and theories of statistics and machine learning, 
+in order to learn the users' behaviors and how to determine what the users want. 
+For example, a system installed in an office environment may monitor the movement of employees, 
+in order to determine when they arrive at the office and when they leave the office. 
+Such information can be used to ensure that windows are opened before employees arrive at the office, 
+in order ensure a better working environment.
 
-Autonomous systems are rule driven systems, 
-that intelligently determines the rules to be created, 
-and the necessary action to take when a set of rules are fulfilled. 
-Typical for such systems may be the complexity of the rules. 
-It is not given that users themselves are capable of determining a suitable set of rules in order to judge if their health is critical. 
-The system itself should be able to determine such set of rules and adjust it to the individual.
+Autonomous systems depend on rules like the previous two systems mentioned. 
+The main difference here is that autonomous system create these rules \emph{themselves}, 
+from observing the users and the environment, 
+or with some preprogrammed rules defined by \emph{experts}
+The rules of such systems are typically much more complex however. 
+It is not given that users themselves are capable of determining a suitable set of rules, 
+for example in order to judge if their health is critical. 
 
+\todo[author=Thalley]{Try to find a better reference for autonomous systems}
 Examples of autonomous systems include the one described by Nehmer \etal \cite{nehmer2006living}. 
 The authors envision a living assistance system which monitors elderly people. 
 A model is outlined, 
@@ -94,38 +134,47 @@ they can determine if a \emph{critical situation} occurs.
 A critical situation could be that the person has fallen and is not responding to contact, \eg calls.
 Such system may reduce the cost of providing care to the elderly people.
 
-Wearables here would be integrated in the same form as with rule driven systems, 
-but where the autonomous systems would likely gather and use more information, 
-to fully automate the home. 
+Wearables can play a huge part in autonomous systems. 
+Previously mentioned in this report, 
+wearables are able to measure a lot of different data about the environment (room temperature, CO\textsubscript{2}, etc.), 
+and the user (body temperature, heart rate, movements, etc.). 
+The reason why wearables especially plays a large role here, 
+is not only the different types of data, but also the amount of it,
+assuming that the user is wearing the measuring wearables most of the time. 
+
+By using this data and statistics, the system can detect certain events or situations, 
+such as knowing when the user is awake or asleep or maybe even detect the level of sleepiness or mood.    
+Based on the data from wearables can be used to automate a lot of processes, 
+and a smart home could potentially be able to do exactly what the user wants, 
+when he wants it, without needing any input from the user. 
 
 \subsection{Conclusion}
 
-The rule driven, gesture driven and autonomous systems are all rule driven to some extend, 
+The user defined rule, interactive and autonomous systems are all depending on rules, 
 but the origin and the types of rules differ between the systems. 
 
-In a rule driven system the rules are configured by the user.
-In an autonomous system the rules are programmed by some expert, 
+In the user defined rule and interactive systems, the rules are configured by the user.
+In an autonomous system the rules are determined by the system or programmed by some expert, 
 or in collaboration with experts in a certain field, \eg the medical field. 
-The system may adapt its set of rules based on the environment and that behavior of the individual.
-Gesture driven systems use rules configured by the user. 
-In such systems gestures make up the condition of a rule.
+The system may adapt its set of rules based on the environment, 
+and that behavior of the individual.
 
 When concerned with the field of home automation, 
 it is relevant to classify each system in order to determine how automatic a system is. 
 The more autonomous a system is, 
 the less the user should be involved with the system.
 Each of the system can integrate wearables to different degrees, 
-where the more autonomous systems would use the wearable more implicitly, 
-and the gesture driven systems would use the wearable explicitly.  
+where the autonomous systems use wearables implicitly, 
+and the other systems use the wearable explicitly.  
 
 The degree of automation as well as the reasoning behind each of the classifications are shown in \Cref{tbl:system-categories}.
 
 \begin{table}[h]
     \centering
     \begin{tabularx}{\textwidth}{XXX}
-    \textbf{Gesture driven systems}       & \textbf{Rule driven systems}                             & \textbf{Autonomous systems} \\
+    \textbf{Interactive systems}          & \textbf{User defined rule systems}                       & \textbf{Autonomous systems} \\
     \textit{Lowest degree of automation}  & \textit{Medium degree of automation}                     & \textit{Highest degree of automation}\\
-    Configured by the user.               & Configured by the user.                                  & Configured by an expert.\\
+    Configured by the user.               & Configured by the user.                                  & Configured by an expert, or based on statistics.\\
     Conditions are triggered by the user. & Automatically and constantly observes the environment.   & Automatically and constantly observes the environment.\\
     ~                                     & The configuration may be reusable for other individuals. & Automatically adjusts to the user's needs.\\
     \end{tabularx}

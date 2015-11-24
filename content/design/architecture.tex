@@ -1,4 +1,4 @@
-\section{Architecture}
+\section{Architecture}\label{sec:architecture}
 The system consists of three layers as illustrated in \Cref{fig:architecture}. 
 Each layer can communicate with the layer below and above it if they exist.
 
@@ -6,31 +6,24 @@ The first layer consist of the wearable device and the mobile device.
 The two may be tightly coupled as some wearable watches, 
 for example the Apple Watch, relies heavily on the phone. 
 The two devices are responsible for listening to new movement data from the wearable, 
-\eg new data from the accelerometer and the magnetometer. 
+\eg new data from the accelerometer and the magnetometer.
+The movement data is used for recognizing gestures, 
+and the magnetometer data is used for determining direction, 
+such that we are able to determine what devices are being pointed at. 
 The topmost layer is also responsible for communicating with the beacons, 
 in order to retrieve the position of the user, 
 and possibly the position of the devices the user can control. 
-This external dependency must communicate directly with the phone, 
-due to limitations of the Estimote beacons.
 
 The topmost layer communicates with a central server developed specifically for this project. 
 The server is responsible for storing positions of the smart devices, 
-as well as receiving and interpret gestures received from the wearable device.
+as well as receiving actions, based on interpreted gestures, from the wearable device.
 Whenever the wearable device recognizes a gesture, 
-it is pushed to the server along with the direction of the user.
-The server then determines if the user points at a known device, 
-and if the gesture is understood by that device. 
-If it is, the appropriate action is triggered. 
-If no device is found, 
-or the gesture is not understood by the device, 
-the data is discarded.
+the wearable devices sends an action and a device ID to the server.
+The server then relays this request to a smart hub. 
 
-\todo[author=Simon]{Is this true? Is the communication between mobile device, server and watch necessary?}
-
-If a gesture is recognized and an action must be triggered, 
-the server communicates with the third layer. 
 The smart hub is responsible for managing the devices that can be controlled using gestures. 
-Therefore the server sends a request to the smart hub in order to trigger the appropriate action.
+The smart execute the request received from the server, 
+on the appropriate smart device. 
 
 \begin{figure}[h]
   \centering
@@ -41,7 +34,7 @@ Therefore the server sends a request to the smart hub in order to trigger the ap
 
 When utilizing a smart hub, users must install a hub in their home. 
 The hub communicates with the users devices, \eg bulbs, locks and thermostats. 
-For privacy reasons, it may be interesting to move the logic from the server to such hubs in the users home. 
+For privacy reasons, it may be interesting to move the logic of the server to the smart hubs in the users home. 
 This would also remove a layer in the architecture, simplifying it.
 
 %Thalley: Let's keep it general and not talk about the SmartThings Hub here. 

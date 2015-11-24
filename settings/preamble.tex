@@ -1,6 +1,9 @@
 \documentclass[openright,twoside,11pt,american]{memoir}
 \synctex=1
 
+%Makes LaTeX more tolerant for underfill lines (won't let e.g. texttt to overfill hboxes)
+\sloppy
+
 % Section spacing and numbering
 \setsecnumdepth{subsection}
 \setlength{\beforechapskip}{0pt}
@@ -38,6 +41,7 @@
 \graphicspath{{./images/}}
 \usepackage{tikz} %Tikz
 \usepackage{tikzscale}
+\usepackage{tikz-uml}
 \usetikzlibrary{calc, arrows, decorations.markings,decorations.text, shapes, positioning}
 %Pseudocode
 \usepackage{algorithm}
@@ -75,7 +79,7 @@
 %\usepgfplotslibrary{dateplot}
 %\usetikzlibrary{pgfplots.dateplot}
 \pgfplotsset{compat=newest,
-  grid=major, 
+%  grid=major, 
   table/col sep = comma,
 	every axis legend/.append style={
 		no marks,
@@ -123,6 +127,14 @@
   autogobble,
   breaklines
 }
+\newmintinline{swift}{}
+
+% Symbols package
+% Initially added to use \degree
+\usepackage{gensymb}
+
+% Pseudocode
+\usepackage{algpseudocode}
 
 \input{settings/macros}
 

@@ -1,0 +1,34 @@
+\usepackage{pgfplots}
+\usepgfplotslibrary{colormaps}
+\pgfplotsset{compat=1.12}
+\usepgfplotslibrary{external}
+
+\pgfplotsset{
+    colormap={grayscale}{ gray(0cm)=(0); gray(1cm)=(1);},
+    % colormap/winter,
+}
+
+\def\customrevertcolormap#1{%
+    \pgfplotsarraycopy{pgfpl@cm@#1}\to{custom@COPY}%
+    \c@pgf@counta=0
+    \c@pgf@countb=\pgfplotsarraysizeof{custom@COPY}\relax
+    \c@pgf@countd=\c@pgf@countb
+    \advance\c@pgf@countd by-1 %
+    \pgfutil@loop
+    \ifnum\c@pgf@counta<\c@pgf@countb
+        \pgfplotsarrayselect{\c@pgf@counta}\of{custom@COPY}\to\pgfplots@loc@TMPa
+        \pgfplotsarrayletentry\c@pgf@countd\of{pgfpl@cm@#1}=\pgfplots@loc@TMPa
+        \advance\c@pgf@counta by1 %
+        \advance\c@pgf@countd by-1 %
+    \pgfutil@repeat
+%\pgfplots@colormap@showdebuginfofor{#1}%
+}%
+
+\newcommand{\heatmap}[1]{
+  \begin{tikzpicture}
+    \begin{axis}[view={0}{90},colorbar] 
+      \customrevertcolormap{grayscale}
+      \addplot3[surf] table[col sep = comma] {#1};
+    \end{axis}
+  \end{tikzpicture}
+}
