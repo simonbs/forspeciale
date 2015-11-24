@@ -1,0 +1,52 @@
+\subsection{Final Prototype}
+\label{sec:implementation:prototypes:prototype4}
+
+The purpose of the fourth and final prototype of the iOS application was to connect the concepts from previous prototypes into a final protoype and control actual smart devices.
+
+This iteration of the application removed the need for pressing to start and end a gesture. Instead the user points with the device in order to select one or more smart devices that should be controlled and performs the gesture after a short delay as described in section \ref{sec:gesture-recognition:points}.
+
+Furthermore gestures can be configured per action. Each action a smart device can perform can be associated with a gesture. Several devices can share a single gesture. The screenshots in figure \ref{fig:prototype4-app-screenshots} shows how this is configured.
+
+The application shows the following four actions.
+
+\begin{itemize}
+\item \emph{turnOn} for the \emph{Lamp at Dinner Table} device.
+\item \emph{turnOff} for the \emph{Lamp at Dinner Table} device.
+\item \emph{turnOn} for the \emph{Lamp at Couches} device.
+\item \emph{turnOff} for the \emph{Lamp at Couches} device.
+\end{itemize}
+
+Only the first action, \emph{turnOn} for \emph{Lamp at Dinner Table}, has a gesture associated with it. The three other actions have no gesture configured and therefore cannot be triggered from the application.
+
+Tapping on a one of the action/device combinations presents the gesture picker from which gestures can be added or associated with a device and an a action. Swiping on a action/device combination lets the users remove an associated gesture.
+
+\subsubsection{Major Changes}
+
+\begin{itemize}
+\item Actual smart devices connected to HomePort are controlled.
+\item Removed the need for pressing start and stop when performing a gesture. Instead the user points with the smarthpone.
+\item Gestures can be associated with a device and action.
+\end{itemize}
+
+\subsubsection{Results}
+
+In the fourth prototype all components were connected and the system could be used as a whole. Using the fourth prototype we are able to perform tests on the entire system and get a better understanding of how realistic the initial vision of controlling a smart home by pointing at one ore more devices and perform a gesture is. We also able to get a better overview of which components of the system needs improvements in future work.
+
+The next step could be to fine tune some of the components in order to perform better measured on speed or accuracy or both. Another possible step to be taken is to port the solution to wearable.
+
+\begin{figure}[!htb]%
+    \centering
+    \subfloat{
+        \includegraphics[width=0.3\textwidth]{images/prototype4-1.png}
+    }
+    \subfloat{
+        \includegraphics[width=0.3\textwidth]{images/prototype4-2.png}
+    }
+    \caption{Screenshots of the fourth and final prototype.}
+    \label{fig:prototype4-app-screenshots}
+\end{figure}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "../../master"
+%%% End:
