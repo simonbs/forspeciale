@@ -8,6 +8,10 @@
 \def\etc{\emph{etc}\onedot} \def\vs{\emph{vs}\onedot}
 \def\wrt{w.r.t\onedot} \def\dof{d.o.f\onedot}
 \def\etal{\emph{et al}\onedot}
+
+\def\figcaption{%
+  \refstepcounter{figure}%
+  \@dblarg{\@caption{figure}}}
 \makeatother
 
 \newcommand{\method}[2]{\sloppy\ensuremath{\texttt{{#1}(#2)}}}
