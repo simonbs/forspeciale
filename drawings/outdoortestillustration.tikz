@@ -1,0 +1,12 @@
+\begin{tikzpicture}
+
+\draw (0,0) rectangle (6,6); % Outline of room
+%
+\draw[red,thick,dotted] (3,3) circle (0.2); % Phone location
+
+\fill[blue!100!] (3.13, 0) circle (0.25); % Beacon location - Bottom
+\fill[blue!100!] (6, 2.83) circle (0.25); % Beacon location - Right
+\fill[blue!100!] (2.83, 6) circle (0.25); % Beacon location - Top
+\fill[blue!100!] (0, 3.13) circle (0.25); % Beacon location - Left
+
+\end{tikzpicture}
