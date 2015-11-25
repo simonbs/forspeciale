@@ -1,0 +1,12 @@
+\usepackage{pgfplots}
+\usepgfplotslibrary{colormaps}
+\pgfplotsset{compat=1.12}
+\usepgfplotslibrary{external}
+
+\newcommand{\heatmap}[1]{
+  \begin{tikzpicture}
+  \begin{axis}[ybar,bar width=2pt]
+    \addplot table[x=gestureNo, y=time, col sep=comma] {#1};   
+  \end{axis}
+\end{tikzpicture}
+}

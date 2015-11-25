@@ -1,32 +1,23 @@
 \section{Performance of Gesture Recognition}\label{sec:gestureperformance}
 Gesture recognition is a core part of our solution and it is being performed often. 
-Since the gesture recognition is being performed by device with somewhat low performance,
+Since the gesture recognition is being performed by a device with somewhat low performance,
 it is important that we have high performance of our gesture recognition. 
 In this section we test the performance of recognizing gestures. 
-We test the performance by executing a number of gestures and see how fast we can recognize these.  
-We expect the number of unique gestures in the database to increase the recognition time. 
-Furthermore, the number of times each gesture has been trained also increase the complexity of recognizing gestures. %Thalley: Remove this line if that is no longer the case
+We test the performance by gradually populating the database with gesture traces and see how fast we can recognize a random gesture input.
+We expect the number of gesture traces in the database to increase the recognition time.
 
-For this setup, we have [NUMBER OF GESTURES], each trained [NUMBER OF TRAININGS] times. 
-We start by evaluating with \num{1} gesture, and then increase the number of unique gestures to estimate the computational complexity.
+For this setup, we add five gesture traces at a time, this is to simulate training a gesture five times as recommended by \cite{threedollar}. We then generate a random gesture input and run the recognition function on it ten times and log the time it took to finish.
+We repeat this until there is a total of 100 gesture traces in the database, which corresponds to 20 gestures.
+We performed this test six times on an iPhone 5.
 
 \begin{figure}[!htb]
     \centering
-    \todo[author=Thalley]{Insert figure}
-    \caption{Graph showing the time of recognizing gestures, with increasing number of unique gestures}
+    \input{drawings/three-dollar-performance-test.tikz}
+    \caption{Graph showing the time of recognizing gestures, with increasing number of gesture traces}
     \label{fig:performancegraph}
 \end{figure}
-\todo[author=Thalley]{Perform performance of gesture recognition tests}
-
-The result from \Cref{fig:performancegraph} show that the complexity of gesture recognition is [RESULT]. 
-
-To find the time it takes to recognize a single gesture, 
-we perform the recognition of a random sample of known gestures \num{1000} times, 
-and calculate the mean time spend on recognizing each gesture. 
-Since the number of unique gestures has an impact on the complexity, 
-we choose a fixed number of common gestures each trained [NUMBER OF TRAININGS] times. 
-We expect at common number of unique gestures to be [NUMBER OF COMMON GESTURES], 
-and for that number of gestures we find that the average time to recognize a single gesture is [RESULT]. 
+\todo[author=Kasper]{Lige nu bruger vi bare resultatet af én af mange tests. Vi kan overveje at slå dem sammen og tage gennemsnitstiden.}
 
 \subsection{Performance of Gesture Recognition Conclusion}
-From the results, we can conclude that... \todo[author=Thalley]{Write conclusion of performance test based on results}
+The result from \Cref{fig:performancegraph} shows that the time spent recognizing a gesture increases linearly with the amount of gesture traces in the database.
+As the system only attempts to recognize a gesture once, the performance of the ``Three Dollar Gesture Recognizer'' should be adequate for use in our system. 

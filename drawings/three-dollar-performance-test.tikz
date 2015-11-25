@@ -1,0 +1,5 @@
+\begin{tikzpicture}
+  \begin{axis}[ybar,bar width=2pt]
+    \addplot table[x=gestureNo, y=time] {data/three-dollar-test-results/results/10xrecognize/2015-11-25 12.36.29.csv};   
+  \end{axis}
+\end{tikzpicture}
