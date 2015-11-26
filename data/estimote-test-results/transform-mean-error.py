@@ -2,7 +2,7 @@
 Transform data from Estimote tests.
 
 Usage:
-  transform-mean-error.py --output=DIR --max-duration=SECONDS --xpos=X --ypos=Y [--skip-header] (--input=DIR | <file>)
+  transform-mean-error.py --output=DIR --max-duration=SECONDS --xpos=X --ypos=Y [--mean-error] [--skip-header] (--input=DIR | <file>)
   transform-mean-error.py --help
   transform-mean-error.py --version
 
@@ -14,6 +14,7 @@ Options:
   --max-duration=TIME                    Maximum duration of test in seconds. Only the first log entries that fit within the specified duration are considered.
   -x X, --xpos=X                         Real X position.
   -y Y, --ypos=Y                         Real Y position.
+  --mean-error                           Outputs a single average mean error.
   --skip-header                          Set option if there is a header that must be skipped.
 """
 from docopt import docopt
@@ -72,19 +73,23 @@ class Coordinate:
   def distance_from(self, other):
     return math.sqrt((self.x - other.x) ** 2 + (self.y - other.y) ** 2)
 
-def transform_all(input_dir, output_dir, max_duration, real_pos, skip_header = False):
+def transform_all(input_dir, output_dir, max_duration, real_pos, mean_error = False, skip_header = False):
   files = [ f for f in os.listdir(input_dir) if os.path.isfile(os.path.join(input_dir, f)) and os.path.splitext(f)[-1] == '.csv' ]
   for file in files:
-    open_and_transform(os.path.join(input_dir, file), output_dir, max_duration, real_pos, skip_header)
+    open_and_transform(os.path.join(input_dir, file), output_dir, max_duration, real_pos, mean_error, skip_header)
 
-def open_and_transform(in_path, output_dir, max_duration, real_pos, skip_header = False):
+def open_and_transform(in_path, output_dir, max_duration, real_pos, mean_error = False, skip_header = False):
   with open(in_path, 'r') as infile:
-    transform(infile, output_dir, max_duration, real_pos, skip_header)
+    transform(infile, output_dir, max_duration, real_pos, mean_error, skip_header)
   
-def transform(infile, output_dir, max_duration, real_pos, skip_header = False):
+def transform(infile, output_dir, max_duration, real_pos, mean_error = False, skip_header = False):
   log_entries = parse_log_entries(infile, skip_header)
   filtered = filter_log_entries(log_entries, max_duration)  
   rows = [ csv_row_from_log_entry(i, e, real_pos) for i, e in enumerate(filtered) ]
+  if mean_error:
+    total = sum([ e.coordinate.distance_from(real_pos) for i, e in enumerate(filtered) ])
+    average = total / len(filtered)
+    rows = [ [average] ]
   write_csv(rows, os.path.join(output_dir, os.path.basename(infile.name)))
 
 def csv_row_from_log_entry(idx, log_entry, real_pos):
@@ -117,6 +122,7 @@ if __name__ == '__main__':
     '--max-duration': Use(int, error='Max duration must be an integer.'),
     '--xpos': Or(Use(Decimal), None, error='Value for X must be an integer.'),
     '--ypos': Or(Use(Decimal), None, error='Value for Y must be an integer.'),
+    '--mean-error': bool,
     '--skip-header': bool    
   })  
   args = s.validate(args)
@@ -124,7 +130,7 @@ if __name__ == '__main__':
   real_pos = Coordinate(args['--xpos'], args['--ypos'])
   
   if args['<file>'] != None:
-    transform(args['<file>'], args['--output'], args['--max-duration'], real_pos, args['--skip-header'])
+    transform(args['<file>'], args['--output'], args['--max-duration'], real_pos, args['--mean-error'], args['--skip-header'])
     args['<file>'].close()
   elif args['--input'] != None:
-    transform_all(args['--input'], args['--output'], real_pos, args['--skip-header'])
+    transform_all(args['--input'], args['--output'], real_pos, args['--mean-error'], args['--skip-header'])
