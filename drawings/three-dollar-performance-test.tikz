@@ -3,15 +3,15 @@
 %      ybar,
 %      bar width=2pt,
       xlabel = Number of unique gestures,
-      ylabel = Seconds,
+      ylabel = average time in ms,
       xtick=data,
       width=0.95\textwidth,
       height = 6cm,
       yticklabel style={align=right,inner sep=0pt,xshift=-0.3em},
       enlargelimits = false,
-      ymax = 1.6,
+      ymax = 150,
       grid=major,
-      try min ticks=10]
-    \addplot table[x=gestureNo, y=time] {data/three-dollar-test-results/results/10xrecognize/2015-11-25 12.36.29.csv};   
+      try min ticks=10]]
+    \addplot table[x=gestureNo, y=time] {data/three-dollar-test-results/results/10xrecognize/average.csv};   
   \end{axis}
 \end{tikzpicture}
