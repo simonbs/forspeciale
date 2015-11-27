@@ -1,17 +1,22 @@
 \subsection{Prototype \#2}
 \label{sec:implementation:prototypes:prototype2}
+\subsubsection{Purpose}
+The purpose of the second prototype, 
+was to test the indoor positioning of the user, 
+using Estimote beacons, 
+and determine if gesture recognition can be performed, 
+using the hardware of a smartphone.
 
-The purpose of the second prototype is to test the  indoor positioning of the user using Estimote beacons and determine if gesture recognition can be performed using the hardware of a smartphone.
-
+\subsubsection{Description}
 The second prototype consisted of an iOS application, 
-similar to the Android application described in section \ref{sec:implementation:prototypes:prototype1}, 
+similar to the Android application described in \Cref{sec:implementation:prototypes:prototype1}, 
 and a server that represented two controllable lamps.
 The platform was changed from Android to iOS, 
 because Estimote does not have a SDK for Android.
 
-In this prototype the room is still represented as a grid, 
-and the user is placed in the center of the grid, 
-however the user is unable to change position.
+In this prototype the room was still represented as a grid, 
+and the user was placed in the center of the grid, 
+however the user was unable to change position.
 This is because the first prototype showcased the idea of pointing at devices from different locations sufficiently, 
 and the next step would be to use the actual location of a user using Estimote beacons.
 As shown in \Cref{fig:prototype2-app-screenshots}, 
@@ -44,7 +49,10 @@ In this prototype, the only actions are \texttt{turnOn} and \texttt{turnOff}.
 
 \subsubsection{Results}
 
-We were able to point at one or more devices and send an action to the devices in order to flip between their two different states. Both the users position and the devices were simulated.
+We were able to point at one or more devices,
+and send an action to the devices, 
+in order to flip between their two different states. 
+Both the user's position and the devices were simulated.
 
 The next step is to perform actual indoor positioning of the user.
 
@@ -62,7 +70,7 @@ The next step is to perform actual indoor positioning of the user.
 
 \begin{figure}[!htb]
     \centering
-    \includegraphics[scale=0.2]{images/Prototype2_Server.png}
+    \includegraphics[width=0.8\textwidth]{images/Prototype2_Server.png}
     \caption{Screenshot of the server representing two lamps in the second prototype. Colors indicate their status. \texttt{Red} (top): Off and \texttt{Green} (bottom): On}
     \label{fig:prototype2-server-screenshot}
 \end{figure}
