@@ -5,7 +5,16 @@
 
 \newcommand{\heatmap}[1]{
   \begin{tikzpicture}
-  \begin{axis}[ybar,bar width=2pt]
+  \begin{axis}[xlabel = Number of unique gestures,
+      ylabel = average time in ms,
+      xtick=data,
+      width=0.95\textwidth,
+      height = 6cm,
+      yticklabel style={align=right,inner sep=0pt,xshift=-0.3em},
+      enlargelimits = false,
+      ymax = 150,
+      grid=major,
+      try min ticks=10]]
     \addplot table[x=gestureNo, y=time, col sep=comma] {#1};   
   \end{axis}
 \end{tikzpicture}
