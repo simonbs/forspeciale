@@ -2,7 +2,7 @@
 The system consists of three layers as illustrated in \Cref{fig:architecture}. 
 Each layer can communicate with the layer below and above it if they exist.
 
-The first layer consist of the wearable device and the mobile device. 
+The first layer consist of the wearable device and the smartphone. 
 The two may be tightly coupled as some wearable watches, 
 for example the Apple Watch, relies heavily on the phone. 
 The two devices are responsible for listening to new movement data from the wearable, 
@@ -25,17 +25,31 @@ The smart hub is responsible for managing the devices that can be controlled usi
 The smart execute the request received from the server, 
 on the appropriate smart device. 
 
-\begin{figure}[h]
+When utilizing a smart hub, users must install a hub in their home. 
+The hub communicates with the users devices, \eg bulbs, locks and thermostats. 
+For privacy reasons, it may be interesting to move the logic of the server to the smart hubs in the users home. 
+This would also remove a layer in the architecture, simplifying it.
+
+\begin{figure}[H]
   \centering
   \input{drawings/systemarchitecture.tikz}
   \caption{Architecture of the system.}
   \label{fig:architecture}
 \end{figure}
 
-When utilizing a smart hub, users must install a hub in their home. 
-The hub communicates with the users devices, \eg bulbs, locks and thermostats. 
-For privacy reasons, it may be interesting to move the logic of the server to the smart hubs in the users home. 
-This would also remove a layer in the architecture, simplifying it.
+The following components are involved in the architecture.
+
+\begin{itemize}
+\item \textbf{Werable Device} Recognizes gestures and ensures actions are sent. Not included in the implemente prototypes. Instead gesture recognition is performed on a smartphone. For more information on gesture recognition see section \ref{sec:gesturerecognition}.
+\item \textbf{Smartphone} Responsible for performing indoor positioning using the beacons. Possibly serves as a medium of communication between the wearable and the server as some wearable devices only support communication through bluetooth.
+\item \textbf{Beacons} Utilized for indoor positioning. For more information on this see section \ref{sec:designindoorlocation}.
+\item \textbf{Server} A medium of communication between the topmost layer and HomePort. For more information about the server see section \ref{sec:serverdesign}.
+\item \textbf{HomePort} The hub responsible for communicating with the smart devices. In this example, HomePort is used but other hubs could be used. For more information on HomePort see section \ref{sec:homeport}.
+\end{itemize}
+
+In the architecture presented in figure \ref{fig:architecture} the server is separated from HomePort. In the current prototype the components are physically separated. In practice it makes sense to bundle the two components together and keep a virtual separation. Based on the current solution the user must install both a server and HomePort in his home. Bundling the two together eases the installation as only a single component will need to be installed and configured by the user.
+
+One way of bundling the two components is to extend HomePort with the capabilities of the server. This is possible as the HomePort solution is open sourced and thus we have access to the entire implementation of HomePort. Such solution is not possible with other hubs, such as SmartThings.
 
 %Thalley: Let's keep it general and not talk about the SmartThings Hub here. 
 %However, Samsung does not allow developers to run applications on the Hub, 
