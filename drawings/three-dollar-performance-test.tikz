@@ -1,5 +1,17 @@
 \begin{tikzpicture}
-  \begin{axis}[ybar,bar width=2pt]
+  \begin{axis}[
+%      ybar,
+%      bar width=2pt,
+      xlabel = Number of unique gestures,
+      ylabel = Seconds,
+      xtick=data,
+      width=0.95\textwidth,
+      height = 6cm,
+      yticklabel style={align=right,inner sep=0pt,xshift=-0.3em},
+      enlargelimits = false,
+      ymax = 1.6,
+      grid=major,
+      try min ticks=10]
     \addplot table[x=gestureNo, y=time] {data/three-dollar-test-results/results/10xrecognize/2015-11-25 12.36.29.csv};   
   \end{axis}
 \end{tikzpicture}

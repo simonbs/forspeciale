@@ -6,18 +6,27 @@ In this section we test the performance of recognizing gestures.
 We test the performance by gradually populating the database with gesture traces and see how fast we can recognize a random gesture input.
 We expect the number of gesture traces in the database to increase the recognition time.
 
-For this setup, we add five gesture traces at a time, this is to simulate training a gesture five times as recommended by \cite{threedollar}. We then generate a random gesture input and run the recognition function on it ten times and log the time it took to finish.
-We repeat this until there is a total of 100 gesture traces in the database, which corresponds to 20 gestures.
-We performed this test six times on an iPhone 5.
+For this setup, we add five gesture traces at a time. 
+This is to simulate training a gesture five times, 
+as recommended by \cite{threedollar}. 
+We then generate a random gesture input, 
+and run the recognition function on it ten times, 
+logging the execution time.
+We repeat this until there is a total of \num{100} gesture traces in the database, 
+which corresponds to \num{20} unique gestures.
+We performed this test six times on an iPhone 5, 
+with a \SI{1.3}{\giga\hertz} dual-core ARM processor and \SI{1}{\giga\byte} RAM.
 
 \begin{figure}[!htb]
     \centering
     \input{drawings/three-dollar-performance-test.tikz}
-    \caption{Graph showing the time of recognizing gestures, with increasing number of gesture traces}
+    \caption{Graph showing the time of recognizing gestures, with increasing number of gesture traces. Each unique gesture is training \num{5} times.}
     \label{fig:performancegraph}
 \end{figure}
 \todo[author=Kasper]{Lige nu bruger vi bare resultatet af én af mange tests. Vi kan overveje at slå dem sammen og tage gennemsnitstiden.}
 
 \subsection{Performance of Gesture Recognition Conclusion}
-The result from \Cref{fig:performancegraph} shows that the time spent recognizing a gesture increases linearly with the amount of gesture traces in the database.
-As the system only attempts to recognize a gesture once, the performance of the ``Three Dollar Gesture Recognizer'' should be adequate for use in our system. 
+The result from \Cref{fig:performancegraph} shows that the time spent recognizing a gesture, 
+increases linearly with the amount of gesture traces in the database.
+As the system only attempts to recognize a gesture once, 
+the performance of the ``Three Dollar Gesture Recognizer'' should be adequate for use in our system. 
