@@ -37,30 +37,35 @@ This would also remove a layer in the architecture, simplifying it.
   \label{fig:architecture}
 \end{figure}
 
-The following components are involved in the architecture.
+The following components are involved in the architecture:
+\begin{description}
+    \item[Werable Device] Recognizes gestures and ensures actions are sent. Not included in the implemented prototypes; gesture recognition is performed on a smartphone in out implementation. For more information on gesture recognition, see \Cref{sec:gesturerecognition}.
+    \item[Smartphone] Responsible for performing indoor positioning using the beacons. Possibly serves as a medium of communication between the wearable and the server, as some wearable devices require a coupled smartphone.
+    \item[Beacons] Utilized for indoor positioning. For more information on this see \Cref{sec:designindoorlocation}.
+    \item[Server] A medium of communication between layer (1) and layer (3). For more information about the server, see \Cref{sec:serverdesign}.
+    \item[Smart Hub] The hub responsible for communicating with the smart devices. For more information on the smart hub, see \Cref{sec:designsmarthub}.
+\end{description}
 
-\begin{itemize}
-\item \textbf{Werable Device} Recognizes gestures and ensures actions are sent. Not included in the implemente prototypes. Instead gesture recognition is performed on a smartphone. For more information on gesture recognition see section \ref{sec:gesturerecognition}.
-\item \textbf{Smartphone} Responsible for performing indoor positioning using the beacons. Possibly serves as a medium of communication between the wearable and the server as some wearable devices only support communication through bluetooth.
-\item \textbf{Beacons} Utilized for indoor positioning. For more information on this see section \ref{sec:designindoorlocation}.
-\item \textbf{Server} A medium of communication between the topmost layer and HomePort. For more information about the server see section \ref{sec:serverdesign}.
-\item \textbf{HomePort} The hub responsible for communicating with the smart devices. In this example, HomePort is used but other hubs could be used. For more information on HomePort see section \ref{sec:homeport}.
-\end{itemize}
+In the architecture presented in \Cref{fig:architecture}, 
+the server is separated from the smart hub. 
+In the current prototype, 
+the components are physically separated. 
+In practice it makes sense to bundle the two components together, 
+and keep a virtual separation. 
+Based on the current solution, 
+the user must install both a server and a smart hub in his home. 
+Bundling the two together eases the installation, 
+as only a single component will need to be installed, 
+and configured by the user.
 
-In the architecture presented in figure \ref{fig:architecture} the server is separated from HomePort. In the current prototype the components are physically separated. In practice it makes sense to bundle the two components together and keep a virtual separation. Based on the current solution the user must install both a server and HomePort in his home. Bundling the two together eases the installation as only a single component will need to be installed and configured by the user.
+One way of bundling the two components, 
+is to extend the smart hub with the capabilities of the server. 
+This is possible if the smart hub solution is open sourced, 
+and we have access to the entire implementation. 
+Such solution is not possible with other hubs, such as SmartThings.
+In order to bundle with such smart hubs, 
+the capabilities of our server must be implemented by the company making the smart hub. 
 
-One way of bundling the two components is to extend HomePort with the capabilities of the server. This is possible as the HomePort solution is open sourced and thus we have access to the entire implementation of HomePort. Such solution is not possible with other hubs, such as SmartThings.
-
-%Thalley: Let's keep it general and not talk about the SmartThings Hub here. 
-%However, Samsung does not allow developers to run applications on the Hub, 
-%nor do they provide a database or any other means of storing larger amount of data in an application running in the SmartThings environment.
-%An alternative is to develop our own hub and system for automating and communicating with the devices, 
-%however, that would a yet another solution for solving that problem. 
-%Many big companies provide such solutions including Google, Microsoft, Apple and Samsung.
-%
-%On the other hand, storing the logic on the server allows, 
-%rather than a hub eliminates the need for distributing updates to multiple hubs every time a new feature is introduced or a minor bug is fixed. 
-%Such changes only need to be deployed to a single server.
 
 %%% Local Variables:
 %%% mode: latex
