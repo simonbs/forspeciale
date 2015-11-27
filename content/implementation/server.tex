@@ -7,9 +7,7 @@ using a microframework called \texttt{Flask},
 which provides a built-in server and a RESTful request handler, among other things. 
 As described in \Cref{sec:serverdesign}, 
 the server only provides two REST methods for controlling a devices and getting the devices. 
-Using \texttt{Flask}, the server has been programmed as simple as \Cref{lst:server}, 
-where the code for communicating with HomePort has been omitted. 
-%Thalley: Er det for dumt at skrive dette? Skal koden fjernes, eller skal man indsætte mere kode?
+Using \texttt{Flask}, the structure of the implementation can be seen in \Cref{lst:server}.
 
 \begin{listing}
   \begin{minted}[linenos, breaklines, autogobble]{python}
@@ -45,13 +43,13 @@ we need to do
 \subsubsection{Mapping Actions}
 In the current implementation of HomePort, 
 there is only two actions: $\{0, 1\}$.
-We implement two actions: $\{\var{turnoff}, \var{turnOn}\}$. 
+We implement two actions: $\{\var{turnOff}, \var{turnOn}\}$. Actions are implemented differently on the server in order to give each action a meaningful value. E.g. ``turnOn'' is more descriptive than a ``0''.
 The two sets of actions are implemented as a list of tuples, 
 where the first value is the HomePort value, 
 and the second value is our string value. 
 
 To map the actions, we either send a numeric value (map to string) or a string value (map to numeric), 
-and look up either the numeric or string value in our list of tuples of actions. 
+and look up either the numeric or string value in our list of tuples of actions.
 
 If the list of tuples is
 \begin{center}
@@ -60,7 +58,7 @@ If the list of tuples is
 then if we send \texttt{0}, we get \texttt{'turnOff'}. 
 
 \subsubsection{Sending HTTP Requests}
-We use another python module called httplib to send the requests. 
+We use another Python module called httplib to send the requests. 
 The request we send are either a \texttt{GET} or a \texttt{PUT}. 
 The \texttt{GET} is simply a \texttt{GET /devices HTTP/1.1}. 
 
@@ -106,9 +104,8 @@ we can do a \texttt{GET} request to the URL of the device, \eg
 \begin{center}
   \texttt{GET /phidget/173111/output/0},
 \end{center}
-and then map the state of HomePort (0 or 1) to our states (off or on). 
+and then map the state of HomePort to our states.
 
-The names and coordinates of the \texttt{Device} objects must be inserted by the user. 
-The names and coordinates in our implementation is currently hardcoded, 
+The names and coordinates of the \texttt{Device} objects must be inserted by the user and are currently hardcoded, 
 as we have not implemented adding new devices. 
 
