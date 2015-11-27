@@ -13,16 +13,17 @@ to the actual position we have in the room.
 We test in with the \num{4} settings from \Cref{table:rooms}.
 
 \begin{table}
-    \centering
-    \begin{tabular}{l| l c c}
-        Name & Size in meters & \# of Beacons & \# of Tests\\ \hline
-        Room 1 & $5 \times 5$ & 4 & 8 \\
-        Room 2 & $8 \times 8$ & 4 & 7 \\
-        Room 3 & $17.9 \times 17.9$ & 4 & 3 \\
-        Room 4 & $4.9 \times 9.95$ & 4/8 &  33
-    \end{tabular}
-    \caption{Room settings}
-    \label{table:rooms}
+  \centering
+  \begin{tabular}{l| l c c}
+    Name & Size in meters & \# of Beacons & \# of Tests\\ \hline
+    Room 1 & $5 \times 5$ & 4 & 8 \\
+    Room 2 & $8 \times 8$ & 4 & 7 \\
+    Room 3 & $17.9 \times 17.9$ & 4 & 3 \\
+    Room 4 & $4.9 \times 9.95$ & 4/8 &  33
+  \end{tabular}
+  \todo[author=Thalley]{Insert number of 2.4 GHz access points}
+  \caption{Room settings}
+  \label{table:rooms}
 \end{table}
 
 We test in different settings to measure if, and how much, 
@@ -37,28 +38,27 @@ Room 1 and Room 2 were setup in an auditorium.
 We used tables to simulate walls, 
 and we placed the beacons on chairs on top of the tables. 
 The setup can be seen in \Cref{fig:audtest} and illustrated in \Cref{fig:precisiontest:illustration}. 
-\todo[author=Thalley]{Insert number of 2.4 GHz access points}
 \begin{figure}[!htb]
-    \centering
-    \includegraphics[width=\textwidth]{drawings/audtest}
-    \caption{The setup for Room 1 and Room 2. Room 1 is marked as the inner (blue) square and is $5 \times 5$ meters. Room 2 is marked as the outer (red) square and is $8 \times 8$ meters. The Estimote beacons are placed on the chairs.}
-    \label{fig:audtest}
+  \centering
+  \includegraphics[width=\textwidth]{drawings/audtest}
+  \caption{The setup for Room 1 and Room 2. Room 1 is marked as the inner (blue) square and is $5 \times 5$ meters. Room 2 is marked as the outer (red) square and is $8 \times 8$ meters. The Estimote beacons are placed on the chairs.}
+  \label{fig:audtest}
 \end{figure}
 
 \begin{figure}[!htb]
-    \centering
-    \input{drawings/audtestillustration.tikz}
-    \caption{Illustration of room used for indoor location precision test. The full (blue) circles represent beacons, the dotted line is the walking path (movement test) and the dotted center circle is the location of the phone (stationary test).}
-    \label{fig:precisiontest:illustration}
+  \centering
+  \input{drawings/audtestillustration.tikz}
+  \caption{Illustration of room used for indoor location precision test. The full (blue) circles represent beacons, the dotted line is the walking path (movement test) and the dotted center circle is the location of the phone (stationary test).}
+  \label{fig:precisiontest:illustration}
 \end{figure}
 
 The setup consisted of four beacons, one on each wall, 
 each using the recommended settings from Estimote \cite{estimote:settings}:
 \begin{description}
-    \item[Broadcasting Power]{4 dBm}
-    \item[Advertising Interval]{200 ms}
-    \item[Smart Power Mode]{Enabled}
-    \item[Basic Power Mode]{Disabled}
+  \item[Broadcasting Power]{4 dBm}
+  \item[Advertising Interval]{200 ms}
+  \item[Smart Power Mode]{Enabled}
+  \item[Basic Power Mode]{Disabled}
 \end{description}
 
 For Room 3, the outdoor ``room'',
@@ -70,10 +70,10 @@ The beacons in this room are slightly off-center (\SI{0.45}{\meter}),
 as we had to use the lampposts' locations. 
 
 \begin{figure}[!htb]
-    \centering
-    \input{drawings/outdoortestillustration.tikz}
-    \caption{Illustration of room used for Estimote accuracy outdoors, with little to no interference from WiFi access points. The full (blue) circles represent beacons, and the dotted center circle is the location of the phone (stationary test).}
-    \label{fig:outdoortest}
+  \centering
+  \input{drawings/outdoortestillustration.tikz}
+  \caption{Illustration of room used for Estimote accuracy outdoors, with little to no interference from WiFi access points. The full (blue) circles represent beacons, and the dotted center circle is the location of the phone (stationary test).}
+  \label{fig:outdoortest}
 \end{figure}
 
 Room 4 is a seminar room. 
@@ -88,19 +88,18 @@ We also tried to perform tests with \num{8} beacons in this room,
 illustrated by \Cref{fig:bowtie8beacons}. 
 
 \begin{figure}[!htb]
-    \begin{minipage}[b]{0.45\textwidth}
-      \centering
-        \input{drawings/seminar4beacons.tikz}
-        \caption{Room 4 bowtie setup using four beacons.}
-        \label{fig:bowtie4beacons}
-    \end{minipage}
-    \hfill
-    \begin{minipage}[b]{0.45\textwidth}
-      \centering
-        \input{drawings/seminar8beacons.tikz}
-        \caption{Room 4 bowtie setup using eight beacons.}
-        \label{fig:bowtie8beacons}
-    \end{minipage}
+  \begin{minipage}[b]{0.45\textwidth}
+    \centering
+    \input{drawings/seminar4beacons.tikz}
+    \caption{Room 4 bowtie setup using four beacons.}
+    \label{fig:bowtie4beacons}
+  \end{minipage}\hfill
+  \begin{minipage}[b]{0.45\textwidth}
+    \centering
+    \input{drawings/seminar8beacons.tikz}
+    \caption{Room 4 bowtie setup using eight beacons.}
+    \label{fig:bowtie8beacons}
+  \end{minipage}
 \end{figure}
 
 \Cref{table:precisiontest:roomsize} shows the test setups from these rooms,
@@ -108,27 +107,26 @@ using the recommended settings.
 In \Cref{sec:settings}, we change some of the settings to determine if they have any effect.
 
 \begin{table}[!htb]
-    \centering
-    \begin{tabular}{l| l l c c}
-        Room   & Phone Position & Duration 	       & Count & \# of Beacons \\ \hline
-        Room 1 & Center         & \SI{1}{\minute}  & 4  & 4 \\ 
-        Room 1 & Center         & \SI{2}{\minute}  & 1     & 4 \\ 
-        Room 1 & Moving         & NA               & 3     & 4 \\
-        Room 2 & Center         & \SI{1}{\minute}  & 3     & 4 \\ 
-        Room 2 & Center         & \SI{2}{\minute}  & 1     & 4 \\
-        Room 2 & Moving         & NA               & 3     & 4 \\ 
-        Room 3 & Center         & \SI{1}{\minute}  & 3     & 4 \\ 
-        Room 4 & Center         & \SI{1}{\minute}  & 3     & 4 \\ 
-        Room 4 & Center         & \SI{1}{\minute}  & 3     & 8 \\ 
-        Room 4 & Moving         & NA       & 3     & 4 \\
-        Room 4 & Moving         & NA       & 3     & 8 \\
-        Room 4 & Moving-Bowtie  & NA       & 3     & 4 \\
-        Room 4 & Moving-Bowtie  & NA       & 3     & 8 \\
-    \end{tabular}
-    \caption{Tests conducted with varying room size and recommended beacon configuration.}
-    \label{table:precisiontest:roomsize}
+  \centering
+  \begin{tabular}{l| l l c c}
+    Room   & Phone Position & Duration 	       & Test Count & \# of Beacons \\ \hline
+    Room 1 & Center         & \SI{1}{\minute}  & 4          & 4 \\ 
+    Room 1 & Center         & \SI{2}{\minute}  & 1          & 4 \\ 
+    Room 1 & Moving         & NA               & 3          & 4 \\
+    Room 2 & Center         & \SI{1}{\minute}  & 3          & 4 \\ 
+    Room 2 & Center         & \SI{2}{\minute}  & 1          & 4 \\
+    Room 2 & Moving         & NA               & 3          & 4 \\ 
+    Room 3 & Center         & \SI{1}{\minute}  & 3          & 4 \\ 
+    Room 4 & Center         & \SI{1}{\minute}  & 3          & 4 \\ 
+    Room 4 & Center         & \SI{1}{\minute}  & 3          & 8 \\ 
+    Room 4 & Moving         & NA               & 3          & 4 \\
+    Room 4 & Moving         & NA               & 3          & 8 \\
+    Room 4 & Moving-Bowtie  & NA               & 3          & 4 \\
+    Room 4 & Moving-Bowtie  & NA               & 3          & 8 \\
+  \end{tabular}
+  \caption{Tests conducted with varying room size and recommended beacon configuration.}
+  \label{table:precisiontest:roomsize}
 \end{table}
-
 
 \subsection{Stationary Accuracy}
 This section contains the results from measuring the accuracy of the tests, 
@@ -140,27 +138,61 @@ shows the number of coordinates measured at that coordinate.
 %HEATMAPS
 \begin{figure}[!htb]
   \begin{minipage}[t]{0.48\textwidth}
+    \centering
     \includegraphics[width=\textwidth]{\heatmap{32}}
     \caption{Room 3, \SI{1}{\minute}, 4 beacons, centered}
     \label{fig:room3:1:4:c}
   \end{minipage}\hfill
   \begin{minipage}[t]{0.48\textwidth}
-    \includegraphics[width=\textwidth]{\heatmap{36}}
-    \caption{Room 4, \SI{1}{\minute}, 4 beacons, centered}
-    \label{fig:room4:1:4:c}
+    \centering
+    \meanerror{32-outside-1218-1790x1790-1min.csv}{11}
+    \caption{Distance error from \Cref{fig:room3:1:4:c}}
+    \label{fig:distance:room3:1:4:c}
   \end{minipage}
 \end{figure}
 
 \begin{figure}[!htb]
-  \begin{minipage}{0.48\textwidth}
+  \begin{minipage}[t]{0.48\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{\heatmap{36}}
+    \caption{Room 4, \SI{1}{\minute}, 4 beacons, centered}
+    \label{fig:room4:1:4:c}
+  \end{minipage}\hfill
+  \begin{minipage}[t]{0.48\textwidth}
+    \centering
+    \meanerror{36-1911-1027-490x995-1min.csv}{4}
+    \caption{Distance error from \Cref{fig:room4:1:4:c}}
+    \label{fig:distance:room4:1:4:c}
+  \end{minipage}
+\end{figure}
+
+\begin{figure}[!htb]
+  \begin{minipage}[t]{0.48\textwidth}
+    \centering
     \includegraphics[width=\textwidth]{\heatmap{43}}
     \caption{Room 4, \SI{1}{\minute}, 4 beacons, at (2,8)}
     \label{fig:room4:1:4:2.8}
   \end{minipage}\hfill
-  \begin{minipage}{0.48\textwidth}
+  \begin{minipage}[t]{0.48\textwidth}
+    \centering
+    \meanerror{43-1911-1106-490x995-1min-at-8.2.csv}{3}
+    \caption{Distance error from \Cref{fig:room4:1:4:2.8}}
+    \label{fig:distance:room4:1:4:2.8}
+  \end{minipage}
+\end{figure}
+
+\begin{figure}[!htb]
+  \begin{minipage}[t]{0.48\textwidth}
+    \centering
     \includegraphics[width=\textwidth]{\heatmap{51}}
     \caption{Room 4, \SI{1}{\minute}, 8 beacons, centered}
     \label{fig:room4:1:8:c}
+  \end{minipage}\hfill
+  \begin{minipage}[t]{0.48\textwidth}
+    \centering
+    \meanerror{51-1911-1137-490x995-1min-8-beacons.csv}{4}
+    \caption{Distance error from \Cref{fig:room4:1:8:c}}
+    \label{fig:distance:room4:1:8:c}
   \end{minipage}
 \end{figure}
 
@@ -174,11 +206,40 @@ and that we are near WiFi access points with the same frequency.
 We see a similar tendency in in \Cref{fig:room4:1:8:c}, 
 but we expect that the increased spreading here is due to interference from using more beacons. 
 
-%MEAN ERROR
-Since we know the location of the phone, 
-we can measure the distance error of each coordinate we get from Estimote. 
-\todo[author=Thalley]{Insert distance error and mean distance error}
+The distance error graphs supports the statement that none of the results are very accurate. 
+It is clearly worst in the outside test, shown by \Cref{fig:distance:room3:1:4:c}. 
+\Cref{fig:distance:room4:1:4:2.8,fig:distance:room4:1:4:c} show some decent results. 
+\Cref{fig:distance:room4:1:4:2.8}, where the phone is not centered, 
+is clearly the best result we get. 
+An interesting result is seen by \Cref{fig:room4:1:8:c},
+where it seems that the number of beacons, 
+makes the measurements fluctuate. 
 
+\Cref{table:meanerrorresults} shows the \emph{mean} distance error of all the stationary tests. 
+
+\begin{table}[!htb]
+  \centering
+  \begin{tabular}{l|l c c}
+    Room   & Position   & \# of beacons & Mean error \\ \hline
+    Room 1 & Centered   & 4             & \SI{1.78}{\meter} \\
+    Room 2 & Centered   & 4             & \SI{2.96}{\meter} \\
+    Room 3 & Centered   & 4             & \SI{7.31}{\meter} \\
+    Room 4 & Centered   & 4             & \SI{1.94}{\meter} \\
+    Room 4 & At $(2,8)$ & 4             & \SI{1.22}{\meter} \\
+    Room 4 & Centered   & 8             & \SI{3.02}{\meter} \\ \hline
+    Total  &            &               & \SI{2.92}{\meter}
+  \end{tabular}
+  \caption{Mean error of all stationary tests with Estimote recommended settings. Some rooms have more test results than others. See \Cref{table:rooms}.}
+  \label{table:meanerrorresults}
+\end{table}
+
+Based on this table, we can conclude the following:
+\begin{itemize}
+  \item The distance error increases as we increase the distance to the beacons
+  \item Adding more beacons results in worse accuracy, likely due to interference
+\end{itemize}
+
+\FloatBarrier
 \subsection{Moving Accuracy}
 In this section we measure the accuracy of the Estimote beacons,
 while the phone is in motion. 
@@ -189,11 +250,13 @@ where \Cref{fig:room4:4:b,fig:room4:8:b} shows selected heatmaps of walking in a
 %HEATMAPS
 \begin{figure}[!htb]
   \begin{minipage}{0.48\textwidth}
+    \centering
     \includegraphics[width=\textwidth]{\heatmap{08}}
     \caption{Room 1, 4 beacons, moving}
     \label{fig:room1:4:m}
   \end{minipage}\hfill
   \begin{minipage}{0.48\textwidth}
+    \centering
     \includegraphics[width=\textwidth]{\heatmap{14}}
     \caption{Room 2, 4 beacons, moving}
     \label{fig:room2:4:m}
@@ -219,11 +282,13 @@ this is likely the reason why the results from Room 4 are worse.
 
 \begin{figure}[!htb]
   \begin{minipage}{0.48\textwidth}
+    \centering
     \includegraphics[width=\textwidth]{\heatmap{40}}
     \caption{Room 4, 4 beacons, bowtie}
     \label{fig:room4:4:b}
   \end{minipage}\hfill
   \begin{minipage}{0.48\textwidth}
+    \centering
     \includegraphics[width=\textwidth]{\heatmap{48}}
     \caption{Room 2, 8 beacons, bowtie}
     \label{fig:room4:8:b}
@@ -245,22 +310,42 @@ This was done three times,
 and then the settings of the beacons were changed.
 
 The difference settings we tested are shown in \Cref{table:precisiontest:settings}.
+Each result describes the mean error distance from \num{3} tests, 
+each \num{1} minutes long.  
 
 \begin{table}[!htb]
   \centering
-  \begin{tabular}{l|l}
-    Advertising Interval & Broadcasting Power \\ \hline
-    200 ms               & 4 dBm              \\ 
-    200 ms               & -20 dBm            \\ 
-    200 ms               & -12 dBm            \\ 
-    200 ms               & -4 dBm             \\ 
-    100 ms               & 4 dBm              \\ 
+  \begin{tabular}{c|c|c}
+    Advertising Interval    & Broadcasting Power & Mean Error Distance \\ \hline
+    \SI{200}{\milli\second} & \num{-20} dBm      & \SI{4.57}{\meter} \\ 
+    \SI{200}{\milli\second} & \num{-12} dBm      & \SI{3.49}{\meter} \\ 
+    \SI{200}{\milli\second} & \num{-4} dBm       & \SI{2.16}{\meter} \\ 
+    \SI{200}{\milli\second} & \num{4} dBm        & \SI{2.81}{\meter} \\ 
+    \SI{100}{\milli\second} & \num{4} dBm        & \SI{1.41}{\meter} \\ 
   \end{tabular}
-  \caption{Tests conducted with varying settings on the beacons.}
+  \caption{Tests conducted with varying settings on the beacons. Each result is from $3 \times 1$ minutes of measurement.}
   \label{table:precisiontest:settings}
 \end{table}
 
-\todo[author=Thalley]{Insert results}
+The results from \Cref{table:precisiontest:settings} show that settings do have an impact on accuracy,
+but they do also have an impact on battery life. 
+While changing from \SI{200}{\milli\second} to \SI{100}{\milli\second} almost increased accuracy by \perc{200},
+it also increases the battery usage by \perc{200}.
+Lower broadcasting powers such as \num{-20} dBm and \num{-12} dBm perform bad. 
+This is because at such lower powers, 
+the signal from the beacons might not have reached the phone, 
+and the lack of data from these beacons is very likely to have worsened the accuracy.
+
+Interestingly, \num{-4} dBm performed better than \num{4} dBm.
+From \Cref{table:meanerrorresults}, we saw that more beacons worsened the accuracy. 
+It is possible that a broadcasting power of \num{4} dBm,
+creates more interferences, and thus worse results, than \num{-4} dBm. 
+We do not, however, have enough data to properly conclude this, 
+but it is nonetheless a logical possibility. 
 
 \subsection{Precision of Indoor Location Conclusion}
-From the results, we can conclude that... \todo[author=Thalley]{Write conclusion of precision test based on results}
+From out results, we can conclude that we cannot, 
+in our settings, reach high indoor accuracy using Estimote beacons. 
+They claim that the accuracy is \num{0.5}-\num{1} meters, 
+but our best result is \num{1.22} meter, 
+and our overall accuracy is \num{2.92} meters. 
