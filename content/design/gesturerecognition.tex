@@ -275,7 +275,7 @@ Most of the attributes and operations should be self-explanatory but some may ne
   \item \texttt{pointDetectedCallback} is a closure called when a point is detected.
 \end{itemize}
 
-By trial and error we found the following thresholds to be suitable.
+By trial and error we found the following thresholds to be suitable:
 
 \begin{itemize}
 \item \texttt{pointingDuration} = 0.5
@@ -284,7 +284,16 @@ By trial and error we found the following thresholds to be suitable.
 \item \texttt{tableThreshold} = 0.005
 \end{itemize}
 
-The thresholds were determined by adjusting the values until an acceptable behaviour was achieved. No systematic experimentation of the values were performed as we have a hypothesis that the values can be calibrated for each user. For example, we found that \texttt{pointingThreshold} to be independent of the user. It depends on how much the user shakes when holding his hand still. A solution is to use a relatively high value but the lower the value is, the more likely a point will be detected and the better.
+The thresholds were determined by adjusting the values, 
+until an acceptable behavior was achieved. 
+No systematic experimentation of the values were performed, 
+as we have a hypothesis that the values can be calibrated for each user. 
+For example, we found that \texttt{pointingThreshold} to be dependent of the user. 
+It depends on how much the user shakes, 
+when trying to hold his hand still. 
+A solution is to use a value higher than the values measured when he is holding his hand still.
+However, the lower the threshold is, 
+the better we can detect a point.
 
 \begin{figure}
   \centering
