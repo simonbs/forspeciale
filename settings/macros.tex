@@ -27,22 +27,23 @@
 
 \newcommand{\heatmap}[1]{data/estimote-test-results/heatmaps/pdf/#1}
 \newcommand{\meanerror}[2]{
-    \begin{tikzpicture}
-    \begin{axis}[
-    width=\textwidth,
-    ylabel = Distance in meters,
-    xlabel = Measurements over time,
-    enlargelimits=false,
-    ymax=#2,
-    ymin=0,
-    grid=major,
-    max space between ticks=15pt,
-    xtick = {0, 50, 100, 150, 200, 250, 300}
-    ]
-    \addplot table [x expr=\coordindex, y index=0] {data/estimote-test-results/mean-error/#1};
-    \end{axis}
-    \end{tikzpicture}
-    }
+  \begin{tikzpicture}
+  \begin{axis}[
+  height=7cm,
+  width=\textwidth,
+  ylabel = Distance in meters,
+  xlabel = Measurements over time,
+  enlargelimits=false,
+  ymax=#2,
+  ymin=0,
+  grid=major,
+  max space between ticks=20pt,
+  xtick = {0, 50, 100, 150, 200, 250, 300}
+  ]
+  \addplot table [x expr=\coordindex, y index=0] {data/estimote-test-results/mean-error/#1};
+  \end{axis}
+  \end{tikzpicture}
+}
 
 \newenvironment{shadedi}{% For use with aligning the def environment
   \def\FrameCommand{\fboxsep=\FrameSep \colorbox{green!40}}%

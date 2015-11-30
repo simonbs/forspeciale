@@ -8,6 +8,7 @@
     % colormap/winter,
 }
 
+
 \def\customrevertcolormap#1{%
     \pgfplotsarraycopy{pgfpl@cm@#1}\to{custom@COPY}%
     \c@pgf@counta=0
@@ -26,9 +27,17 @@
 
 \newcommand{\heatmap}[1]{
   \begin{tikzpicture}
-    \begin{axis}[view={0}{90},colorbar] 
-      \customrevertcolormap{grayscale}
-      \addplot3[surf] table[col sep = comma] {#1};
+    \begin{axis}[
+      view={0}{90},
+      colorbar, 
+      colormap={mygray}{rgb(0pt)=(1,1,1); rgb(5pt)=(0.9,0.9,0.9);  rgb(400pt)=(0.15,0.15,0.15);  rgb(1000pt)=(0,0,0)},
+      height=7cm,
+      width=7cm,
+      ylabel = Room length,
+      xlabel = Room width,
+      max space between ticks=25pt] 
+%      \customrevertcolormap{grayscale}
+      \addplot3[surf, shader=flat] table[col sep = comma] {#1};
     \end{axis}
   \end{tikzpicture}
 }

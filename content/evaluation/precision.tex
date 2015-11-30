@@ -135,16 +135,18 @@ where we have placed a phone and logged the locations.
 In these heatmaps, the heat, or intensity, 
 shows the number of coordinates measured at that coordinate. 
 
-%HEATMAPS
+%HEATMAPS AND MEAN ERRORS
+\newcommand{\graphspace}{\vspace{0.08cm}}
 \begin{figure}[!htb]
-  \begin{minipage}[t]{0.48\textwidth}
+  \begin{minipage}[b]{0.5\textwidth}
     \centering
-    \includegraphics[width=\textwidth]{\heatmap{32}}
+    \includegraphics{\heatmap{32}}
+    \graphspace
     \caption{Room 3, \SI{1}{\minute}, 4 beacons, centered}
     \label{fig:room3:1:4:c}
   \end{minipage}\hfill
-  \begin{minipage}[t]{0.48\textwidth}
-    \centering
+  \begin{minipage}[b]{0.45\textwidth}
+%    \centering
     \meanerror{32-outside-1218-1790x1790-1min.csv}{11}
     \caption{Distance error from \Cref{fig:room3:1:4:c}}
     \label{fig:distance:room3:1:4:c}
@@ -152,13 +154,14 @@ shows the number of coordinates measured at that coordinate.
 \end{figure}
 
 \begin{figure}[!htb]
-  \begin{minipage}[t]{0.48\textwidth}
+  \begin{minipage}[b]{0.5\textwidth}
     \centering
-    \includegraphics[width=\textwidth]{\heatmap{36}}
+    \includegraphics{\heatmap{36}}
+    \graphspace
     \caption{Room 4, \SI{1}{\minute}, 4 beacons, centered}
     \label{fig:room4:1:4:c}
   \end{minipage}\hfill
-  \begin{minipage}[t]{0.48\textwidth}
+  \begin{minipage}[b]{0.45\textwidth}
     \centering
     \meanerror{36-1911-1027-490x995-1min.csv}{4}
     \caption{Distance error from \Cref{fig:room4:1:4:c}}
@@ -167,13 +170,14 @@ shows the number of coordinates measured at that coordinate.
 \end{figure}
 
 \begin{figure}[!htb]
-  \begin{minipage}[t]{0.48\textwidth}
+  \begin{minipage}[b]{0.5\textwidth}
     \centering
-    \includegraphics[width=\textwidth]{\heatmap{43}}
+    \includegraphics{\heatmap{43}}
+    \graphspace
     \caption{Room 4, \SI{1}{\minute}, 4 beacons, at (2,8)}
     \label{fig:room4:1:4:2.8}
   \end{minipage}\hfill
-  \begin{minipage}[t]{0.48\textwidth}
+  \begin{minipage}[b]{0.45\textwidth}
     \centering
     \meanerror{43-1911-1106-490x995-1min-at-8.2.csv}{3}
     \caption{Distance error from \Cref{fig:room4:1:4:2.8}}
@@ -182,13 +186,14 @@ shows the number of coordinates measured at that coordinate.
 \end{figure}
 
 \begin{figure}[!htb]
-  \begin{minipage}[t]{0.48\textwidth}
+  \begin{minipage}[b]{0.5\textwidth}
     \centering
-    \includegraphics[width=\textwidth]{\heatmap{51}}
+    \includegraphics{\heatmap{51}}
+    \graphspace
     \caption{Room 4, \SI{1}{\minute}, 8 beacons, centered}
     \label{fig:room4:1:8:c}
   \end{minipage}\hfill
-  \begin{minipage}[t]{0.48\textwidth}
+  \begin{minipage}[b]{0.45\textwidth}
     \centering
     \meanerror{51-1911-1137-490x995-1min-8-beacons.csv}{4}
     \caption{Distance error from \Cref{fig:room4:1:8:c}}
