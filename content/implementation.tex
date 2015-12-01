@@ -1,3 +1,36 @@
 \chapter{Implementation}\label{chap:implementation}
-\input{content/implementation/prototypes}
+%\input{content/implementation/prototypes}
+This chapter describes the implementation details of our system, 
+designed in \Cref{chap:design}. 
+The system consists of three layers, as described by \Cref{fig:architecture}.
+We designed the first layer to consist of a wearable device and a smartphone. 
+However, since we did not have access to a wearable device, 
+we have implemented the first layer entirely as a iPhone application. 
+
+This application have been developed through several prototypes. 
+The first prototype, described in \Cref{sec:implementation:prototypes:prototype1}, was implemented as an Android application, 
+to develop a way to find which devices the user points at. 
+\Cref{sec:implementation:prototypes:prototype2} describes the second prototype was implemented as a iPhone application,
+developed to test the Estimote indoor location software development kit (SDK). 
+We also developed a very basic server for this prototype, \ie the second layer. 
+The third prototype in \Cref{sec:implementation:prototypes:prototype3}, 
+implemented the \$3 Gesture Recognition system,
+and used the location estimated from the Estimote SDK. 
+The fourth and final prototype described in \Cref{sec:implementation:prototypes:prototype4} connected all the layers of the system. 
+This prototype connects to and communicates with the implemented server and smart hub. 
+
+The implementation of the server, \ie the second layer of the system, 
+is described in \Cref{sec:serverimplementation}. 
+As the smart hub, the third layer, is not something that we have implemented ourself, 
+we will not describe the implementation of this.
+However, \Cref{sec:serverimplementation} describes how it is connected to our system. 
+
+\input{content/implementation/prototype1}
+\FloatBarrier
+\input{content/implementation/prototype2}
+\FloatBarrier
+\input{content/implementation/prototype3}
+\FloatBarrier
+\input{content/implementation/prototype4}
+\FloatBarrier
 \input{content/implementation/server}
