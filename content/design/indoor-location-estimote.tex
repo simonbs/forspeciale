@@ -11,6 +11,60 @@ and has released a software development kit (SDK),
 that developers can use to perform indoor positioning, 
 making it easier to adopt the technology.
 
+\subsubsection{The Beacons and the iBeacon Protocol}
+Before we describe how we can use the beacons for indoor positioning, 
+we want to describe the technology that makes this possible. 
+Most of this section contains information from \cite{ESTIMOTEBEACON}.
+
+The beacon contains a small ARM processor with an antenna, 
+a Bluetooth Smart module and a battery, enclosed in a silicone casing,
+as shown by \Cref{fig:estimotebeacon}.
+The flat side of the casing has an adhesive on one side, 
+so that the beacons can be attached to surfaces. 
+
+\begin{figure}[!htb]
+  \centering
+  \includegraphics[width=0.6\textwidth]{images/estimotebeacon}
+  \caption{Image of an Estimote beacon. Contains a small ARM processor, a Bluetooth Smart module and a battery, enclosed in silicone casing. Source: \protect\cite{ESTIMOTEBEACON}}
+  \label{fig:estimotebeacon}
+\end{figure}
+
+The beacons broadcast signals. 
+The beacons can broadcast these in an interval between \SI{100}{\milli\second} and \SI{2000}{\milli\second},
+however an operating system such as iOS only scans for signals every \SI{1}{\second}.
+Likewise, the beacons can broadcast the signals with a broadcasting power between \num{4} dBm and \num{-30}.
+The further the signals travels, the weaker they get.
+This means that the further away from a beacon you receive the signal, 
+the weaker it is, and thus the accuracy falls. 
+In short, the distance estimates will be more accurate the closer to a beacon you are. 
+
+Estimote Beacons uses the iBeacon protocol. 
+Each iBeacon packet include \cite{IBEACON}:
+\begin{description}
+  \item[UUID] A \SI{16}{\byte} identifier string 
+  \item[Major] A \SI{2}{\byte} string to identify a subset of beacons within a larger group
+  \item[Minor] A \SI{2}{\byte} string meant to identify individual beacons
+  \item[Tx Power] A power defined as the signal exactly 1 meter from the device. This is used to estimate the distance between the devices. 
+\end{description}
+
+Estimote uses the iBeacon packets to estimate the distances. 
+However, rather than trying to estimate exact distances, 
+Estimote uses \emph{proximity zones}. 
+There are four zones:
+\begin{enumerate}
+  \item Immediate (very close to the beacon)
+  \item Near (about 1-3 meters from the beacon)
+  \item Far (further away or the signal is fluctuating too much to make a better estimate)
+  \item Unknown 
+\end{enumerate}
+
+By using \num{3} or more beacons, it is possible to estimate the users location. 
+A typical method of estimating the location is trilateration. 
+However, Estimote found that this method could not get better accuracy than \SI{5}{\meter}.
+To get better results, 
+they utilize particle filtering, sensor fusion and noise reduction algorithms.
+
+\subsubsection{Indoor Location with Estimote}
 Estimote, aside from offering the typical use case for beacons like entering a specific region, 
 has also specialized in indoor location of users using the iBeacon protocol. 
 The company has developed and released the Estimote Indoor Location SDK\footnote{https://github.com/Estimote/iOS-Indoor-SDK}.
