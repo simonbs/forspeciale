@@ -40,6 +40,11 @@ we need to do
   \item Transform XML data from HomePort to JSON
 \end{enumerate}
 
+We have borrowed a box from Aalborg University,
+containing two ordinary light bulbs, 
+a Phidget interface kit and a relay.
+This Phidget box have been used to test the implementation of connecting with HomePort. 
+
 \subsubsection{Mapping Actions}
 In the current implementation of HomePort, 
 there is only two actions: $\{0, 1\}$.
@@ -59,20 +64,20 @@ then if we send \texttt{0}, we get \texttt{'turnOff'}.
 
 \subsubsection{Sending HTTP Requests}
 We use another Python module called httplib to send the requests. 
-The request we send are either a \texttt{GET} or a \texttt{PUT}. 
-The \texttt{GET} is simply a \texttt{GET /devices HTTP/1.1}. 
+The request we send are either a GET or a PUT. 
+The GET is simply a \texttt{GET /devices HTTP/1.1}. 
 
-To perform an action, we use the aforementioned mapper to get the numeric value of our action and send a \texttt{PUT} request with 
-  \begin{minted}[breaklines, autogobble]{python}
-  "<?xml version='1.0' encoding='UTF-8'?><value>" + mapper.map_action_to_id(action) + "</value>"
-  \end{minted}
+To perform an action, we use the aforementioned mapper to get the numeric value of our action and send a PUT request with 
+\begin{minted}[breaklines, autogobble]{python}
+"<?xml version='1.0' encoding='UTF-8'?><value>" + actionID + "</value>"
+\end{minted}
 as data. 
 
 \subsubsection{Transforming XML Data}
 When we request devices from HomePort, 
 we receive an XML response. 
 An example response of HomePort could be:
-\begin{minted}[linenos, breaklines, autogobble]{xml}
+\begin{minted}[linenos, breaklines, autogobble, escapeinside=||]{xml}
 <?xml version="1.0"?>
 <devicelist name="services.xml" id="12345">
   <device desc="phidget" id="173111" vendorid="0x01" productid="0x01" version="V1" location="ExampleRoom" type="phidget">
@@ -80,7 +85,7 @@ An example response of HomePort could be:
     <service desc="input" id="0" value_url="/phidget/173111/output/0" type="input" unit="0/1">
       <parameter id="0"/>
     </service>
-    ...
+    |\ldots|
   </device>
 </devicelist>
 \end{minted}
@@ -100,7 +105,7 @@ and then use our mapper to convert these to our actions.
 We also need to get the state of the device. 
 In HomePort, the state is either 0 (off) or 1 (on). 
 To get the state of the device, 
-we can do a \texttt{GET} request to the URL of the device, \eg 
+we can do a \texttt{GET} request to the URL of the device, \eg:
 \begin{center}
   \texttt{GET /phidget/173111/output/0},
 \end{center}
@@ -109,3 +114,20 @@ and then map the state of HomePort to our states.
 The names and coordinates of the \texttt{Device} objects must be inserted by the user and are currently hardcoded, 
 as we have not implemented adding new devices. 
 
+The JSON result of the transformed XML, with a name and coordinate is:
+
+\begin{minted}[linenos, breaklines, autogobble, escapeinside=||]{xml}
+{
+  "devices": [
+  {
+    "actions": ["turnOff", "turnOn"], 
+    "coords": [6.5, 3.35], 
+    "id": "0", 
+    "name": "Lamp at Couches", 
+    "state": "off", 
+    "url": "/phidget/173111/output/0"
+  }, 
+  {|\ldots|}
+  ]
+}
+\end{minted}
