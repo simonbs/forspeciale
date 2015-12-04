@@ -1,32 +1,4 @@
 \section{Indoor Positioning}\label{sec:analysis:indoor-positioning}
-In this project, a solution for pointing at a controllable device, \eg a lamp, is proposed. 
-In order to determine which device the user points at, 
-and thereby intends to control, 
-it is necessary to determine the locations of the devices in the system, 
-relative to the user. 
-We must thus know the location of the user, 
-and his controllable devices along with the orientation of the user.
-
-The orientation of the user can be retrieved from any device possessing a magnetometer. 
-We found that 49 devices in Vandrico's database contain the magnetometer component. 
-Given the orientation of the user, his location and the location of a controllable device, 
-we can calculate if the user is looking at, 
-or in the direction of, the controllable device.
-We also need to define a visibility range, \ie a range that constitutes the area in which items are visible to the system. This range can be specified (in degrees) as $r = o \pm e$, where $r$ is the visibility range, $o$ is the orientation of the user and $e$ is the distance between $o$ and the edges of $r$.
-\Cref{fig:visibilityangle} illustrates this. 
-In this figure, the user's orientation is \var{o1}, 
-and there are two devices with orientations \var{o2} and \var{o3}. 
-An orientation in degrees is between \num{0} and \num{360}. 
-To determine whether a device with orientation \var{o2} is within the visibility range, 
-it is a simple matter of calculating whether \var{o2} is greather than $\var{o1}-\var{e}$ and smaller than $\var{o1}+\var{e}$, with some exceptions when the visibility range spans the gap between 359\degree and 0\degree.
-
-\begin{figure}[!htb]
-    \centering
-    \def\svgwidth{0.6\textwidth}
-    \import{drawings/}{drawings/visibilityangle.pdf_tex}
-    \caption{Finding objects in the visibility range. Device 1 is within the range, but Device 2 is not.}
-\label{fig:visibilityangle}
-\end{figure}
 
 The focus of this project is not to position devices, 
 and as such it was not the intention to spend time developing an entire solution for positioning devices indoors. 
@@ -64,7 +36,7 @@ if he points at the overlap as visualized in \Cref{fig:indoor-positioning:overla
     \begin{minipage}[t]{0.45\textwidth}
         \centering
         \includegraphics[width=0.6\textwidth]{images/incorrect-positioning-estimate.png}
-        \caption{Incorrect location estimate. The estimate is visualized as a striped circle.}
+        \caption{Incorrect location estimate. The estimate is visualized as a striped circle. The actual location of the device is illustrated as a bulb with a circle around.}
         \label{fig:indoor-positioning:incorrect}
     \end{minipage}\qquad
     \begin{minipage}[t]{0.45\textwidth}
