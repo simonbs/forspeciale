@@ -1,99 +1,6 @@
 %!TeX root=../../master.tex
-\section{Gesture Recognition}\label{sec:gesturerecognition}
-The system lets users control smart devices in their home by performing certain gestures.
+\section{Detecting Points}\label{sec:detecting-points}
 
-Gesture recognition can generally be split into two categories: 
-Camera-based and motion-based \cite{Kela2006}. 
-Examples of camera-based gesture recognition systems are the ``Gesture Pendant'' \cite{starner2000gesture} and the Kinect \cite{kinect}, 
-and an example of a motion-based system is the Reemo \cite{Reemo}.
-
-The camera-based solution require that the limbs, 
-used to perform gestures, 
-are visible to the camera, 
-and as such \emph{static} cameras placed in a room, 
-may be rendered useless if the user turns his back against them. 
-In addition, furniture and other people may stand in between them, 
-and obstruct the line of sight between the camera and the user.
-This would likely not happen with the ``Gesture Pendant'', 
-but the user would have to make sure that the pendant was always outside of any clothes worn, 
-as putting on a sweater or wrapping yourself in a blanket, 
-might block the view of the camera.
-
-Motion-based solutions can employ various different sensors on the person,
-such as accelerometers and gyroscopes, 
-and depending on the type of sensor, 
-different methods can be used to recognize gestures.
-As mentioned in \Cref{sec:wearables}, accelerometers are present in about half of the wearables. 
-Because of this, we will focus on finding a solution using accelerometer, 
-so that we do not have to use additional hardware, such as cameras. 
-
-In the following section, we will describe a gesture recognition system called the \$3 Gesture Recognizer. 
-
-
-\subsection{\$3 Gesture Recognizer}\label{sec:threedollar}
-The \$3 Gesture Recognizer is a gesture recognition system, 
-created by Sven Kratz and Michael Rohs, 
-and is presented in the paper ``A \$3 Gesture Recognizer – Simple Gesture Recognition for Devices Equipped with 3D Acceleration Sensors'' \cite{threedollar}.
-
-The system is based on the \$1 Recognizer by Wobrock \etal \cite{wobbrock2007gestures}, 
-and adds the ability to detect three dimensional gestures, 
-rather than being limited to two dimensional gestures.
-
-Both of these systems are designed to be easy to use by anyone for fast prototyping of user interfaces, 
-which makes them appropriate for use in this project.
-The \$3 Gesture Recognizer, however, is better suited, 
-as it is capable of recognizing more gestures because it utilizes three dimensional data.
-This means that users have even more options for personalizing the gestures, 
-that they will use to control their home with.
-
-In addition, the \$3 Gesture Recognizer only requires the user to train a gesture about five times, 
-before it can deliver adequate recognition rates. 
-This provides a better experience for the user, 
-as he does not need to spend much time training the system before he is able to use it.
-Whenever a user trains a gesture, 
-a new gesture trace is stored and associated with a gesture class. 
-A gesture class that has been trained five times, 
-has five gesture traces stored.
-
-The way the \$3 Gesture Recognizer works, 
-is by collecting data from a three-axis accelerometer, 
-and from this it creates a gesture trace $T$, 
-which consists of a set of candidate points. 
-This is illustrated in \Cref{fig:onedollar-gesturetrace}.
-
-The figure also shows that the gesture traces can contain a different number of points, 
-when performing the same gesture at different speeds.
-Because of this, the \$3 Gesture Recognizer \emph{resamples} $T$, 
-so that it contains a fixed number of points. 
-In \cite{threedollar}, the number of points $N$ is \num{150}, 
-with equal distance between the points.
-If $N$ is set to a lower value, then precision is lost. 
-If $N$ is set to a higher value, then computational cost increases.
-After resampling the points, 
-$T$ is rotated in an attempt to correct for any rotational error, 
-and finally it is scaled to fit inside of a cube of $100^3$ units, 
-to compensate for the fact that may perform inconsistently sized gestures.
-
-Once all of these transformations have been performed, 
-the gesture trace is matched against all the training gestures. 
-From these comparisons a scoring table is created, 
-where each trained gesture is given a score, 
-based on the distance between it and the input gesture trace. 
-To reduce the amount of false positives, 
-a scoring heuristic is utilized, 
-which simply determines whether a score is above a threshold $\epsilon$.
-
-\todo[author=Thalley]{We should include a description of how gestures are compared. What's the math behind it?}
-
-\begin{figure}[!htb]
-  \centering
-  \includegraphics[width=0.8\textwidth]{images/1-dollar-gesturetrace.png}
-  \caption{A slow and fast question mark and a triangle, made by subjects using a stylus on a Pocket PC. Note the considerable time differences and resulting numbers of points. Image and text is from Figure 3 in \cite{wobbrock2007gestures}}
-  \label{fig:onedollar-gesturetrace}
-\end{figure}
-
-\subsection{Detecting Points Before and After Gestures}
-\label{sec:gesture-recognition:points}
 Before a user performs a gesture in order to control a smart device, 
 he must point at the smart device he desires to control. 
 
@@ -104,7 +11,7 @@ An accelerometer can be used to detect if the user holds the device still.
 If there is a low amount of activity on all three axes, 
 it is assumed that the user is holding the device in his hand without moving it.
 
-\Cref{fig:gesture-recognition:point-to-gesture-state-diagram} shows the relationship of a point and a gesture in a state diagram. 
+\Cref{fig:point-to-gesture-state-diagram} shows the relationship of a point and a gesture in a state diagram. 
 All gestures begin and end with a point. 
 When the first point is detected, 
 a very short delay is introduced in order for the user to prepare to do the gesture, 
@@ -126,16 +33,16 @@ In such case, the system returns to the initial state.
 \centering
 \includegraphics[width=\textwidth]{images/point-to-gesture-state-diagram}
 \caption{State diagram showing the relationship between a point and a gesture. A gesture always starts and ends with a point.}
-\label{fig:gesture-recognition:point-to-gesture-state-diagram}
+\label{fig:point-to-gesture-state-diagram}
 \end{figure}
 
 \subsubsection{Using Accelerometer Data to Detect a Point}
 
-\Cref{fig:gesture-recognition:pointer} shows screenshots of an application, 
+\Cref{fig:pointer} shows screenshots of an application, 
 created to experiment with data from the accelerometer. 
-The figure shows graphs of measurements made while the device was lying on a table (\Cref{fig:gesture-recognition:pointer:table}), 
-the user was pointing with the device in his hand (\Cref{fig:gesture-recognition:pointer:hand}), 
-and while the user was walking with the device in his hand (\Cref{fig:gesture-recognition:pointer:walk}).
+The figure shows graphs of measurements made while the device was lying on a table (\Cref{fig:pointer:table}), 
+the user was pointing with the device in his hand (\Cref{fig:pointer:hand}), 
+and while the user was walking with the device in his hand (\Cref{fig:pointer:walk}).
 We measure this so that we do not recognize a device laying still on a table, 
 as a user pointing.
  
@@ -154,17 +61,17 @@ we can conclude that the accelerometer data can be used to determine if a user i
 
 \begin{figure}[!htb]%
     \centering
-    \subbottom[Table]{\label{fig:gesture-recognition:pointer:table}
+    \subbottom[Table]{\label{fig:pointer:table}
         \frame{\includegraphics[width=0.3\textwidth]{images/pointer-table}}
     }
-    \subbottom[Hand]{\label{fig:gesture-recognition:pointer:hand}
+    \subbottom[Hand]{\label{fig:pointer:hand}
         \frame{\includegraphics[width=0.3\textwidth]{images/pointer-hand}}
     }
-    \subbottom[Walk]{\label{fig:gesture-recognition:pointer:walk}
+    \subbottom[Walk]{\label{fig:pointer:walk}
         \frame{\includegraphics[width=0.3\textwidth]{images/pointer-walk}}
     }
     \caption{Screenshots of application created to experiment with data from the accelerometer. Leftmost screenshot shows graph of measurements made when the device lies on a table. The middle image shows graph of measurements made while pointing with the device. Rightmost screenshot shows graph of measurements made while the user was walking with the device in his hand.}
-    \label{fig:gesture-recognition:pointer}
+    \label{fig:pointer}
 \end{figure}
 
 \subsubsection{Detecting Points using PointDetector}
@@ -180,7 +87,7 @@ and based on the data determines if a user points with the device.
 When a user points with the device, 
 an instance of the class will inform a listener.
 
-The state diagram in \Cref{fig:gesture-recognition:pointdetector-state-diagram} illustrates the internals of the \texttt{PointDetector} class. 
+The state diagram in \Cref{fig:pointdetector-state-diagram} illustrates the internals of the \texttt{PointDetector} class. 
 When instantiated, the object will not be detecting, 
 \ie it will not be receiving accelerometer data. 
 After the instantiation, the instance can begin detecting. 
@@ -230,7 +137,7 @@ the values must be checked against another threshold, $g$. Note that $g < h$.
 \centering
 \includegraphics[width=\textwidth]{images/point-detector-state-diagram}
 \caption{State diagram showing the states the \texttt{PointDetector} class can be in.}
-\label{fig:gesture-recognition:pointdetector-state-diagram}
+\label{fig:pointdetector-state-diagram}
 \end{figure}
 
 The following pseudo code checks if a data set from the accelerometer indicates a point. 
@@ -264,7 +171,7 @@ If the data does not fit within the threshold $g$, the function checks if the da
   \end{algorithmic}
 \end{algorithm}
 
-\Cref{fig:gesture-recognition:pointdetector-uml} shows an example of the attributes and operations the \texttt{PointDetector} may have. 
+\Cref{fig:pointdetector-uml} shows an example of the attributes and operations the \texttt{PointDetector} may have. 
 Most of the attributes and operations should be self-explanatory but some may need a short description.
 
 \begin{itemize}
@@ -319,7 +226,7 @@ the better we can detect a point.
     } 
   \end{tikzpicture}
   \caption{Class diagram of the \texttt{PointDetector} class.}
-  \label{fig:gesture-recognition:pointdetector-uml}
+  \label{fig:pointdetector-uml}
 \end{figure}
 
 %%% Local Variables:

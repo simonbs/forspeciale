@@ -1,0 +1,146 @@
+\section{Indoor Positioning}\label{sec:analysis:indoor-positioning}
+In this project, a solution for pointing at a controllable device, \eg a lamp, is proposed. 
+In order to determine which device the user points at, 
+and thereby intends to control, 
+it is necessary to determine the locations of the devices in the system, 
+relative to the user. 
+We must thus know the location of the user, 
+and his controllable devices along with the orientation of the user.
+
+The orientation of the user can be retrieved from any device possessing a magnetometer. 
+We found that 49 devices in Vandrico's database contain the magnetometer component. 
+Given the orientation of the user, his location and the location of a controllable device, 
+we can calculate if the user is looking at, 
+or in the direction of, the controllable device.
+We also need to define a visibility range, \ie a range that constitutes the area in which items are visible to the system. This range can be specified (in degrees) as $r = o \pm e$, where $r$ is the visibility range, $o$ is the orientation of the user and $e$ is the distance between $o$ and the edges of $r$.
+\Cref{fig:visibilityangle} illustrates this. 
+In this figure, the user's orientation is \var{o1}, 
+and there are two devices with orientations \var{o2} and \var{o3}. 
+An orientation in degrees is between \num{0} and \num{360}. 
+To determine whether a device with orientation \var{o2} is within the visibility range, 
+it is a simple matter of calculating whether \var{o2} is greather than $\var{o1}-\var{e}$ and smaller than $\var{o1}+\var{e}$, with some exceptions when the visibility range spans the gap between 359\degree and 0\degree.
+
+\begin{figure}[!htb]
+    \centering
+    \def\svgwidth{0.6\textwidth}
+    \import{drawings/}{drawings/visibilityangle.pdf_tex}
+    \caption{Finding objects in the visibility range. Device 1 is within the range, but Device 2 is not.}
+\label{fig:visibilityangle}
+\end{figure}
+
+The focus of this project is not to position devices, 
+and as such it was not the intention to spend time developing an entire solution for positioning devices indoors. 
+Instead it was desired to find an existing product, 
+that could be used to facilitate indoor positioning.
+The solution should be available in the early phases of the project, 
+in order to start building the system based on the solution for positioning.
+
+As the target group of the project is consumers, 
+and not businesses with big budgets, 
+it is desired that the price of the technology used for indoor positioning is kept at a minimum. 
+This includes the price for any device, 
+that may have to be installed on each controllable device in order to position it.
+
+It is assumed that users already own one or more devices that fit within the concept of Internet of Things, 
+and are early adapters of such technology. 
+However, it easy to imagine that this project can be used in an office environment, 
+where employees of varying technological expertise work or in health care. 
+Therefore users may have a varying degree of technological expertise, 
+and it should be easy to extend the solution with new controllable devices.
+
+Naturally the accuracy of the solution used for indoor positioning plays an important part. 
+\Cref{fig:indoor-positioning:incorrect} shows the consequence of an incorrect location. 
+If a lamp is estimated to be at another location that it is actually located, 
+the user must point to an incorrect location in order to control the lamp.
+Furthermore if the estimate is too wide, 
+\ie the given area in which the lamp is located is very big, 
+there is a greater risk that locations overlap. 
+Overlapping locations causes a complexity, 
+as it is necessary to determine which device the user desires to control, 
+if he points at the overlap as visualized in \Cref{fig:indoor-positioning:overlap}.
+
+\begin{figure}[!htb]
+    \centering
+    \begin{minipage}[t]{0.45\textwidth}
+        \centering
+        \includegraphics[width=0.6\textwidth]{images/incorrect-positioning-estimate.png}
+        \caption{Incorrect location estimate. The estimate is visualized as a striped circle.}
+        \label{fig:indoor-positioning:incorrect}
+    \end{minipage}\qquad
+    \begin{minipage}[t]{0.45\textwidth}
+        \centering
+        \includegraphics[width=0.6\textwidth]{images/positioning-overlap.png}
+        \caption{Overlap of estimated positions. The estimates are visualized as a striped circle.}
+        \label{fig:indoor-positioning:overlap}
+    \end{minipage}
+\end{figure}
+
+
+\subsection{Analysis of Potential Existing Solutions}
+This section will be an analysis of commercialized products that offer indoor location.
+Only solutions intended for indoor positioning are considered.
+GPS is not considered a potential solution as GPS is meant for outdoor positioning, 
+and the location offered by GPS tend to have poor accuracy indoors.
+We have chosen not to include solutions designed for larger buildings such as airports, malls or warehouses, 
+as these does not provide solutions or setups for smaller areas such as rooms or houses. 
+
+\Cref{tbl:indoor-positioning} shows the results of the analysis. 
+\begin{table}[!htb]
+    \begin{description}[style=multiline,leftmargin=2.5cm]
+        \item[Product:] Estimote Beacons and Stickers \cite{estimote}
+        \item[Availability:] Beacons and Stickers are shipping. SDKs available.
+        \item[Technology:] iBeacon protocol.
+        \item[Price:] \SI{99}[\$]{} for beacons. \SI{99}[\$]{} for \num{10} stickers, one per device to be positioned.
+        \item[Ease of use:] Initial installation of beacons. Attach each sticker to device.
+        \item[Accuracy:] \num{0.5}-\num{1} meter \cite{estimote:accuracy}. However the accuracy is reported to be \num{3}-\num{4} meters on average, for locations bigger than \SI{100}{\square\meter} based on an e-mail correspondence with Wojtek Borowicz from Estimote. See \Cref{appendix:estimote-accuracy}.
+
+        \item[Product:] Pozyx \cite{pozyx}
+        \item[Availability:] Available for preorder.
+        \item[Technology:] Ultra-wideband (UWB).
+        \item[Price:] \SI{368}[\$]{}\$368 for anchors. \SI{123}[\$]{} for each device to be positioned, plus supported Arduino.
+        \item[Ease of use:] Initial installation of anchors. One tag for each device, plus supported Arduino. Not meant for mounting.
+        \item[Accuracy:] Claimed to be \SI{10}{\centi\meter}. Untested. \\
+        
+        \item[Product:] SmartActionSLAM \cite{SASLAM}
+        \item[Availability:] Android Application (research). Not commercialized.
+        \item[Technology:] Smartphone sensors.
+        \item[Price:] N/A.
+        \item[Ease of use:] Requires modification of source code (available) to get real-time position. 
+        \item[Accuracy:] Reported to have a mean error of \SI{0.34}{\meter} (only using smartphone and no external sensors).\\
+        
+        \item[Product:] DecaWave's DW1000 \cite{decawave}
+        \item[Availability:] Available in stores. 
+        \item[Technology:] Ultra-wideband (UWB)
+        \item[Price:] Chips are \SI{12.50}[\$]{}, transceiver module is \SI{25}[\$]{}. Evaluation kits are available for \SI{589}[\$]{} and \SI{990}[\$]{} 
+        \item[Ease of use:] No SDK and requires implementing the chips on a board yourself. 
+        \item[Accuracy:] Claimed to be \SI{10}{\centi\meter}. 
+        \end{description}
+    \caption{Assessment of potential solutions for indoor positioning. Please note that all prices are converted to U.S. dollars from their respective currency. Prices include the minimum available hardware for positioning a device.}
+    \label{tbl:indoor-positioning}
+\end{table}
+
+Estimote gives a solution using Bluetooth Low Energy (BLE) beacons using the iBeacon protocol. 
+The beacons can be mounted on walls in a room or building, 
+and then by using the signal strength of each beacon (an iBeacon feature), 
+it can estimate how far away the user is. 
+Estimote's solution is available as a consumer product.
+
+Pozyx and DecaWave use a wireless radio technology known as ultra-wideband, which works much like BLE but at a different frequency. 
+Like Estimote, it also requires setting up ``anchors'' and then using the signal strength to find the location. 
+No easy to use consumer product is available for either of these.
+
+SmartActionSLAM is an Android application from research done by Hardegger \etal \cite{SASLAM}. 
+This solution is a lot different from most other indoor location solutions. 
+It \emph{calculates} an estimated location by counting steps and estimating step length and direction. 
+In theory it can be adapted to almost any smartphone, 
+but requires a lot of work to adapt the released code from the research project. The benefit of this solution is that no extra hardware is needed. SmartActionSLAM can run on the users smartphone and with some adjustments potentially on a wearable.
+
+Technologies like NFC and RFID were not considered for positioning in this project. Such systems only detect users when they walk by the sensors and then report the position of the sensor. We were looking for technologies that provide a more granular position of the user. Furthermore WiFi was not considered as the group had worked with indoor positioning using WiFi in previous projects and found it to be unreliable and therefore wanted to try another technology.
+
+\input{content/analysis/indoor-positioning-estimote.tex}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "../../master"
+%%% TeX-command-extra-options: "-shell-escape"
+%%% End:
