@@ -30,7 +30,7 @@ These requirements are our functional requirements that we determine our system 
 \subsection{Performance Requirements}
 We will measure how well the the system performs by these requirements:
 \begin{description}
-    \item[Realtime gesture recognition] The system should recognize gestures effectively to give the user a feeling of realtime control of devices. %Thalley: Should we define a maximum computational time? 
+    \item[Realtime gesture recognition] The system should recognize gestures effectively to give the user a feeling of realtime control of devices. We set a computational requirement of less than \SI{200}{\milli\second} per gesture. %Thalley: Should we define a maximum computational time? 
     \item[Scalability] The system should scale well with the number of smart devices and locations. Adding more smart devices close to each other will make it difficult to select the right one (due to inaccuracy of pointing). The system should be able to determine the right device, if two or more devices are close to each (less than a meter apart).
     \item[Correct gesture recognition] The system should recognize gestures correctly at least \perc{80} of the time. If the system continuously turns the volume of your stereo up instead of down, it is rendered useless.  
     \item[Correct device selection] The system should send the action to the correct device at least \perc{80} of the time. The system needs to figure out which device is the most likely to perform a given action. The system should not turn on the coffee machine instead of turning on a lamp.
@@ -42,6 +42,6 @@ We will measure how well the the system performs by these requirements:
 These requirements describe additional requirements, not mentioned in the previous two requirements sections.
 \begin{description}
     \item[Use existing hardware] Our system should not use any specialized or non-commercialized hardware.  
-    \item[Useful throughout the day] Our system should be usable throughout the day without requiring recharging of devices. 
+    \item[Limited battery usage] Our system should be usable throughout the day, without requiring recharging of devices. 
     \item[Not limited to line of sight] Unlike Reemo, we do not want our system to require line of sight of devices we want to control. 
 \end{description}
