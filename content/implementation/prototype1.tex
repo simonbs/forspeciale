@@ -17,7 +17,7 @@ This position can be changed by using the \texttt{Up}, \texttt{Down}, \texttt{Le
 When the user's direction changes, 
 a list of devices being pointed at is acquired, 
 by calculating the angle between the user's position and the position of each device.
-The direction is found using magnetic fields, 
+The direction is found using magnetic fields\todo[author=Brian]{Kan højtalere og andre magnetiske felter forstyrre magnetometeret så det ikke længere er præcist nok?}, 
 such that \num{0} is north, \num{-90} is west, \num{90} is east, etc. 
 The angle between each smart device and the user, 
 is calculated finding the inverse tangent (arctangent), 
@@ -50,7 +50,7 @@ A screenshot of this application is shown in \Cref{fig:prototype1-app-screenshot
 \end{table}
 
 \subsection{Results}
-
+\todo[author=Brian]{Skriv noget om hvor præcist det var.}
 From the prototype we found that given the user's position, 
 the user's direction (from a magnetometer) and the positions of smart devices, 
 we can determine which smart devices a user points at. 
