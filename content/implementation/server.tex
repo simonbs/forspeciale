@@ -4,7 +4,7 @@ In this section, we briefly document the implementation of the server.
 
 The server is implemented in Python,
 using a microframework called \texttt{Flask},
-which provides a built-in server and a RESTful request handler, among other things. 
+which provides a built-in server and a RESTful request handler. 
 As described in \Cref{sec:serverdesign}, 
 the server only provides two REST methods for controlling a devices and getting the devices. 
 Using \texttt{Flask}, the structure of the implementation can be seen in \Cref{lst:server}.
@@ -90,6 +90,7 @@ An example response of HomePort could be:
 </devicelist>
 \end{minted}
 
+\todo[author=brian]{Why does server need device state?}
 The values that we are interested in here is the attributes of the \texttt{service} element, 
 mainly the attributes \texttt{id}, \texttt{value\_url} and \texttt{unit}. 
 The \texttt{desc} attribute have the potential to contain the name of the smart device, 
