@@ -1,0 +1,149 @@
+\section{System Correctness}
+\label{sec:evaluation:system-correctness}
+
+In order to determine the system correctness given the inaccuracy of the indoor positioning described in section \ref{sec:estimoteprecision}, we created a simulation of the system.
+
+The purpose of the simulation is to calculate how often the user points at the intended device given some inaccuracy of the indoor positioning.
+
+The system is based on \textit{setups}. Each setup consists of the following parameters:
+
+\begin{itemize}
+\item \texttt{roomSize}: The size of some room.
+\item \texttt{position}: A position of the user in the room.
+\item \texttt{devices}: The devices available in the room.
+\item \texttt{focusedDevice}: The device the user must point at.
+\item \texttt{offset}: An offset applied to the users position.
+\end{itemize}
+
+For each setup, the simulation calculates the orientation the user must have in order to point at \texttt{focusedDevice}. The simulation then performs 100 tests for each setup. For each of those tests the users position is offsetted both horizontally and vertically by a total amount of \texttt{offset}. The horizontal offset, that is, the offset for $x$ is chosen as a random number between $-offset$ and $offset$. The vertical offset, that is, the offset for $y$ is then calculated as $y = \sqrt{offset^2 - x^2}$. We then ensure that $x \geq 0 \wedge x \leq roomSize.width \wedge y \geq 0 \wedge y \leq roomSize.height$.
+
+One iteration of the test consists of multiple setups with different values for \texttt{position} and \texttt{focusedDevice}. We had three setups for each device in the system. Six devices were included resulting in a total of 18 setups.
+
+For each of the 18 setups we perform 100 tests with different offsets of the user. In each of the 100 tests we find the set of devices the user points at given his position, his orientation and the set of six devices. If the \texttt{focusedDevice} is still in the set of devices the user points at, the test is considered to be accepted. 
+
+The result of performing the 1800 tests is a percentage of how often the \texttt{focusedDevice} was in the set of visible devices. For example, a test result of 24\% indicates that 24\% of times the user still pointed at the desired device even though his location was offset by Estimote.
+
+Since there are random numbers in the system, we may get slightly different results when performing a test with the exact same input values. Therefore we perform the 1800 tests 10 times and take the average accuracy.
+
+This was performed seven times in order to see the influence of \texttt{offset}. That is, the influence of the inaccuracy of Estimote.
+
+To sum up, there are four niveaus of tests:
+
+\begin{enumerate}
+\item A number of setups. In our case this is 18, three for each of the six devices in the system.
+\item 100 tests for each of the setups. Each test randomly offsets the user position horizontallt and vertically resulting in a total offset of \texttt{offset}.
+\item The set of 18 setups is then tested 10 times in order to calculate an average accuracy. This results in 18000 small tests where the users position is offsetted.
+\item This is then done seven times with different values of \texttt{offset}.
+\end{enumerate}
+
+\subsection{Configuration}
+
+Table \ref{tbl:evaluation:system-correctness:devices} shows the six devices used in the simulation of the system.
+
+\begin{table}[!hbt]
+\centering
+\caption{Devices used in the simulation.}
+\label{tbl:evaluation:system-correctness:devices}
+\begin{tabular}{c|c}
+\textbf{ID} & \textbf{Coordinate} \\
+\hline 
+1           & (6.5 ; 3.4)         \\
+2           & (3.5 ; 3 ; 4)       \\
+3           & (4 ; 1.8)           \\
+4           & (2.5 ; 1.8)         \\
+5           & (0.5 ; 0.5)         \\
+6           & (2.5 ; 3.2)        
+\end{tabular}
+\end{table}
+
+Table \ref{lst:evaluation:system-correctness:setups} shows the 18 setups tested. The set of setups was tested with the offsets shown in \ref{lst:evaluation:system-correctness:results} along with the achived accuracy when applying the offset to the users position.
+
+The size of the room used in the setups matches a real world living room in a 80m\textsuperscript{2} appartment. Six devices are used as we found it reasonable in a living room of that size.
+
+The positions used are arbitrary and less important when we calculate the orientation based on the users position and the position of the focused device.
+
+\begin{table}[!hbt]
+\centering
+\caption{Setups used in the simulation. Device IDs references table \ref{tbl:evaluation:system-correctness:devices}.}
+\label{lst:evaluation:system-correctness:setups}
+\begin{tabular}{c|ccc}
+\textbf{ID} & \textbf{Position} & \textbf{Focused device ID} & \textbf{Room size} \\
+\hline
+1           & (2 ; 2)           & 1                          & 6.9m x 5.37m       \\
+2           & (3.4 ; 4.9)       & 1                          & 6.9m x 5.37m       \\
+3           & (1.1 ; 3.6)       & 1                          & 6.9m x 5.37m       \\
+4           & (0.5 ; 0.5)       & 2                          & 6.9m x 5.37m       \\
+5           & (1.1 ; 3.3)       & 2                          & 6.9m x 5.37m       \\
+6           & (5.5 ; 5.2)       & 3                          & 6.9m x 5.37m       \\
+7           & (3 ; 2.9)         & 3                          & 6.9m x 5.37m       \\
+8           & (1 ; 2)           & 3                          & 6.9m x 5.37m       \\
+9           & (2.5 ; 2.3)       & 3                          & 6.9m x 5.37m       \\
+10          & (4.4 ; 3.4)       & 4                          & 6.9m x 5.37m       \\
+11          & (6 ; 1.2)         & 4                          & 6.9m x 5.37m       \\
+12          & (5.8 ; 2.7)       & 4                          & 6.9m x 5.37m       \\
+13          & (4.6 ; 1.4)       & 5                          & 6.9m x 5.37m       \\
+14          & (2.3 ; 5.2)       & 5                          & 6.9m x 5.37m       \\
+15          & (0.3 ; 0.1)       & 5                          & 6.9m x 5.37m       \\
+16          & (6.2 ; 4.4)       & 6                          & 6.9m x 5.37m       \\
+17          & (5.1 ; 2.7)       & 6                          & 6.9m x 5.37m       \\
+18          & (3.2 ; 5.1)       & 6                          & 6.9m x 5.37m      
+\end{tabular}
+\end{table}
+
+During all tests a visibility angle of 30 degrees was used. That is, 15 degrees on each side of the users orientation as described in section \ref{sec:analysis:orientation}.
+
+Figure \ref{fig:evaluation:system-correctness:simulation} illustrates the simulation. In this case the user desires to control device 1 (the rightmost device). The figure shows three situations in the simulation. Figure \ref{fig:evaluation:system-correctness:simulation:initial} initial situation in which the user faces the device directly. This sitaution is not considered when calculating the resulting accuracy as this situation always takes place when the orientation of the user is calculated. The accepted situation is shown in figure \ref{fig:evaluation:system-correctness:simulation:accepted}. Even though the user is offsetted, device 1 is still in his line of sight. This is not the case in figure \ref{fig:evaluation:system-correctness:simulation:failure} in which the offset causes device 1 to no longer be in the users line of sight.
+
+Please note that the line of sight in figure \ref{fig:evaluation:system-correctness:simulation} is for illustration purposes only. In reality the line of sight is a triangle of 30 degrees from the user pointing in the users orientation.
+
+\begin{figure}[!htb]%
+    \centering
+    \subbottom[Initial position of the user. The user focuses directly on device 1 (the rightmost device).]{\label{fig:evaluation:system-correctness:simulation:initial}
+        \frame{\includegraphics[width=0.3\textwidth]{images/system-correctness-initial}}
+    }
+    \subbottom[Accepted position of the user. Even though the user is offsetted, device 1 is still in his line of sight.]{\label{fig:evaluation:system-correctness:simulation:accepted}
+        \frame{\includegraphics[width=0.3\textwidth]{images/system-correctness-accepted}}
+    }
+    \subbottom[Rejected position of the user. Due to the offset, device 1 is no longer in the users line of sight.]{\label{fig:evaluation:system-correctness:simulation:failure}
+        \frame{\includegraphics[width=0.3\textwidth]{images/system-correctness-failure}}
+    }
+    \caption{Illustrations of the simulation. Device 1 is the desired device to be focused.}
+    \label{fig:evaluation:system-correctness:simulation}
+\end{figure}
+
+\subsection{Results}
+
+Table \ref{lst:evaluation:system-correctness:results} shows the results of the simulation. We tested the system with offsets from 0 to 2.92 meters with a 0.5 meters interval. We test up to 2.92 meters as this is the average mean error we measured when testing the precision of Estimote as described in section \ref{sec:estimoteprecision}.
+
+\begin{table}[]
+\centering
+\caption{Results of the seven tests performed. The ``Offset'' column shows the total offset applied to the users position and the ``Accuracy'' column shows the number of tests that resulted in the desired device being in the line of sight. The accuracy has been rounded to two decimals.}
+\label{lst:evaluation:system-correctness:results}
+\begin{tabular}{cc}
+\textbf{Offset} & \textbf{Accuracy} \\
+\hline
+0 meters        & 100\%           \\
+0.5 meters      & 88.93\%         \\
+1 meter         & 56.67\%         \\
+1.5 meters      & 23.54\%         \\
+2 meters        & 12.56\%         \\
+2.5 meters      & 6.89\%         \\
+2.92 meters     & 4.29\%        
+\end{tabular}
+\end{table}
+
+\begin{figure}[!htb]
+    \centering
+    \input{drawings/system-correctness.tikz}
+    \caption{Accuracy of the system for each of the offsets in table \ref{lst:evaluation:system-correctness:results}.}
+    \label{fig:evaluation:system-correctness:results}
+\end{figure}
+
+Based on the results presented in table \ref{lst:evaluation:system-correctness:results} and illustrated in figure \ref{fig:evaluation:system-correctness:results} we can conclude that the system is not sufficiently accurate. With a mean error of 2.92 meters, the system will only point at the desired device 4.29\% of the time. In order to achieve the desired accuracy described in the requirements section in section \ref{sec:requirements-specification} we must reduce the offset to 0.5 - 1 meters.
+
+Inaccuracy in the orientation of the user, which may the result of an inaccurate magnometer, was not simulated in this test. From use through out the project we generally found the magnometer to be reliable within a few degrees. Furthermore any inaccuracy in the measurements provided by the magnometer could be compensated by a wider visibility angle.
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "../../master"
+%%% End:

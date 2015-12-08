@@ -1,0 +1,17 @@
+\begin{tikzpicture}
+  \begin{axis}[
+%      ybar,
+%      bar width=2pt,
+      xlabel = Offset in meters,
+      ylabel = Accuracy in percent,
+      xtick=data,
+      width=0.95\textwidth,
+      height = 6cm,
+      yticklabel style={align=right,inner sep=0pt,xshift=-0.3em},
+      enlargelimits = false,
+      ymax = 100,
+      grid=major,
+      try min ticks=10]]
+    \addplot table[x=offset, y=accuracy] {data/system-correctness/results.csv};   
+  \end{axis}
+\end{tikzpicture}
