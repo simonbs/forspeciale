@@ -1,40 +1,63 @@
 \section{Project Results}\label{sec:results}
-In the problem statement we wrote that we wish to solve the following:
-\begin{quote}
-  How well can we balance the production from renewable energy sources with the consumption from charging electric vehicles, using an intelligent home charging station that supports demand-response and the flexibilities in electric vehicles' power consumption?
+This section describes the final results of our project. 
+First we will discuss whether our system meets the requirements, 
+setup in \Cref{sec:requirements-specification}. 
+Then we will conclude the project based on our problem statement from \Cref{sec:researchstatement}.
 
-  And the following part questions:
-  \begin{itemize}
-    \item How can we minimize imbalances?
-    \item How can we maximize profit?
-  \end{itemize}
-\end{quote}
+\subsection{Requirements}\label{sec:conclusion-requirements}
+\subsubsection{Functional Requirements}
+\begin{description}
+  \item[\yes Add smart devices] The adding of smart devices is done by connecting them to the smart hub (HomePort). If any device is added to HomePort, they are visible in our system. 
+  \item[\no Assign a location to devices] It is not possible to assign locations to devices in our application. We have, however, made a design for it. 
+  \item[\yes Create gestures] It is possible to create new gestures.
+  \item[\yes Train gestures] It is possible to train gestures.
+  \item[\yes Recognize gestures] We can recognize gestures using the \$3 Gesture Recognizer.
+  \item[\yes Assign gestures to actions] We can add gestures to actions. 
+  \item[\yes Control smart devices by pointing at them] We can control smart devices by pointing at them.
+\end{description}
 
+\subsubsection{Performance Requirements}
+\begin{description}
+  \item[\yes Realtime gesture recognition] The requirement was to recognize gestures faster than \SI{200}{\milli\second} per gesture. We are able to do this up to a certain number of gestures. We measured less than \SI{120}{\milli\second} for \num{20} unique gestures, trained \num{5} times each, using an iPhone 5.
+  \item[\yes Scalability] The system shows linear scalability in terms of performance in gesture recognition. 
+  \item[\yes Correct gesture recognition] The requirement was \perc{80} correctness rate for gestures. The \$3 Gesture Recognition paper \cite{threedollar} reports a correct recognition rate of \perc{80}.
+  \item[\no Correct device selection] The requirement was to send the action to the correct device \perc{80} of the time. Based on the average mean distance error of \SI{2.92}{\meter} that we have measured, we get a correctness rate of just \perc{4.29}. 
+\end{description}
 
-By utilizing an electric vehicle data structure and a corresponding charge-offer data structure representing the vehicle's flexible consumption in a scenario where energy production is purely based on renewable energy sources, we are able to minimize imbalances and increase profits for a balance responsible party compared to not using our system.
+\subsubsection{Overall Requirements}
+\begin{description}
+  \item[\yes Use existing hardware] The system is implemented using only existing hardware. The only non-commercial hardware is the smart hub. 
+  \item[Limited battery usage] We did not test this. 
+  \item[\yes Not limited to line of sight] We are not limited to line of sight. 
+\end{description}
 
-By balancing the charging of flexible-consumption electric vehicles, we can increase the overall profit for the balance responsible party by an average of $12-\perc{13}$ in the three cases we have described in this report; each consisting of different values of required driving distance, deadline flexibility, weather, and price forecast errors.
+\subsection{Results}
+The problem statement in \Cref{sec:researchstatement} asks:
+\begin{framed}
+  How can wearables be utilized for home automation in a gesture driven solution?
+\end{framed}
 
-% Hvordan minimirer vi imbalances
-% Hvordan maksimerer vi profit
-To minimize energy imbalances and maximize profits, we designed two scheduling methods which utilize the flexible consumption property of electric vehicles and their charge-offers. In \Cref{chap:design}, we introduced the optimization problem, which when solved would produce the optimal solution. This problem is however too complex to be solved optimally in reasonable time when scaling the size of the problem, as it is a NP-complete problem, shown in \Cref{sec:lpsched}. Thus we had to use approximations to solve the problem with LP scheduling procedure and design and implement a greedy scheduler as an alternative. We will in \Cref{sec:furtherwork} further abbreviate, how this problem can be mitigated.%Keep discussing about schedulers based on new results
+We have developed a system that uses a wearable device as a control for home automation. 
+The system works by recognizing \emph{three-dimensional gestures}, 
+created by moving the wearable around, 
+and making a gesture trace by measuring accelerometer data. 
+Each recognized gesture corresponds to an \emph{action}, 
+which is carried out by the device the user is pointing at with the wearable device. 
+To figure out which device we point at, 
+we use the magnetometer in the device for orientation, 
+and Bluetooth Low Energy (BLE) beacons for indoor location. 
+The system can calculate which device that is being pointed at, 
+using the user's location and orientation, 
+as well as the smart devices' locations 
 
-To further maximize profits we use price forecasting to improve the scheduling. We were able to forecast prices with a MAPE value of \perc{9.2}.
-
-In the following section we will further discuss these results and evaluate on the project as a whole.
-
-% -Ved at bruge charge-offers kan vi planlægge energiforbruget og således balancere energiforbruget
-% 	+Dette minimerer imbalances
-% Brug en kopi 4.2 til at vise hvor godt vi balancerer - dog ikke optimalt
-% Scheduling -> meget bedre end ikke scheduling
-% Vi forøger profit med ca. 20% ifølge cases 
-% Resultatet afhænger af forecasting
-% Vi bruger weather forecast, men har ikke haft mulighed for at teste MAPE for den
-% MAPE for price forecast 9,2 %
-% Ingen supply forecast, hvilket ville forøge profit endnu mere
-% Det er urealistisk at balancere energi optimalt inden for små time slots
-% Too computationally heavy
-% NP-Hard
-
-
-% asd
+In our implementation we switched out the wearable for a phone, 
+as this made the implementation and testing easier. 
+\Cref{sec:conclusion-requirements} discussed whether or not the system met the requirements we had set for it. 
+While most of the requirements are met, 
+one of the most important ones,
+was not met. 
+Our results showed that the mean distance error we could get from the BLE beacons was \SI{2.92}{\meter},
+which resulted in a correctness rate of pointing of just \perc{4.29}. 
+This very low rate is unacceptable for the system that we wanted, 
+and we can conclude that BLE beacons \emph{cannot} provide the indoor location accuracy that we need. 
+Our tests show that we need an accuracy of around \SI{0.5}{\meter} to be viable. 
