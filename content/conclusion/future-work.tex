@@ -1,0 +1,66 @@
+\section{Future Work}\label{sec:conclusion:future-work}
+
+From the conclusion we found that there are some requirements from the requirement specification presented in section \ref{sec:requirements-specification} that are only partially fulfilled and in the evaluation of the system in chapter \ref{chap:evaluation} we found that there are parts of the system that does not work as well as intended.
+
+Based on this we can formulate the points described below for improving the system.
+
+\subsection{Use a Wearable}
+
+In order to prototype and test the concepts and technologies combined in the system, e.g indoor positioning, gesture recognition, orientation of the user, the system was developed for a smartphone as we already had access to multiple smartphones that could be used to test the system but had no access to a wearable that fit our needs.
+
+Instead of spending money on an expensive wearable and time on getting to know yet another platform, it was faster for us to prototype the solution on a smartphone.
+
+In order to get the full benefit of the system, i.e. the convenience of controlling a smart home by performing gestures without of being near a smartphone, the system should be ported to a wearable and only rely on a smartphone for the situations where it is absolutely needed.
+
+\subsection{Unify the Server and the Hub}
+
+The server used as a medium for communicating with HomePort is currently a standalone piece of software. Ideally this should be bundled with the hub. Thereby we reduce the amount of programs that needs to be run in each household in order to use the system. Unifying the server and the hub means that only one piece of software needs to be configured and started.
+
+As the solution is built on HomePort, which is open source, the server can be bundled with HomePort.
+
+\subsection{Investigate Alternatives for Indoor Positioning}
+
+In section \ref{sec:estimoteprecision} we presented results showing Estimotes low accuracy when performing indoor positioning and in section \ref{sec:evaluation:system-correctness} we showed the consequences of this inaccuracy.
+
+It would be interesting to investigate if there are better solutions for indoor positioning than the one provided by Estimote or solutions based on iBeacon in general. Alternatives that may be worth considering includes solutions based on ultra wideband such as Pozyx described in section \ref{sec:analysis:indoor-positioning}.
+
+In order to achieve the the desired accuracy of 80\% as described in the requirement specification, the solution used for indoor positioning must have an inaccuracy lower than one meter as described in \ref{sec:evaluation:system-correctness}.
+
+\subsection{Include Information About the Users Context}
+
+An alternative to precise user positioning, i.e. tracking of a user inside a room, is to include other information about the context the user operates in.
+
+Together with the orientation of the user, the position of the user is used to determine which device the user points at and thus which device to send an action to. This means the position of the user and his orientation provides some information about the context in which the user operates. Since we found the position of the user to be inaccurate it may interesting to look at other information about the context of the user.
+
+By excluding the position if the user we are no longer able to create a solution in which the user points at a smart device in order to control it but maybe this is not necessary in order to provide a good user experience. Given a broad amount of data about the users context we may be able to determine or narrow the set of devices the user desires to control. For example, it may be that users are more likely to control devices that are in the same room as themselves. Estimote or other indoor positioning technologies should be able to determine which room a user is in with a higher accuracy than a precise location of the user.
+
+If a smart device that is in the same room as the user supports the gesture performed by the user, the smart device receives the appropirate action. If not, we look in the entire system across all rooms for devices that supports the gesture.
+
+Other information about the context may be the state of other devices in the system, devices the user has recently controlled, patterns of the users behaviour throughout his day or data provided by other sensors in the system.
+
+These are ideas that may be worth exploring. 
+
+\subsection{Configuration of Locations}
+
+Should the project continue to use Estimote or similar products for indoor postioning, a solution for configuring locations should be implemented. In section \ref{sec:design:indoor-positioning:configuration-of-locations} we designed a proposal for configuring locations for use with Estimote. 
+
+Due to time constraints and its low complexity and little contribution to the core of the project, the designed solution was not implemented. If the solution was released as a product for end users this should be implemented in order to ease the setup for the user.
+
+\subsection{Improve Detection of Pointing}
+
+As described in the evaluation of detecting points in section \ref{sec:evaluation:pointing} there are issues with the point detector. It is currently too slow and detects points if the phone is lying on a table that makes small vibrations.
+
+Future work could look into reducing the length of the sampling period. Furthermore future work could look into better detecting if a device is ``idle''. This issue may become more critical when using a wearable device. For example, if the system is implemented on a smart watch worn on the wrist, there are several states to consider. The hand may be held still because the user is not moving, it may be moving slighly because the user is typing on a computer or it may be moving even more because the user is walking. Lastly, the wearable may be held still because the user is pointing. There are many cases to consider.
+
+\subsection{Continuous Recognition of Gestures}
+
+Another interesting aspect to investigate, is to eliminate the need of starting and stopping a gesture by performing a point. In the \$3 Gesture Recognizer example application, a button was used to start and stop the gesture. The user would press ``Start'', perform the gesture and then press ``Stop'' when the gesture was finished. In this project we replaced this button with a point. The user must start a gesture by pointing, perform the gesture and then point again to end the gesture. While more natural than pressing a button, this is not ideal.
+
+Ideally we would like to get a stream of data from the accelerometer and continuously recognize gestures in that stream. Thereby there is no need to explicitly start and stop a gesture.
+
+This becomes more interesting when the system is ported to a smart device. If we are able to continuously recognize gestures, the user only needs to perform the gesture, e.g. wave his hand, in order to trigger an action in his smart home.
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "../../master"
+%%% End:
