@@ -83,26 +83,37 @@ To analyze the precision,
 to see whether we could actually use these beacons and Estimote's SDK, 
 we performed a few tests. 
 During our tests we found that the approach for configuring the indoor positioning, 
-as described above, works terribly or not at all. 
-After configuring the room, 
-the application would show an illustration of the registered room, 
-and we found the measurements to to be very inaccurate.
-We have decided not to use the built-in room configuration. 
+as described above, 
+works terribly or not at all. 
 
-Figure \ref{fig:estimote-location-configuration} shows an example of the inaccruacy of Estimotes indoor positioning app. Figure \ref{fig:estimote-location-configuration:estimate} shows the room configured using Estimotes app and figure \ref{fig:estimote-location-configuration:actual} shows the same room configured in code using exact measurements of the room. Notice the shape of the room changes from being almost quadratic to rectangular.
-Also notice that figure \ref{fig:estimote-location-configuration:actual} only has four beacons whereas figure \ref{fig:estimote-location-configuration:estimate} has six beacons. In order for the Estimote indoor positioning to detect the ``dent'' in the room in the upper left corner, we had to install two more beacons. If we did not install the two extra beacons, the application would cut the corner resulting in a single wall replacing the two walls.
+\Cref{fig:estimote-location-configuration} shows an example of the inaccuracy of Estimote's indoor positioning application. 
+\Cref{fig:estimote-location-configuration:estimate} shows the room configured, 
+using Estimote's application and \Cref{fig:estimote-location-configuration:actual} shows the same room, 
+configured in code using exact measurements of the room. 
+Notice the shape of the room changes from being almost quadratic to rectangular;
+the short walls are almost \SI{3}{\meter} off.
+Also notice that \Cref{fig:estimote-location-configuration:actual} only has four beacons, 
+whereas \Cref{fig:estimote-location-configuration:estimate} has six beacons. 
+We had to install two additional beacons to detect the ``dent'' in the room's upper left corner. 
+Without the two extra beacons, 
+the application would not be able to account for the ``dent'',
+which \emph{could} have an impact on the location afterwards. 
 
 \begin{figure}[!htb]%
     \centering
-    \subbottom[Room configured with Estimotes application]{\label{fig:estimote-location-configuration:estimate}
+    \subbottom[Room configured with Estimote's application]{\label{fig:estimote-location-configuration:estimate}
         \includegraphics[width=0.45\textwidth]{images/estimote-configurated-room}
     }
     \subbottom[Room configured in code with exact measurements]{\label{fig:estimote-location-configuration:actual}
         \includegraphics[width=0.45\textwidth]{images/estimote-real-configuration}
     }
-    \caption{Illustration of the inaccuracy of the locations configured by Estimotes indoor positioning application.}
+    \caption{Illustration of the inaccuracy of the locations configured by Estimote's indoor positioning application.}
     \label{fig:estimote-location-configuration}
 \end{figure}
+
+After configuring the room, 
+we found the measurements to to be very inaccurate.
+Due to this, we decide not to use the built-in room configuration. 
 
 \subsubsection{Configuring Rooms Programmatically}
 As mentioned, Estimote provides the Estimote Indoor Location SDK, 
