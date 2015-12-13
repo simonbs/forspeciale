@@ -52,11 +52,18 @@ if he points at the overlap as visualized in \Cref{fig:indoor-positioning:overla
 This section will be an analysis of commercialized products that offer indoor location.
 Only solutions intended for indoor positioning are considered.
 GPS is not considered a potential solution as GPS is meant for outdoor positioning, 
-and the location offered by GPS tend to have poor accuracy indoors.
-We have chosen not to include solutions designed for larger buildings such as airports, malls or warehouses, 
+and the location offered by GPS tend to have poor accuracy indoors \cite{Liu:4343996}.
+Furthermore WiFi is not considered, 
+as analyses have shown the accuracy of such solutions to be \SI{2}{\meter} and above \cite{Liu:4343996,jekabsons2011analysis}.
+Technologies like NFC and RFID were not considered for positioning in this project either. 
+Such systems only detect users when they walk by the sensors, 
+and then report which sensor was activated.
+We were looking for technologies that provide a more granular position of the user. 
+
+Furthermore, we have chosen not to include solutions designed for larger buildings such as airports, malls or warehouses, 
 as these does not provide solutions or setups for smaller areas such as rooms or houses. 
 
-\Cref{tbl:indoor-positioning} shows the results of the analysis. 
+\Cref{tbl:indoor-positioning} shows the results of our analysis. 
 \begin{table}[!htb]
     \begin{description}[style=multiline,leftmargin=2.5cm]
         \item[Product:] Estimote Beacons and Stickers \cite{estimote}
@@ -97,8 +104,10 @@ and then by using the signal strength of each beacon (an iBeacon feature),
 it can estimate how far away the user is. 
 Estimote's solution is available as a consumer product.
 
-Pozyx and DecaWave use a wireless radio technology known as ultra-wideband, which works much like BLE but at a different frequency. 
-Like Estimote, it also requires setting up ``anchors'' and then using the signal strength to find the location. 
+Pozyx and DecaWave use a wireless radio technology known as ultra-wideband (UWB), 
+which works much like BLE but at a different frequency. 
+Like Estimote, it also requires setting up ``anchors'', 
+and then using the signal strength to find the location. 
 No easy to use consumer product is available for either of these.
 
 SmartActionSLAM is an Android application from research done by Hardegger \etal \cite{SASLAM}. 
@@ -106,8 +115,6 @@ This solution is a lot different from most other indoor location solutions.
 It \emph{calculates} an estimated location by counting steps and estimating step length and direction. 
 In theory it can be adapted to almost any smartphone, 
 but requires a lot of work to adapt the released code from the research project. The benefit of this solution is that no extra hardware is needed. SmartActionSLAM can run on the users smartphone and with some adjustments potentially on a wearable.
-
-Technologies like NFC and RFID were not considered for positioning in this project. Such systems only detect users when they walk by the sensors and then report the position of the sensor. We were looking for technologies that provide a more granular position of the user. Furthermore WiFi was not considered as the group had worked with indoor positioning using WiFi in previous projects and found it to be unreliable and therefore wanted to try another technology.
 
 \input{content/analysis/indoor-positioning-estimote.tex}
 
