@@ -1,8 +1,8 @@
 \section{Architecture}\label{sec:architecture}
-The system consists of three layers as illustrated in \Cref{fig:architecture}. 
-Each layer can communicate with the layer below and above it if they exist.
+The system consists of three tiers as illustrated in \Cref{fig:architecture}. 
+Each tier can communicate with the component(s) below and above, if they exist.
 
-The first layer consist of the wearable device and the smartphone. 
+Tier (1) consist of the wearable device and the smartphone.
 The two may be tightly coupled as some wearable watches, 
 for example the Apple Watch, relies heavily on the phone. 
 The two devices are responsible for listening to new movement data from the wearable, 
@@ -10,30 +10,38 @@ The two devices are responsible for listening to new movement data from the wear
 The movement data is used for recognizing gestures, 
 and the magnetometer data is used for determining direction, 
 such that we are able to determine what devices are being pointed at. 
-The topmost layer is also responsible for communicating with the beacons, 
+Tier (1) is also responsible for communicating with the beacons, 
 in order to retrieve the position of the user, 
 and possibly the position of the devices the user can control. 
 
-The topmost layer communicates with a central server developed specifically for this project. 
+Tier (1) communicates with a central server in Tier (2), 
+developed specifically for this project. 
 The server is responsible for storing positions of the smart devices, 
 as well as receiving actions, based on interpreted gestures, from the wearable device.
 Whenever the wearable device recognizes a gesture, 
 the wearable devices sends an action and a device ID to the server.
 The server then relays this request to a smart hub. 
 
-The smart hub is responsible for managing the devices that can be controlled using gestures. 
+Typically the third tier in such an architecture is a data tier. 
+However, in our architecture the third tier is the smart hub, 
+and even though it contains data about the devices, 
+it is different from typical tier three components such as a database. 
+The smart hub in Tier (3) is responsible for managing the devices, 
+that can be controlled using gestures. 
 The smart execute the request received from the server, 
 on the appropriate smart device. 
+If the request is a GET request to find all devices connected to the hub, 
+the response is then sent back to the wearable, through the server. 
 
 When utilizing a smart hub, users must install a hub in their home. 
 The hub communicates with the users devices, \eg bulbs, locks and thermostats. 
 For privacy reasons, it may be interesting to move the logic of the server to the smart hubs in the users home. 
-This would also remove a layer in the architecture, simplifying it.
+This would also remove a tier in the architecture, simplifying it.
 
 \begin{figure}[H]
   \centering
   \input{drawings/systemarchitecture.tikz}
-  \caption{Architecture of the system.}
+  \caption{Three-tier client-server architecture of the system.}
   \label{fig:architecture}
 \end{figure}
 
@@ -42,11 +50,11 @@ The following components are involved in the architecture:
     \item[Werable Device] Recognizes gestures and ensures actions are sent. For more information on gesture recognition, see \Cref{sec:gesturerecognition}. Not included in the implemented prototypes; gesture recognition is performed on a smartphone in out implementation. See \Cref{chap:implementation} for reasons why. 
     \item[Smartphone] Responsible for performing indoor positioning using the beacons. Possibly serves as a medium of communication between the wearable and the server, as some wearable devices require a coupled smartphone.
     \item[Beacons] Utilized for indoor positioning. For more information on this see \Cref{sec:designindoorlocation}.
-    \item[Server] A medium of communication between layer (1) and layer (3). For more information about the server, see \Cref{sec:serverdesign}.
+    \item[Server] A medium of communication between Tier (1) and Tier (3). The server performs processes requests and responses from the other two tiers to allow for communication between them. For more information about the server, see \Cref{sec:serverdesign}.
     \item[Smart Hub] The hub responsible for communicating with the smart devices. For more information on the smart hub, see \Cref{sec:designsmarthub}.
 \end{description}
 
-In the architecture presented in \Cref{fig:architecture}, 
+In the three-tier architecture presented in \Cref{fig:architecture}, 
 the server is separated from the smart hub. 
 In the current prototype, 
 the components are physically separated. 
@@ -60,7 +68,7 @@ and configured by the user.
 
 One way of bundling the two components, 
 is to extend the smart hub with the capabilities of the server.
-Such solution is not possible with other hubs, such as SmartThings.
+Such solution is not possible with other hubs, such as SmartThings \cite{SMARTTHINGS}.
 In order to bundle with such smart hubs, 
 the capabilities of our server must be implemented by the company making the smart hub. 
 
