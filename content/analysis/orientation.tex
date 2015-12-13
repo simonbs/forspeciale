@@ -12,13 +12,28 @@ We found that 49 devices in Vandrico's database contain the magnetometer compone
 Given the orientation of the user, his location and the location of a controllable device, 
 we can calculate if the user is looking at, 
 or in the direction of, the controllable device.
-We also need to define a visibility range, \ie a range that constitutes the area in which items are visible to the system. This range can be specified (in degrees) as $r = o \pm e$, where $r$ is the visibility range, $o$ is the orientation of the user and $e$ is the distance between $o$ and the edges of $r$.
+We also need to define a visibility range, 
+\ie a range that constitutes the area in which items are visible to the system. 
+This range can be specified (in degrees) as $r = o \pm e$, 
+where $r$ is the visibility range, $o$ is the orientation of the user, 
+and $e$ is the distance between $o$ and the edges of $r$.
 \Cref{fig:visibilityangle} illustrates this. 
-In this figure, the user's orientation is \var{o1}, 
+In \Cref{fig:visibilityangle}, the user's orientation is \var{o1}, 
 and there are two devices with orientations \var{o2} and \var{o3}. 
 An orientation in degrees is between \num{0} and \num{360}. 
 To determine whether a device with orientation \var{o2} is within the visibility range, 
-it is a simple matter of calculating whether \var{o2} is greather than $\var{o1}-\var{e}$ and smaller than $\var{o1}+\var{e}$, with some exceptions when the visibility range spans the gap between 359\degree and 0\degree.
+it is a simple matter of calculating whether \var{o2} is greater than $\var{o1}-\var{e}$, 
+and smaller than $\var{o1}+\var{e}$, 
+with some exceptions when the visibility range spans the gap between 359\degree and 0\degree.
+
+Given the user' location $(x1, y1)$ and the devices locations $(x2, y2)$ and $(x3, y3)$,
+we can calculate the orientation of the devices (\var{o2} and \var{o3}), 
+by finding the inverse tangent (arctangent), 
+and then converting from radians to degrees (dividing \num{180} by $\pi$), 
+such that we get: with the following equation:
+\begin{equation}\label{eq:angle}
+\var{orientation} = 180 / \pi * \arctan((\var{user.y} - \var{device.y}) / (\var{user.x} - \var{device.x}))
+\end{equation}
 
 \begin{figure}[!htb]
     \centering

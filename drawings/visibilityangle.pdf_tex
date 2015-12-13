@@ -50,15 +50,15 @@
   \makeatother%
   \begin{picture}(1,0.76183758)%
     \put(0,0){\includegraphics[width=\unitlength,page=1]{visibilityangle.pdf}}%
-    \put(0.45264145,0.37967544){\color[rgb]{0,0,0}\rotatebox{-37.99999908}{\makebox(0,0)[b]{\smash{User Orientation = o1}}}}%
+    \put(0.45264145,0.37967544){\color[rgb]{0,0,0}\rotatebox{-37.99999908}{\makebox(0,0)[b]{\smash{User Orientation = $o1$}}}}%
     \put(0,0){\includegraphics[width=\unitlength,page=2]{visibilityangle.pdf}}%
     \put(0.63052734,0.48082979){\color[rgb]{0,0,0}\rotatebox{-63.49999884}{\makebox(0,0)[b]{\smash{Visibility Range}}}}%
-    \put(0.46956024,0.2294506){\color[rgb]{0,0,0}\rotatebox{-19.49999698}{\makebox(0,0)[b]{\smash{Device Orientation = o2}}}}%
+    \put(0.46956024,0.2294506){\color[rgb]{0,0,0}\rotatebox{-19.49999698}{\makebox(0,0)[b]{\smash{Device Orientation = $o2$}}}}%
     \put(0,0){\includegraphics[width=\unitlength,page=3]{visibilityangle.pdf}}%
-    \put(0.48548562,0.06715392){\color[rgb]{0,0,0}\rotatebox{6.50000324}{\makebox(0,0)[b]{\smash{Device Orientation = o3}}}}%
-    \put(-0.00464555,0.4053298){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.24095063\unitlength}\centering Device 1 (x2,y2)\end{minipage}}}%
-    \put(0.82896434,0.13227203){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.22040444\unitlength}\centering User (x1,y1)\end{minipage}}}%
-    \put(-0.0190325,0.10051885){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.24095063\unitlength}\centering Device 2 (x3,y3)\end{minipage}}}%
+    \put(0.48548562,0.06715392){\color[rgb]{0,0,0}\rotatebox{6.50000324}{\makebox(0,0)[b]{\smash{Device Orientation = $o3$}}}}%
+    \put(-0.00464555,0.4053298){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.24095063\unitlength}\centering Device 1 $(x2,y2)$\end{minipage}}}%
+    \put(0.82896434,0.13227203){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.22040444\unitlength}\centering User $(x1,y1)$\end{minipage}}}%
+    \put(-0.0190325,0.10051885){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.24095063\unitlength}\centering Device 2 $(x3,y3)$\end{minipage}}}%
     \put(0,0){\includegraphics[width=\unitlength,page=4]{visibilityangle.pdf}}%
   \end{picture}%
 \endgroup%

@@ -19,11 +19,10 @@ a list of devices being pointed at is acquired,
 by calculating the angle between the user's position and the position of each device.
 The direction is found using magnetic fields\todo[author=Brian]{Kan højtalere og andre magnetiske felter forstyrre magnetometeret så det ikke længere er præcist nok?}, 
 such that \num{0} is north, \num{-90} is west, \num{90} is east, etc. 
+
 The angle between each smart device and the user, 
-is calculated finding the inverse tangent (arctangent), 
-and then converting from radians to degrees (dividing \num{180} by $\pi$), 
-such that we get:
-\begin{equation}\label{eq:angle}
+is calculated by \Cref{eq:angle} from \Cref{sec:analysis:orientation}:
+\begin{equation}
 \var{angle} = 180 / \pi * \arctan(\var{user.y} - \var{device.y} / \var{user.x} - \var{device.x})
 \end{equation}
 where \var{user.x} and \var{user.y} are the $x$ and $y$ coordinates of the user and likewise for the device.
