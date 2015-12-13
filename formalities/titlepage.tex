@@ -10,40 +10,25 @@
   \vspace{0.1cm}
   \hrule
 
-  \newcommand{\titleitem}[2]{\textbf{#1:}
-
-  \hspace*{0.5cm}
-  \noindent\begin{minipage}{0.9\columnwidth}#2\end{minipage}
-  \vspace{0.25cm}}
+  \newcommand{\titleitem}[2]{\item[#1:] ~\\ #2 \\}
   \begin{multicols}{2}
-    \titleitem{Title}{\productname{}}
-    
-    \titleitem{Theme of project}{Pre-specialisation in Computer Science}
-    
-    \titleitem{Project period}{
-      \protect\formatdate{2}{9}{2015}\\ to\\ \protect\formatdate{20}{12}{2015}
-    }
-
-    \titleitem{Participants}{
-      Jens Emil Gydesen \\
-      (\url{jgydes11@student.aau.dk})\\ 
-      Kasper Lind Sørensen \\(\url{klsa11@student.aau.dk}\\
-      Simon Binderup Støvring \\(\url{sstavr11@student.aau.dk})
-    }
-
-    \titleitem{Advisor}{Brian Nielsen\\(\url{bnielsen@cs.aau.dk})}
-
-% Tilføj senere
-% \titleitem{Sidetal}{\pageref{sidsteSideUdenBilag}} 
-% \titleitem{Sidetal m/ bilag} {\pgeref{sidsteSideMedBilag}}
-    \titleitem{Ended}{
-      \protect\formatdate{20}{12}{2015}
-    }
-
+  	\begin{description}
+  		\titleitem{Title}{Point and Control with Gestures in a Smart Home}
+  		\titleitem{Theme of project}{Pre-specialisatio}
+  		\titleitem{Project period}{\protect\formatdate{2}{9}{2015}\\ to\\ \protect\formatdate{20}{12}{2015}}
+  		\titleitem{Participants}{
+  			Jens Emil Gydesen \\ (\url{jgydes11@student.aau.dk})\\ 
+  			Kasper Lind Sørensen \\(\url{klsa11@student.aau.dk}\\
+  			Simon Binderup Støvring \\(\url{sstavr11@student.aau.dk})
+  			}
+  		\titleitem{Advisor}{Brian Nielsen\\(\url{bnielsen@cs.aau.dk})}
+  	\end{description}
     \vfill
     \columnbreak
 
-    \titleitem{Abstract}{\input{formalities/abstract}}
+    \begin{description}
+    	\titleitem{Abstract}{\input{formalities/abstract}}
+    \end{description}
 
   \end{multicols}
   \vfill
