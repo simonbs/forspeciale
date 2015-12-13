@@ -11,7 +11,8 @@ HomePort on the other hand has showed problems.
 The implementation of HomePort that we use, 
 is the so-called OldHomePort\footnote{\url{https://github.com/home-port/HomePort/tree/OldHomePort}}. 
 We used this version as it was the only one with a phidget adapter implemented. 
-Through testing we have found that this version of HomePort crashes a lot when receiving requests. 
+Through the development of the server, 
+we found that this version of HomePort crashes a lot\footnote{Up to a few times every minute} when handling requests. 
 Sometimes it will even disconnect the phidget interface kit, 
 and thus all the devices, at seemingly random points of time. 
 We have not worked on determining the errors of OldHomePort, 
