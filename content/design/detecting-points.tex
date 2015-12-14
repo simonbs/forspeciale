@@ -87,30 +87,21 @@ When a user points with the device,
 an instance of the class will inform a listener, i.e. another object interested in knowhing if the user points.
 Data from the accelerometer is expressed as acceleration on the $x$, $y$ and $z$ axes.
 
-The state diagram in \Cref{fig:pointdetector-state-diagram} illustrates the internals of the \texttt{PointDetector} class. 
+The flow chart in \Cref{fig:pointdetector-flow-chart} illustrates the internals of the \texttt{PointDetector} class. 
 When instantiated, the object will not be detecting, 
 \ie it will not be receiving accelerometer data. 
 After the instantiation, the instance can begin detecting. 
 The detection can be stopped at any time.
 
-When detecting, the \texttt{PointDetector} will wait for the first acceleration data from the accelerometer, 
-that indicates that the user is pointing. 
-When the it is received, 
-the object will enter the \textit{Sampling} state, 
-in which it continuously checks data from the accelerometer, 
-to determine if it indicates a point. 
-If it indicates a point, 
+When detecting, the \texttt{PointDetector} will receive the first acceleration data from the accelerometer. It checks if it indicates a point. If it does, the sampling phase is started.
+During that phase, the detector continuously checks if acceleration data indicates a point or not. The phase lasts for half a second.
+
+If acceleration data indicates a point, 
 both the \emph{point sample count} and the \emph{total sample count} will be incremented. 
 If the data does not indicate a point, 
 only the total sample count will be incremented.
-%Thalley: Beskrivelse af de her sample counts bør nok ligge heroppe. Kunne ikke lige finde en pæn måde at gøre det på selv.
 
-At the same time the detector enters the sampling state, 
-it will start a timer that runs for a number of seconds. 
-When the time has passed, 
-the detector will leave the sampling state, 
-and determine if the result of the sampling, 
-indicates that the user is pointing. 
+When half a second has passed, the detector determines if the result of the phase is a point or not. A point is reported if $\frac{\text{point sample count}}{\text{total sample count}} \geq 0.5$.
 
 The sampling phase is necessary in order to avoid ``outliers'', 
 \ie anomalies in the accelerometer data. 
@@ -135,9 +126,9 @@ the values must be checked against another threshold, $g$. Note that $g < h$.
 
 \begin{figure}
 \centering
-\includegraphics[width=\textwidth]{images/point-detector-state-diagram}
-\caption{State diagram showing the states the \texttt{PointDetector} class can be in.}
-\label{fig:pointdetector-state-diagram}
+\includegraphics[height=0.85\textheight]{images/point-detector-flow-chart}
+\caption{Flow diagram showing how the \texttt{PointDetector} detects a point. Please note that for improved readability, the flow chart does not show when detection is stopped. The detection can be stopped at any time if a component is no longer interested in checking if the user is pointing.}
+\label{fig:pointdetector-flow-chart}
 \end{figure}
 
 The following pseudo code checks if acceleration data from the accelerometer indicates a point. 
