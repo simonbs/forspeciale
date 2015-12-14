@@ -9,8 +9,8 @@ This section will contain some of the measurements from our tests.
 All of the measurements can be found in \Cref{app:estimotetestresults}
 
 We test this by comparing the position we get from the application, \ie from the Estimote beacons,
-to the actual position we have measured in the room. 
-We test in with the \num{4} settings from \Cref{table:rooms}.
+to the actual position we have measured in the room using a measuring tape.
+We test it with the \num{4} settings from \Cref{table:rooms}.
 
 \begin{table}
   \centering
@@ -25,7 +25,7 @@ We test in with the \num{4} settings from \Cref{table:rooms}.
   \label{table:rooms}
 \end{table}
 
-We test in different settings to measure if, and how much, 
+We tested in different settings to measure if, and how much, 
 the size of the room matters in terms of accuracy. 
 We decided to test outside in an area where there were none or few WiFi signals,
 as WiFi shares the same same radio frequency as BLE (\SI{2.4}{\GHz}). 
@@ -47,12 +47,12 @@ The setup can be seen in \Cref{fig:audtest} and illustrated in \Cref{fig:precisi
 \begin{figure}[!htb]
   \centering
   \input{drawings/audtestillustration.tikz}
-  \caption{Illustration of room used for indoor location precision test. The full (blue) circles represent beacons, the dotted line is the walking path (movement test) and the dotted center circle is the location of the phone (stationary test).}
+  \caption{Illustration of room used for indoor location precision test. The full (blue) circles represent beacons, the dotted line is the walking path for the movement tests and the dotted center circle is the location of the phone for the stationary tests.}
   \label{fig:precisiontest:illustration}
 \end{figure}
 
 The setup consisted of four beacons, one on each wall, 
-each recommended settings from Estimote \cite{estimote:settings}:
+each using the recommended settings from Estimote \cite{estimote:settings}:
 \begin{description}
   \item[Broadcasting Power:]{\num{4} dBm}
   \item[Advertising Interval:]{\SI{200}{\milli\second}}
@@ -81,7 +81,7 @@ Room 4 is a seminar room.
 The setup for Room 4 for the stationary tests,
 were exactly the same as the Room 1 and 2. 
 We also did movement tests in this room, 
-where the user walked around near the walls as with Room 1 and 2. 
+where the user walked around near the walls as done in Room 1 and 2. 
 We did, however, also test movement where the user walked in a \emph{bowtie},
 illustrated by \Cref{fig:bowtie4beacons}. 
 We did this to see if we it would have any effect if we did not walk near the beacons all the time. 
@@ -134,10 +134,10 @@ where we have placed a phone and logged the locations.
 \Cref{fig:room3:1:4:c,fig:room4:1:4:c,fig:room4:1:4:2.8,fig:room4:1:8:c} shows selected results as heatmaps. 
 In these heatmaps, the heat, or intensity, 
 shows the number of coordinates measured at that coordinate. 
-Located the to the right of each of these figures, 
+Located to the right of each of these figures, 
 is a graph showing the distance error from that test. 
-We use the Euclidean distance to calculate the distance error between the phone's location, 
-and the each of the locations reported by the app:
+We use the Euclidean distance to calculate the distance error between the location of the phone, 
+and each of the locations reported by the app:
 \begin{equation}
  \var{distanceError(phone, app)} = \sqrt{(\var{phone.x} - \var{app.x})^2 + (\var{phone.y} - \var{app.y})^2}
 \end{equation}
@@ -222,7 +222,7 @@ The distance error graphs supports the statement that none of the results are ve
 It is clearly worst in the outside test, shown by \Cref{fig:distance:room3:1:4:c}. 
 \Cref{fig:distance:room4:1:4:2.8,fig:distance:room4:1:4:c} show some decent results. 
 \Cref{fig:distance:room4:1:4:2.8}, where the phone is not centered, 
-is clearly the best result we get. 
+is the best result we get. 
 An interesting result is seen by \Cref{fig:room4:1:8:c},
 where it seems that the number of beacons, 
 makes the measurements fluctuate. 
@@ -261,7 +261,7 @@ The reasoning behind this theory is that in \Cref{fig:distance:room4:1:8:c},
 we consistent change between \SI{3.5}{\meter} and \SI{2.5}{\meter}, 
 where from the tests with \num{4} (\Cref{fig:distance:room3:1:4:c,fig:distance:room4:1:4:c,fig:distance:room3:1:4:2.8}) beacons, 
 we see a convergence after the first \num{50} measurements.
-The change could be a result of the Estimote changing from two sets of \num{4} beacons, 
+The change could be a result of Estimote changing from two sets of \num{4} beacons, 
 where the \SI{3.5}{\meter} results are from one set, 
 and the \SI{2.5}{\meter} results are from the other set. 
 Estimote has not provided any documentation about how many beacons is used to get the location using the SDK, 
@@ -349,7 +349,7 @@ and logging position data for a duration of one minute.
 This was done three times, 
 and then the settings of the beacons were changed.
 
-The difference settings we tested are shown in \Cref{table:precisiontest:settings}.
+The different settings we tested are shown in \Cref{table:precisiontest:settings}.
 Each result describes the mean error distance from \num{3} tests, 
 each \num{1} minutes long.  
 
@@ -367,8 +367,7 @@ each \num{1} minutes long.
   \label{table:precisiontest:settings}
 \end{table}
 
-The results from \Cref{table:precisiontest:settings} show that settings do have an impact on accuracy,
-but they do also have an impact on battery life. 
+The results from \Cref{table:precisiontest:settings} show that settings do have an impact on accuracy. However, the settings also have an impact on battery life. 
 While changing from \SI{200}{\milli\second} to \SI{100}{\milli\second} almost increased accuracy by \perc{200},
 it also increases the battery usage by \perc{200}.
 Lower broadcasting powers such as \num{-20} dBm and \num{-12} dBm perform bad. 
@@ -383,7 +382,7 @@ creates more interferences, and thus worse results, than \num{-4} dBm.
 We do not, however, have enough data to properly conclude this. 
 
 \subsection{Precision of Indoor Location Conclusion}
-From out results, we can conclude that we cannot, 
+From our results, we can conclude that we cannot, 
 in our settings, reach high indoor accuracy using Estimote beacons. 
 They claim that the accuracy is \num{0.5}-\num{1} meters, 
 but our best result is \num{1.22} meter, 
@@ -395,17 +394,17 @@ to compensate for inaccurate results.
 
 \subsubsection{Considerations}
 All of our experiments in this section have been performed on a single device.
-We cannot say if using a different phone would provide the same results. 
+We cannot say if using a different phone would provide the same results.
+The tests were performed on an iPhone 6 Plus running iOS 9.1.
 
 Even though we have switched beacons between tests, 
 so that we did not use the same ones every time, 
 we have not tested if any of the beacons we have used are defect. 
 
 The poor accuracy can also be from the SDK rather than the beacons. 
-We have not tested whether we could obtain better results using other SDKs, 
-not from Estimote. 
+We have not tested whether we could obtain better results using other SDKs that are not provided by Estimote. 
 
-Since all of our tests were performed at locations with considerable large number of WiFi access points (see \Cref{table:rooms}),
+Since all of our tests were performed at locations with considerable large number of WiFi access points as seen in \Cref{table:rooms},
 the results could be affected by this. 
 We did not test the locations in rooms with less access points, 
 except for the outside room (Room 3), 
