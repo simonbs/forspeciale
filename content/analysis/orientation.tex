@@ -4,7 +4,7 @@ In order to determine which device the user points at,
 and thereby intends to control, 
 it is necessary to determine the locations of the devices in the system, 
 relative to the user. 
-We must thus know the location of the user, 
+Thus we must know the location of the user, 
 and his controllable devices along with the orientation of the user.
 
 The orientation of the user can be retrieved from any device possessing a magnetometer. 
@@ -24,13 +24,14 @@ An orientation in degrees is between \num{0} and \num{360}.
 To determine whether a device with orientation \var{o2} is within the visibility range, 
 it is a simple matter of calculating whether \var{o2} is greater than $\var{o1}-\var{e}$, 
 and smaller than $\var{o1}+\var{e}$, 
-with some exceptions when the visibility range spans the gap between 359\degree and 0\degree.
+with some exceptions when the visibility range spans the gap between 359\degree \ and 0\degree.
 
-Given the user' location $(x1, y1)$ and the devices locations $(x2, y2)$ and $(x3, y3)$,
+Given the user's location $(x1, y1)$ and the devices locations $(x2, y2)$ and $(x3, y3)$,
 we can calculate the orientation of the devices (\var{o2} and \var{o3}), 
 by finding the inverse tangent (arctangent), 
 and then converting from radians to degrees (dividing \num{180} by $\pi$), 
-such that we get: with the following equation:
+such that we get the following.
+
 \begin{equation}\label{eq:angle}
 \var{orientation} = 180 / \pi * \arctan((\var{user.y} - \var{device.y}) / (\var{user.x} - \var{device.x}))
 \end{equation}
