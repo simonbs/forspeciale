@@ -19,7 +19,7 @@ Then we will conclude the project based on our problem statement from \Cref{sec:
 \subsubsection{Performance Requirements}
 \begin{description}
   \item[\yes Realtime gesture recognition] The requirement was to recognize gestures faster than \SI{200}{\milli\second} per gesture. We are able to do this up to a certain number of gestures. We measured less than \SI{120}{\milli\second} for \num{20} unique gestures, trained \num{5} times each, using an iPhone 5.
-  \item[\yes Scalability] The system shows linear scalability in terms of performance in gesture recognition. 
+  \item[\yes Scalability] To correctly select devices that are near each other, more unique gestures are needed to select between them. The system shows linear scalability in terms of performance in gesture recognition, \ie the number of gestures linearly increases the computational time for each gesture. The system scales linearly.  
   \item[\yes Correct gesture recognition] The requirement was \perc{80} correctness rate for gestures. The \$3 Gesture Recognition paper \cite{threedollar} reports a correct recognition rate of \perc{80}.
   \item[\no Correct device selection] The requirement was to send the action to the correct device \perc{80} of the time. Based on the average mean distance error of \SI{2.92}{\meter} that we have measured, we get a correctness rate of just \perc{4.29}. 
 \end{description}
@@ -36,7 +36,7 @@ The problem statement in \Cref{sec:researchstatement} asks:
   How can wearables be utilized for home automation in a gesture driven solution?
 \end{framed}
 
-We have developed a system that uses a wearable device as a control for home automation. 
+We have developed an interactive system that uses a wearable device as a control for home automation. 
 The system works by recognizing \emph{three-dimensional gestures}, 
 created by moving the wearable around, 
 and making a gesture trace by measuring accelerometer data. 

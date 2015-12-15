@@ -1,8 +1,7 @@
 \section{Levels of Smart Home Automation}\label{sec:system-categories}
-
 Smart home \emph{automation} is one of the big sell-points of smart homes.
-Home automation can happen at various degrees. 
-In this section we will analyze and categorize the different types of smart home automation. 
+Smart home automation can happen at various degrees. 
+In this section we will analyze and categorize the different levels of smart home automation. 
 We divide the scenarios in which home automation is facilitated, 
 into the following three level. Each level represents a degree of home automation.
 
@@ -46,19 +45,19 @@ Each event represents a condition.
 An event may be fulfilled by a change in time, 
 the state of devices in the system of the location of the user.
 
-A wearable here could be integrated as a form of sensor, for example to measure body temperature or CO\textsubscript{2} index.
+A wearable could be integrated as a type of sensor, 
+for example to measure body temperature or CO\textsubscript{2} index.
 The information can be included in rules that involves data about the user. 
-For example, turn up the heat if the skin temperature of the user is low, o
-r open the windows if the CO\textsubscript{2} index near the user is too high.
+For example, turn up the heat if the skin temperature of the user is low, 
+or open the windows if the CO\textsubscript{2} index near the user is too high.
 Wearables could also be used to create a ``Follow Me'' system, 
 that could track if the user is near \eg a door, 
 and automatically open the door for the user, 
 or have the lighting follow the user around the house (turning off the lights in unoccupied rooms). 
-Such a system could be implemented using a smartphone. 
+Such a system could also be implemented using a smartphone. 
 However, it is fair to assume that users are more likely to leave their phone on a desk or table than a wearable. 
 If they are using a wearable such as a smartwatch, 
 they are most likely wearing it in the daytime.
-
 
 \subsection{Interactive Systems}
 
@@ -76,8 +75,8 @@ as each gesture registered in the system is associated with one or more actions.
 The association means that each time the gesture is registered in the system, the action should be triggered. 
 Such rules can be formulated as ``if I wave, then lower the temperature on my thermostat''
 The difference between these types of systems and the user defined rule systems, 
-is that the actions are performed explicitly by the user, 
-and not by measurements or other observations.
+is that the actions are performed \emph{explicitly} by the user, 
+and not by measurements or other implicit observations.
 Gesture driven systems can implemented using motion sensors such as accelerometers, 
 but it is also possible to do it via a video stream (recognizing gestures using a camera). 
 
@@ -90,7 +89,8 @@ The remote control could be the aforementioned Logitech Harmony Remote,
 but could also simply be a smartphone application. 
 These types of systems are not combined with wearables data from wearables, 
 as they typically require a screen to control which device to perform an action on.
-A wearable could be used as a remote control but this is only slightly more convenient than a smartphone or a regular remote.
+A wearable could also be used as a remote control, 
+but this is only slightly more convenient than a smartphone or a regular remote.
 
 \subsection{Autonomous Systems}
 
@@ -121,23 +121,23 @@ Autonomous systems depend on rules like the previous two systems mentioned.
 The main difference here is that autonomous system create these rules \emph{themselves}, 
 from observing the users and the environment, 
 or with some preprogrammed rules defined by \emph{experts}.
-The rules of such systems are typically much more complex however. 
+The rules of such systems are typically much more complex. 
 It is not given that users themselves are capable of determining a suitable set of rules, 
 for example in order to judge if their health is critical. 
 
-\todo[author=Thalley]{Try to find a better reference for autonomous systems}
 Examples of autonomous systems include the one described by Nehmer \etal \cite{nehmer2006living}. 
 The authors envision a living assistance system which monitors elderly people. 
 A model is outlined, 
 and by continuously feeding the model with data about the individuals body functions and his behavior, 
 they can determine if a \emph{critical situation} occurs. 
-A critical situation could be that the person has fallen and is not responding to contact, \eg calls.
+A critical situation could be that the person has fallen, 
+and is not responding to contact, such as calls.
 Such system may reduce the cost of providing care to the elderly people.
 
 Wearables can play a huge part in autonomous systems. 
 Previously mentioned in this report, 
 wearables are able to measure a lot of different data about the environment (room temperature, CO\textsubscript{2}, etc.), 
-and the user (body temperature, heart rate, movements, etc.). 
+and the user (body temperature, heart rate, movements, \etc). 
 The reason why wearables especially plays a large role here, 
 is not only the different types of data, but also the amount of it,
 assuming that the user is wearing the measuring wearables most of the time. 
@@ -150,7 +150,7 @@ when he wants it, without needing any input from the user.
 
 \subsection{Conclusion}
 
-The user defined rule, interactive and autonomous systems are all depending on rules, 
+The user defined rule, the interactive and the autonomous systems are all depending on rules, 
 but the origin and the types of rules differ between the systems. 
 
 In the user defined rule and interactive systems, the rules are configured by the user.

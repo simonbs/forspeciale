@@ -2,7 +2,8 @@
 \section{Requirements Specification}
 \label{sec:requirements-specification}
 
-In this section we will list the requirements that the system we develop must fulfill.
+In this section we list the requirements, 
+that we expect the system to fulfill.
 We divide the specifications into functional requirements, 
 \ie functions that our system must implement,
 performance requirements,
@@ -11,37 +12,33 @@ and overall requirements,
 \ie requirements that our solution as a whole should fulfill.
 
 %Thalley: Evaluerer vi 
-The requirements in this section will be evaluated in \Cref{chap:conclusion}.
+The requirements in this section will be evaluated in \Cref{sec:conclusion-requirements}.
 
 \subsection{Functional Requirements}
-These requirements are our functional requirements that we determine our system should implement:
+These requirements are our functional requirements, 
+that we determine our system should implement:
 \begin{description}
-%Thalley: Setup a room er udkommenteret fordi at det ikke et krav for sådanne et system. 
-%    \item[Setup a room] The user needs to be able to specify the positions of the Estimote beacons in a room, as well as the shape and size of the room. They should be able to do this for multiple rooms so they can use the system in their entire home.
     \item[Add smart devices] If the user is performing a first time setup, or has acquired a new smart device, he needs to be able to add it to the system. 
     \item[Assign a location to devices] The system should be able to insert the position of the smart devices, without the user having to insert actual coordinates himself, \eg by using an ``Assign Location'' button. This is needed first time the user adds a smart item to a room, but also when a smart item is moved or removed.
     \item[Create gestures] The user needs to be able to create new gestures to perform actions. This is necessary as people would not necessarily have the same preferences to gestures, but it is also easier to recognize gestures performed by the same user that created them.
-    \item[Train gestures] Gestures should be able to be \emph{trained}, \ie when adding a new gesture. The gesture should be performed several times to let the system better recognize the gestures later.  
+    \item[Train gestures] Gestures should be able to be \emph{trained}, \ie when adding a new gesture. The gesture should be performed several times, to let the system better recognize the gestures later.  
     \item[Recognize gestures] The system should be able to recognize gestures, in order to execute actions based on the gestures.
     \item[Assign gestures to actions] The user should be able to link a gesture to a certain action, \eg \textit{Clockwise circle} turns up the stereo.
     \item[Control smart devices by pointing at them] The system needs to detect when a user is pointing at smart items, determine which items are being pointed at, and react to any gestures performed.
 \end{description}
 
 \subsection{Performance Requirements}
-We will measure how well the the system performs by these requirements:
+We will measure how well the the system performs, by these requirements:
 \begin{description}
-    \item[Realtime gesture recognition] The system should recognize gestures effectively to give the user a feeling of realtime control of devices. We set a computational requirement of less than \SI{200}{\milli\second} per gesture. %Thalley: Should we define a maximum computational time? 
+    \item[Realtime gesture recognition] The system should recognize gestures effectively to give the user a feeling of realtime control of devices. We set a requirement to recognize gestures faster than \SI{200}{\milli\second} per gesture.
     \item[Scalability] The system should scale well with the number of smart devices and locations. Adding more smart devices close to each other will make it difficult to select the right one (due to inaccuracy of pointing). The system should be able to determine the right device, if two or more devices are close to each (less than a meter apart).
     \item[Correct gesture recognition] The system should recognize gestures correctly at least \perc{80} of the time. If the system continuously turns the volume of your stereo up instead of down, it is rendered useless.  
     \item[Correct device selection] The system should send the action to the correct device at least \perc{80} of the time. The system needs to figure out which device is the most likely to perform a given action. The system should not turn on the coffee machine instead of turning on a lamp.
-    %Thalley: Den sidste er udkommenteret da det blot er en kombination af de forrige to (alternative kun bruge den sidste og fjerne de andre to?)
-%    \item[Overall system correctness] The system should recognize the correct gesture and send the corrosponding action to the correct device at least \perc{80} of the time. This is required to give the user actual control of the devices. 
 \end{description}
     
 \subsection{Overall Requirements}
 These requirements describe additional requirements, not mentioned in the previous two requirements sections.
 \begin{description}
-    \item[Use existing hardware] Our system should not use any specialized or non-commercialized hardware.  
-    \item[Limited battery usage] Our system should be usable throughout the day, without requiring recharging of devices. 
+    \item[Use existing hardware] Our system should not require any specialized or non-commercialized hardware.  
     \item[Not limited to line of sight] Unlike Reemo, we do not want our system to require line of sight of devices we want to control. 
 \end{description}
