@@ -23,6 +23,7 @@
 *.lol
 *.synctex.gz
 *.fdb_latexmk
+*.tdo
 master.pdf
 _minted-master
 master.pyg
