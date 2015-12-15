@@ -1,5 +1,4 @@
 \section{Smart Homes \& Smart Hubs}\label{sec:smarthomes}
-%Thalley: Indfør noget statistik over smart homes?
 Smart homes are, as mentioned, also a trending concept. 
 Berg Insight have compiled a report \cite{SMARTHOMETREND}, 
 showing that the number of smart homes in North America and in Europe is rising steadily. 
@@ -23,7 +22,7 @@ The elements in smart homes can be categorized into:
 \end{enumerate}
 
 We will not discuss the sensors of smart homes much in this report, 
-but will rather talk about the actuators, 
+but will rather talk about the \emph{actuators}, 
 \ie the controllable smart devices,
 and the software clients that control the actuators in a smart home.
 
@@ -73,7 +72,8 @@ but it cannot communicate with other devices that uses \eg the ZigBee or Z-Wave 
 \end{table}
 
 Researchers and companies are working on developing what we call \emph{smart hubs}. 
-A smart hub is a device, or service, that implements several communication protocols used by IoT devices, 
+A smart hub is a device, or service, 
+that implements several communication protocols used by IoT devices, 
 and gives the user a single protocol or interface. 
 The goal of a smart hub is to make the connected devices able to communicate.
 The communication problem arises from the number of different communication protocols used by the smart devices. 
@@ -94,7 +94,7 @@ The architecture consists of \num{4} layers as illustrated by \Cref{fig:homeport
 \begin{figure}[!htb]
     \centering
     \input{drawings/homeport.tikz}
-    \caption{The HomePort architecture proposed in \protect\cite{HOMEPORT10}}
+    \caption{The HomePort architecture proposed in \protect\cite{HOMEPORT10}.}
     \label{fig:homeport}
 \end{figure}
 
@@ -118,7 +118,7 @@ which also returns the services they provide.
 \begin{figure}[!htb]
     \centering
     \input{drawings/homeport2.tikz}
-    \caption{The HomePort architecture implemented in \protect\cite{HOMEPORT13}}
+    \caption{The HomePort architecture implemented in \protect\cite{HOMEPORT13}.}
     \label{fig:homeport2}
 \end{figure}
 
@@ -147,9 +147,9 @@ This URL is used to control the devices.
 Following is an example of how to turn on a lamp in HomePort.
 In this example, the lamp is connected to a Phidget\footnote{\url{http://www.phidgets.com/}} network, 
 where HomePort is connected to a Phidget interface kit with ID \texttt{173111}, 
-using a Phidgets adapter. 
+using a Phidget adapter. 
 We want to change the \emph{output} of the lamp with ID \texttt{0}, 
-to the value \texttt{1}. 
+to the value \texttt{1}, \ie turn the lamp on. 
 To change the value of the lamp, 
 we must send the following XML data to it:
 
@@ -160,31 +160,41 @@ we must send the following XML data to it:
 The data is sent as a PUT request with the URL of the lamp, 
 which in this example is \texttt{/phidget/173111/output/0}. 
 The URL describes that we want to change the output of device with ID \texttt{0}, 
-of the interface with ID \texttt{173111} of the Phidgets network, to the value \texttt{1}.
+of the interface with ID \texttt{173111} of the Phidget network, to the value \texttt{1}.
 
 From what we have seen so far with HomePort, 
-it shows that only a part of the smart hub's responsibility is the translation between the different protocols. 
+it shows that only a part of the smart hub's responsibility, 
+is the translation between the different protocols. 
 The smart hub should also handle requests from clients (\eg using a RESTful interface), 
 and preferably also provide secure communication. 
 
 \subsection{Smart Hubs on the Market}\label{sec:smarthubsmarket}
-The requirements for smart hubs have gained the attention of several large companies and even more smaller companies, 
-all competing to be center of future smart homes. 
-One of the mature commercial available smart hubs is the Samsung SmartThings Hub \cite{SMARTTHINGS}. 
-The SmartThings Hub is a standalone device that supports the Z-Wave, ZigBee and WiFi protocols, 
+The requirements for smart hubs have gained the attention of several large companies, 
+and even more smaller companies, 
+all competing to be the center of future smart homes. 
+One of the mature commercial available smart hubs, 
+is the Samsung SmartThings Hub \cite{SMARTTHINGS}. 
+The SmartThings Hub is a standalone device, 
+that supports the Z-Wave, ZigBee and WiFi protocols, 
 and provides a smartphone application and a RESTful interface. 
-The SmartThings Hub has been tested and is compatible with more than 150 devices as of October 2015,
-but with support for the aforementioned protocols and a REST interface, this number is in practice higher.  
-The price for such a hub is \$99, which is, compared to the prices for some of the compatible devices, very affordable. 
+The SmartThings Hub has been tested, 
+and is compatible with more than \num{150} devices as of October 2015.
+With support for the aforementioned protocols, 
+and a REST interface, this number is in practice higher.  
+The price for such a hub is \$99, 
+which is, compared to the prices for some of the compatible devices, very affordable. 
 
 Samsung is, however, not the only company selling smart hubs. 
-Microsoft has been working on their HomeOS \cite{HOMEOS} and Apple has their HomeKit \cite{HOMEKIT}.
+Microsoft has been working on their HomeOS \cite{HOMEOS}, 
+and Apple has their HomeKit \cite{HOMEKIT}.
 While these products differ in terms of architecture, descriptions (operating system contra hub) and availability,
 they all share the same goal of giving a centralized control of smart devices. 
 
 There are also other open source alternatives such as openHAB \cite{OPENHAB}, 
-where you setup your own server running the open sourced code and control the devices through that. 
-The advantage here is of course the price (free) and the possibility of adding new unsupported products. 
+where you setup your own server running the open sourced code, 
+and control the devices through that. 
+The advantage here is of course the price (free), 
+and the possibility of adding new unsupported products. 
 
 \Cref{table:smarthubs} gives a short overview of some of the available or coming smart hubs. 
 \begin{table}
@@ -198,7 +208,7 @@ The advantage here is of course the price (free) and the possibility of adding n
         Samsung \cite{SMARTTHINGS}        & SmartThings Hub: A standalone device that costs \$99 \\
         Microsoft \cite{HOMEOS}           & HomeOS: An operating system that runs on a server
     \end{tabular}
-    \caption{An overview of home automation hubs from different companies}
+    \caption{An overview of home automation hubs from different companies.}
     \label{table:smarthubs}
 \end{table}
 
@@ -206,44 +216,50 @@ The advantage here is of course the price (free) and the possibility of adding n
 While smart hubs let different smart devices communicate, 
 they are not meant to be a control panel for smart homes (although some, such as HomeOS, is designed as such).
 To control the devices connected to a smart home, or standalone smart devices, 
-most vendors offer a smartphone application that gives the consumer a basic interface to control the device, 
-set rules for it and so on.
+most vendors offer a smartphone applications, 
+that give the consumer a basic interface to control the device and set rules for it, \etc.
 This is for example the case with the Samsung SmartThings Hub. 
 
-An alternative to such a smartphone application could be the Logitech Harmony Remote \cite{HARMONYREMOTE}, 
+An alternative to such a smartphone application, 
+could be the Logitech Harmony Remote \cite{HARMONYREMOTE}, 
 which is a universal remote that can connect to over \num{270000} devices (smart and dumb). 
 It comes either as a standalone remote control or connected with a hub. 
 Depending on the model, the remote either uses infrared (does not require a hub), 
 or connects to a hub via WiFi. 
 
-Gesture control is a newer and more advanced way of controlling a smart home. 
-We have already mentioned the HIRIS computer that are able to track 3D movements, and thus 3D gestures, 
+Gesture control is a alternative way of controlling a smart home. 
+We have already mentioned the HIRIS computer, 
+that is able to track 3D movements, and thus 3D gestures, 
 but in this section we want to explore another solution that are designed for smart homes. 
 
 A company known as Reemo \cite{Reemo}, formerly Playtabase, 
 has created a way of controlling smart devices in homes using gestures. 
 They have developed a wearable device which is located on the wrist. 
 The wearable allows user to point at a device, 
-and then perform a pre-programmed gesture that corresponds to a certain action for that device. 
+and then perform a pre-programmed gesture, 
+which corresponds to a certain action for that device. 
 A small receiver must be placed near the devices that you want to control. 
 The receiver must be pointed at as depicted by \Cref{fig:reemo}.
-The pointing will, however, only work if the device is line of sight of the wearable. 
+The pointing will, however, only work, 
+if the device is line of sight of the wearable. 
 
-%Thalley: Skal vi bare skrive ``Reemo'' i stedet for en url som source?
 \begin{figure}[!htb]
     \centering
     \includegraphics[width=0.8\textwidth]{images/Reemo}
-    \caption{How Reemo gesture control works. Source: \url{http://www.getreemo.com/projects/}}
+    \caption{How Reemo gesture control works. Source: \url{http://www.getreemo.com/projects/}.}
     \label{fig:reemo}
 \end{figure}
 
 Unfortunately they have not disclosed any details regarding the technology, 
-how the receivers know which receiver you are pointing at or how the devices are controlled. 
+how the system knows which receiver you are pointing at, 
+or how the devices are controlled. 
 The company and the product is also still in a development phase, 
-so the product is not commercialized yet but have been in development since mid-2014.
+so the product is not commercialized yet, 
+but have been in development since mid-2014.
 
 These are the most common and/or most intuitive ways of controlling smart devices. 
-The question is which is ``the best'', or rather, which method is the wanted way of controlling the devices.
+The question is which solution is ``the best'', 
+or rather, which method is the wanted way of controlling the devices.
 \Cref{tbl:smartcontrol} summaries the aforementioned 3 ways. 
 
 \begin{table}[!htb]
@@ -272,14 +288,16 @@ The question is which is ``the best'', or rather, which method is the wanted way
                        Must remember gestures.
                        Must be in line of sight of the wearable.
     }
-    \caption{Ways of controlling smart devices}
+    \caption{Ways of controlling smart devices.}
     \label{tbl:smartcontrol}
 \end{table}
 
-Each way has its pros and cons. 
-A survey \cite{Kela2006} of 37 people showed that \perc{76} found gestures to be a natural way of controlling devices, 
-while \perc{8} found it unnatural and the remaining left the question unanswered. 
-This survey shows that users would rather have gesture for control, 
+Each solution has its pros and cons. 
+A survey \cite{Kela2006} of \num{37} people, 
+showed that \perc{76} found gestures to be a natural way of controlling devices, 
+while \perc{8} found it unnatural, 
+and the remaining left the question unanswered. 
+This survey shows that users would rather perform gestures for control, 
 rather than the bother of always using their smartphone or remote for control.  
 A product such as Reemo is a one way of controlling smart devices, 
 but it has a downside that the objects must be in line of sight. 
@@ -290,18 +308,20 @@ we think that the system would be improved.
 So far we have only discussed smart homes in a way that we \emph{actively} control them. 
 \emph{Ambient Intelligence} (AmI) is a concept, 
 where the idea is to enrich an environment with technology, 
-such that a system can make decisions \emph{for} us, without our interaction \cite{augusto2007ambient}. 
-Similar concepts are ubiquitous computing \cite{Weiser:237456}, pervasive computing \cite{Saha:2003:PCP:642243.642248} and the disappearing computer \cite{Weiser:1999:CSC:329124.329126,Streitz:2005:1047671}. 
+such that a system can make decisions \emph{for} us, 
+without our interaction \cite{augusto2007ambient}. 
+Similar concepts are ubiquitous computing \cite{Weiser:237456}, pervasive computing \cite{Saha:2003:PCP:642243.642248}, 
+and the disappearing computer \cite{Weiser:1999:CSC:329124.329126,Streitz:2005:1047671}. 
 
 Augusto and McCullagh \cite{augusto2007ambient} defines AmI as: ``A digital environment that \emph{proactively}, but \emph{sensibly}, supports people in their daily lives.''.
-Sensibly here means that the system must be \emph{intelligent}. 
+\emph{Sensibly} here means that the system must be \emph{intelligent}. 
 The system must be able to recognize the user, 
 and learn his or her preferences,
 to be able to act on his or her behalf. 
-Such a system must utilize and learn from sensors, networks, artificial intelligence and human interaction. 
+Such a system must utilize and learn from sensors, networks, artificial intelligence, and human interaction. 
 
 The applications of ambient intelligence can be many, 
-but in a smart home setting it could provide health monitoring or assisted living\cite{acampora2013survey}.
+but in a smart home setting it could provide health monitoring or assisted living \cite{acampora2013survey}.
 
 %%% Local Variables:
 %%% mode: latex
