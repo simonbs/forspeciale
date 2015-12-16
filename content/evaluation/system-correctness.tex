@@ -34,9 +34,9 @@ with different values for \texttt{position} and \texttt{focusedDevice}.
 We had three setups for each device in the system. 
 Six devices were included resulting in a total of 18 setups.
 
-For each of the \num{18} setups we perform \num{100} tests with different offsets of the user. 
+For each of the \num{18} setups we performed \num{100} tests with different offsets of the user. 
 In each of the \num{100} tests, 
-we find the set of devices the user points at given his position, 
+we found the set of devices the user points at given his position, 
 his orientation and the set of six devices. 
 If the \texttt{focusedDevice} is still in the set of devices the user points at, 
 \ie the user points at the intended device,
@@ -46,15 +46,14 @@ The result of performing the \num{1800} tests,
 is a percentage of how often the \texttt{focusedDevice} was in the set of visible devices. 
 For example, a test result of \perc{24} indicates that \perc{24} of the time, 
 the user still pointed at the desired device, 
-even though his location was offset by a simulated value, 
-as we could get from Estimote.
+even though his location was offset, as it would be if we got the position from the Estimote Indoor SDK.
 
 Since there are random numbers in the system, 
 we may get slightly different results when performing a test with the exact same input values. 
 Therefore we perform the \num{1800} tests \num{10} times each, 
 and take the average correctness rate.
 
-This was performed seven times in order to see the influence of \texttt{offset},
+This was performed seven times with different offsets in order to see the influence of \texttt{offset},
 \ie the influence of the inaccuracy of Estimote.
 
 To sum up:
