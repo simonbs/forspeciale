@@ -125,9 +125,6 @@ both the \emph{point sample count} and the \emph{total sample count} will be inc
 If the data does not indicate a point, 
 only the total sample count will be incremented.
 
-When half a second has passed, the detector determines if the result of the phase is a point or not. 
-A point is reported if $\frac{\text{point sample count}}{\text{total sample count}} \geq 0.5$.
-
 The sampling phase is necessary in order to avoid ``outliers'', 
 \ie anomalies in the accelerometer data. 
 The accelerometer continuously delivers data, 
@@ -140,9 +137,13 @@ the detector investigates the relation between the point sample count, $p$,
 and the total sample count, $t$. 
 If $p/t \geq c$, where $c$ is the necessary percentage of samples that must indicate a point, 
 then the detector can conclude that the sample is indeed a point.
+For example when half a second has passed, the detector determines if the result of the phase is a point or not
+by checking if $\frac{\text{point sample count}}{\text{total sample count}} \geq 0.5$.
 
-After the sampling phase has concluded, 
-the detector will wait for the next data from the accelerometer that indicates a point.
+After the sampling phase has concluded, the detector will continue detecting by investigating the next
+data from the accelerometer.
+
+The detection can be stopped at any time during the process.
 
 An accelerometer delivers an $x$-, $y$- and $z$-acceleration. 
 Determining if acceleration data indicates a point, 
@@ -153,7 +154,7 @@ the values must be checked against another threshold, $g$. Note that $g < h$.
 \begin{figure}
 \centering
 \includegraphics[height=0.85\textheight]{images/point-detector-flow-chart}
-\caption{Flowchart diagram showing how the \texttt{PointDetector} detects a point. Please note that for improved readability, the flow chart does not show when detection is stopped. The detection can be stopped at any time, if a component is no longer interested in checking if the user is pointing.}
+\caption{Flowchart showing how the \texttt{PointDetector} detects a point. Please note that for improved readability, the flowchart does not show when detection is stopped. The detection can be stopped at any time, if a component is no longer interested in checking if the user is pointing.}
 \label{fig:pointdetector-flow-chart}
 \end{figure}
 
@@ -161,7 +162,7 @@ The following pseudo code checks if acceleration data from the accelerometer ind
 \texttt{DataFitsWithinThreshold} takes the data from the accelerometer and a threshold $t$. 
 The function returns whether or not all of the $x$-, $y$- and $z$-values in the accelerometer data fits within the threshold.
 
-\begin{algorithm}
+\begin{algorithm}[!hbt]
   \begin{algorithmic}
     \Function{DataFitsWithinThreshold}{$data$, $t$}
       \State \Return $data.x \leq t \And data.x \geq -t \And data.y \leq t \And data.y \geq -t \And data.z \leq t \And data.z \geq -t$
@@ -181,7 +182,7 @@ The threshold $h$ is some small number,
 that represents an approximate of the acceleration of the device, 
 when the user points with it.
 
-\begin{algorithm}
+\begin{algorithm}[!hbt]
   \begin{algorithmic}
     \Function{AccelerometerDataIndicatesPoint}{$data$}
     \If{\Call{DataFitsWithinThreshold}{data, g}}
