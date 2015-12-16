@@ -1,19 +1,17 @@
 \section{Server and HomePort}\label{sec:servereval}
-% This section briefly describes the evaluation of the implemented server and HomePort. 
-
 The server has not been tested in detail, 
 as the number of the requests sent to and from the server is small,
 and the complexity of the requests are simple. 
 We have experienced no problems with the server during development,
 or through testing the application. 
 
-HomePort on the other hand has showed problems. 
+However, our third party smart hub, HomePort, showed problems. 
 The implementation of HomePort that we use, 
 is the so-called OldHomePort\footnote{\url{https://github.com/home-port/HomePort/tree/OldHomePort}}. 
-We used this version as it was the only one with a phidget adapter implemented. 
+We used this version as it was the only one with a Phidget adapter implemented. 
 Through the development of the server, 
 we found that this version of HomePort crashes up to a few times every minute when handling requests. 
-Sometimes it will even disconnect the phidget interface kit, 
+Sometimes it will even disconnect the Phidget interface kit, 
 and thus all the devices, at seemingly random points of time. 
 We have not worked on determining the errors of OldHomePort, 
 nor have we tried to debug it. 

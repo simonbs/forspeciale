@@ -1,25 +1,25 @@
 \section{Precision of Indoor Positioning}\label{sec:estimoteprecision}
 Another core part of our system is indoor positioning. 
-For the ``point-to-select'' part of our system to work as intended, 
+For the ``point and select'' part of our system to work as intended, 
 we need high indoor precision. 
-In \Cref{sec:design:indoor-positioning} we mentioned that Estimote claims the accuracy to be \num{0.5}-\num{1} meters.
+In \Cref{sec:design:indoor-positioning} we mentioned that Estimote claims the accuracy to be \SIrange{0.5}{1}{\meter}.
 In this section we test if that is actually the case, 
 or even if we can achieve better results than that. 
 This section will contain some of the measurements from our tests. 
-All of the measurements can be found in \Cref{app:estimotetestresults}.
+Heatmaps of all of the measurements can be found in \Cref{app:estimotetestresults}.
 
 We test this by comparing the position we get from the application, \ie from the Estimote beacons,
 to the actual position we have measured in the room using a measuring tape.
-We test it with the four settings from \Cref{table:rooms}.
+We test it with the \num{4} settings from \Cref{table:rooms}.
 
 \begin{table}
   \centering
   \begin{tabular}{l| l c c c}
-    Name & Size in meters & \# of Beacons & \# of Tests & \# of WiFi Access Points\\ \hline
-    Room 1 & $5 \times 5$ & 4 & 8 & 19 \\
-    Room 2 & $8 \times 8$ & 4 & 7 & 19 \\
-    Room 3 & $17.9 \times 17.9$ & 4 & 3 & 3\\
-    Room 4 & $4.9 \times 9.95$ & 4/8 & 33 & 20 
+  	Name   & Size in meters     & \# of Beacons   & \# of Tests & \# of WiFi Access Points \\ \hline
+  	Room 1 & $5 \times 5$       & \num{4}         & \num{8}     & \num{19}                 \\
+  	Room 2 & $8 \times 8$       & \num{4}         & \num{7}     & \num{19}                 \\
+  	Room 3 & $17.9 \times 17.9$ & \num{4}         & \num{3}     & \num{3}                  \\
+  	Room 4 & $4.9 \times 9.95$  & \num{4}/\num{8} & \num{33}    & \num{20}
   \end{tabular}
   \caption{Settings of the rooms in which we conducted the tests.}
   \label{table:rooms}
@@ -27,7 +27,8 @@ We test it with the four settings from \Cref{table:rooms}.
 
 We tested in different settings to measure if, and how much, 
 the size of the room matters in terms of accuracy. 
-We decided to test outside in an area where there were none or few WiFi signals,
+We decided to test outside in an area, 
+where there were none or few WiFi signals (Room 3),
 as WiFi shares the same same radio frequency as BLE (\SI{2.4}{\GHz}). 
 We have performed tests both with and without movement. 
 The same person performed all the movement tests. 
@@ -51,7 +52,7 @@ The setup can be seen in \Cref{fig:audtest} and illustrated in \Cref{fig:precisi
   \label{fig:precisiontest:illustration}
 \end{figure}
 
-The setup consisted of four beacons, one on each wall, 
+The setup consisted of \num{4} beacons, \num{1} on each wall, 
 each using the following recommended settings from Estimote \cite{estimote:settings}:
 \begin{description}
   \item[Broadcasting Power:]{\num{4} dBm}
@@ -82,23 +83,23 @@ The setup for Room 4 for the stationary tests,
 were exactly the same as the Room 1 and 2. 
 We also did movement tests in this room, 
 where the user walked around near the walls as done in Room 1 and 2. 
-We did, however, also test movement where the user walked in a \emph{bowtie},
+We did, however, also test movement where the user walked in a \emph{bow tie} pattern,
 illustrated by \Cref{fig:bowtie4beacons}. 
 We did this to see if we it would have any effect if we did not walk near the beacons all the time. 
-We also tried to perform tests with eight beacons in this room, 
+We also tried to perform tests with \num{8} beacons in this room, 
 illustrated by \Cref{fig:bowtie8beacons}. 
 
 \begin{figure}[!htb]
   \begin{minipage}[b]{0.45\textwidth}
     \centering
     \input{drawings/seminar4beacons.tikz}
-    \caption{Room 4 bowtie setup using four beacons.}
+    \caption{Room 4 bow tie setup using \num{4} beacons.}
     \label{fig:bowtie4beacons}
   \end{minipage}\hfill
   \begin{minipage}[b]{0.45\textwidth}
     \centering
     \input{drawings/seminar8beacons.tikz}
-    \caption{Room 4 bowtie setup using eight beacons.}
+    \caption{Room 4 bow tie setup using \num{8} beacons.}
     \label{fig:bowtie8beacons}
   \end{minipage}
 \end{figure}
@@ -109,20 +110,20 @@ In \Cref{sec:settings}, we change some of the settings to determine if they have
 \begin{table}[!htb]
   \centering
   \begin{tabular}{l| l l c c}
-    Room   & Phone Position & Duration 	       & Test Count & \# of Beacons \\ \hline
-    Room 1 & Center         & \SI{1}{\minute}  & 4          & 4 \\ 
-    Room 1 & Center         & \SI{2}{\minute}  & 1          & 4 \\ 
-    Room 1 & Moving         & NA               & 3          & 4 \\
-    Room 2 & Center         & \SI{1}{\minute}  & 3          & 4 \\ 
-    Room 2 & Center         & \SI{2}{\minute}  & 1          & 4 \\
-    Room 2 & Moving         & NA               & 3          & 4 \\ 
-    Room 3 & Center         & \SI{1}{\minute}  & 3          & 4 \\ 
-    Room 4 & Center         & \SI{1}{\minute}  & 3          & 4 \\ 
-    Room 4 & Center         & \SI{1}{\minute}  & 3          & 8 \\ 
-    Room 4 & Moving         & NA               & 3          & 4 \\
-    Room 4 & Moving         & NA               & 3          & 8 \\
-    Room 4 & Moving-Bowtie  & NA               & 3          & 4 \\
-    Room 4 & Moving-Bowtie  & NA               & 3          & 8 \\
+  	Room   & Phone Position & Duration        & Test Count & \# of Beacons \\ \hline
+  	Room 1 & Center         & \SI{1}{\minute} & \num{4}    & \num{4}       \\
+  	Room 1 & Center         & \SI{2}{\minute} & \num{1}    & \num{4}       \\
+  	Room 1 & Moving         & NA              & \num{3}    & \num{4}       \\
+  	Room 2 & Center         & \SI{1}{\minute} & \num{3}    & \num{4}       \\
+  	Room 2 & Center         & \SI{2}{\minute} & \num{1}    & \num{4}       \\
+  	Room 2 & Moving         & NA              & \num{3}    & \num{4}       \\
+  	Room 3 & Center         & \SI{1}{\minute} & \num{3}    & \num{4}       \\
+  	Room 4 & Center         & \SI{1}{\minute} & \num{3}    & \num{4}       \\
+  	Room 4 & Center         & \SI{1}{\minute} & \num{3}    & \num{8}       \\
+  	Room 4 & Moving         & NA              & \num{3}    & \num{4}       \\
+  	Room 4 & Moving         & NA              & \num{3}    & \num{8}       \\
+  	Room 4 & Moving-Bowtie  & NA              & \num{3}    & \num{4}       \\
+  	Room 4 & Moving-Bowtie  & NA              & \num{3}    & \num{8}
   \end{tabular}
   \caption{Tests conducted with varying room size and recommended beacon configuration.}
   \label{table:precisiontest:roomsize}
@@ -132,12 +133,13 @@ In \Cref{sec:settings}, we change some of the settings to determine if they have
 This section contains the results from measuring the accuracy of the tests, 
 where we have placed a phone and logged the locations. 
 \Cref{fig:room3:1:4:c,fig:room4:1:4:c,fig:room4:1:4:2.8,fig:room4:1:8:c} shows selected results as heatmaps. 
+The heatmaps were selected on consistency with the other heatmaps from the same tests.
 In these heatmaps, the heat, or intensity, 
 shows the number of coordinates measured at that coordinate. 
 Located to the right of each of these figures, 
 is a graph showing the distance error from that test. 
 We use the Euclidean distance to calculate the distance error between the location of the phone, 
-and each of the locations reported by the app:
+and each of the locations reported by the application:
 \begin{equation}
  \var{distanceError(phone, app)} = \sqrt{(\var{phone.x} - \var{app.x})^2 + (\var{phone.y} - \var{app.y})^2}
 \end{equation}
@@ -149,7 +151,7 @@ and each of the locations reported by the app:
     \centering
     \includegraphics{\heatmap{32}}
     \graphspace
-    \caption{Room 3, \SI{1}{\minute}, 4 beacons, centered}
+    \caption{Room 3, \SI{1}{\minute}, \num{4} beacons, centered}
     \label{fig:room3:1:4:c}
   \end{minipage}\hfill
   \begin{minipage}[b]{0.45\textwidth}
@@ -165,7 +167,7 @@ and each of the locations reported by the app:
     \centering
     \includegraphics{\heatmap{36}}
     \graphspace
-    \caption{Room 4, \SI{1}{\minute}, 4 beacons, centered}
+    \caption{Room 4, \SI{1}{\minute}, \num{4} beacons, centered}
     \label{fig:room4:1:4:c}
   \end{minipage}\hfill
   \begin{minipage}[b]{0.45\textwidth}
@@ -181,7 +183,7 @@ and each of the locations reported by the app:
     \centering
     \includegraphics{\heatmap{43}}
     \graphspace
-    \caption{Room 4, \SI{1}{\minute}, 4 beacons, at (2,8)}
+    \caption{Room 4, \SI{1}{\minute}, \num{4} beacons, at $(2,8)$}
     \label{fig:room4:1:4:2.8}
   \end{minipage}\hfill
   \begin{minipage}[b]{0.45\textwidth}
@@ -197,7 +199,7 @@ and each of the locations reported by the app:
     \centering
     \includegraphics{\heatmap{51}}
     \graphspace
-    \caption{Room 4, \SI{1}{\minute}, 8 beacons, centered}
+    \caption{Room 4, \SI{1}{\minute}, \num{8} beacons, centered}
     \label{fig:room4:1:8:c}
   \end{minipage}\hfill
   \begin{minipage}[b]{0.45\textwidth}
@@ -232,14 +234,14 @@ makes the measurements fluctuate.
 \begin{table}[!htb]
   \centering
   \begin{tabular}{l|l c c}
-    Room   & Position   & \# of beacons & Mean error \\ \hline
-    Room 1 & Centered   & 4             & \SI{1.78}{\meter} \\
-    Room 2 & Centered   & 4             & \SI{2.96}{\meter} \\
-    Room 3 & Centered   & 4             & \SI{7.31}{\meter} \\
-    Room 4 & Centered   & 4             & \SI{1.94}{\meter} \\
-    Room 4 & At $(2,8)$ & 4             & \SI{1.22}{\meter} \\
-    Room 4 & Centered   & 8             & \SI{3.02}{\meter} \\ \hline
-    Total  &            &               & \SI{2.92}{\meter}
+  	Room   & Position   & \# of beacons & Mean error        \\ \hline
+  	Room 1 & Centered   & \num{4}       & \SI{1.78}{\meter} \\
+  	Room 2 & Centered   & \num{4}       & \SI{2.96}{\meter} \\
+  	Room 3 & Centered   & \num{4}       & \SI{7.31}{\meter} \\
+  	Room 4 & Centered   & \num{4}       & \SI{1.94}{\meter} \\
+  	Room 4 & At $(2,8)$ & \num{4}       & \SI{1.22}{\meter} \\
+  	Room 4 & Centered   & \num{8}       & \SI{3.02}{\meter} \\ \hline
+  	Total  &            &               & \SI{2.92}{\meter}
   \end{tabular}
   \caption{Mean error of all stationary tests with Estimote recommended settings. Some rooms have more test results than others. See \Cref{table:rooms}.}
   \label{table:meanerrorresults}
@@ -251,24 +253,25 @@ Based on this table, we can conclude the following:
   \item Adding more beacons results in worse accuracy
 \end{itemize}
 
-Increasing the distance to the beacons, results in weaker signals from the beacons. 
+Increasing the distance to the beacons, 
+results in weaker signals from the beacons. 
 It is thus expectable that the accuracy is worse further away from the beacons. 
 
 Regarding the worse accuracy with more beacons, 
 we have two theories to why.
-The first theory is that the Estimote SDK only uses a subset of beacons, \eg only four, for accuracy. 
+The first theory is that the Estimote SDK only uses a subset of beacons, \eg only \num{4}, for accuracy. 
 The reasoning behind this theory is that in \Cref{fig:distance:room4:1:8:c}, 
 we consistent change between \SI{3.5}{\meter} and \SI{2.5}{\meter}, 
 where from the tests with four (\Cref{fig:distance:room3:1:4:c,fig:distance:room4:1:4:c,fig:distance:room4:1:4:2.8}) beacons, 
 we see a convergence after the first \num{50} measurements.
-The change could be a result of Estimote changing from two sets of four beacons, 
+The change could be a result of Estimote changing from two sets of \num{4} beacons, 
 where the \SI{3.5}{\meter} results are from one set, 
 and the \SI{2.5}{\meter} results are from the other set. 
 Estimote has not provided any documentation about how many beacons is used to get the location using the SDK, 
 nor are we able to see this from the SDK. 
 
 The other theory is that the beacons interfere with each other. 
-With eight beacons in a $5 \times 10$ meter room, 
+With \num{8} beacons in a $5 \times 10$ meter room, 
 it is possible that the signals interfere with each other, 
 when the beacons are placed near to each other. 
 In Estimote's guide for beacon placement \cite{SIGNALBLEED}, 
@@ -277,7 +280,7 @@ they write:
   ``If you’re using many beacon regions in close proximity to each other, it’s likely that you will experience \emph{signal bleed}: beacons from one region being detected in the other.''
 \end{quote}
 So it is possible that the signals we read from a beacon is from another beacon,
-and thus we get a wrong reading.  
+and thus we get a wrong reading. 
 
 \FloatBarrier
 \subsection{Moving Accuracy}
@@ -286,26 +289,26 @@ while the phone is in motion.
 We walk around in a given path, 
 as described by \Cref{sec:setup}.
 \Cref{fig:room1:4:m,fig:room2:4:m,fig:room4:4:m} shows selected heatmaps of walking near the walls, 
-where \Cref{fig:room4:4:b,fig:room4:8:b} shows selected heatmaps of walking in a bowtie pattern.
+where \Cref{fig:room4:4:b,fig:room4:8:b} shows selected heatmaps of walking in a bow tie pattern.
 %HEATMAPS
 \begin{figure}[!htb]
   \begin{minipage}{0.48\textwidth}
     \centering
     \includegraphics[width=\textwidth]{\heatmap{08}}
-    \caption{Room 1, 4 beacons, moving}
+    \caption{Room 1, \num{4} beacons, moving}
     \label{fig:room1:4:m}
   \end{minipage}\hfill
   \begin{minipage}{0.48\textwidth}
     \centering
     \includegraphics[width=\textwidth]{\heatmap{14}}
-    \caption{Room 2, 4 beacons, moving}
+    \caption{Room 2, \num{4} beacons, moving}
     \label{fig:room2:4:m}
   \end{minipage}
 \end{figure}
 \begin{figure}[!htb]
   \centering
   \includegraphics[width=0.48\textwidth]{\heatmap{37}}
-  \caption{Room 4, 4 beacons, moving}
+  \caption{Room 4, \num{4} beacons, moving}
   \label{fig:room4:4:m}
 \end{figure}
 
@@ -313,7 +316,7 @@ where \Cref{fig:room4:4:b,fig:room4:8:b} shows selected heatmaps of walking in a
 were relatively close to where we walked, 
 but had trouble near the corners, \ie further away from the beacons. 
 \Cref{fig:room4:4:m} shows poor results. 
-The main difference between rooms 1 and 2 and Room 4,
+The main difference between Rooms 1, 2 and 4,
 besides the size,  
 is that Room 4 has actual walls, 
 instead of the simulated walls. 
@@ -324,16 +327,17 @@ this is likely the reason why the results from Room 4 are worse.
   \begin{minipage}{0.48\textwidth}
     \centering
     \includegraphics[width=\textwidth]{\heatmap{40}}
-    \caption{Room 4, 4 beacons, bowtie}
+    \caption{Room 4, \num{4} beacons, bow tie}
     \label{fig:room4:4:b}
   \end{minipage}\hfill
   \begin{minipage}{0.48\textwidth}
     \centering
     \includegraphics[width=\textwidth]{\heatmap{48}}
-    \caption{Room 2, 8 beacons, bowtie}
+    \caption{Room 2, \num{8} beacons, bow tie}
     \label{fig:room4:8:b}
   \end{minipage}
 \end{figure}
+
 Like with \Cref{fig:room4:4:m}, \Cref{fig:room4:4:b,fig:room4:8:b} show poor results. 
 This is likely due to walls, as with before, 
 but also that we are now spending more time walking further away from beacons, 
@@ -342,16 +346,16 @@ than we did in \Cref{fig:room1:4:m,fig:room2:4:m}.
 \subsection{Changing Settings}\label{sec:settings}
 For this test the objective was to test the accuracy of the positioning system,
 using different settings. 
-We use Room 4 with 4 beacons for these tests. 
+We use Room 4 with \num{4} beacons for these tests. 
 The tests conducted in this room, 
 had the phone placed on a table in the center of the room, 
 and logging position data for a duration of one minute.
-This was done three times, 
+This was done \num{3} times, 
 and then the settings of the beacons were changed.
 
 The different settings we tested are shown in \Cref{table:precisiontest:settings}.
 Each result describes the mean error distance from \num{3} tests, 
-each \num{1} minutes long.  
+each \SI{1}{\minute} long.  
 
 \begin{table}[!htb]
   \centering
@@ -367,7 +371,8 @@ each \num{1} minutes long.
   \label{table:precisiontest:settings}
 \end{table}
 
-The results from \Cref{table:precisiontest:settings} show that settings do have an impact on accuracy. However, the settings also have an impact on battery life. 
+The results from \Cref{table:precisiontest:settings} show that settings do have an impact on accuracy. 
+However, the settings also have an impact on battery life. 
 While changing from \SI{200}{\milli\second} to \SI{100}{\milli\second} almost increased accuracy by \perc{200},
 it also increases the battery usage by \perc{200}.
 Lower broadcasting powers such as \num{-20} dBm and \num{-12} dBm perform bad. 
@@ -384,9 +389,9 @@ We do not, however, have enough data to properly conclude this.
 \subsection{Precision of Indoor Positioning Conclusion}
 From our results, we can conclude that we cannot, 
 in our settings, reach high indoor accuracy using Estimote beacons. 
-They claim that the accuracy is \num{0.5}-\num{1} meters, 
-but our best result is \num{1.22} meter, 
-and our average accuracy is \num{2.92} meters. 
+They claim that the accuracy is \SIrange{0.5}{1}{\meter}, 
+but our best result is \SI{1.22}{\meter}, 
+and our average accuracy is \SI{2.92}{\meter}.
 
 No tendencies are shown across the results. 
 This make it very hard, if not impossible,
@@ -402,10 +407,14 @@ so that we did not use the same ones every time,
 we have not tested if any of the beacons we have used are defect. 
 
 The poor accuracy can also be from the SDK rather than the beacons. 
-We have not tested whether we could obtain better results using other SDKs that are not provided by Estimote. 
+We have not tested whether we could obtain better results, 
+using other SDKs that are not provided by Estimote. 
 
-Since all of our tests were performed at locations with considerable large number of WiFi access points as seen in \Cref{table:rooms},
+Since all of our tests were performed at locations with considerable large number of WiFi access points, as seen in \Cref{table:rooms},
 the results could be affected by this. 
 We did not test the locations in rooms with less access points, 
 except for the outside room (Room 3), 
 but where the size and settings of the room may have had too much effect on the results.
+
+Lastly, the results from Room 3 may be affected by the wiring of the lamppost, 
+on which the beacons were attached.
