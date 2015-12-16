@@ -2,14 +2,15 @@
 \label{sec:implementation:prototypes:prototype2}
 The purpose of the second prototype, 
 was to communicate with the server, 
-using the locations of the user and the devices to control virtual devices. 
+using the locations of the user and the devices, 
+to control virtual devices. 
 
 \subsection{Description}
-The second prototype consisted of an iOS application, 
+The second prototype is implemented as an iOS application, 
 similar to the Android application described in \Cref{sec:implementation:prototypes:prototype1}, 
-and a server that held two virtual controllable lamps.
+and a server that simulates two virtual controllable lamps.
 The platform was changed from Android to iOS, 
-because Estimote does not have a SDK for Android.
+because Estimote does not have a ``Indoor Location SDK'' for Android.
 
 In this prototype the room was still represented as a grid, 
 and the user was placed in the center of the grid, 
@@ -30,7 +31,7 @@ it will be reflected on the server,
 where a corresponding box will have the color green when turned on, 
 and red when turned off as shown in \Cref{fig:prototype2-server-screenshot}.
 The server is running as a Heruko\footnote{\url{https://heroku.com/}} application, 
-as a simple RESTful webservice written in Python. 
+as a simple RESTful web service written in Python. 
 The server contains the information of the devices, 
 such as ID, name, status and position.
 The application gets this information by sending a GET request, 
@@ -52,7 +53,8 @@ and send an action to the devices,
 in order to flip between their two different states. 
 Both the user's position and the devices were simulated.
 
-The next step is to perform actual indoor positioning of the user.
+The next step is to perform actual indoor positioning of the user,
+and implement gesture recognition.
 
 \begin{figure}[!htb]%
     \centering
@@ -69,7 +71,7 @@ The next step is to perform actual indoor positioning of the user.
 \begin{figure}[!htb]
     \centering
     \includegraphics[width=0.8\textwidth]{images/Prototype2_Server.png}
-    \caption{Screenshot of the website hosted on the server. The screenshot shows two lamps in the second prototype. Colors indicate their status. \texttt{Red} (top): Off and \texttt{Green} (bottom): On}
+    \caption{Screenshot of the website hosted on the server. The screenshot shows two lamps in the second prototype. Colors indicate their status. \texttt{Red} (top): Off and \texttt{Green} (bottom): On.}
     \label{fig:prototype2-server-screenshot}
 \end{figure}
 

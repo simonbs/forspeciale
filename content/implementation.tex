@@ -2,26 +2,28 @@
 %\input{content/implementation/prototypes}
 This chapter describes the implementation details of our system, 
 designed in \Cref{chap:design}. 
-The system consists of three layers, as described by \Cref{fig:architecture}.
-We designed the first layer to consist of a wearable device and a smartphone. 
+The system consists of three tiers, as described by \Cref{fig:architecture}.
+We designed the first tier to consist of a wearable device and a smartphone. 
 However, since we did not have access to a wearable device, 
-we have implemented the first layer entirely as a iPhone application. 
+we have implemented the first tier \emph{entirely} as a smartphone application. 
 
 This application have been developed through several prototypes. 
-The first prototype, described in \Cref{sec:implementation:prototypes:prototype1}, was implemented as an Android application, 
+The first prototype, described in \Cref{sec:implementation:prototypes:prototype1}, 
+was implemented as an Android application, 
 to develop a way to find which devices the user points at. 
-\Cref{sec:implementation:prototypes:prototype2} describes the second prototype was implemented as a iPhone application,
+\Cref{sec:implementation:prototypes:prototype2} describes the second prototype was implemented as an iOS application,
 developed to test communication with the server and control of the devices. 
-We also developed a very basic server for this prototype, \ie the second layer. 
+We also developed a very basic server for this prototype, \ie the second tier. 
 The third prototype in \Cref{sec:implementation:prototypes:prototype3}, 
 implemented the \$3 Gesture Recognition system,
 and used the location estimated from the Estimote SDK. 
-The fourth and final prototype described in \Cref{sec:implementation:prototypes:prototype4} connected all the layers of the system. 
+The fourth and final prototype described in \Cref{sec:implementation:prototypes:prototype4}, 
+connected all the components of the system. 
 This prototype connects to and communicates with the implemented server and smart hub. 
 
-The implementation of the server, \ie the second layer of the system, 
+The final implementation of the server,
 is described in \Cref{sec:serverimplementation}. 
-As the smart hub, the third layer, is not something that we have implemented ourself, 
+As the smart hub, the third tier, is not something that we have implemented ourself, 
 we will not describe the implementation of this.
 However, \Cref{sec:serverimplementation} describes how it is connected to our system. 
 

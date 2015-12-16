@@ -24,13 +24,13 @@ and smaller than $\var{o1}+\var{e}$,
 with some exceptions when the visibility range spans the gap between 359\degree \ and 0\degree.
 
 Given the user's location $(x1, y1)$ and the devices locations $(x2, y2)$ and $(x3, y3)$,
-we can calculate the orientation of the devices (\var{o2} and \var{o3}), 
+we can calculate the angle between the devices' orientation (\var{o2} and \var{o3}), 
 by finding the inverse tangent (arctangent), 
 and then converting from radians to degrees (dividing \num{180} by $\pi$), 
 such that we get the following equation:
 
 \begin{equation}\label{eq:angle}
-\var{orientation} = 180 / \pi * \arctan((\var{user.y} - \var{device.y}) / (\var{user.x} - \var{device.x}))
+\var{angle} = 180 / \pi * \arctan((\var{user.y} - \var{device.y}) / (\var{user.x} - \var{device.x}))
 \end{equation}
 
 \begin{figure}[!htb]

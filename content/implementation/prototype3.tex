@@ -2,7 +2,7 @@
 \label{sec:implementation:prototypes:prototype3}
 
 The purpose of the third prototype, 
-was to test indoor positioning using beacons, 
+was to test indoor positioning using the Estimote beacons, 
 as well as test the use of gesture recognition on a smartphone.
 
 \subsection{Description}
@@ -27,7 +27,7 @@ The states are represented by green and red respectively.
 Furthermore the prototype added support for training and recognizing gestures, 
 using the \$3 Gesture Recognizer library described in \Cref{sec:threedollar}.
 Users can add a gesture by giving the gesture a name, 
-and train it at least five times. 
+and train it at least \num{5} times. 
 When added, the gesture can be used when pointing at a lamp, 
 to toggle the state of the lamp. 
 For example, if the user has trained a circle named ``Half Circle'', 
@@ -38,20 +38,24 @@ in order to either turn on or turn off the lamps.
 The third prototype does not support associating a gesture with an action, 
 \ie performing a specific action for a specific gesture. 
 Nor does it support creating a model of a room. 
-The prototype is limited to a specific room, 
+The prototype is limited to a specific (hardcoded) room,
 modeled after the living room of one of the research members.
 
 \subsection{Major Changes}
 \begin{itemize}
-\item Uses BLE beacons to position the user in a room, and take his position into account when determining devices being pointed at.
+\item Uses BLE beacons to position the user in a room, and take his position into account, when determining devices being pointed at.
 \item Adds training and recognition of gestures, in order to trigger actions of a controllable device.
 \item Adds a graphical representation of the room, in which the beacons and the devices are installed.
 \end{itemize}
 
 \subsection{Results}
 
-We were able to get the position of the user by using Estimote beacons allowing the app to keep track of the user. In addition, the \$3 Gesture Recognition Library was introduced which allows users to control the lamps by performing a gesture with the phone.
-The accuracy of Estimote is explored in \Cref{sec:estimoteprecision} and the performance of the gesture recognition is explored in \Cref{sec:gestureperformance}.
+We were able to get the position of the user by using Estimote beacons, 
+allowing the application to keep track of the user. 
+In addition, the \threedollar library was introduced, 
+which allows users to control the lamps by performing a gesture with the phone.
+The accuracy of Estimote is explored in \Cref{sec:estimoteprecision}, 
+and the performance of the gesture recognition is explored in \Cref{sec:gestureperformance}.
 
 The prototyped used simulated devices, 
 and the next step is to control actual smart devices, 

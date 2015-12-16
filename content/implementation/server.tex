@@ -27,7 +27,7 @@ Using \texttt{Flask}, the structure of the implementation can be seen in \Cref{l
     if __name__ == '__main__':
     app.run(host="localhost", port=5000)
   \end{minted}
-  \caption{Simple server implemented in Python using Flask}
+  \caption{Simple server implemented in Python using Flask.}
   \label{lst:server}
 \end{listing}
 
@@ -48,7 +48,10 @@ This Phidget box have been used to test the implementation of connecting with Ho
 \subsubsection{Mapping Actions}
 In the current implementation of HomePort, 
 there is only two actions: $\{0, 1\}$.
-We implement two actions: $\{\var{turnOff}, \var{turnOn}\}$. Actions are implemented differently on the server in order to give each action a meaningful value. E.g. ``turnOn'' is more descriptive than a ``0''.
+We implement two actions: $\{\var{turnOff}, \var{turnOn}\}$. 
+Actions are implemented differently on the server, 
+in order to give each action a meaningful value, 
+\eg ``turnOn'' is more descriptive than a ``0''.
 The two sets of actions are implemented as a list of tuples, 
 where the first value is the HomePort value, 
 and the second value is our string value. 
@@ -63,7 +66,8 @@ If the list of tuples is
 then if we send \texttt{0}, we get \texttt{'turnOff'}. 
 
 \subsubsection{Sending HTTP Requests}
-We use another Python module called httplib to send the requests. 
+We use another Python module called httplib, 
+to send the requests from the server to HomePort. 
 The request we send are either a GET or a PUT. 
 The GET is simply a \texttt{GET /devices HTTP/1.1}. 
 
@@ -90,7 +94,6 @@ An example response of HomePort could be:
 </devicelist>
 \end{minted}
 
-\todo[author=brian]{Why does server need device state?}
 The values that we are interested in here is the attributes of the \texttt{service} element, 
 mainly the attributes \texttt{id}, \texttt{value\_url} and \texttt{unit}. 
 The \texttt{desc} attribute have the potential to contain the name of the smart device, 
@@ -104,6 +107,9 @@ so we transform the string \texttt{''0/1''} to a list \texttt{['0', '1']},
 and then use our mapper to convert these to our actions. 
 
 We also need to get the state of the device. 
+If we know the state of the device, 
+we are able to use a single gesture for on and off,
+\ie the action of the gesture could simply switch the binary state of the device. 
 In HomePort, the state is either 0 (off) or 1 (on). 
 To get the state of the device, 
 we can do a \texttt{GET} request to the URL of the device, \eg:
