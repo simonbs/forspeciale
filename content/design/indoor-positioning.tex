@@ -1,13 +1,16 @@
 \section{Indoor Positioning}
 \label{sec:design:indoor-positioning}
 
-There are two distinct ways of locating a user, 
+There are two distinct ways of positioning a user, 
 when using the iBeacon protocol \cite{estimote:monitoring-ranging}.
 
 \begin{itemize}
 \item Region monitoring is performed to check, if a user enters or leaves a specific region. A region is a geofence, \ie a virtual perimeter around some location. A region can be used to check, if a user arrives or leaves his house, his workplace or if he is nearby a shop encapsulated in a geofence. Regions are useful for performing simple home automation, \eg turn the lights on when the user arrives at home, and turn them off when they leave.
 \item Ranging is more granular than region monitoring, and is used to continuously retrieve the set of beacons in range, along with an estimated distance to them, based on the signal strengths. Ranging is used to get a granular user position.
 \end{itemize}
+
+We use ranging as we are interested in a granular and accurate position of the user as
+we need to determine his position relative to the smart devices in his home.
 
 According to both Apple and Estimote it is preferred that ranging is only performed, 
 while the application is in the foreground, 
