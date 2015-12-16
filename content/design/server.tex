@@ -1,5 +1,6 @@
 \section{Server}\label{sec:serverdesign}
-The server of our system manages the communication between the user and HomePort which in turn controls the smart devices.
+The server of our system manages the communication between the user and HomePort, 
+which in turn controls the smart devices.
 The user issues a request containing the actions to be executed and on which device. 
 The server must also contain information about the smart devices available,
 and be able to provide the wearable with this information. 
@@ -40,16 +41,18 @@ but could also for a lamp, be a number between \num{0} and \num{100} describing 
 The state should come from the smart hub and/or the device itself. 
 The tuple of \texttt{coordinates} describes the location of the smart device. 
 The \texttt{url} attribute contains the URL of the device, if any. 
-The \texttt{canPerformAction(action)} method is used to make sure that we do not try to perform an action on a device that cannot perform that action. 
+The \texttt{canPerformAction(action)} method is used to make sure that we do not try to perform an action, 
+on a device that cannot perform that action. 
 
 \subsection{Communication with Smart Hub}\label{sec:designsmarthub}
 We have chosen to use HomePort (introduced in \Cref{sec:homeport}) as our smart hub in this project.
 The reason why we chose to use HomePort is that is it easily available for us, 
 since it is a research project from our university. 
-This means that we have access to the source code and are able to modify the code to better suit our needs.
+This means that we have access to the source code, 
+and are able to modify the code to better suit our needs.
 Furthermore, HomePort can control the Phidget devices we have available, 
-making it easier and faster to setup than to order a commerciel product, 
-or implement support for these devices on the open source solutions described in \Cref{sec:smarthubsmarket}. 
+making it easier and faster to setup than to order a commercial product, 
+or implement support for these devices for the open source solutions described in \Cref{sec:smarthubsmarket}. 
 
 As mentioned in \Cref{sec:homeport}, we can get list of available devices by sending a \texttt{GET} request to \texttt{/devices} on the HomePort server. 
 The list is returned as Extensible Markup Language (XML). 
@@ -58,5 +61,6 @@ we need to translate from XML to JSON in the server.
 
 To execute an action on a device, we can send a \texttt{PUT} request to the HomePort server. 
 We use the \texttt{id} of the device to construct the proper HomePort URL. 
-However, HomePort uses numerical values for actions, i.e. 0 = ``off'', 1 = ``on'', 
-so our server also needs to be able to map the actions to a numerical value in order for HomePort to process it. 
+However, HomePort uses numerical values for actions, \eg 0 is ``off'' and 1 is ``on'', 
+so our server also needs to be able to map the actions to a numerical value, 
+in order for HomePort to process it. 

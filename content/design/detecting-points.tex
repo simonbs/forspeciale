@@ -1,23 +1,41 @@
 %!TeX root=../../master.tex
 \section{Detecting Points}\label{sec:detecting-points}
 
-We have desgined the system in wuch a way, that the user must point at the smart device he desires to control before he performs a gesture.
+We have designed the system in such a way, 
+that the user must point at the smart device he desires to control, 
+before he performs a gesture.
 
-Pointing at a smart device informs the system which device actions should be sent to. This allows multiple devices to share actions and only the device being pointed at, will be receive the action. Configuring multiple devices with the same gesture means that the users can configure fewer gestures as they can be reused.
+Pointing at a smart device informs the system which device the action should be sent to. 
+This allows multiple devices to share gestures, 
+and only the device being pointed at, 
+will be receive the action that maps to the gesture. 
+Configuring multiple devices with the same gesture, 
+means that the users can configure fewer gestures, 
+as they can be reused.
 
+Gestures are recognized using the previously described \$3 Gesture Recognizer (see \Cref{sec:threedollar}). 
+However, the \$3 Gesture Recognizer must have an explicit start and stop when recognizing gestures. 
+This would typically be implemented by using a button, 
+but if the wearable does not have such an interface,
+we need an alternative way of starting and stopping the gesture recognition.
+We propose a solution where we start recognizing a gesture after a \emph{point} is detected,
+and stopped when a new point is detected. 
 We define a point as the user holding his phone still for a small period of time. 
 An accelerometer can be used to detect if the user holds the device still. 
 If there is a low amount of activity on all three axes, 
 it is assumed that the user is holding the device in his hand without moving it.
 
-\Cref{fig:point-to-gesture-state-diagram} shows the relationship of a point and a gesture in a state diagram. 
+\Cref{fig:point-to-gesture-state-diagram} shows the relationship of a point and a gesture in a state-chart diagram. 
 All gestures begin and end with a point. 
 When the first point is detected, 
-we intrduce a very short delay in order for the user to prepare to do the gesture, 
+we introduce a very short delay in order for the user to prepare to do the gesture, 
 \eg move the position of his hand. 
-The delay was added because from our testing we found that if there was no delay, the recognition would suddenly begin without the user being prepared, resulting in the first data being invalid and not part of any gesture and ultimately the gesture would not be recognized.
+The delay was added because our testing showed that if there was no delay, 
+the recognition would suddenly begin without the user being prepared, 
+resulting in the first data being invalid, 
+and not part of any gesture, 
+and thus the gesture would not be recognized.
 The gesture recognition begins when the delay has passed. 
-Gestures are recognized using the previously described \$3 Gesture Recognizer. 
 After the gesture has been performed, 
 the device must be held still again and the second point is detected. 
 The collected gesture data is then analyzed by the \$3 Gesture Recognizer, 
@@ -25,13 +43,13 @@ in order to determine which known gesture was performed, if any at all.
 Lastly, the system returns to the initial state and another gesture can be performed.
 
 While performing the gesture, the recognition may timeout. 
-The \$3 Gesture Recognizer can recognize gestures for a maximum of four seconds before the recognition is canceled. 
+The \$3 Gesture Recognizer can recognize gestures for a maximum of \SI{4}{\second} before the recognition is canceled. 
 In such case, the system returns to the initial state.
 
 \begin{figure}[h]
 \centering
 \includegraphics[width=\textwidth]{images/point-to-gesture-state-diagram}
-\caption{State diagram showing the relationship between a point and a gesture. A gesture always starts and ends with a point.}
+\caption{State-chart diagram showing the relationship between a point and a gesture. A gesture always starts and ends with a point.}
 \label{fig:point-to-gesture-state-diagram}
 \end{figure}
 
@@ -46,7 +64,7 @@ We measure this so that we do not recognize a device laying still on a table,
 as a user pointing.
  
 The $x$-, $y$- and $z$-values are measured in radians per second. 
-The $y$-axis of the graph spans from \num{-5} to num{5}. 
+The $y$-axis of the graph spans from \SIrange{-5}{5}{\radian\per\second}. 
 The graphs shows that there are small, 
 but measurable differences between the measurements made when the device is lying on the table,
 and when the user is pointing with the device. 
@@ -81,27 +99,34 @@ we limit the context in which a point is detected,
 to a user walking with the phone in his hand, 
 then stopping up to point at an actuator with the phone.
 
-We created the \texttt{PointDetector} class and instances of this receives data from the accelerometer, 
-and based on the data it determines if a user points with the device. 
+We created the \texttt{PointDetector} class, 
+and instances of this receives data from the accelerometer, 
+and based on the data, 
+it determines if a user points with the device. 
 When a user points with the device, 
-an instance of the class will inform a listener, i.e. another object interested in knowhing if the user points.
-Data from the accelerometer is expressed as acceleration on the $x$, $y$ and $z$ axes.
+an instance of the class will inform a listener, 
+\ie another object interested in knowing if the user points.
+Data from the accelerometer is expressed as acceleration on the $x-$, $y-$ and $z-$axes.
 
-The flow chart in \Cref{fig:pointdetector-flow-chart} illustrates the internals of the \texttt{PointDetector} class. 
+The flowchart in \Cref{fig:pointdetector-flow-chart} illustrates the internals of the \texttt{PointDetector} class. 
 When instantiated, the object will not be detecting, 
 \ie it will not be receiving accelerometer data. 
 After the instantiation, the instance can begin detecting. 
 The detection can be stopped at any time.
 
-When detecting, the \texttt{PointDetector} will receive the first acceleration data from the accelerometer. It checks if it indicates a point. If it does, the sampling phase is started.
-During that phase, the detector continuously checks if acceleration data indicates a point or not. The phase lasts for half a second.
+When detecting, the \texttt{PointDetector} will receive the first acceleration data from the accelerometer. 
+It checks if it indicates a point. 
+If it does, the sampling phase is started.
+During that phase, the detector continuously checks if acceleration data indicates a point or not. 
+The phase lasts for half a second.
 
 If acceleration data indicates a point, 
 both the \emph{point sample count} and the \emph{total sample count} will be incremented. 
 If the data does not indicate a point, 
 only the total sample count will be incremented.
 
-When half a second has passed, the detector determines if the result of the phase is a point or not. A point is reported if $\frac{\text{point sample count}}{\text{total sample count}} \geq 0.5$.
+When half a second has passed, the detector determines if the result of the phase is a point or not. 
+A point is reported if $\frac{\text{point sample count}}{\text{total sample count}} \geq 0.5$.
 
 The sampling phase is necessary in order to avoid ``outliers'', 
 \ie anomalies in the accelerometer data. 
@@ -120,19 +145,20 @@ After the sampling phase has concluded,
 the detector will wait for the next data from the accelerometer that indicates a point.
 
 An accelerometer delivers an $x$-, $y$- and $z$-acceleration. 
-Determining if acceleration data indicates a point is a matter of checking if the three values fits within some threshold, $h$. 
+Determining if acceleration data indicates a point, 
+is a matter of checking if the three values fits within some threshold, $h$. 
 In order to check if the phone is lying still on a table, 
 the values must be checked against another threshold, $g$. Note that $g < h$.
 
 \begin{figure}
 \centering
 \includegraphics[height=0.85\textheight]{images/point-detector-flow-chart}
-\caption{Flow diagram showing how the \texttt{PointDetector} detects a point. Please note that for improved readability, the flow chart does not show when detection is stopped. The detection can be stopped at any time if a component is no longer interested in checking if the user is pointing.}
+\caption{Flowchart diagram showing how the \texttt{PointDetector} detects a point. Please note that for improved readability, the flow chart does not show when detection is stopped. The detection can be stopped at any time, if a component is no longer interested in checking if the user is pointing.}
 \label{fig:pointdetector-flow-chart}
 \end{figure}
 
 The following pseudo code checks if acceleration data from the accelerometer indicates a point. 
-\texttt{DataFitsWithinThreshold} takes the data from the accelerometer and a threshold $t$. \\
+\texttt{DataFitsWithinThreshold} takes the data from the accelerometer and a threshold $t$. 
 The function returns whether or not all of the $x$-, $y$- and $z$-values in the accelerometer data fits within the threshold.
 
 \begin{algorithm}
@@ -148,7 +174,12 @@ and checks if it fits within the threshold $g$,
 indicating that the data comes from a device lying on the table. 
 If the data fits within $g$, 
 the function returns false. 
-If it does not fit within the threshold $g$, the function checks if the data fits within the threshold $h$ and returns the result of the check as a boolean value. $h$ is some small number that represents an approximate of the acceleration of the device when the user points with it.
+If it does not fit within the threshold $g$, 
+the function checks if the data fits within the threshold $h$, 
+and returns the result of the check as a boolean value. 
+The threshold $h$ is some small number, 
+that represents an approximate of the acceleration of the device, 
+when the user points with it.
 
 \begin{algorithm}
   \begin{algorithmic}
@@ -162,11 +193,13 @@ If it does not fit within the threshold $g$, the function checks if the data fit
   \end{algorithmic}
 \end{algorithm}
 
-\Cref{fig:pointdetector-uml} shows an example of the attributes and operations the \texttt{PointDetector} may have. 
-Most of the attributes and operations should be self-explanatory but some may need a short description.
+\Cref{fig:pointdetector-uml} shows an example of the attributes, 
+and operations the \texttt{PointDetector} may have. 
+Most of the attributes and operations should be self-explanatory, 
+but some may need a short description.
 
 \begin{itemize}
-  \item \texttt{pointingDuration} specifies the duration of the timer registered when entering the sampling phase.
+  \item \texttt{pointingDuration} specifies the duration of the timer registered, when entering the sampling phase.
   \item \texttt{pointingSampleFrequency} corresponds to $c$, the percentage of samples that must indicate a point.
   \item \texttt{pointingThreshold} corresponds to $h$, the threshold of data when determining if the device is lying on the table.
   \item \texttt{tableThreshold} corresponds to $g$, the threshold of data when determining if the device is being pointed with.
@@ -176,10 +209,10 @@ Most of the attributes and operations should be self-explanatory but some may ne
 By trial and error we found the following thresholds to be suitable:
 
 \begin{itemize}
-\item \texttt{pointingDuration} = 0.5
-\item \texttt{pointingSampleFrequency} = 0.5
-\item \texttt{pointingThreshold} = 0.05
-\item \texttt{tableThreshold} = 0.005
+\item \texttt{pointingDuration} = \num{0.5}
+\item \texttt{pointingSampleFrequency} = \num{0.5}
+\item \texttt{pointingThreshold} = \num{0.05}
+\item \texttt{tableThreshold} = \num{0.005}
 \end{itemize}
 
 The thresholds were determined by adjusting the values, 

@@ -1,6 +1,6 @@
 \section{Architecture}\label{sec:architecture}
-The system consists of three tiers as illustrated in \Cref{fig:architecture}. 
-Each tier can communicate with the component(s) below and above, if they exist.
+The system consists of three tiers as illustrated by \Cref{fig:architecture}. 
+Each tier can communicate with the tiers below and above, if they exist.
 
 Tier (1) consist of the wearable device and the smartphone.
 The two may be tightly coupled as some wearable watches, 
@@ -34,7 +34,7 @@ If the request is a GET request to find all devices connected to the hub,
 the response is then sent back to the wearable, through the server. 
 
 When utilizing a smart hub, users must install a hub in their home. 
-The hub communicates with the users devices, \eg bulbs, locks and thermostats. 
+The hub communicates with the user's devices, \eg bulbs, locks and thermostats. 
 For privacy reasons, it may be interesting to move the logic of the server to the smart hubs in the users home. 
 This would also remove a tier in the architecture, simplifying it.
 
