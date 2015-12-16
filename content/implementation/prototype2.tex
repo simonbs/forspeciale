@@ -7,7 +7,7 @@ using the locations of the user and the devices to control virtual devices.
 \subsection{Description}
 The second prototype consisted of an iOS application, 
 similar to the Android application described in \Cref{sec:implementation:prototypes:prototype1}, 
-and a server that represented two controllable lamps.
+and a server that held two virtual controllable lamps.
 The platform was changed from Android to iOS, 
 because Estimote does not have a SDK for Android.
 
@@ -27,8 +27,8 @@ two buttons will appear that allow the user to interact with the device,
 by either turning it \texttt{on} or \texttt{off}.
 When the user turns a device on or off, 
 it will be reflected on the server, 
-where a corresponding box will have the color \texttt{green} when turned on, 
-and \texttt{red} when turned off as shown in \Cref{fig:prototype2-server-screenshot}.
+where a corresponding box will have the color green when turned on, 
+and red when turned off as shown in \Cref{fig:prototype2-server-screenshot}.
 The server is running as a Heruko\footnote{\url{https://heroku.com/}} application, 
 as a simple RESTful webservice written in Python. 
 The server contains the information of the devices, 
@@ -69,7 +69,7 @@ The next step is to perform actual indoor positioning of the user.
 \begin{figure}[!htb]
     \centering
     \includegraphics[width=0.8\textwidth]{images/Prototype2_Server.png}
-    \caption{Screenshot of the server representing two lamps in the second prototype. Colors indicate their status. \texttt{Red} (top): Off and \texttt{Green} (bottom): On}
+    \caption{Screenshot of the website hosted on the server. The screenshot shows two lamps in the second prototype. Colors indicate their status. \texttt{Red} (top): Off and \texttt{Green} (bottom): On}
     \label{fig:prototype2-server-screenshot}
 \end{figure}
 
