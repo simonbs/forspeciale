@@ -55,12 +55,10 @@ a new gesture trace is stored and associated with a gesture class.
 A gesture class that has been trained five times, 
 has five gesture traces stored.
 
-The way the \$3 Gesture Recognizer works, 
-is by collecting data from a three-axis accelerometer, 
-and from this it creates a gesture trace $T$, 
-which consists of a set of candidate points. 
+The \$3 Gesture Recognizer works by sampling a three-axis accelerometer and subtracting the current acceleration from the previous acceleration to acquire an acceleration delta.
+These acceleration deltas are then used to create a timeseries called gesture trace $T$.
 This is illustrated in \Cref{fig:onedollar-gesturetrace}. 
-Note that this illustration only shows two dimensions. 
+Note that this illustration only shows two-dimensionsional traces as it is from Wobbrock \etal \cite{wobbrock2007gestures}, the gesture traces in \cite{threedollar} are three-dimensional. 
 
 The figure also shows that the gesture traces can contain a different number of points, 
 when performing the same gesture at different speeds.
@@ -77,14 +75,34 @@ to compensate for the fact that may perform inconsistently sized gestures.
 
 Once all of these transformations have been performed, 
 the gesture trace is matched against all the training gestures. 
-From these comparisons a scoring table is created, 
-where each trained gesture is given a score, 
-based on the distance between it and the input gesture trace. 
-To reduce the amount of false positives, 
-a scoring heuristic is utilized, 
-which simply determines whether a score is above a threshold $\epsilon$.
 
-\todo[author=Thalley]{We should include a description of how gestures are compared. What's the math behind it?}
+The gesture traces are stored as matrices with three columns, one for each axis of the accelerometer, where each row represents an acceleration delta.
+These matrices are compared by calculating the distance between them using the average mean square error.
+The distance is then converted to a score in the range $[0,1]$ using an equation by Wobbrock \etal modified to work with three-dimensional traces.
+The scoring equation is shown in \Cref{eq:gesture-scoring}.
+
+\begin{figure}
+    \begin{equation}
+        score = 1-\frac{d}{0.5\sqrt{3l^2}}
+    \end{equation}
+    \caption{Scoring equation from \protect\cite{threedollar}.}
+    \label{eq:gesture-scoring}
+\end{figure}
+
+A scoring table is then created, listing all of the trained gesture traces and their score. The table is sorted by highest score.
+To lessen the occurences of false positives the scoring heuristic explained in \Cref{three-dollar-heuristic} is used.
+
+\begin{figure}[!htb]
+    \begin{itemize}
+        \item {$\epsilon$ is defined as the threshold score.}
+        \item {Iff the highest-scoring candidate in the score table has
+a score $> 1.1\epsilon$, return this candidate’s gesture ID.}
+        \item {Iff, within the top three candidates in the score table, two candidates exist of the same gesture class and have a score > 0.95$\epsilon$, respectively, return the gesture ID of these two candidates.}
+        \item {Else, return ``Gesture not recognized!''.}
+    \end{itemize}
+    \caption{Scoring heuristic from \protect\cite{threedollar}}
+    \label{three-dollar-heuristic}
+\end{figure}
 
 \begin{figure}[!htb]
   \centering
