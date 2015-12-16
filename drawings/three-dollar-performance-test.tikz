@@ -3,7 +3,7 @@
 %      ybar,
 %      bar width=2pt,
       xlabel = Number of unique gestures,
-      ylabel = average time in ms,
+      ylabel = Average time in ms,
       xtick=data,
       width=0.95\textwidth,
       height = 6cm,
