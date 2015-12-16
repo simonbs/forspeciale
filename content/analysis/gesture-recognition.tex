@@ -37,7 +37,7 @@ and is presented in the paper ``A \$3 Gesture Recognizer – Simple Gesture Reco
 
 The system is based on the \$1 Recognizer by Wobbrock \etal \cite{wobbrock2007gestures}, 
 and adds the ability to detect \emph{three dimensional gestures}, 
-rather than being limited to two dimensional gestures used by the \$1 Recognizer.
+rather than being limited to two dimensional gestures from the \$1 Recognizer.
 
 Both of these systems are designed to be easy to use by anyone for fast prototyping of user interfaces, 
 which makes them appropriate for use in this project.
@@ -55,12 +55,24 @@ a new gesture trace is stored and associated with a gesture class.
 A gesture class that has been trained five times, 
 has five gesture traces stored.
 
-The \$3 Gesture Recognizer works by sampling a three-axis accelerometer and subtracting the current acceleration from the previous acceleration to acquire an acceleration delta.
-These acceleration deltas are then used to create a timeseries called gesture trace $T$.
+The \$3 Gesture Recognizer works by sampling a three-axis accelerometer, 
+and subtracting the current acceleration from the previous acceleration, 
+to acquire an acceleration delta.
+These acceleration deltas are then used to create a three dimensional time series, 
+called gesture trace $T$.
 This is illustrated in \Cref{fig:onedollar-gesturetrace}. 
-Note that this illustration only shows two-dimensionsional traces as it is from Wobbrock \etal \cite{wobbrock2007gestures}, the gesture traces in \cite{threedollar} are three-dimensional. 
+Note that this illustration only shows two-dimensionsional traces, 
+as the illustration is from Wobbrock \etal \cite{wobbrock2007gestures}.
+The gesture traces in \cite{threedollar} are three-dimensional. 
 
-The figure also shows that the gesture traces can contain a different number of points, 
+\begin{figure}[!htb]
+	\centering
+	\includegraphics[width=0.8\textwidth]{images/1-dollar-gesturetrace.png}
+	\caption{A slow and fast question mark and a triangle, made by subjects using a stylus on a Pocket PC. Note the considerable time differences and resulting numbers of points. Image and text is from Figure 3 in \protect\cite{wobbrock2007gestures}.}
+	\label{fig:onedollar-gesturetrace}
+\end{figure}
+
+\Cref{fig:onedollar-gesturetrace} also shows that the gesture traces can contain a different number of points, 
 when performing the same gesture at different speeds.
 Because of this, the \$3 Gesture Recognizer \emph{resamples} $T$, 
 so that it contains a fixed number of points. 
@@ -71,45 +83,37 @@ If $N$ is set to a higher value, then computational cost increases.
 After resampling the points, 
 $T$ is rotated in an attempt to correct for any rotational error, 
 and finally it is scaled to fit inside of a cube of $100^3$ units, 
-to compensate for the fact that may perform inconsistently sized gestures.
+to compensate for the fact that users may perform inconsistently sized gestures.
+
 
 Once all of these transformations have been performed, 
-the gesture trace is matched against all the training gestures. 
+the gesture trace is matched against all the trained gestures. 
 
-The gesture traces are stored as matrices with three columns, one for each axis of the accelerometer, where each row represents an acceleration delta.
-These matrices are compared by calculating the distance between them using the average mean square error.
-The distance is then converted to a score in the range $[0,1]$ using an equation by Wobbrock \etal modified to work with three-dimensional traces.
-The scoring equation is shown in \Cref{eq:gesture-scoring}.
+The gesture traces are stored as matrices with three columns, 
+one for each axis of the accelerometer, 
+where each row represents an acceleration delta.
+These matrices are compared by calculating the distance between them using, 
+the average mean square error (MSE).
+The distance is then converted to a score in the range $[0,1]$, 
+using an equation by Wobbrock \etal, 
+modified to work with three-dimensional traces.
+The scoring equation from \cite{threedollar} is shown in \Cref{eq:gesture-scoring}:
+\begin{equation}\label{eq:gesture-scoring}
+    score = 1-\frac{d}{0.5\sqrt{3l^2}}
+\end{equation}
 
-\begin{figure}
-    \begin{equation}
-        score = 1-\frac{d}{0.5\sqrt{3l^2}}
-    \end{equation}
-    \caption{Scoring equation from \protect\cite{threedollar}.}
-    \label{eq:gesture-scoring}
-\end{figure}
+A scoring table is then created, 
+listing all of the trained gesture traces and their score. 
+The table is sorted by the highest score.
+To reduce the number of false positives, 
+the following scoring heuristic is used:
 
-A scoring table is then created, listing all of the trained gesture traces and their score. The table is sorted by highest score.
-To lessen the occurences of false positives the scoring heuristic explained in \Cref{three-dollar-heuristic} is used.
-
-\begin{figure}[!htb]
-    \begin{itemize}
-        \item {$\epsilon$ is defined as the threshold score.}
-        \item {Iff the highest-scoring candidate in the score table has
-a score $> 1.1\epsilon$, return this candidate’s gesture ID.}
-        \item {Iff, within the top three candidates in the score table, two candidates exist of the same gesture class and have a score > 0.95$\epsilon$, respectively, return the gesture ID of these two candidates.}
-        \item {Else, return ``Gesture not recognized!''.}
-    \end{itemize}
-    \caption{Scoring heuristic from \protect\cite{threedollar}}
-    \label{three-dollar-heuristic}
-\end{figure}
-
-\begin{figure}[!htb]
-  \centering
-  \includegraphics[width=0.8\textwidth]{images/1-dollar-gesturetrace.png}
-  \caption{A slow and fast question mark and a triangle, made by subjects using a stylus on a Pocket PC. Note the considerable time differences and resulting numbers of points. Image and text is from Figure 3 in \protect\cite{wobbrock2007gestures}.}
-  \label{fig:onedollar-gesturetrace}
-\end{figure}
+\begin{enumerate}
+	\item {$\epsilon$ is defined as the threshold score.}
+	\item {Iff the highest-scoring candidate in the score table has a score $> 1.1\epsilon$, return this candidate’s gesture ID.}
+	\item {Iff, within the top three candidates in the score table, two candidates exist of the same gesture class and have a score > 0.95$\epsilon$, respectively, return the gesture ID of these two candidates.}
+	\item {Else, return ``Gesture not recognized!''.}
+\end{enumerate}
 
 %%% Local Variables:
 %%% mode: latex
