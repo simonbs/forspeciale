@@ -44,7 +44,7 @@ Each recognized gesture corresponds to an \emph{action},
 which is carried out by the device the user is pointing at with the wearable device. 
 To figure out which device we point at, 
 we use the magnetometer in the device for orientation, 
-and Bluetooth Low Energy (BLE) beacons for indoor location. 
+and Bluetooth Low Energy (BLE) beacons for indoor positioning. 
 The system can calculate which device that is being pointed at, 
 using the user's location and orientation, 
 as well as the smart devices' locations 
@@ -58,5 +58,5 @@ was not met.
 Our results showed that the mean distance error we could get from the BLE beacons was \SI{2.92}{\meter},
 which resulted in a correctness rate of pointing of just \perc{4.29}. 
 This very low rate is unacceptable for the system that we wanted, 
-and we can conclude that BLE beacons \emph{cannot} provide the indoor location accuracy that we need. 
+and we can conclude that BLE beacons \emph{cannot} provide the indoor position accuracy that we need. 
 Our tests show that we need an accuracy of around \SI{0.5}{\meter} to be viable. 
