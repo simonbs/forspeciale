@@ -28,12 +28,12 @@ As mentioned in \Cref{sec:wearables}, accelerometers are present in about half o
 Because of this, we will focus on finding a solution using accelerometer, 
 so that we do not have to use additional hardware, such as cameras. 
 
-In the following section, we will describe a gesture recognition system called the \$3 Gesture Recognizer. 
+In the following section, we will describe a gesture recognition system called the \threedollar. 
 
-\subsection{\$3 Gesture Recognizer}\label{sec:threedollar}
-The \$3 Gesture Recognizer is a gesture recognition system, 
+\subsection{\threedollar}\label{sec:threedollar}
+The \threedollar is a gesture recognition system, 
 created by Sven Kratz and Michael Rohs, 
-and is presented in the paper ``A \$3 Gesture Recognizer – Simple Gesture Recognition for Devices Equipped with 3D Acceleration Sensors'' \cite{threedollar}.
+and is presented in the paper ``A \threedollar – Simple Gesture Recognition for Devices Equipped with 3D Acceleration Sensors'' \cite{threedollar}.
 
 The system is based on the \$1 Recognizer by Wobbrock \etal \cite{wobbrock2007gestures}, 
 and adds the ability to detect \emph{three dimensional gestures}, 
@@ -41,12 +41,12 @@ rather than being limited to two dimensional gestures from the \$1 Recognizer.
 
 Both of these systems are designed to be easy to use by anyone for fast prototyping of user interfaces, 
 which makes them appropriate for use in this project.
-The \$3 Gesture Recognizer, however, is better suited, 
+The \threedollar, however, is better suited, 
 as it is capable of recognizing more gestures because it utilizes three dimensional data.
 This means that users have even more options for personalizing the gestures, 
 that they will use to control their home with.
 
-The \$3 Gesture Recognizer requires the user to train a gesture about five times, 
+The \threedollar requires the user to train a gesture about \num{5} times, 
 before it can deliver adequate recognition rates. 
 This provides a good experience for the user, 
 as he does not need to spend much time training the system before he is able to use it.
@@ -55,7 +55,7 @@ a new gesture trace is stored and associated with a gesture class.
 A gesture class that has been trained five times, 
 has five gesture traces stored.
 
-The \$3 Gesture Recognizer works by sampling a three-axis accelerometer, 
+The \threedollar works by sampling a three-axis accelerometer, 
 and subtracting the current acceleration from the previous acceleration, 
 to acquire an acceleration delta.
 These acceleration deltas are then used to create a three dimensional time series, 
@@ -74,7 +74,7 @@ The gesture traces in \cite{threedollar} are three-dimensional.
 
 \Cref{fig:onedollar-gesturetrace} also shows that the gesture traces can contain a different number of points, 
 when performing the same gesture at different speeds.
-Because of this, the \$3 Gesture Recognizer \emph{resamples} $T$, 
+Because of this, the \threedollar \emph{resamples} $T$, 
 so that it contains a fixed number of points. 
 In \cite{threedollar}, the number of points $N$ is \num{150}, 
 with equal distance between the points.

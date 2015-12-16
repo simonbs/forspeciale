@@ -9,7 +9,7 @@ We expect the number of gesture traces in the database to increase the recogniti
 
 For this setup, we add five gesture traces at a time. 
 This is to simulate training a gesture five times, 
-as recommended by the \$3 Gesture Recognition paper \cite{threedollar}. 
+as recommended by the \threedollar paper \cite{threedollar}. 
 We then generate a random gesture input, 
 and run the recognition function on it ten times, 
 logging the execution time.
@@ -39,7 +39,7 @@ in a timespan of one minute and thirteen seconds,
 starting at the point where the application was launched on the iPhone. 
 The first dotted line shows the time when the test began, 
 and the second dotted line shows when the test finished, 
-and where the \$3 Gesture Recognizer started cleaning up its resources.
+and where the \threedollar started cleaning up its resources.
 However, as the graph shows, the memory use stays high after cleanup. %Thalley: Kunne det ikke blot være pga. iOS's måde at håndtere memory på? 
 This issue is the reason we only repeat recognition ten times for each gesture, 
 as more would cause the application to shut down due to excessive memory usage. %Thalley: Kan vi se hvor mange gestures den højst kan recognize før det er et problem? 
@@ -53,7 +53,7 @@ as more would cause the application to shut down due to excessive memory usage. 
     \draw[red,ultra thick, dotted] (0.73,0.08) -- (0.73,0.97);
     \end{scope}
   \end{tikzpicture}
-  \caption{RAM usage of the \$3 Gesture Recognizer. The first dashed line shows when it starts recognizing, and the second dashed line shows when it stops. The area after the second dashed line shows that it does \emph{not} clean up the memory after use.}
+  \caption{RAM usage of the \threedollar. The first dashed line shows when it starts recognizing, and the second dashed line shows when it stops. The area after the second dashed line shows that it does \emph{not} clean up the memory after use.}
   \label{fig:threedollarmemory}
 \end{figure}
 
@@ -61,11 +61,11 @@ as more would cause the application to shut down due to excessive memory usage. 
 The result from \Cref{fig:performancegraph} shows that the time spent recognizing a gesture 
 increases linearly with the amount of gesture traces in the database.
 The computational time is well below the requirement of \SI{200}{\milli\second},
-thus the performance of the \$3 Gesture Recognizer is adequate for our system. 
+thus the performance of the \threedollar is adequate for our system. 
 The memory issues encountered during testing, however, 
 showed that it might not be an appropriate solution, 
 if the system is to run for a prolonged period of time.
-With a proper implementation of the \$3 Gesture Recognizer, 
+With a proper implementation of the \threedollar, 
 this can be avoided. 
 
 \subsubsection{Considerations}
@@ -74,6 +74,6 @@ the memory used, as seen by \Cref{fig:threedollarmemory}, is high (up to \SI{405
 For the iPhone that we tested on, this is an issue as the operating system terminates the application due to high memory pressure. With less memory available which may be the case on smaller wearables, this would be an even more critical issue.
 
 Furthermore, we tested by generating random gestures programmatically. 
-We assume that the \$3 Gesture Recognizer spend the same amount of time on each gesture, 
+We assume that the \threedollar spend the same amount of time on each gesture, 
 regardless of whether it exists in the gesture database or if it is a completely random trace. 
 

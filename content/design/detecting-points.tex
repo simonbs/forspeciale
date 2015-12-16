@@ -13,8 +13,8 @@ Configuring multiple devices with the same gesture,
 means that the users can configure fewer gestures, 
 as they can be reused.
 
-Gestures are recognized using the previously described \$3 Gesture Recognizer (see \Cref{sec:threedollar}). 
-However, the \$3 Gesture Recognizer must have an explicit start and stop when recognizing gestures. 
+Gestures are recognized using the previously described \threedollar (see \Cref{sec:threedollar}). 
+However, the \threedollar must have an explicit start and stop when recognizing gestures. 
 This would typically be implemented by using a button, 
 but if the wearable does not have such an interface,
 we need an alternative way of starting and stopping the gesture recognition.
@@ -38,12 +38,12 @@ and thus the gesture would not be recognized.
 The gesture recognition begins when the delay has passed. 
 After the gesture has been performed, 
 the device must be held still again and the second point is detected. 
-The collected gesture data is then analyzed by the \$3 Gesture Recognizer, 
+The collected gesture data is then analyzed by the \threedollar, 
 in order to determine which known gesture was performed, if any at all. 
 Lastly, the system returns to the initial state and another gesture can be performed.
 
 While performing the gesture, the recognition may timeout. 
-The \$3 Gesture Recognizer can recognize gestures for a maximum of \SI{4}{\second} before the recognition is canceled. 
+The \threedollar can recognize gestures for a maximum of \SI{4}{\second} before the recognition is canceled. 
 In such case, the system returns to the initial state.
 
 \begin{figure}[h]
