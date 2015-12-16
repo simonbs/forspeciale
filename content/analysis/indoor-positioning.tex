@@ -4,7 +4,7 @@ The focus of this project is not to position devices,
 and as such it was not the intention to spend time developing an entire solution for positioning devices indoors. 
 Instead it was desired to find an existing product, 
 that could be used to facilitate indoor positioning.
-The solution should be available in the early phases of the project, 
+The solution had to be available in the early phases of the project, 
 in order to start building the system based on the solution for positioning.
 
 As the target group of the project is consumers, 
@@ -54,7 +54,8 @@ Only solutions intended for indoor positioning are considered.
 GPS is not considered a potential solution as GPS is meant for outdoor positioning, 
 and the location offered by GPS tend to have poor accuracy indoors \cite{Liu:4343996}.
 Furthermore WiFi is not considered, 
-as analyses have shown the accuracy of such solutions to be \SI{2}{\meter} and above \cite{Liu:4343996,jekabsons2011analysis}.
+as analyses have shown the accuracy of such solutions to be \SI{2}{\meter} and above \cite{Liu:4343996,jekabsons2011analysis}, 
+which is a high inaccuracy in a single room. 
 Technologies like NFC and RFID were not considered for positioning in this project either. 
 Such systems only detect users when they walk by the sensors, 
 and then report which sensor was activated.
@@ -69,16 +70,16 @@ as these does not provide solutions or setups for smaller areas such as rooms or
         \item[Product:] Estimote Beacons and Stickers \cite{estimote}
         \item[Availability:] Beacons and Stickers are shipping. SDKs available.
         \item[Technology:] iBeacon protocol.
-        \item[Price:] \SI{99}[\$]{} for beacons. \SI{99}[\$]{} for \num{10} stickers, one per device to be positioned.
-        \item[Ease of use:] Initial installation of beacons. Attach each sticker to device.
-        \item[Accuracy:] \num{0.5}-\num{1} meter \cite{estimote:accuracy}. However the accuracy is reported to be \num{3}-\num{4} meters on average, for locations bigger than \SI{100}{\square\meter} based on an e-mail correspondence with Wojtek Borowicz from Estimote. See \Cref{appendix:estimote-accuracy}.
+        \item[Price:] \$99 for \num{3} beacons. A minimum of \num{4} beacons is needed. 
+        \item[Ease of use:] Initial installation of beacons. 
+        \item[Accuracy:] \SIrange{0.5}{1}{\meter} \cite{estimote:accuracy}. However the accuracy is reported to be \SIrange{3}{4}{\meter} on average, for locations bigger than \SI{100}{\square\meter} based on an e-mail correspondence with Wojtek Borowicz from Estimote. See \Cref{appendix:estimote-accuracy}.
 
         \item[Product:] Pozyx \cite{pozyx}
         \item[Availability:] Available for preorder.
         \item[Technology:] Ultra-wideband (UWB).
-        \item[Price:] \SI{368}[\$]{}\ for anchors. \SI{123}[\$]{} for each device to be positioned, plus supported Arduino.
+        \item[Price:] \$368 for anchors. \$123 for each device to be positioned, plus supported Arduino.
         \item[Ease of use:] Initial installation of anchors. One tag for each device, plus supported Arduino. Not meant for mounting.
-        \item[Accuracy:] Claimed to be \SI{10}{\centi\meter}. Untested. \\
+        \item[Accuracy:] Claimed to be \SI{10}{\centi\meter}. \\
         
         \item[Product:] SmartActionSLAM \cite{SASLAM}
         \item[Availability:] Android Application (research). Not commercialized.
@@ -89,12 +90,12 @@ as these does not provide solutions or setups for smaller areas such as rooms or
         
         \item[Product:] DecaWave's DW1000 \cite{decawave}
         \item[Availability:] Available in stores. 
-        \item[Technology:] Ultra-wideband (UWB)
-        \item[Price:] Chips are \SI{12.50}[\$]{}, transceiver module is \SI{25}[\$]{}. Evaluation kits are available for \SI{589}[\$]{} and \SI{990}[\$]{} 
+        \item[Technology:] Ultra-wideband (UWB).
+        \item[Price:] Chips are \$12.50, transceiver module is \$25. Evaluation kits are available for \$589 or \$990 .
         \item[Ease of use:] No SDK and requires implementing the chips on a board yourself. 
         \item[Accuracy:] Claimed to be \SI{10}{\centi\meter}. 
         \end{description}
-    \caption{Assessment of potential solutions for indoor positioning. Please note that all prices are converted to U.S. dollars from their respective currency. Prices include the minimum available hardware for positioning a device.}
+    \caption{Assessment of potential solutions for indoor positioning. Please note that all prices are converted to U.S. dollars from their respective currency.}
     \label{tbl:indoor-positioning}
 \end{table}
 
@@ -105,7 +106,11 @@ it can estimate how far away the user is.
 Estimote's solution is available as a consumer product.
 
 Pozyx and DecaWave use a wireless radio technology known as ultra-wideband (UWB), 
-which works much like BLE but at a different frequency. 
+which works much like BLE, 
+but where the rising and failing of edges of the signals are much faster. 
+Due to this, it is easier to better determine the signal strength, and thus the distance, 
+between the transmitter and the receiver. 
+See \cite{UWB} for a further description of why. 
 Like Estimote, it also requires setting up ``anchors'', 
 and then using the signal strength to find the location. 
 No easy to use consumer product is available for either of these.
@@ -114,7 +119,10 @@ SmartActionSLAM is an Android application from research done by Hardegger \etal 
 This solution is a lot different from most other indoor location solutions. 
 It \emph{calculates} an estimated location by counting steps and estimating step length and direction. 
 In theory it can be adapted to almost any smartphone, 
-but requires a lot of work to adapt the released code from the research project. The benefit of this solution is that no extra hardware is needed. SmartActionSLAM can run on the users smartphone and with some adjustments potentially on a wearable.
+but requires a lot of work to adapt the released code from the research project. 
+The benefit of this solution is that no extra hardware is needed. 
+SmartActionSLAM can run on the users smartphone, 
+and with some adjustments, potentially on a wearable.
 
 \input{content/analysis/indoor-positioning-estimote.tex}
 

@@ -8,16 +8,13 @@ Thus we must know the location of the user,
 and his controllable devices along with the orientation of the user.
 
 The orientation of the user can be retrieved from any device possessing a magnetometer. 
-We found that 49 devices in Vandrico's database contain the magnetometer component. 
-Given the orientation of the user, his location and the location of a controllable device, 
-we can calculate if the user is looking at, 
-or in the direction of, the controllable device.
+We found that \num{49} devices in Vandrico's database contain the magnetometer component. 
 We also need to define a visibility range, 
 \ie a range that constitutes the area in which items are visible to the system. 
 This range can be specified (in degrees) as $r = o \pm e$, 
 where $r$ is the visibility range, $o$ is the orientation of the user, 
 and $e$ is the distance between $o$ and the edges of $r$.
-\Cref{fig:visibilityangle} illustrates this. 
+\Cref{fig:visibilityangle} illustrates the visibility angle. 
 In \Cref{fig:visibilityangle}, the user's orientation is \var{o1}, 
 and there are two devices with orientations \var{o2} and \var{o3}. 
 An orientation in degrees is between \num{0} and \num{360}. 
@@ -30,7 +27,7 @@ Given the user's location $(x1, y1)$ and the devices locations $(x2, y2)$ and $(
 we can calculate the orientation of the devices (\var{o2} and \var{o3}), 
 by finding the inverse tangent (arctangent), 
 and then converting from radians to degrees (dividing \num{180} by $\pi$), 
-such that we get the following.
+such that we get the following equation:
 
 \begin{equation}\label{eq:angle}
 \var{orientation} = 180 / \pi * \arctan((\var{user.y} - \var{device.y}) / (\var{user.x} - \var{device.x}))

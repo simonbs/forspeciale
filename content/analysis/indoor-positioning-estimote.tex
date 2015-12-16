@@ -4,7 +4,7 @@ We choose to use the solution provided by Estimote for this project.
 The choice of Estimote was made due to it being available already, 
 having a low price which may fit consumers, 
 and its advertised ease of use. 
-However, as described below the ease of use come at a cost of the accuracy.
+However, as described further below, the ease of use come at a cost of the accuracy.
 Furthermore Estimote has put effort into optimizing their software for indoor positioning, 
 and has released a software development kit (SDK),
 that developers can use to perform indoor positioning, 
@@ -13,25 +13,27 @@ making it easier to adopt the technology.
 \subsubsection{The Beacons and the iBeacon Protocol}
 Before we describe how we can use the beacons for indoor positioning, 
 we want to describe the technology that makes this possible. 
-The sections is based on a blog post by Estimote on how beacons work \cite{ESTIMOTEBEACON}.
+This section is based on a blog post by Estimote on how beacons work \cite{ESTIMOTEBEACON}.
 
 The beacon contains a small ARM processor with an antenna, 
-a Bluetooth Smart module and a battery, enclosed in a silicone casing,
-as shown by \Cref{fig:estimotebeacon}.
+a Bluetooth Smart module and a battery, enclosed in a silicone casing.
+A illustration of a beacon is shown by \Cref{fig:estimotebeacon}.
 The flat side of the casing has an adhesive on one side, 
 so that the beacons can be attached to surfaces. 
 
 \begin{figure}[!htb]
   \centering
   \includegraphics[width=0.6\textwidth]{images/estimotebeacon}
-  \caption{Image of an Estimote beacon. Contains a small ARM processor, a Bluetooth Smart module and a battery, enclosed in silicone casing. Source: \protect\cite{ESTIMOTEBEACON}}
+  \caption{Image of an Estimote beacon. Contains a small ARM processor, a Bluetooth Smart module and a battery, enclosed in silicone casing. Source: \protect\cite{ESTIMOTEBEACON}.}
   \label{fig:estimotebeacon}
 \end{figure}
 
-The beacons broadcast signals. 
+The beacons broadcast signals in intervals. 
 The beacons can broadcast these in an interval between \SI{100}{\milli\second} and \SI{2000}{\milli\second},
-however an operating system such as iOS only scans for signals every \SI{1}{\second}.
-Likewise, the beacons can broadcast the signals with a broadcasting power between \num{4} dBm and \num{-30}.
+however an operating system such as iOS only scans for signals every \SI{1}{\second}, 
+and Android scans every \SI{1.1}{\second}, 
+but may changed for faster or slower scans.
+Likewise, the beacons can broadcast the signals with a broadcasting power between \num{4} dBm and \num{-30} dBm.
 The further the signals travels, the weaker they get.
 This means that the further away from a beacon you receive the signal, 
 the weaker it is, and thus the accuracy falls. 
@@ -43,7 +45,7 @@ Each iBeacon packet include \cite{IBEACON}:
   \item[UUID] A \SI{16}{\byte} identifier string 
   \item[Major] A \SI{2}{\byte} string to identify a subset of beacons within a larger group
   \item[Minor] A \SI{2}{\byte} string meant to identify individual beacons
-  \item[Tx Power] A power defined as the signal exactly 1 meter from the device. This is used to estimate the distance between the devices. 
+  \item[Tx Power] A power defined as the signal exactly \SI{1}{\meter} from the device. This is used to estimate the distance between the devices. 
 \end{description}
 
 Estimote uses the iBeacon packets to estimate the distances. 
@@ -52,7 +54,7 @@ Estimote uses \emph{proximity zones}.
 There are four zones:
 \begin{enumerate}
   \item Immediate (very close to the beacon)
-  \item Near (about 1-3 meters from the beacon)
+  \item Near (about \SIrange{1}{3}{\meter} from the beacon)
   \item Far (further away or the signal is fluctuating too much to make a better estimate)
   \item Unknown 
 \end{enumerate}
@@ -92,10 +94,10 @@ using Estimote's application and \Cref{fig:estimote-location-configuration:actua
 configured in code using exact measurements of the room. 
 Notice the shape of the room changes from being almost quadratic to rectangular;
 the short walls are almost \SI{3}{\meter} off.
-Also notice that \Cref{fig:estimote-location-configuration:actual} only has four beacons, 
-whereas \Cref{fig:estimote-location-configuration:estimate} has six beacons. 
-We had to install two additional beacons to detect the ``dent'' in the room's upper left corner. 
-Without the two extra beacons, 
+Also notice that \Cref{fig:estimote-location-configuration:actual} only has \num{4} beacons, 
+whereas \Cref{fig:estimote-location-configuration:estimate} has \num{6} beacons. 
+We had to install \num{2} additional beacons to detect the ``dent'' in the room's upper left corner. 
+Without the \num{2} extra beacons, 
 the application would not be able to account for the ``dent'',
 which \emph{could} have an impact on the location afterwards. 
 
@@ -121,7 +123,7 @@ for performing indoor positioning using beacons on iOS.
 The SDK provides two mechanisms for configuring a room for indoor positioning.
 
 \begin{enumerate}
-\item Using the built-in controller. The component presents the user with a guided configuration similar to the one used in the Estimote Indoor Location application.
+\item Using the built-in controller. The component presents the user with a guided configuration, similar to the one used in the Estimote Indoor Location application.
 \item Programmatically using the \texttt{ESTLocationBuilder} class.
 \end{enumerate}
 
@@ -131,7 +133,7 @@ The \texttt{ESTLocationBuilder} lets developers configure a room programmaticall
 by passing coordinates (\texttt{ESTPoint}s) and an orientation to the builder. 
 The $X$ and $Y$ value of each coordinate is measured in meters. 
 Therefore a set of coordinates $\{(0, 0), (0, 5)\}$ represents a horizontal line of $5$ meters, 
-and the set of coordinates $\{(0,0),(0,5),(5,5),(5,0)\}$ represents $5$ by $5$ meter room.
+and the set of coordinates $\{(0,0),(0,5),(5,5),(5,0)\}$ represents a $5$ by $5$ meter room.
 
 \Cref{fig:estlocationbuilder-livingroom} shows an example of a location created programmatically using the \texttt{ESTLocationBuilder}. The room is created using the following set of coordinates: $\{(0, 0), (5.37, 0), (5.37, 0.6), (6.9, 0.6), (6.9, 3.85), (0, 3.85)\}$.
 
@@ -142,10 +144,9 @@ and the set of coordinates $\{(0,0),(0,5),(5,5),(5,0)\}$ represents $5$ by $5$ m
   \label{fig:estlocationbuilder-livingroom}
 \end{figure}
 
-The builder is configured with $6$ coordinates that gives information about the shape of the room. 
+The builder is configured with \num{6} coordinates that gives information about the shape of the room. 
 Next, the beacons are added to the walls of the room. 
-Beacons are added with the identifier of the beacon, 
-such as \texttt{dec18deac0c5} for the \texttt{ice3} beacon. 
+Beacons are added with the MAC address of the beacon.
 Lastly the orientation of the room relative to north and the name of the room is set. 
 When the room has been configured, 
 it can be stored on the users Estimote account using the Estimote SDK.
