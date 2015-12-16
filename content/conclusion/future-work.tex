@@ -46,8 +46,7 @@ and in \Cref{sec:evaluation:system-correctness} we showed the consequences of th
 
 It would be interesting to investigate, 
 if there are better solutions for indoor positioning, 
-than the one provided by Estimote, 
-or other solutions based on iBeacon/BLE in general. 
+than the one provided by Estimote.
 Alternatives that may be worth considering, 
 include solutions based on ultra wideband (UWB), 
 such as Pozyx or DecaWave described in \Cref{sec:analysis:indoor-positioning}.
@@ -55,7 +54,7 @@ UWB have been reported to have accuracy of below \SI{0.3}{\meter} \cite{Liu:4343
 
 In order to achieve the the desired accuracy of \perc{80}, 
 as described in the requirement specification, 
-the solution used for indoor positioning must have an inaccuracy lower than one meter, 
+the solution used for indoor positioning must have an inaccuracy of about \SI{0.6}{\meter}
 as described in \Cref{sec:evaluation:system-correctness}.
 
 \subsection{Include Information About the Users Context}
@@ -81,7 +80,7 @@ we may be able to determine or narrow the set of devices the user desires to con
 For example, it may be that users are more likely to control devices, 
 that are in the same room as themselves. 
 Estimote or other indoor positioning technologies should be able to determine which room a user is in, 
-with a higher accuracy than a precise location of the user.
+with a higher accuracy than a granular position of the user. In this case we may be able utilize the region monitoring as described in \Cref{sec:design:indoor-positioning}.
 
 If a smart device, that is in the same room as the user, 
 supports the gesture performed by the user, 
@@ -106,9 +105,9 @@ a solution for configuring locations should be implemented.
 In \Cref{sec:design:indoor-positioning:configuration-of-locations} we proposed a design for configuring locations for use with Estimote. 
 
 Due to time constraints, 
-and its low complexity and little contribution to the core of the project, 
+the low complexity of the feature and its little contribution to the core of the project, 
 the designed solution was not implemented. 
-If the solution was released as a product for end users, 
+If the solution implemented during the project was released as a product for end users, 
 this should be implemented in order to ease the setup for the user.
 
 \subsection{Improve Detection of Pointing}
