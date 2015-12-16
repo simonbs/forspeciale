@@ -9,7 +9,7 @@ The two devices are responsible for listening to new movement data from the wear
 \eg new data from the accelerometer and the magnetometer.
 The movement data is used for recognizing gestures, 
 and the magnetometer data is used for determining direction, 
-such that we are able to determine what devices are being pointed at. 
+such that we are able to determine which devices are being pointed at. 
 Tier (1) is also responsible for communicating with the beacons, 
 in order to retrieve the position of the user, 
 and possibly the position of the devices the user can control. 
@@ -28,15 +28,15 @@ and even though it contains data about the devices,
 it is different from typical tier three components such as a database. 
 The smart hub in Tier (3) is responsible for managing the devices, 
 that can be controlled using gestures. 
-The smart execute the request received from the server, 
-on the appropriate smart device. 
+The smart hub executes the request received from the server and puts the smart device into an appropriate state.
 If the request is a GET request to find all devices connected to the hub, 
-the response is then sent back to the wearable, through the server. 
+the response is then sent back to the wearable, through the server
+and possibly through the smartphone depending on the relationship between the wearable and the smartphone. 
 
 When utilizing a smart hub, users must install a hub in their home. 
 The hub communicates with the user's devices, \eg bulbs, locks and thermostats. 
 For privacy reasons, it may be interesting to move the logic of the server to the smart hubs in the users home. 
-This would also remove a tier in the architecture, simplifying it.
+This would also remove a tier in the architecture and thus simplifying it.
 
 \begin{figure}[H]
   \centering
