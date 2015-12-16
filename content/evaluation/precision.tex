@@ -1,16 +1,16 @@
-\section{Precision of Indoor Location}\label{sec:estimoteprecision}
-Another core part of our system is indoor location. 
+\section{Precision of Indoor Positioning}\label{sec:estimoteprecision}
+Another core part of our system is indoor positioning. 
 For the ``point-to-select'' part of our system to work as intended, 
 we need high indoor precision. 
 In \Cref{sec:design:indoor-positioning} we mentioned that Estimote claims the accuracy to be \num{0.5}-\num{1} meters.
 In this section we test if that is actually the case, 
 or even if we can achieve better results than that. 
 This section will contain some of the measurements from our tests. 
-All of the measurements can be found in \Cref{app:estimotetestresults}
+All of the measurements can be found in \Cref{app:estimotetestresults}.
 
 We test this by comparing the position we get from the application, \ie from the Estimote beacons,
 to the actual position we have measured in the room using a measuring tape.
-We test it with the \num{4} settings from \Cref{table:rooms}.
+We test it with the four settings from \Cref{table:rooms}.
 
 \begin{table}
   \centering
@@ -21,7 +21,7 @@ We test it with the \num{4} settings from \Cref{table:rooms}.
     Room 3 & $17.9 \times 17.9$ & 4 & 3 & 3\\
     Room 4 & $4.9 \times 9.95$ & 4/8 & 33 & 20 
   \end{tabular}
-  \caption{Room settings}
+  \caption{Settings of the rooms in which we conducted the tests.}
   \label{table:rooms}
 \end{table}
 
@@ -47,12 +47,12 @@ The setup can be seen in \Cref{fig:audtest} and illustrated in \Cref{fig:precisi
 \begin{figure}[!htb]
   \centering
   \input{drawings/audtestillustration.tikz}
-  \caption{Illustration of room used for indoor location precision test. The full (blue) circles represent beacons, the dotted line is the walking path for the movement tests and the dotted center circle is the location of the phone for the stationary tests.}
+  \caption{Illustration of room used for indoor positioning precision test. The filled (blue) circles represent beacons, the dotted line is the walking path for the movement tests and the dotted center circle is the location of the phone for the stationary tests.}
   \label{fig:precisiontest:illustration}
 \end{figure}
 
 The setup consisted of four beacons, one on each wall, 
-each using the recommended settings from Estimote \cite{estimote:settings}:
+each using the following recommended settings from Estimote \cite{estimote:settings}:
 \begin{description}
   \item[Broadcasting Power:]{\num{4} dBm}
   \item[Advertising Interval:]{\SI{200}{\milli\second}}
@@ -73,7 +73,7 @@ as we had to use the lampposts' locations.
 \begin{figure}[!htb]
   \centering
   \input{drawings/outdoortestillustration.tikz}
-  \caption{Illustration of room used for Estimote accuracy outdoors, with little to no interference from WiFi access points. The full (blue) circles represent beacons, and the dotted center circle is the location of the phone (stationary test).}
+  \caption{Illustration of room used for Estimote accuracy outdoors, with little to no interference from WiFi access points. The filled (blue) circles represent beacons, and the dotted center circle is the location of the phone (stationary test).}
   \label{fig:outdoortest}
 \end{figure}
 
@@ -85,7 +85,7 @@ where the user walked around near the walls as done in Room 1 and 2.
 We did, however, also test movement where the user walked in a \emph{bowtie},
 illustrated by \Cref{fig:bowtie4beacons}. 
 We did this to see if we it would have any effect if we did not walk near the beacons all the time. 
-We also tried to perform tests with \num{8} beacons in this room, 
+We also tried to perform tests with eight beacons in this room, 
 illustrated by \Cref{fig:bowtie8beacons}. 
 
 \begin{figure}[!htb]
@@ -256,19 +256,19 @@ It is thus expectable that the accuracy is worse further away from the beacons.
 
 Regarding the worse accuracy with more beacons, 
 we have two theories to why.
-The first theory is that the Estimote SDK only uses a subset of beacons, \eg only \num{4}, for accuracy. 
+The first theory is that the Estimote SDK only uses a subset of beacons, \eg only four, for accuracy. 
 The reasoning behind this theory is that in \Cref{fig:distance:room4:1:8:c}, 
 we consistent change between \SI{3.5}{\meter} and \SI{2.5}{\meter}, 
-where from the tests with \num{4} (\Cref{fig:distance:room3:1:4:c,fig:distance:room4:1:4:c,fig:distance:room4:1:4:2.8}) beacons, 
+where from the tests with four (\Cref{fig:distance:room3:1:4:c,fig:distance:room4:1:4:c,fig:distance:room4:1:4:2.8}) beacons, 
 we see a convergence after the first \num{50} measurements.
-The change could be a result of Estimote changing from two sets of \num{4} beacons, 
+The change could be a result of Estimote changing from two sets of four beacons, 
 where the \SI{3.5}{\meter} results are from one set, 
 and the \SI{2.5}{\meter} results are from the other set. 
 Estimote has not provided any documentation about how many beacons is used to get the location using the SDK, 
 nor are we able to see this from the SDK. 
 
 The other theory is that the beacons interfere with each other. 
-With \num{8} beacons in a $5 \times 10$ meter room, 
+With eight beacons in a $5 \times 10$ meter room, 
 it is possible that the signals interfere with each other, 
 when the beacons are placed near to each other. 
 In Estimote's guide for beacon placement \cite{SIGNALBLEED}, 
@@ -340,7 +340,7 @@ but also that we are now spending more time walking further away from beacons,
 than we did in \Cref{fig:room1:4:m,fig:room2:4:m}.
 
 \subsection{Changing Settings}\label{sec:settings}
-For this test the objective was to test the accuracy of the location system,
+For this test the objective was to test the accuracy of the positioning system,
 using different settings. 
 We use Room 4 with 4 beacons for these tests. 
 The tests conducted in this room, 
@@ -381,7 +381,7 @@ It is possible that a broadcasting power of \num{4} dBm,
 creates more interferences, and thus worse results, than \num{-4} dBm. 
 We do not, however, have enough data to properly conclude this. 
 
-\subsection{Precision of Indoor Location Conclusion}
+\subsection{Precision of Indoor Positioning Conclusion}
 From our results, we can conclude that we cannot, 
 in our settings, reach high indoor accuracy using Estimote beacons. 
 They claim that the accuracy is \num{0.5}-\num{1} meters, 
