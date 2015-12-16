@@ -71,9 +71,7 @@ this can be avoided.
 \subsubsection{Considerations}
 While the computational time is low, 
 the memory used, as seen by \Cref{fig:threedollarmemory}, is high (up to \SI{405.1}{\mega\byte}). 
-For the iPhone that we tested on, this is not an issue, 
-but with lower memory available (most wearables do not have more than \SI{512}{\mega\byte}), 
-this might be a considerable problem. 
+For the iPhone that we tested on, this is an issue as the operating system terminates the application due to high memory pressure. With less memory available which may be the case on smaller wearables, this would be an even more critical issue.
 
 Furthermore, we tested by generating random gestures programmatically. 
 We assume that the \$3 Gesture Recognizer spend the same amount of time on each gesture, 
