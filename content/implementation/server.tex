@@ -3,7 +3,7 @@ The server was described in \Cref{sec:serverdesign}.
 In this section, we briefly document the implementation of the server.
 
 The server is implemented in Python,
-using a microframework called \texttt{Flask},
+using a microframework called \texttt{Flask}\footnote{http://flask.pocoo.org/},
 which provides a built-in server and a RESTful request handler. 
 As described in \Cref{sec:serverdesign}, 
 the server only provides two REST methods for controlling a devices and getting the devices. 
@@ -43,7 +43,7 @@ we need to do
 We have borrowed a box from Aalborg University,
 containing two ordinary light bulbs, 
 a Phidget interface kit and a relay.
-This Phidget box have been used to test the implementation of connecting with HomePort. 
+This Phidget box has been used to test the implementation of connecting with HomePort. 
 
 \subsubsection{Mapping Actions}
 In the current implementation of HomePort, 
@@ -94,9 +94,9 @@ An example response of HomePort could be:
 </devicelist>
 \end{minted}
 
-The values that we are interested in here is the attributes of the \texttt{service} element, 
+The values that we are interested in here are the attributes of the \texttt{service} element, 
 mainly the attributes \texttt{id}, \texttt{value\_url} and \texttt{unit}. 
-The \texttt{desc} attribute have the potential to contain the name of the smart device, 
+The \texttt{desc} attribute has the potential to contain the name of the smart device, 
 but is not so in the version of HomePort that we are using. 
 We will use the \texttt{id} to identify the HomePort, 
 the \texttt{value\_url} to easily send actions to the device, 
