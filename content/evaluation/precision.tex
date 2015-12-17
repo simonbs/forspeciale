@@ -60,12 +60,13 @@ each using the following recommended settings from Estimote \cite{estimote:setti
   \item[Smart Power Mode:]{Enabled}
   \item[Basic Power Mode:]{Disabled}
 \end{description}
-The beacons run firmware version A3.2.0 and hardware version,
-and the broadcasting scheme is the Estimote default scheme (\ie). 
+The beacons run firmware version A3.2.0 and hardware version D3.4,
+and the broadcasting scheme is the Estimote default scheme (\ie).
+\todo[author=Kasper]{\ie what?} 
 
 For Room 3, the outdoor ``room'',
 we attached the beacons to lampposts. 
-We tested outside to see if the number of access points would have, and how much of, 
+We tested outside to see if the number of WiFi access points would have, and how much of, 
 an impact on the accuracy. 
 The ``room'' is illustrated in \Cref{fig:outdoortest}. 
 The beacons in this room are slightly off-center (\SI{0.45}{\meter}), 
@@ -373,9 +374,9 @@ each \SI{1}{\minute} long.
 
 The results from \Cref{table:precisiontest:settings} show that settings do have an impact on accuracy. 
 However, the settings also have an impact on battery life. 
-While changing from \SI{200}{\milli\second} to \SI{100}{\milli\second} almost increased accuracy by \perc{200},
-it also increases the battery usage by \perc{200}.
-Lower broadcasting powers such as \num{-20} dBm and \num{-12} dBm perform bad. 
+While changing from \SI{200}{\milli\second} to \SI{100}{\milli\second} almost increased accuracy by \perc{100}\todo[author=Kasper]{It used to state that the accuracy was increased by \perc{200} but I think that that is wrong. $\frac{281-141}{281}*100 = 49.82$ so roughly half. Half the error must mean double the accuracy, but that means an increase of \perc{100} and not \perc{200}. \perc{200} would be triple the accuracy and that can't be the case.},
+it also increases the battery usage by \perc{200}\todo[author=Kasper]{Since there was some confusing regarding the percentage increase of accuracy, we better double check the battery usage.}.
+Lower broadcasting powers such as \num{-20} dBm and \num{-12} dBm perform badly. 
 This is because at such lower powers, 
 the signal from the beacons might not have reached the phone, 
 and the lack of data from these beacons is very likely to have worsened the accuracy.
