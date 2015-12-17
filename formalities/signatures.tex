@@ -1,16 +1,34 @@
-\newcommand{\signature}[3][5cm]{%
-  \begin{tabular}{@{}p{#1}@{}}
-    #2 \\[2\normalbaselineskip] \hrule \\[0pt]
+\makeatletter
+\define@key{signature}{width}{\def\sig@width{#1}}
+\define@key{signature}{content height}{\def\sig@contentHeight{#1}}
+\define@key{signature}{image}{\def\sig@image{#1}}
+\setkeys{signature}{width=5cm, content height=1cm}%
+\newcommand{\signature}[3][]{%
+  \begingroup%
+  \setkeys{signature}{#1}% Set new keys
+  \begin{tabular}{@{}p{\sig@width}@{}}
+    #2
+    \@ifundefined{sig@image}{
+      \\\vspace{\sig@contentHeight}
+    }{
+    \\
+    \parbox[t][\sig@contentHeight][b]{\sig@width}{
+      \includegraphics[max height=1cm, max width=\sig@width]{\sig@image}
+    }
+    }
+    \hrule \\[0pt]
     {\small #3} \\[2\normalbaselineskip]
   \end{tabular}
+  \endgroup%
 }
+\makeatother
 
 \centering
 \signature{Jens Emil Gydesen}{jgydes11@student.aau.dk}
 \\ \vspace{1cm}
 \signature{Kasper Lind Sørensen}{klsa11@student.aau.dk}
 \\ \vspace{1cm}
-\signature{Simon B. Støvring}{sstavr11@student.aau.dk}
+\signature[image=signature-sbs]{Simon B. Støvring}{sstavr11@student.aau.dk}
 
 %%% Local Variables:
 %%% mode: latex
