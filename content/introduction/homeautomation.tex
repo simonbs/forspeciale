@@ -144,11 +144,14 @@ or rather what values the devices can have (\eg 0 = off, and 1 = on).
 Each device also has an URL. 
 This URL is used to control the devices. 
 
+\FloatBarrier
+\subsubsection{Example of HomePort}
 Following is an example of how to turn on a lamp in HomePort.
 In this example, the lamp is connected to a Phidget\footnote{\url{http://www.phidgets.com/}} network, 
 where HomePort is connected to a Phidget interface kit with ID \texttt{173111}, 
 using a Phidget adapter. 
-We want to change the \emph{output} of the lamp with ID \texttt{0}, 
+We have borrowed a box (\Cref{fig:phidget-box}) with a Phidget interface kit and two light bulbs (simulating lamps) from Aalborg University.
+We want to change the \emph{output} of the lamp with ID \texttt{0} (the right lamp in \Cref{fig:phidget-box}),
 to the value \texttt{1}, \ie turn the lamp on. 
 To change the value of the lamp, 
 we must send the following XML data to it:
@@ -157,10 +160,23 @@ we must send the following XML data to it:
   <?xml version='1.0' encoding='UTF-8'?><value>1</value>
 \end{minted}
 
+\begin{figure}[!htb]
+	\centering
+	\subbottom[Both lamps off]{\label{fig:phidget-box:off}
+	  	\includegraphics[width=0.45\textwidth]{images/phidget_off}
+	}\hfill
+	\subbottom[Lamp with ID 0 is on]{\label{fig:phidget-box:on}
+	  	\includegraphics[width=0.45\textwidth]{images/phidget_on}
+	}
+	\caption{Phidget box with a Phidget interface kit, a relay and two light bulbs connected to HomePort}
+	\label{fig:phidget-box}
+\end{figure}
+
 The data is sent as a PUT request with the URL of the lamp, 
 which in this example is \texttt{/phidget/173111/output/0}. 
-The URL describes that we want to change the output of device with ID \texttt{0}, 
-of the interface with ID \texttt{173111} of the Phidget network, to the value \texttt{1}.
+The URL describes that we want to change the \texttt{output} of device with ID \texttt{0}, 
+of the network interface with ID \texttt{173111}, to the value \texttt{1}.
+The result of this PUT request is \Cref{fig:phidget-box:on}.
 
 From what we have seen so far with HomePort, 
 it shows that only a part of the smart hub's responsibility, 
