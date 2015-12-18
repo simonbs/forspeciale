@@ -1,0 +1,10 @@
+\begin{tikzpicture}
+  \draw (5, 5) circle (0.25); % Inner cirlce
+  \draw (5, 5) circle (3); % Outer cirlce
+  \draw (5, 5) -- (5,2); % Radius
+ 
+ %Text
+  \node at (5,5.5) {Actual Position};
+  \node at (5,1.75) {Offsetted Position};);
+  \node at (6.2, 3.7) {Offset radius};
+\end{tikzpicture}
