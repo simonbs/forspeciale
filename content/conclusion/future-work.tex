@@ -1,7 +1,7 @@
 \section{Future Work}\label{sec:conclusion:future-work}
 
 From the conclusion we found that there are some requirements, 
-from the requirement specification presented in \Cref{sec:requirements-specification}, 
+of our requirement specification presented in \Cref{sec:requirements-specification}, 
 that are only partially fulfilled, 
 and in the evaluation of the system in \Cref{chap:evaluation}, 
 we found that there are parts of the system that does not work as well as intended.
@@ -26,8 +26,7 @@ In order to get the full benefit of the system,
 \ie the convenience of controlling a smart home by performing gestures, 
 without of being near a smartphone, 
 the system should be ported to a wearable, 
-and only rely on a smartphone for the situations, 
-where it is absolutely needed, if needed at all.
+and not rely on a smartphone.
 
 \subsection{Unify the Server and the Hub}
 
@@ -64,6 +63,8 @@ An alternative to precise user positioning,
 \ie tracking of a user inside a room, 
 is to include other information about the context the user operates in.
 
+The context could be information about which rooom the user is currently in and what the user is currently doing. \eg if a user is currently watching TV in the living room, it is more likely that he wants to control devices related to this activity, like the volume of the TV.
+
 Together with the orientation of the user, 
 the position of the user is used to determine which device the user points at, 
 and thus which device to send an action to. 
@@ -72,18 +73,20 @@ in which the user operates.
 Since we found the position of the user to be inaccurate, 
 it may be interesting to look at other information about the context of the user.
 
-By excluding the position if the user, 
+By excluding the position of the user, 
 we are no longer able to create a solution, 
 in which the user points at a smart device in order to control it, 
 but this may not be necessary in order to provide a good user experience. 
 Given a broad amount of data about the user's context, 
+\eg which room he is in and which devices are currently turned on, 
 we may be able to determine or narrow the set of devices the user desires to control. 
 For example, it may be that users are more likely to control devices, 
 that are in the same room as themselves. 
 Estimote or other indoor positioning technologies should be able to determine which room a user is in, 
-with a higher accuracy than a granular position of the user. In this case we may be able utilize the region monitoring as described in \Cref{sec:design:indoor-positioning}.
+with a higher accuracy than when detecting the exact location of the user.
+In this case we may be able to utilize the region monitoring as described in \Cref{sec:design:indoor-positioning}.
 
-If a smart device, that is in the same room as the user, 
+If a smart device in the room the user is currently in, 
 supports the gesture performed by the user, 
 the smart device receives the appropriate action. 
 If not, we look in the entire system across all rooms for devices that supports the gesture.
@@ -95,6 +98,7 @@ Other information about the context may be the state of other devices in the sys
 devices the user has recently controlled, 
 patterns of the users behavior throughout his day, 
 or data provided by other sensors in the system.
+\eg if the user usually watches TV at a lower volume in the evening and the TV is currently on, then it is likely that the user wants to control the volume of the TV.
 
 These are ideas that may be worth exploring. 
 
@@ -118,9 +122,9 @@ there are issues with the point detector.
 It is currently too slow, 
 and detects points if the phone is lying on a table that is subject to vibrations (from \eg a stereo og a desktop computer).
 
-Future work could look into reducing the length of the sampling period. 
+Future work could look into reducing the length of the period in which the samples are gathered from the accelerometer to detect whether the user is pointing.
 Furthermore future work could look into better detecting if a device is ``idle'', 
-\ie if it laying still on \eg a table. 
+\ie if it is laying still on \eg a table. 
 This issue may become more critical when using a wearable device. 
 For example, if the system is implemented on a smartwatch, 
 there are several states to consider. 
@@ -147,8 +151,8 @@ this is not ideal.
 
 Ideally we would like to be able to do gesture recognition on a \emph{continuous stream} of data from the accelerometer. 
 By doing so, we eliminate the need to explicitly start and stop a gesture.
-This could, however, easily become very costly for to perform for wearables,
-both in terms of CPU, but also battery.
+This could, however, easily become very costly to perform for wearables,
+both in terms of CPU, but also battery. Furthermore, if the system is continuously detecting gestures it increases the risk of getting false positives when the user is not actually performing any gestures.
 
 %%% Local Variables:
 %%% mode: latex
