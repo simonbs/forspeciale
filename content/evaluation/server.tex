@@ -1,9 +1,20 @@
 \section{Server and HomePort}\label{sec:servereval}
-The server has not been tested in detail, 
-as the number of the requests sent to and from the server is small,
-and the complexity of the requests are simple. 
-We have experienced no problems with the server during development,
-or through testing the application. 
+We have tested the correctness of the server, 
+but not the performance.
+We have omitted testing the performance, 
+as the number of requests send to the server i minimal. 
+
+To test the correctness of the server, 
+we simulate \num{5} devices,
+and send both GET and POST requests to the server.
+We send a total of \num{10000} requests (a mix of POST and GET) to the server, 
+and validate the response received. 
+We send both valid requests, 
+\ie \texttt{GET /devices} and POST with valid ID and action,
+but also invalid POST requests, \ie POST requests with invalid actions. 
+Each of the \num{10000} requests returned the expected response code, 
+\ie 200 for valid requests, and 400 for bad requests.
+We can conclude that the server works as intended.
 
 However, our third party smart hub, HomePort, showed problems. 
 The implementation of HomePort that we use, 
