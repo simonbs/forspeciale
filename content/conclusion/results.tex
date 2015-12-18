@@ -48,7 +48,7 @@ we use the magnetometer in the device for orientation,
 and Bluetooth Low Energy (BLE) beacons for indoor positioning. 
 The system calculates which device that is being pointed at, 
 using the user's location and orientation, 
-as well as the smart devices' locations 
+as well as the smart devices' locations.
 
 In our implementation we switched out the wearable for a phone, 
 as this made the implementation and testing easier. 
@@ -59,6 +59,6 @@ Our results showed that the mean distance error we could get from the BLE beacon
 which resulted in a correctness rate of pointing of just \perc{4.29}. 
 Even our best case result, with an accuracy of \SI{1.22}{\meter},
 would result in less than \perc{50} correctness.
-This very low rate is unacceptable for the system that we wanted, 
-and we can conclude that BLE beacons \emph{cannot} provide the indoor position accuracy that we need. 
+This very low rate is unacceptable for the system that we expected, 
+and we can conclude that our use of Estimote beacons \emph{cannot} provide the indoor position accuracy that we need. 
 Our tests show that we need an average accuracy of around \SI{0.6}{\meter} to be viable. 
