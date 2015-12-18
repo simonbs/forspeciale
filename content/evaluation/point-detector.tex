@@ -1,9 +1,7 @@
 \section{Pointing}
 \label{sec:evaluation:pointing}
 
-A qualitative test of pointing with the device, 
-as described in \Cref{sec:detecting-points}, 
-was performed. 
+We performed a test of pointing with the device (see \Cref{sec:detecting-points}).
 We were interested in determining if we are able to determine, 
 when users point with the device, 
 and when it lies on the table.
@@ -23,13 +21,16 @@ This was performed multiple times,
 and in all cases the screen successfully turned green.
 
 Furthermore we put the phone down on various tables inside the room. 
-The screen remained white and thus not points were detected.
+The screen remained white and thus no points were detected.
 
 During our tests we did find the following two issues:
 \begin{itemize}
-\item Detecting a point felt slow. The time that passes from the user points with the device to the point is detected, is too long. This could possibly be fixed by reducing the length of the sampling period, but this may have an impact on the accuracy of the detector, \ie it may detect points when the user did not intend to point.
+\item Detecting a point felt slow. The time that passes from the user points with the device to the point is detected, is too long. This could possibly be fixed by reducing the length of the sampling duration, but this may have an impact on the accuracy of the detector, \ie it may detect points when the user did not intend to point.
 \item When the phone lied still on a table with small vibrations, it would detect a point. For example, typing on a laptop placed on a table, caused the table to make small vibrations. In this case, the detector may recognize a point. This could possibly be fixed by increasing the acceleration threshold for tables. However, this may negatively impact the accuracy of the detector when the user points.
 \end{itemize}
+
+Based on this, we conclude that detecting points works, 
+but it needs more tuning to give a better experience. 
 
 %%% Local Variables:
 %%% mode: latex
