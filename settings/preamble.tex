@@ -66,7 +66,7 @@
 \usepackage{booktabs}
 \usepackage{xspace} %Automatic spacing in macros
 \usepackage[thinlines]{easytable} %proves the {TAB} environment
-\usepackage{caption} %Figure captions in tables
+\usepackage[font={it}]{caption} %Figure captions in tables
 \usepackage{longtable} %Multipage tables
 \usepackage{textcomp} %provides text versions of math symbols, e.g. \textrightarrow
 \usepackage{lipsum} %provides \limsum for testing
@@ -121,9 +121,9 @@
 
 %Listings
 % \usepackage{listings} %For code listings
-% \usepackage[font={small,it}]{caption}
 % \input{settings/codelistingstyling}
 \usepackage{minted}
+\captionsetup[listing]{position=bottom}
 \newminted{swift}{
   linenos,
   autogobble,

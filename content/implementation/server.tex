@@ -10,7 +10,7 @@ the server only provides two REST methods for controlling a devices and getting 
 Using \texttt{Flask}, the structure of the implementation can be seen in \Cref{lst:server}.
 
 \begin{listing}
-  \begin{minted}[linenos, breaklines, autogobble]{python}
+  \begin{minted}[breaklines, autogobble]{python}
     from flask import Flask
     app = Flask(__name__)
     
@@ -72,16 +72,21 @@ The request we send are either a GET or a PUT.
 The GET is simply a \texttt{GET /devices HTTP/1.1}. 
 
 To perform an action, we use the aforementioned mapper to get the numeric value of our action and send a PUT request with 
+\begin{listing}
 \begin{minted}[breaklines, autogobble]{python}
 "<?xml version='1.0' encoding='UTF-8'?><value>" + actionID + "</value>"
 \end{minted}
+\caption{Example of PUT request data.}
+\label{lst:putrequest}
+\end{listing}
 as data. 
 
 \subsubsection{Transforming XML Data}
 When we request devices from HomePort, 
 we receive an XML response. 
 An example response of HomePort could be:
-\begin{minted}[linenos, breaklines, autogobble, escapeinside=||]{xml}
+\begin{listing}
+\begin{minted}[breaklines, autogobble, escapeinside=||]{xml}
 <?xml version="1.0"?>
 <devicelist name="services.xml" id="12345">
   <device desc="phidget" id="173111" vendorid="0x01" productid="0x01" version="V1" location="ExampleRoom" type="phidget">
@@ -93,6 +98,10 @@ An example response of HomePort could be:
   </device>
 </devicelist>
 \end{minted}
+
+\caption{Example of HomePort output.}
+\label{lst:homeportoutput}
+\end{listing}
 
 The values that we are interested in here are the attributes of the \texttt{service} element, 
 mainly the attributes \texttt{id}, \texttt{value\_url} and \texttt{unit}. 
@@ -123,7 +132,8 @@ as we have not implemented adding new devices.
 
 The JSON result of the transformed XML, with a name and coordinate is:
 
-\begin{minted}[linenos, breaklines, autogobble, escapeinside=||]{xml}
+\begin{listing}
+\begin{minted}[breaklines, autogobble, escapeinside=||]{json}
 {
   "devices": [
   {
@@ -138,3 +148,6 @@ The JSON result of the transformed XML, with a name and coordinate is:
   ]
 }
 \end{minted}
+\caption{JSON output of our server}
+\label{lst:serveroutput}
+\end{listing}
