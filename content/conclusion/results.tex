@@ -1,6 +1,6 @@
 \section{Project Results}\label{sec:results}
 This section describes the final results of our project. 
-First we will discuss whether our system meets the requirements, 
+First we discuss whether our system meets the requirements, 
 setup in \Cref{sec:requirements-specification}. 
 Then we will conclude the project based on our problem statement from \Cref{sec:researchstatement}.
 
@@ -13,13 +13,13 @@ Then we will conclude the project based on our problem statement from \Cref{sec:
   \item[\yes Train gestures] It is possible to train gestures, but only when creating it. 
   \item[\yes Recognize gestures] We can recognize gestures using the \threedollar.
   \item[\yes Assign gestures to actions] We can add gestures to actions. Multiple actions can share same gesture.  
-  \item[\yes Control smart devices by pointing at them] We can control smart devices by pointing at them.
+  \item[\yes Control smart devices by pointing at them] It is possible to detect when the user is pointing, recognize gestures and when the position of the user i known it is also possible to determine which device he is pointing at. As such the requirement is fulfilled as it is possible, though due to the inaccuracy explained in \Cref{sec:evaluation:system-correctness} it is not reliable. 
 \end{description}
 
 \subsubsection{Performance Requirements}
 \begin{description}
-  \item[\yes Realtime gesture recognition] The requirement was to recognize gestures faster than \SI{200}{\milli\second} per gesture. We are able to do this, up to a certain number of gestures. We measured less than \SI{120}{\milli\second} for \num{20} unique gestures, trained \num{5} times each, using an iPhone 5.
-  \item[\yes Scalability] To correctly select devices that are near each other, more unique gestures are needed to select between them. The system shows linear scalability in terms of performance in gesture recognition, \ie the number of gestures linearly increases the computational time for each gesture. The system scales linearly.  
+  \item[\yes Realtime gesture recognition] The requirement was to recognize gestures faster than \SI{200}{\milli\second} per gesture. We are able to do this, up to a certain number of gestures. We measured less than \SI{120}{\milli\second} for \num{20} unique registered gestures, trained \num{5} times each, using an iPhone 5.
+  \item[\yes Scalability of gesture recognition] To correctly select devices that are near each other, more unique gestures are needed to select between them. The system shows linear scalability in terms of performance in gesture recognition, \ie the number of gestures linearly increases the computational time for each gesture. The system scales linearly.  
   \item[\yes Correct gesture recognition] The requirement was \perc{80} correctness rate for gestures. The \threedollar paper \cite{threedollar} reports a correct recognition rate of \perc{80}.
   \item[\no Correct device selection] The requirement was to send the action to the correct device \perc{80} of the time. Based on the average mean distance error of \SI{2.92}{\meter} that we have measured, we get a correctness rate of just \perc{4.29}. 
 \end{description}
