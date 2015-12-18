@@ -10,6 +10,7 @@
       yticklabel style={align=right,inner sep=0pt,xshift=-0.3em},
       enlargelimits = false,
       ymax = 100,
+      ymin = 0,
       grid=major,
       try min ticks=10]]
     \addplot table[x=offset, y=accuracy] {data/system-correctness/results.csv};   
