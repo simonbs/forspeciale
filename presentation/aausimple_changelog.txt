@@ -1,0 +1,81 @@
+****************************************************
+* This is the changelog for the
+* AAU Simple beamer theme
+****************************************************
+
+****************************************************
+* v. 1.3.2
+* 2014-10-31
+****************************************************
+- The rotationcw and option now works again. Since the
+  change to the fp package, is did not work.
+- The \ExecuteOptionsBeamer{rotationcw} line in the
+  AAUsimpletheme.tex file has been removed since it
+  causes an keyval error in newer versions of Beamer.
+  (Thanks to Mathias Grønning Lyngsø for pointing this
+  out.)
+
+****************************************************
+* v. 1.3.1
+* 2014-10-07
+****************************************************
+- The fp package is now used to calculate the
+  position of the progress bar. This solves the
+  problem that the previous implementation failed for
+  more than fifty slides. (Thanks to Thomas Arildsen
+  for the solution.)
+- The AAU waves in the background are now drawn
+  correctly.
+- The documentation has been updated.
+
+****************************************************
+* v. 1.3.0
+* 2014-09-13
+****************************************************
+- The author info and presentation title is now added
+  to the headline (thanks to Robert Dahl Jacobsen for
+  this idea)
+- The blue header background has been moved down so
+  the AAU logo is now centered on it.
+- The theme can now handle TikZ externalisation
+- Title and subtitle do not jump between frames.
+- A very long title is now not overlapping the logo.
+
+****************************************************
+* v. 1.2.1
+* 2014-04-08
+****************************************************
+- removed an unused option from the table of content slide
+  which causes an error for MikTeX users. Thanks to Mads
+  Lauridsen for pointing this out.
+- added a description of a known problem.
+
+****************************************************
+* v. 1.2.0
+* 2013-05-25
+****************************************************
+- the AAU waves background are now easier to remove and include
+  on individual slides
+- an eps-version of the aau-waves background is now also included
+- all graphics is now moved to the folder AAUgraphics
+- the title page is no longer counted as a frame by default
+- added a final page has been added
+- use numbers instead of a picture as default for the references 
+- removed the sfmath math font since it is not in MikTeX's repository
+- updated the documentation
+
+****************************************************
+* v. 1.1.0
+* 2013-05-13
+****************************************************
+- added two new ways of displaying the progress of the
+  slide show
+- added an option to change the direction of the rotation
+  of the circular progress bars
+- updated the documentation
+
+****************************************************
+* v. 1.0.0
+* 2013-05-10
+****************************************************
+- the first version of the theme
