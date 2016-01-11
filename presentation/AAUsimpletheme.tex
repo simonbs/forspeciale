@@ -5,7 +5,6 @@
 %    rotationcw,          % change the rotation direction from counter-clockwise to clockwise
 %    shownavsym          % show the navigation symbols
   ]{AAUsimple}
-  
 % If you want to change the colors of the various elements in the theme, edit and uncomment the following lines
 % Change the bar and sidebar colors:
 %\setbeamercolor{AAUsimple}{fg=red!20,bg=red}
@@ -24,11 +23,27 @@
 % Or whatever. Note that the encoding and the font should match. If T1
 % does not look nice, try deleting the line with the fontenc.
 \usepackage{helvet}
+\usepackage{graphicx} %For figures
+\graphicspath{{./images/}}
+\usepackage{tikz} %Tikz
+\usepackage{tikzscale}
+\usepackage{tikz-uml}
+\usetikzlibrary{calc, arrows, decorations.markings,decorations.text, shapes, positioning}
+\usepackage{pgfplots} %Graph plotting
+\pgfplotsset{compat=newest,
+  table/col sep = comma,
+  every axis legend/.append style={
+    no marks,
+    filter discard warning=false,
+  }
+}
+\usepackage{siunitx}
 
 % colored hyperlinks
 \newcommand{\chref}[2]{%
   \href{#1}{{\usebeamercolor[bg]{AAUsimple}#2}}%
 }
+\newcommand{\perc}[1]{\SI{#1}{\percent}}
 
 \title{Point and Control with Gestures in a Smart Home}
 
@@ -85,6 +100,8 @@
 
 \include{content/introduction}
 \include{content/architecture}
+\include{content/evaluation}
+\include{content/conlusion}
 
 \end{document}
 
