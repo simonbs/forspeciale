@@ -30,7 +30,7 @@
 \usepackage{tikzscale}
 \usepackage{tikz-uml}
 \usepackage{framed}
-\usetikzlibrary{calc, arrows, decorations.markings,decorations.text, shapes, positioning}
+\usetikzlibrary{calc, arrows, decorations.markings,decorations.text, shapes, positioning, decorations.pathreplacing}
 \usepackage{pgfplots} %Graph plotting
 \pgfplotsset{compat=newest,
   table/col sep = comma,
@@ -52,6 +52,7 @@
   \href{#1}{{\usebeamercolor[bg]{AAUsimple}#2}}%
 }
 \newcommand{\perc}[1]{\SI{#1}{\percent}}
+\renewcommand{\arraystretch}{1.25}
 
 \title{Point and Control with Gestures in a Smart Home}
 
@@ -106,12 +107,12 @@
 \end{frame}
 %%%%%%%%%%%%%%%%
 
-\include{content/introduction}
-\include{content/architecture}
-
-\include{content/gesturesandpointing}
-\include{content/orientation}
-\include{content/indorpositioning}
+%\include{content/introduction}
+%\include{content/architecture}
+%
+%\include{content/gesturesandpointing}
+%\include{content/orientation}
+%\include{content/indorpositioning}
 
 \include{content/evaluation}
 \include{content/conlusion}
