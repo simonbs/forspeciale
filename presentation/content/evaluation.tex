@@ -71,12 +71,41 @@
       \input{../drawings/audtestillustration.tikz}
     }
   \end{center}
-  
 \end{frame}
 
 \begin{frame}{Precision of Indoor Positioning}{Auditorium Setup}
   \centering\vfill
   \includegraphics[width=\textwidth]{../drawings/audtest}
+\end{frame}
+
+\begin{frame}{Precision of Indoor Positioning}{Heatmap and Distance Graph (Room 4)}
+	\centering\vfill
+	  \begin{minipage}[b]{0.49\textwidth}
+	  	\centering
+	  	\includegraphics[width=\textwidth, height=4.5cm]{../data/estimote-test-results/heatmaps/pdf/36}
+			\vspace{0.35cm}
+%	  	\caption{Room 4, \SI{1}{\minute}, \num{4} beacons, centered}
+%	  	\label{fig:room4:1:4:c}
+	  \end{minipage}\hfill
+	  \begin{minipage}[b]{0.49\textwidth}
+	  	\centering      
+	  	\begin{tikzpicture}
+	  	\begin{axis}[
+	  	height=\textwidth,
+	  	width=\textwidth,
+	  	ylabel = Distance in meters,
+	  	xlabel = Measurements over time,
+	  	enlargelimits=false,
+	  	ymax=4,
+	  	ymin=0,
+	  	grid=major,
+	  	max space between ticks=20pt,
+%	  	xtick = {0, 50, 100, 150, 200, 250, 300}
+	  	]
+	  	\addplot table [x expr=\coordindex, y index=0] {../data/estimote-test-results/mean-error/36-1911-1027-490x995-1min.csv};
+	  	\end{axis}
+	  	\end{tikzpicture}
+	  \end{minipage}
 \end{frame}
 
 \begin{frame}{Precision of Indoor Positioning}{Stationary Results}
