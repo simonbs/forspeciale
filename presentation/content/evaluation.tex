@@ -33,10 +33,10 @@
 \end{frame}
 
 %Thalley: Usikker på om vi vil have memory med
-\begin{frame}{Gesture Recognition}{Memory}
-  \centering\vfill
-  \includegraphics[width=0.9\textwidth]{../images/three-dollar-memory-use}
-\end{frame}
+%\begin{frame}{Gesture Recognition}{Memory}
+%  \centering\vfill
+%  \includegraphics[width=0.9\textwidth]{../images/three-dollar-memory-use}
+%\end{frame}
 
 \begin{frame}{Gesture Recognition}{Correctness}
   \begin{itemize}
@@ -99,7 +99,21 @@
     \item Simulate a inaccurate position on the circle with radius \SI{2.92}{\meter}
   \end{itemize}
   \begin{center}
-    \scalebox{0.8}{\input{../drawings/offsetradius.tikz}}
+    \scalebox{0.8}{
+    	\begin{tikzpicture}
+    	\draw[fill] (5, 5) circle (0.15); % Inner cirlce
+    	\draw (5, 5) circle (3); % Outer cirlce
+    	\draw (5, 5) -- (5,2); % Radius
+    	\draw[fill] (5, 2) circle (0.15);
+    	
+    	%Text
+    	\node at (5,5.5) {Actual Position};
+    	\node at (5,1.65) {Offsetted Position};
+    	\node at (6.2, 3.7) {Offset radius};
+    	
+    	\draw [decorate,decoration={brace,amplitude=10pt,mirror}] (5,5) -- (5,2) node[midway, xshift=-1cm] {\SI{2.92}{\meter}};
+    	\end{tikzpicture}
+    	}
   \end{center}
 \end{frame}
 
