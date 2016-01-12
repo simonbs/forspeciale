@@ -24,6 +24,31 @@
 % Or whatever. Note that the encoding and the font should match. If T1
 % does not look nice, try deleting the line with the fontenc.
 \usepackage{helvet}
+\usepackage{subfig}
+
+\usepackage{tikz} %Tikz
+\usepackage{tikzscale}
+\usepackage{tikz-uml}
+
+\usepackage{pgfplots} %Graph plotting
+\pgfplotsset{compat=newest,
+%  grid=major, 
+  table/col sep = comma,
+	every axis legend/.append style={
+		no marks,
+%		at={(0.5,1.25)},
+%		legend columns=-1,
+		filter discard warning=false,
+	}
+}
+
+\usetikzlibrary{calc, arrows, decorations.markings,decorations.text, shapes, positioning}
+
+\usepackage{tabularx}
+
+\usepackage{tcolorbox}
+
+\usepackage{xcolor}
 
 % colored hyperlinks
 \newcommand{\chref}[2]{%
