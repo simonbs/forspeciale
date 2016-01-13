@@ -1,17 +1,17 @@
 \section{Evaluation}
-\begin{frame}{Gesture Recognition}{Setup}
+\begin{frame}{Gesture Recognition Performance}{Setup}
   \begin{itemize}
     \item Measure recognition time for $5, 10, \ldots, 100$ gesture traces
     \begin{itemize}
       \item Equal to $1, 2, \ldots, 20$ unique gestures, trained 5 times each
-      \item Average of 60 measurements per number of gesture traces
+      \item Measured mean of 60 measurements per number of gesture traces
     \end{itemize}
     \item Generate random gesture trace inputs
     \item Requirement: Faster than \SI{200}{\milli\second}
   \end{itemize}
 \end{frame}
 
-\begin{frame}{Gesture Recognition}{Performance}
+\begin{frame}{Gesture Recognition Performance}{Results}
   \vfill\centering
     \begin{tikzpicture}
     \begin{axis}[
@@ -128,36 +128,45 @@
     \item Simulate a inaccurate position on the circle with radius \SI{2.92}{\meter}
   \end{itemize}
   \begin{center}
-    \scalebox{0.8}{
-    	\begin{tikzpicture}
-    	\draw[fill] (5, 5) circle (0.15); % Inner cirlce
-    	\draw (5, 5) circle (3); % Outer cirlce
-    	\draw (5, 5) -- (5,2); % Radius
-    	\draw[fill] (5, 2) circle (0.15);
+  	\begin{minipage}{0.49\textwidth}
+  		\scalebox{0.7}{
+  			\begin{tikzpicture}
+  			\draw[fill] (5, 5) circle (0.15); % Inner cirlce
+  			\draw (5, 5) circle (3); % Outer cirlce
+  			\draw (5, 5) -- (5,2); % Radius
+  			\draw[fill] (5, 2) circle (0.15);
+  			
+  			%Text
+  			\node at (5,5.5) {Actual Position};
+  			\node at (5,1.65) {Offsetted Position};
+  			\node at (6.2, 3.7) {Offset radius};
+  			
+  			\draw [decorate,decoration={brace,amplitude=10pt,mirror}] (5,5) -- (5,2) node[midway, xshift=-1cm] {\SI{2.92}{\meter}};
+  			\end{tikzpicture}
+  		}
+  	\end{minipage}
+  	\begin{minipage}{0.49\textwidth}
+  		\frame{\includegraphics[width=\textwidth]{../images/system-correctness-initial}}
+  	\end{minipage}
     	
-    	%Text
-    	\node at (5,5.5) {Actual Position};
-    	\node at (5,1.65) {Offsetted Position};
-    	\node at (6.2, 3.7) {Offset radius};
-    	
-    	\draw [decorate,decoration={brace,amplitude=10pt,mirror}] (5,5) -- (5,2) node[midway, xshift=-1cm] {\SI{2.92}{\meter}};
-    	\end{tikzpicture}
-    	}
   \end{center}
 \end{frame}
 
 \begin{frame}{Impact of Simulated Accuracy}{Setup}
   \begin{itemize}
-    \item 18 tests with different positions
+    \item 18 tests with different \emph{actual} positions
     \item 6 devices in room of size $6.9 \times 5.37$ meters
     \begin{itemize}
       \item 3 test for each focused device
     \end{itemize}
+    \item 100 randomly generated \emph{inaccurate} positions for each test
+    \item Measured mean of 10 iterations
     \item Requirement: At least \perc{80} accuracy
   \end{itemize}
+  
 \end{frame}
 
-\begin{frame}{Impact of Simulated Accuracy}{Results}
+\begin{frame}{Impact of Simulated Accuracy}{Results with different visibility angles}
   \centering\vfill
   \begin{tikzpicture}
   \begin{axis}[
@@ -170,12 +179,20 @@
     enlargelimits = false,
     ymax = 100,
     ymin = 0,
-    nodes near coords align={right},
-    nodes near coords={\pgfmathprintnumber\pgfplotspointmeta\%},
-    every node near coord/.append style={font=\footnotesize, inner sep=1pt, yshift=0.2cm},
+    nodes near coords align={vertical},
+    every node near coord/.append style={font=\footnotesize, inner sep=1pt, yshift=-0.35cm},
     grid=major,
     try min ticks=10]
-    \addplot table[x=offset, y=accuracy] {../data/system-correctness/results.csv};   
+    \addlegendimage{empty legend}
+    \addplot[blue, nodes near coords={\pgfmathprintnumber\pgfplotspointmeta\%}] table[x=offset, y=30] {images/results.csv};
+    \addplot[red] table[x=offset, y=35] {images/results.csv};   
+    \addplot[orange] table[x=offset, y=40] {images/results.csv};   
+    \addplot[black, nodes near coords={\pgfmathprintnumber\pgfplotspointmeta\%}, every node near coord/.append style={font=\footnotesize, inner sep=1pt, yshift=0.5cm}] table[x=offset, y=45] {images/results.csv};
+    \addlegendentry{\scriptsize\hspace{-.6cm}\textbf{Visibility Angle}}
+    \addlegendentry{30\degree}
+    \addlegendentry{35\degree}
+    \addlegendentry{40\degree}
+    \addlegendentry{45\degree}
   \end{axis}
   \end{tikzpicture}
 \end{frame}
