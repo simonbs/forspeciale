@@ -1,10 +1,22 @@
 \documentclass[10pt]{beamer}
+
+%For Handouts
+%\documentclass[10pt,handout]{beamer} %For printing
+%\usepackage{pgf}
+%\usepackage{pgfpages}
+%\pgfpagesuselayout{4 on 1}[a4paper, border shrink = 2mm, landscape]
+%\pgfpageslogicalpageoptions{1}{border code=\pgfusepath{stroke}} %Frames around slides
+%\pgfpageslogicalpageoptions{2}{border code=\pgfusepath{stroke}}
+%\pgfpageslogicalpageoptions{3}{border code=\pgfusepath{stroke}}
+%\pgfpageslogicalpageoptions{4}{border code=\pgfusepath{stroke}}
+
 \usetheme[
 %%% options passed to the outer theme
 %    progressstyle=movCircCnt,   %either fixedCircCnt, movCircCnt, or corner
 %    rotationcw,          % change the rotation direction from counter-clockwise to clockwise
 %    shownavsym          % show the navigation symbols
   ]{AAUsimple}
+  
   
 % If you want to change the colors of the various elements in the theme, edit and uncomment the following lines
 % Change the bar and sidebar colors:
@@ -40,6 +52,7 @@
   }
 }
 \usepackage{siunitx}
+\usepackage{gensymb}
 
 \usepackage{subfig}
 \usepackage{tcolorbox}
